@@ -1,0 +1,24 @@
+{
+ "generated_utc": "2026-07-13T12:17:31.916508+00:00",
+ "window_minutes": 60,
+ "cutoff_et": "2026-04-18 07:00 EDT",
+ "window_start_et": "2026-04-18 06:00 EDT",
+ "window_end_et": "2026-04-18 07:00 EDT",
+ "note": "Original composite (waveform + Inferno spectrogram + amplitude spectrum) independently generated from R6E8A data; not copied from any third-party UI. Window ends at the fixed 07:00 ET report cutoff.",
+ "channels": {
+  "HDF": {
+   "ok": true,
+   "png": "snapshot_hdf.png",
+   "source": "uploaded_miniseed",
+   "data_through_et": "2026-04-18 06:59",
+   "unit": "Pa"
+  },
+  "EHZ": {
+   "ok": true,
+   "png": "snapshot_ehz.png",
+   "source": "uploaded_miniseed",
+   "data_through_et": "2026-04-18 06:59",
+   "unit": "um/s"
+  }
+ }
+}

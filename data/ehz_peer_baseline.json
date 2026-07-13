@@ -1,0 +1,234 @@
+{
+ "generated_utc": "2026-07-13T12:21:26.839989+00:00",
+ "kind": "external_network_peer_ehz_arithmetic_mean",
+ "network": "AM (Raspberry Shake)",
+ "channel": "EHZ",
+ "units": "um/s",
+ "matched_window_utc": "2026-04-18",
+ "matched_window_note": "Single UTC day 2026-04-18 (R6E8A DOY108). EHZ velocity, response-corrected, independent of the HDF baseline.",
+ "metric": "Per-minute 60 s demeaned RMS of EHZ velocity (um/s), then daily mean-of-minutes and daily peak minute.",
+ "rms_band": "0.1-8 Hz",
+ "response_removal": "Per-station StationXML, output VEL (m/s -> um/s), pre_filt (0.05,0.1,8,9) Hz, water level 60, decimated to 20 Hz.",
+ "selection_rule": "Same deterministic longitude-stratified public AM stations selected for the HDF peer baseline (data/peer_baseline.json), using their EHZ channel. Stations without a public EHZ channel on the matched day are excluded and reported. R6E8A excluded; each station counted once.",
+ "counts": {
+  "reused_candidates": 29,
+  "valid_computed": 22,
+  "excluded_no_ehz": 7
+ },
+ "excluded_stations": [
+  "R0993",
+  "R11C3",
+  "R45FA",
+  "R8122",
+  "RBED8",
+  "RCB56",
+  "RD5DB"
+ ],
+ "peer_arithmetic_mean_umps": 1.37637,
+ "peer_daily_mean_umps": {
+  "n": 22,
+  "arithmetic_mean": 1.37637,
+  "median": 0.71896,
+  "p75": 2.1321,
+  "p90": 2.35947,
+  "p95": 2.70411,
+  "p99": 5.01803,
+  "min": 0.33485,
+  "max": 5.62841
+ },
+ "peer_daily_peak_umps": {
+  "n": 22,
+  "arithmetic_mean": 74.82789,
+  "median": 11.36408,
+  "p75": 65.19405,
+  "p90": 221.04521,
+  "p95": 239.03934,
+  "p99": 600.11163,
+  "min": 0.77804,
+  "max": 696.00124
+ },
+ "r6e8a": {
+  "matched_day_daily_mean_umps": 7.6,
+  "matched_day_daily_peak_umps": 19.53,
+  "mean_percent_vs_peer_mean": 452.2,
+  "mean_percentile_vs_peers": 100.0
+ },
+ "peers": [
+  {
+   "sta": "R0038",
+   "lat": 46.505,
+   "lon": 7.305,
+   "daily_mean_umps": 0.53468,
+   "daily_peak_umps": 59.55292,
+   "minutes": 1439
+  },
+  {
+   "sta": "R0066",
+   "lat": 33.847,
+   "lon": -117.912,
+   "daily_mean_umps": 5.62841,
+   "daily_peak_umps": 232.49028,
+   "minutes": 1411
+  },
+  {
+   "sta": "R0115",
+   "lat": 50.964,
+   "lon": 3.705,
+   "daily_mean_umps": 0.55107,
+   "daily_peak_umps": 3.56038,
+   "minutes": 1440
+  },
+  {
+   "sta": "R017E",
+   "lat": 58.09,
+   "lon": 7.96,
+   "daily_mean_umps": 0.40492,
+   "daily_peak_umps": 0.84876,
+   "minutes": 1440
+  },
+  {
+   "sta": "R01D4",
+   "lat": null,
+   "lon": null,
+   "daily_mean_umps": 0.36146,
+   "daily_peak_umps": 0.8849,
+   "minutes": 1440
+  },
+  {
+   "sta": "R0318",
+   "lat": 33.036,
+   "lon": -96.584,
+   "daily_mean_umps": 0.49563,
+   "daily_peak_umps": 2.35203,
+   "minutes": 1440
+  },
+  {
+   "sta": "R0352",
+   "lat": 42.604,
+   "lon": -71.415,
+   "daily_mean_umps": 0.72815,
+   "daily_peak_umps": 10.21678,
+   "minutes": 1440
+  },
+  {
+   "sta": "R03EA",
+   "lat": 47.342,
+   "lon": 8.59,
+   "daily_mean_umps": 0.33485,
+   "daily_peak_umps": 0.77804,
+   "minutes": 1440
+  },
+  {
+   "sta": "R0448",
+   "lat": 45.495,
+   "lon": 27.828,
+   "daily_mean_umps": 0.58104,
+   "daily_peak_umps": 3.55831,
+   "minutes": 1440
+  },
+  {
+   "sta": "R17FC",
+   "lat": 25.883,
+   "lon": -80.364,
+   "daily_mean_umps": 2.16439,
+   "daily_peak_umps": 696.00124,
+   "minutes": 1440
+  },
+  {
+   "sta": "R2011",
+   "lat": 34.405,
+   "lon": -119.874,
+   "daily_mean_umps": 2.14858,
+   "daily_peak_umps": 90.19756,
+   "minutes": 1440
+  },
+  {
+   "sta": "R4477",
+   "lat": -32.495,
+   "lon": 115.75,
+   "daily_mean_umps": 1.76764,
+   "daily_peak_umps": 12.51139,
+   "minutes": 1440
+  },
+  {
+   "sta": "R4BA9",
+   "lat": 22.279,
+   "lon": 114.184,
+   "daily_mean_umps": 2.72183,
+   "daily_peak_umps": 6.63351,
+   "minutes": 1440
+  },
+  {
+   "sta": "R5BB4",
+   "lat": 42.387,
+   "lon": -71.092,
+   "daily_mean_umps": 0.37622,
+   "daily_peak_umps": 43.26016,
+   "minutes": 1437
+  },
+  {
+   "sta": "R6A49",
+   "lat": -37.739,
+   "lon": 175.271,
+   "daily_mean_umps": 2.08265,
+   "daily_peak_umps": 32.47455,
+   "minutes": 1440
+  },
+  {
+   "sta": "R6E77",
+   "lat": -2.973,
+   "lon": 105.791,
+   "daily_mean_umps": 0.70978,
+   "daily_peak_umps": 2.98939,
+   "minutes": 1294
+  },
+  {
+   "sta": "R6E9E",
+   "lat": null,
+   "lon": null,
+   "daily_mean_umps": 2.28778,
+   "daily_peak_umps": 67.07443,
+   "minutes": 1435
+  },
+  {
+   "sta": "R6EC5",
+   "lat": 35.757,
+   "lon": -106.013,
+   "daily_mean_umps": 1.41027,
+   "daily_peak_umps": 118.03961,
+   "minutes": 1440
+  },
+  {
+   "sta": "R78A1",
+   "lat": 51.414,
+   "lon": -1.141,
+   "daily_mean_umps": 0.62484,
+   "daily_peak_umps": 4.21532,
+   "minutes": 1440
+  },
+  {
+   "sta": "R941E",
+   "lat": 45.568,
+   "lon": -122.631,
+   "daily_mean_umps": 1.34034,
+   "daily_peak_umps": 239.38403,
+   "minutes": 1440
+  },
+  {
+   "sta": "RCDB4",
+   "lat": -5.009,
+   "lon": 151.353,
+   "daily_mean_umps": 0.65819,
+   "daily_peak_umps": 2.90043,
+   "minutes": 1435
+  },
+  {
+   "sta": "S5954",
+   "lat": 51.55,
+   "lon": -0.159,
+   "daily_mean_umps": 2.36743,
+   "daily_peak_umps": 16.28953,
+   "minutes": 1440
+  }
+ ]
+}

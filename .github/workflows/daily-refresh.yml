@@ -1,0 +1,76 @@
+name: Daily R6E8A data refresh (07:00 ET)
+
+# Regenerates the derived data (per-minute RMS cache, events, composite snapshots)
+# for AM.R6E8A once per day, aligned to a fixed 07:00 AM America/Detroit cutoff,
+# AFTER the Raspberry Shake FDSN archive lag has cleared (target 07:35 ET).
+#
+# DST-safe: cron runs in UTC only, so we schedule BOTH candidate UTC times that
+# correspond to 07:35 America/Detroit (EDT = UTC-4 -> 11:35 UTC; EST = UTC-5 ->
+# 12:35 UTC) and then GATE the real work on the actual local time, so it executes
+# exactly once per day whichever offset is in effect.
+#
+# Only derived assets are ever committed. Raw MiniSEED is streamed/processed and
+# never written to the repo. Attribution + DOI are embedded in the site.
+
+on:
+  schedule:
+    - cron: "35 11 * * *"   # 07:35 America/Detroit during EDT
+    - cron: "35 12 * * *"   # 07:35 America/Detroit during EST
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Gate on local America/Detroit hour (skip the wrong DST cron)
+        id: gate
+        run: |
+          LOCAL_HOUR=$(TZ=America/Detroit date +%H)
+          echo "local_hour=$LOCAL_HOUR"
+          if [ "$LOCAL_HOUR" != "07" ] && [ "${{ github.event_name }}" != "workflow_dispatch" ]; then
+            echo "run=false" >> "$GITHUB_OUTPUT"
+            echo "Not 07:xx America/Detroit — this is the other DST cron; skipping."
+          else
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Checkout
+        if: steps.gate.outputs.run == 'true'
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        if: steps.gate.outputs.run == 'true'
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        if: steps.gate.outputs.run == 'true'
+        run: pip install "obspy>=1.5" "numpy" "scipy" "matplotlib"
+
+      - name: Regenerate derived data (no raw MiniSEED committed)
+        if: steps.gate.outputs.run == 'true'
+        run: python3 tools/daily_refresh.py
+
+      - name: Commit derived assets if changed
+        if: steps.gate.outputs.run == 'true'
+        run: |
+          git config user.name "r6e8a-bot"
+          git config user.email "r6e8a-bot@users.noreply.github.com"
+          # Derived assets ONLY — never raw waveforms.
+          git add data/minute_cache.json data/events_embed.js \
+                  data/ehz_peer_baseline.json data/snapshot_meta.json \
+                  data/daily_report.json assets/snapshot_hdf.png assets/snapshot_ehz.png 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "No derived changes to commit."
+          else
+            git commit -m "Daily R6E8A derived refresh ($(TZ=America/Detroit date '+%Y-%m-%d 07:00 ET'))"
+            git push
+          fi

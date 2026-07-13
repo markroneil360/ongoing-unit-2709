@@ -1,0 +1,4 @@
+qa_*.png
+*.log
+peer_cache/
+HANDOFF.md
