@@ -1,0 +1,29 @@
+{
+  "station": "AM.R6E8A.00",
+  "timezone_display": "America/Detroit",
+  "range_start": "2026-07-15",
+  "range_end": "present",
+  "uploaded_files": [
+    {"channel":"EHZ","day_of_year":198,"date":"2026-07-17","filename":"AM.R6E8A.00.EHZ.D.2026(1).198","size_bytes":21428736},
+    {"channel":"EHZ","day_of_year":199,"date":"2026-07-18","filename":"AM.R6E8A.00.EHZ.D.2026(1).199","size_bytes":21426688},
+    {"channel":"EHZ","day_of_year":200,"date":"2026-07-19","filename":"AM.R6E8A.00.EHZ.D.2026(1).200","size_bytes":21424128},
+    {"channel":"EHZ","day_of_year":203,"date":"2026-07-22","filename":"AM.R6E8A.00.EHZ.D.2026(1).203","size_bytes":14887936},
+    {"channel":"EHZ","day_of_year":196,"date":"2026-07-15","filename":"AM.R6E8A.00.EHZ.D.2026(2).196","size_bytes":21423616},
+    {"channel":"EHZ","day_of_year":197,"date":"2026-07-16","filename":"AM.R6E8A.00.EHZ.D.2026(2).197","size_bytes":21417984},
+    {"channel":"EHZ","day_of_year":202,"date":"2026-07-21","filename":"AM.R6E8A.00.EHZ.D.2026(2).202","size_bytes":21416448},
+    {"channel":"EHZ","day_of_year":201,"date":"2026-07-20","filename":"AM.R6E8A.00.EHZ.D.2026(3).201","size_bytes":21412864},
+    {"channel":"HDF","day_of_year":196,"date":"2026-07-15","filename":"AM.R6E8A.00.HDF.D.2026(1).196","size_bytes":20456448},
+    {"channel":"HDF","day_of_year":197,"date":"2026-07-16","filename":"AM.R6E8A.00.HDF.D.2026(1).197","size_bytes":20501504},
+    {"channel":"HDF","day_of_year":198,"date":"2026-07-17","filename":"AM.R6E8A.00.HDF.D.2026(1).198","size_bytes":20455424},
+    {"channel":"HDF","day_of_year":199,"date":"2026-07-18","filename":"AM.R6E8A.00.HDF.D.2026(1).199","size_bytes":20439552},
+    {"channel":"HDF","day_of_year":200,"date":"2026-07-19","filename":"AM.R6E8A.00.HDF.D.2026(1).200","size_bytes":20584448},
+    {"channel":"HDF","day_of_year":202,"date":"2026-07-21","filename":"AM.R6E8A.00.HDF.D.2026(1).202","size_bytes":20405760},
+    {"channel":"HDF","day_of_year":203,"date":"2026-07-22","filename":"AM.R6E8A.00.HDF.D.2026(1).203","size_bytes":14300160},
+    {"channel":"HDF","day_of_year":201,"date":"2026-07-20","filename":"AM.R6E8A.00.HDF.D.2026(2).201","size_bytes":20150784}
+  ],
+  "notes": [
+    "HDF and EHZ remain separate evidence streams.",
+    "Missing or pending samples are not treated as zero.",
+    "This Data may lag. For personal verification, use Raspberry Shake FDSN."
+  ]
+}
