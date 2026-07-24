@@ -1,0 +1,27 @@
+name: Update daily highest HDF infrasound event
+on:
+  schedule:
+    - cron: '37 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: r6e8a-daily-highest
+  cancel-in-progress: true
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --disable-pip-version-check numpy scipy requests obspy
+      - run: python scripts/update_daily_highest.py
+      - name: Commit refreshed statistic
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/daily-highest.json
+          git diff --cached --quiet || git commit -m "Update daily highest HDF infrasound event"
+          git push
