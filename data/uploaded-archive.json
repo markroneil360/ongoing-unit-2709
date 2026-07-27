@@ -1,0 +1,30 @@
+{
+  "station": "AM.R6E8A.00",
+  "generated_utc": "2026-07-27T18:16:23.653776+00:00",
+  "display_timezone": "America/New_York",
+  "coverage_start_doy": 196,
+  "coverage_end_doy": 208,
+  "latest_coverage_et": "2026-07-27T13:51:01.769000-04:00",
+  "complete_dual_channel_days": [196,197,198,199,200,201,202,203,204,205,206,207],
+  "partial_dual_channel_days": [208],
+  "summary": {
+    "HDF": {"complete_days": 12, "partial_days": 1, "latest_end_et": "2026-07-27T13:51:01.769000-04:00", "latest_day_coverage_percent": 74.375},
+    "EHZ": {"complete_days": 12, "partial_days": 1, "latest_end_et": "2026-07-27T13:50:55.429000-04:00", "latest_day_coverage_percent": 74.369}
+  },
+  "days": [
+    {"doy":196,"utc_date":"2026-07-15","HDF":{"coverage_percent":100.0,"start_utc":"2026-07-15T00:00:02.009000+00:00","end_utc":"2026-07-16T00:00:01.949000+00:00"},"EHZ":{"coverage_percent":100.0,"start_utc":"2026-07-15T00:00:00.199000+00:00","end_utc":"2026-07-16T00:00:02.009000+00:00"},"status":"complete"},
+    {"doy":197,"utc_date":"2026-07-16","HDF":{"coverage_percent":100.0},"EHZ":{"coverage_percent":99.999},"status":"complete"},
+    {"doy":198,"utc_date":"2026-07-17","HDF":{"coverage_percent":100.0},"EHZ":{"coverage_percent":100.0},"status":"complete"},
+    {"doy":199,"utc_date":"2026-07-18","HDF":{"coverage_percent":100.0},"EHZ":{"coverage_percent":100.0},"status":"complete"},
+    {"doy":200,"utc_date":"2026-07-19","HDF":{"coverage_percent":100.0},"EHZ":{"coverage_percent":99.999},"status":"complete"},
+    {"doy":201,"utc_date":"2026-07-20","HDF":{"coverage_percent":100.0},"EHZ":{"coverage_percent":100.0},"status":"complete"},
+    {"doy":202,"utc_date":"2026-07-21","HDF":{"coverage_percent":99.998},"EHZ":{"coverage_percent":100.0},"status":"complete"},
+    {"doy":203,"utc_date":"2026-07-22","HDF":{"coverage_percent":100.0},"EHZ":{"coverage_percent":100.0},"status":"complete"},
+    {"doy":204,"utc_date":"2026-07-23","HDF":{"coverage_percent":100.0},"EHZ":{"coverage_percent":99.999},"status":"complete"},
+    {"doy":205,"utc_date":"2026-07-24","HDF":{"coverage_percent":99.999},"EHZ":{"coverage_percent":100.0},"status":"complete"},
+    {"doy":206,"utc_date":"2026-07-25","HDF":{"coverage_percent":100.0},"EHZ":{"coverage_percent":99.999},"status":"complete"},
+    {"doy":207,"utc_date":"2026-07-26","HDF":{"coverage_percent":100.0},"EHZ":{"coverage_percent":100.0},"status":"complete"},
+    {"doy":208,"utc_date":"2026-07-27","HDF":{"coverage_percent":74.375,"end_et":"2026-07-27T13:51:01.769000-04:00"},"EHZ":{"coverage_percent":74.369,"end_et":"2026-07-27T13:50:55.429000-04:00"},"status":"partial"}
+  ],
+  "note": "Coverage derived from uploaded MiniSEED record headers. HDF and EHZ remain separate. No waveform amplitude metrics were recalculated in this manifest."
+}
