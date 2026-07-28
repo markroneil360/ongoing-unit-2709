@@ -1,0 +1,55 @@
+name: Add prolonged events section
+
+on:
+  push:
+    paths:
+      - '.github/workflows/add-prolonged-events.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch-dashboard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch dashboard
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+
+          if 'Prolonged abnormal activity' in s:
+              raise SystemExit(0)
+
+          s = s.replace(
+              '.events{width:100%;border-collapse:collapse}',
+              '.event-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0 20px}.event-stat{border:1px solid var(--line);border-radius:12px;padding:16px;background:rgba(0,37,29,.35)}.event-stat b{display:block;font-size:1.65rem;color:var(--red);margin-top:4px}.events-wrap{overflow-x:auto}.events{width:100%;border-collapse:collapse;min-width:650px}'
+          )
+          s = s.replace(
+              '@media(max-width:620px){.wrap',
+              '@media(max-width:620px){.event-summary{grid-template-columns:1fr}.wrap'
+          )
+
+          anchor = '</section>\n<section class="panel"><div class="section-kicker">Selected benchmark framework</div>'
+          section = '''</section>
+<section class="panel"><div class="section-kicker">Prolonged abnormal activity</div><h2>Events over 30 minutes</h2><p><strong>Display rule:</strong> show every continuous HDF interval that remains at least <strong>50% above the applicable matched reference</strong> for longer than <strong>30 minutes</strong>. Events are ranked by duration, longest first.</p><div class="event-summary"><div class="event-stat">Qualifying events<b>4</b></div><div class="event-stat">Combined duration<b>10 hr 45 min</b></div><div class="event-stat">Longest event<b>4 hr 5 min</b></div></div><div class="events-wrap"><table class="events"><tr><th>Start — ET</th><th>End — ET</th><th>Duration</th><th>Abnormal level</th><th>Dominant frequency</th></tr><tr><td>Jul 28 · 8:00 AM</td><td>Jul 28 · 12:05 PM</td><td><strong>4 hr 5 min</strong></td><td><strong>174% above</strong></td><td>0.106 Hz</td></tr><tr><td>Jul 27 · 8:05 PM</td><td>Jul 27 · 11:40 PM</td><td><strong>3 hr 35 min</strong></td><td><strong>345% above</strong></td><td>0.95 Hz</td></tr><tr><td>Jul 28 · 2:00 AM</td><td>Jul 28 · 4:15 AM</td><td><strong>2 hr 15 min</strong></td><td><strong>145% above</strong></td><td>0.068 Hz</td></tr><tr><td>Jul 28 · 5:25 AM</td><td>Jul 28 · 6:15 AM</td><td><strong>50 min</strong></td><td><strong>122% above</strong></td><td>9.39 Hz</td></tr></table></div><p class="footnote">HDF prolonged-event results use the latest verified upload and the established quiet-hour reference method. Missing samples are not bridged or counted as event time.</p></section>
+<section class="panel"><div class="section-kicker">Selected benchmark framework</div>'''
+
+          if anchor not in s:
+              raise SystemExit('Dashboard anchor not found')
+
+          s = s.replace(anchor, section, 1)
+          p.write_text(s, encoding='utf-8')
+          PY
+      - name: Commit dashboard update
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet || git commit -m "Add prolonged abnormal event durations"
+          git push
