@@ -1,0 +1,31 @@
+{
+  "station": "AM.R6E8A.00",
+  "window_start_et": "2026-07-27T11:00:00-04:00",
+  "window_end_et": "2026-07-28T11:00:00-04:00",
+  "generated_utc": "2026-07-28T15:48:02.551475+00:00",
+  "cutoff_rule": "11:00 AM America/Detroit to 11:00 AM next day",
+  "channels": {
+    "HDF": {
+      "channel": "HDF",
+      "unit": "Pa",
+      "reference": 0.08119,
+      "mean": 0.09819959238394627,
+      "percent_above_reference": 21.0,
+      "coverage_percent": 100.0,
+      "minutes": 1440,
+      "data_through_et": "2026-07-28T10:59:59.959000-04:00",
+      "provenance_url": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-07-27T15:00:00&end=2026-07-28T15:00:00&format=miniseed&nodata=404"
+    },
+    "EHZ": {
+      "channel": "EHZ",
+      "unit": "um/s",
+      "reference": 1.37637,
+      "mean": 6.801188200965824,
+      "percent_above_reference": 394.1,
+      "coverage_percent": 100.0,
+      "minutes": 1440,
+      "data_through_et": "2026-07-28T10:59:59.959000-04:00",
+      "provenance_url": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=EHZ&start=2026-07-27T15:00:00&end=2026-07-28T15:00:00&format=miniseed&nodata=404"
+    }
+  }
+}
