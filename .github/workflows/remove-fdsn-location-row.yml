@@ -1,0 +1,36 @@
+name: Remove visible FDSN location row
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/remove-fdsn-location-row.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  edit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Remove visible Location 00 row only
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          target = '<div class="row"><span>Location</span><strong>00</strong></div>'
+          if target not in s:
+              raise SystemExit('Target row not found; no file changed.')
+          s = s.replace(target, '', 1)
+          p.write_text(s, encoding='utf-8')
+          PY
+      - name: Commit single-row removal
+        run: |
+          git config user.name 'r6e8a-bot'
+          git config user.email 'r6e8a-bot@users.noreply.github.com'
+          git add index.html
+          git commit -m 'Remove visible FDSN location 00 row'
+          git push
