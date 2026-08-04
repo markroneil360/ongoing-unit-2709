@@ -61,7 +61,7 @@ def check_structure_and_rules():
         "Tier 3",
         "Tier 4",
         "Current recommendation: hold the result at N/A",
-        "Infrasound Pressure Recorded",
+        "Infrasound Detected",
     )
     for phrase in required:
         assert phrase in source, f"missing required public element: {phrase}"
