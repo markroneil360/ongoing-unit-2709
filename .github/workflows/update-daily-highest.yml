@@ -1,27 +1,69 @@
-name: Update daily highest HDF infrasound event
+name: Update R6E8A live instrument status and reports
+
 on:
   schedule:
     - cron: '37 * * * *'
   workflow_dispatch:
+  push:
+    branches:
+      - main
+      - 'codex/r6e8a-live-dashboard-*'
+    paths:
+      - 'scripts/update_daily_highest.py'
+      - 'scripts/generate_reports.py'
+      - 'data/daily-highest-history.json'
+      - '.github/workflows/update-daily-highest.yml'
+
 permissions:
   contents: write
+
 concurrency:
-  group: r6e8a-daily-highest
+  group: r6e8a-live-${{ github.ref }}
   cancel-in-progress: true
+
 jobs:
   update:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: pip install --disable-pip-version-check numpy scipy requests obspy
-      - run: python scripts/update_daily_highest.py
-      - name: Commit refreshed statistic
+      - name: Install processing and report dependencies
+        run: pip install --disable-pip-version-check numpy scipy requests obspy reportlab pypdf
+      - name: Refresh dual-channel status without interpolating gaps
+        run: python scripts/update_daily_highest.py
+      - name: Generate verified PDF downloads
+        run: python scripts/generate_reports.py
+      - name: Validate generated artifacts
+        run: |
+          python -m json.tool data/daily-highest.json >/dev/null
+          python -m json.tool data/daily-highest-history.json >/dev/null
+          python - <<'PY'
+          from pathlib import Path
+          from pypdf import PdfReader
+          paths = [
+              Path('downloads/R6E8A-24-hour-report.pdf'),
+              Path('downloads/R6E8A-7-day-trailing-report.pdf'),
+          ]
+          for path in paths:
+              if not path.exists() or path.stat().st_size < 5000:
+                  raise SystemExit(f'Invalid report: {path}')
+              if not PdfReader(str(path)).pages:
+                  raise SystemExit(f'No PDF pages: {path}')
+          PY
+      - name: Commit derived status and reports
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/daily-highest.json
-          git diff --cached --quiet || git commit -m "Update daily highest HDF infrasound event"
-          git push
+          git add data/daily-highest.json data/daily-highest-history.json \
+                  downloads/R6E8A-24-hour-report.pdf \
+                  downloads/R6E8A-7-day-trailing-report.pdf
+          if git diff --cached --quiet; then
+            echo "No derived changes to commit."
+            exit 0
+          fi
+          git commit -m "Update R6E8A live status and reports"
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
