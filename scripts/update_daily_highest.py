@@ -1,118 +1,349 @@
 #!/usr/bin/env python3
-"""Update the current Detroit-day highest HDF infrasound event for AM.R6E8A.00."""
+"""Refresh the live R6E8A HDF/EHZ instrument record.
+
+The public dashboard uses this derived JSON plus Raspberry Shake's official
+DataView embeds. Raw MiniSEED is streamed from FDSN and is never committed.
+HDF and EHZ are processed independently and gaps are never interpolated.
+"""
 from __future__ import annotations
-import io, json, math
+
+import io
+import json
+import math
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
+
 import numpy as np
 import requests
-from obspy import read
+from obspy import UTCDateTime, read
 from scipy import signal
+
 
 STATION = "R6E8A"
 NETWORK = "AM"
-LOCATION = "00"
+LOCATION = "00"  # Required internally by FDSN; intentionally hidden in public labels.
 FDSN = "https://data.raspberryshake.org/fdsnws/dataselect/1/query"
 ET = ZoneInfo("America/Detroit")
 OUT = Path("data/daily-highest.json")
+HISTORY = Path("data/daily-highest-history.json")
+
+
+def iso_utc(value: datetime) -> str:
+    return value.astimezone(timezone.utc).isoformat().replace("+00:00", "Z")
+
+
+def format_et(value: datetime) -> str:
+    return value.astimezone(ET).strftime("%b %-d - %-I:%M:%S %p EST")
+
 
 def fetch(channel: str, start: datetime, end: datetime):
-    params = {"net": NETWORK, "sta": STATION, "loc": LOCATION, "cha": channel,
-              "start": start.astimezone(timezone.utc).isoformat().replace("+00:00", "Z"),
-              "end": end.astimezone(timezone.utc).isoformat().replace("+00:00", "Z")}
-    response = requests.get(FDSN, params=params, timeout=120)
+    params = {
+        "net": NETWORK,
+        "sta": STATION,
+        "loc": LOCATION,
+        "cha": channel,
+        "start": iso_utc(start),
+        "end": iso_utc(end),
+        "format": "miniseed",
+        "nodata": 404,
+    }
+    response = requests.get(
+        FDSN,
+        params=params,
+        timeout=180,
+        headers={"User-Agent": "r6e8a-dashboard/2.0"},
+    )
     response.raise_for_status()
     stream = read(io.BytesIO(response.content), format="MSEED")
-    stream.merge(method=1, fill_value="interpolate")
-    return stream[0]
+    stream.merge(method=0)
+    return stream.split(), response.url
 
-def per_second_rms(x: np.ndarray, fs: int):
-    n = len(x) // fs
-    y = x[:n * fs].reshape(n, fs)
-    y = signal.detrend(y, axis=1, type="linear")
-    return np.sqrt(np.mean(y * y, axis=1))
 
-def dominant_frequency(x: np.ndarray, fs: float):
-    x = signal.detrend(x.astype(float))
-    frequency, power = signal.periodogram(x, fs=fs, window="hann", scaling="spectrum")
-    mask = (frequency >= 0.1) & (frequency <= 20.0)
-    indexes = np.where(mask)[0]
-    peak_index = indexes[int(np.argmax(power[mask]))]
-    peak = float(frequency[peak_index])
-    if 0 < peak_index < len(power) - 1:
-        a, b, c = np.log(power[peak_index - 1:peak_index + 2] + 1e-300)
-        denominator = a - 2 * b + c
-        if denominator:
-            peak += float(0.5 * (a - c) / denominator * (frequency[1] - frequency[0]))
-    return peak
+def per_second_records(stream):
+    """Return sorted (UTC epoch second, RMS counts) without bridging gaps."""
+    records = []
+    for trace in stream:
+        fs = int(round(float(trace.stats.sampling_rate)))
+        if fs <= 0:
+            continue
+        values = np.asarray(trace.data, dtype=float)
+        count = len(values) // fs
+        if count <= 0:
+            continue
+        frames = values[: count * fs].reshape(count, fs)
+        frames = signal.detrend(frames, axis=1, type="linear")
+        rms = np.sqrt(np.mean(frames * frames, axis=1))
+        start_epoch = float(trace.stats.starttime.timestamp)
+        records.extend((start_epoch + index, float(value)) for index, value in enumerate(rms))
+    records.sort(key=lambda item: item[0])
+    return records
+
+
+def dominant_frequency(stream, peak_epoch: float) -> float | None:
+    """Use an eleven-second raw-count window centered on the event peak."""
+    target = UTCDateTime(peak_epoch)
+    for trace in stream:
+        if trace.stats.starttime <= target <= trace.stats.endtime:
+            fs = float(trace.stats.sampling_rate)
+            center = int(round((target - trace.stats.starttime) * fs))
+            half = max(1, int(round(5.0 * fs)))
+            values = np.asarray(trace.data[max(0, center - half): center + half + 1], dtype=float)
+            if values.size < max(8, int(fs)):
+                return None
+            values = signal.detrend(values)
+            frequencies, power = signal.periodogram(
+                values, fs=fs, window="hann", scaling="spectrum"
+            )
+            mask = (frequencies >= 0.1) & (frequencies <= 20.0)
+            if not np.any(mask):
+                return None
+            indexes = np.where(mask)[0]
+            peak_index = indexes[int(np.argmax(power[mask]))]
+            peak = float(frequencies[peak_index])
+            if 0 < peak_index < len(power) - 1:
+                a, b, c = np.log(power[peak_index - 1:peak_index + 2] + 1e-300)
+                denominator = a - 2 * b + c
+                if denominator:
+                    peak += float(
+                        0.5 * (a - c) / denominator * (frequencies[1] - frequencies[0])
+                    )
+            return round(peak, 4)
+    return None
+
+
+def event_summary(records, stream, start: datetime, end: datetime):
+    start_epoch = start.astimezone(timezone.utc).timestamp()
+    end_epoch = end.astimezone(timezone.utc).timestamp()
+    window = [(epoch, value) for epoch, value in records if start_epoch <= epoch < end_epoch]
+    if not window:
+        return None
+
+    epochs = np.asarray([item[0] for item in window], dtype=float)
+    rms = np.asarray([item[1] for item in window], dtype=float)
+    median = float(np.median(rms))
+    mad = float(1.4826 * np.median(np.abs(rms - median))) or 1.0
+    robust_z = (rms - median) / mad
+    hot_indexes = np.where(robust_z >= 8.0)[0]
+
+    groups = []
+    if hot_indexes.size:
+        group = [int(hot_indexes[0])]
+        for index in hot_indexes[1:]:
+            index = int(index)
+            if index == group[-1] + 1 and epochs[index] - epochs[group[-1]] <= 1.5:
+                group.append(index)
+            else:
+                groups.append(group)
+                group = [index]
+        groups.append(group)
+    else:
+        groups = [[int(np.argmax(rms))]]
+
+    chosen = max(groups, key=lambda indexes: float(np.max(rms[indexes])))
+    peak_index = max(chosen, key=lambda index: float(rms[index]))
+    event_start = datetime.fromtimestamp(float(epochs[chosen[0]]), tz=timezone.utc)
+    event_end = datetime.fromtimestamp(float(epochs[chosen[-1]] + 1.0), tz=timezone.utc)
+    peak_time = datetime.fromtimestamp(float(epochs[peak_index]), tz=timezone.utc)
+    peak_rms = float(rms[peak_index])
+    frequency = dominant_frequency(stream, float(epochs[peak_index]))
+
+    return {
+        "event_date_et": peak_time.astimezone(ET).date().isoformat(),
+        "display_time_et": format_et(peak_time),
+        "event_start_utc": iso_utc(event_start),
+        "event_end_utc": iso_utc(event_end),
+        "duration_s": round((event_end - event_start).total_seconds(), 2),
+        "dominant_frequency_hz": frequency,
+        "peak_rms_counts": round(peak_rms, 4),
+        "window_median_rms_counts": round(median, 4),
+        "above_window_median_percent": round((peak_rms / median - 1.0) * 100.0, 1)
+        if median
+        else None,
+        "multiple_of_window_median": round(peak_rms / median, 2) if median else None,
+        "robust_z": round(float(robust_z[peak_index]), 2),
+        "observed_seconds": int(len(window)),
+        "coverage_percent": round(100.0 * len(window) / max(1.0, end_epoch - start_epoch), 1),
+        "latest_sample_utc": iso_utc(
+            datetime.fromtimestamp(float(epochs[-1] + 1.0), tz=timezone.utc)
+        ),
+        "_peak_epoch": float(epochs[peak_index]),
+    }
+
+
+def z_at(records, start: datetime, end: datetime, epoch: float) -> float | None:
+    start_epoch = start.astimezone(timezone.utc).timestamp()
+    end_epoch = end.astimezone(timezone.utc).timestamp()
+    window = [(t, value) for t, value in records if start_epoch <= t < end_epoch]
+    if not window:
+        return None
+    values = np.asarray([item[1] for item in window], dtype=float)
+    median = float(np.median(values))
+    mad = float(1.4826 * np.median(np.abs(values - median))) or 1.0
+    nearest = min(window, key=lambda item: abs(item[0] - epoch))
+    if abs(nearest[0] - epoch) > 1.5:
+        return None
+    return round(float((nearest[1] - median) / mad), 2)
+
+
+def public_event(event):
+    if event is None:
+        return None
+    clean = dict(event)
+    clean.pop("_peak_epoch", None)
+    return clean
+
+
+def update_history(day_hdf, simultaneous_ehz_z, generated_utc):
+    if day_hdf is None:
+        return
+    history = {
+        "station": "AM.R6E8A",
+        "timezone": "America/Detroit",
+        "metric": "HDF one-second RMS instrument counts; same-channel daily context only",
+        "calibration_note": "Raw instrument counts are not dB(A), dB(C), dB(G), NC or RC.",
+        "days": [],
+    }
+    if HISTORY.exists():
+        try:
+            loaded = json.loads(HISTORY.read_text(encoding="utf-8"))
+            if isinstance(loaded, dict):
+                history.update(loaded)
+        except (OSError, json.JSONDecodeError):
+            pass
+
+    record = public_event(day_hdf)
+    record["daily_median_rms_counts"] = record.pop("window_median_rms_counts")
+    record["above_median_percent"] = record.pop("above_window_median_percent")
+    record.pop("multiple_of_window_median", None)
+    record["simultaneous_ehz_robust_z"] = simultaneous_ehz_z
+    record["classification"] = (
+        "Predominantly HDF pressure/infrasound"
+        if simultaneous_ehz_z is None or simultaneous_ehz_z < 4.0
+        else "HDF event with elevated EHZ context"
+    )
+    date_key = record["event_date_et"]
+    days = [item for item in history.get("days", []) if item.get("event_date_et") != date_key]
+    days.append(record)
+    days.sort(key=lambda item: item.get("event_date_et", ""))
+    history["days"] = days[-60:]
+    history["generated_utc"] = generated_utc
+    HISTORY.parent.mkdir(parents=True, exist_ok=True)
+    HISTORY.write_text(json.dumps(history, indent=2) + "\n", encoding="utf-8")
+
 
 def main():
     now_et = datetime.now(ET)
-    end_et = now_et - timedelta(minutes=30)
-    start_et = end_et.replace(hour=0, minute=0, second=0, microsecond=0)
-    if end_et <= start_et + timedelta(minutes=1):
-        start_et -= timedelta(days=1)
-    hdf = fetch("HDF", start_et, end_et)
-    ehz = fetch("EHZ", start_et, end_et)
-    fs = int(round(hdf.stats.sampling_rate))
-    data = np.asarray(hdf.data, dtype=float)
-    rms = per_second_rms(data, fs)
-    median = float(np.median(rms))
-    mad = float(1.4826 * np.median(np.abs(rms - median))) or 1.0
-    z = (rms - median) / mad
-    hot = z >= 8.0
-    groups = []
-    i = 0
-    while i < len(hot):
-        if not hot[i]:
-            i += 1
-            continue
-        j = i + 1
-        while j < len(hot) and hot[j]:
-            j += 1
-        groups.append((i, j))
-        i = j
-    if not groups:
-        peak = int(np.argmax(rms))
-        groups = [(peak, peak + 1)]
-    i, j = max(groups, key=lambda group: float(np.max(rms[group[0]:group[1]])))
-    peak_i = i + int(np.argmax(rms[i:j]))
-    hdf_start = hdf.stats.starttime.datetime.replace(tzinfo=timezone.utc)
-    event_start = hdf_start + timedelta(seconds=i)
-    event_end = hdf_start + timedelta(seconds=j)
-    frequency = dominant_frequency(data[i * fs:j * fs], fs)
-    efs = int(round(ehz.stats.sampling_rate))
-    edata = np.asarray(ehz.data, dtype=float)
-    erms = per_second_rms(edata, efs)
-    emedian = float(np.median(erms))
-    emad = float(1.4826 * np.median(np.abs(erms - emedian))) or 1.0
-    peak_utc = hdf_start + timedelta(seconds=peak_i)
-    ehz_start = ehz.stats.starttime.datetime.replace(tzinfo=timezone.utc)
-    ehz_index = int((peak_utc - ehz_start).total_seconds())
-    ehz_z = float((erms[ehz_index] - emedian) / emad) if 0 <= ehz_index < len(erms) else float("nan")
-    peak_rms = float(rms[peak_i])
-    p99 = float(np.percentile(rms, 99))
-    peak_et = peak_utc.astimezone(ET)
-    result = {
-        "station": "AM.R6E8A.00", "channel": "HDF", "event_date_et": peak_et.date().isoformat(),
-        "display_time_et": peak_et.strftime("%b %-d · %-I:%M:%S %p ET"),
-        "event_start_utc": event_start.isoformat().replace("+00:00", "Z"),
-        "event_end_utc": event_end.isoformat().replace("+00:00", "Z"),
-        "duration_s": round((event_end - event_start).total_seconds(), 2),
-        "dominant_frequency_hz": round(frequency, 4), "peak_rms_counts": round(peak_rms, 4),
-        "daily_median_rms_counts": round(median, 4), "daily_99th_rms_counts": round(p99, 4),
-        "above_median_percent": round((peak_rms / median - 1) * 100, 1),
-        "multiple_of_median": round(peak_rms / median, 2),
-        "multiple_of_99th_percentile": round(peak_rms / p99, 2),
-        "hdf_robust_z": round(float(z[peak_i]), 2),
-        "simultaneous_ehz_robust_z": None if math.isnan(ehz_z) else round(ehz_z, 2),
-        "classification": "Predominantly HDF pressure/infrasound" if math.isnan(ehz_z) or ehz_z < 4 else "HDF event with elevated EHZ context",
-        "analyzed_through_et": end_et.strftime("%B %-d, %Y, %-I:%M %p Eastern Time"),
-        "calibration_note": "Instrument counts are not converted to dBA, dBC, NC or dBG without acoustic calibration."
+    cutoff_et = now_et - timedelta(minutes=30)
+    trailing_start_et = cutoff_et - timedelta(hours=24)
+    day_start_et = cutoff_et.replace(hour=0, minute=0, second=0, microsecond=0)
+
+    streams = {}
+    records = {}
+    source_urls = {}
+    errors = {}
+    for channel in ("HDF", "EHZ"):
+        try:
+            stream, source_url = fetch(channel, trailing_start_et, cutoff_et)
+            streams[channel] = stream
+            records[channel] = per_second_records(stream)
+            source_urls[channel] = source_url
+        except Exception as error:  # Keep the other channel available when one fails.
+            streams[channel] = None
+            records[channel] = []
+            errors[channel] = f"{type(error).__name__}: {error}"
+
+    trailing = {
+        channel: event_summary(
+            records[channel], streams[channel], trailing_start_et, cutoff_et
+        )
+        if streams[channel]
+        else None
+        for channel in ("HDF", "EHZ")
     }
+    detroit_day = {
+        channel: event_summary(records[channel], streams[channel], day_start_et, cutoff_et)
+        if streams[channel]
+        else None
+        for channel in ("HDF", "EHZ")
+    }
+
+    day_hdf = detroit_day["HDF"]
+    simultaneous_ehz_z = None
+    if day_hdf is not None:
+        simultaneous_ehz_z = z_at(
+            records["EHZ"], day_start_et, cutoff_et, day_hdf["_peak_epoch"]
+        )
+    generated_utc = iso_utc(datetime.now(timezone.utc))
+
+    channels = {}
+    for channel in ("HDF", "EHZ"):
+        event = detroit_day[channel]
+        channels[channel] = {
+            "available": event is not None,
+            "role": "Primary pressure/infrasound" if channel == "HDF" else "Secondary vertical motion",
+            "units": "instrument counts (one-second RMS)",
+            "latest_sample_utc": event.get("latest_sample_utc") if event else None,
+            "coverage_percent_since_midnight": event.get("coverage_percent") if event else 0.0,
+            "detroit_day_highest": public_event(event),
+            "trailing_24h_highest": public_event(trailing[channel]),
+            "error": errors.get(channel),
+        }
+
+    result = {
+        "schema_version": 2,
+        "station": "AM.R6E8A",
+        "generated_utc": generated_utc,
+        "analyzed_through_utc": iso_utc(cutoff_et),
+        "analyzed_through_et": cutoff_et.strftime(
+            "%B %-d, %Y, %-I:%M %p Eastern Time"
+        ),
+        "requested_window_utc": {
+            "start": iso_utc(trailing_start_et),
+            "end": iso_utc(cutoff_et),
+        },
+        "source": "Raspberry Shake FDSN dataselect",
+        "source_urls": source_urls,
+        "archive_delay_minutes": 30,
+        "channels": channels,
+        "calibration_note": (
+            "Raw instrument counts are not converted to dB(A), dB(C), dB(G), NC or RC. "
+            "HDF and EHZ remain independent."
+        ),
+    }
+
+    # Legacy top-level fields retained for old report consumers, without percentile fields.
+    if day_hdf is not None:
+        result.update(
+            {
+                "channel": "HDF",
+                "event_date_et": day_hdf["event_date_et"],
+                "display_time_et": day_hdf["display_time_et"],
+                "event_start_utc": day_hdf["event_start_utc"],
+                "event_end_utc": day_hdf["event_end_utc"],
+                "duration_s": day_hdf["duration_s"],
+                "dominant_frequency_hz": day_hdf["dominant_frequency_hz"],
+                "peak_rms_counts": day_hdf["peak_rms_counts"],
+                "daily_median_rms_counts": day_hdf["window_median_rms_counts"],
+                "above_median_percent": day_hdf["above_window_median_percent"],
+                "multiple_of_median": day_hdf["multiple_of_window_median"],
+                "hdf_robust_z": day_hdf["robust_z"],
+                "simultaneous_ehz_robust_z": simultaneous_ehz_z,
+                "classification": (
+                    "Predominantly HDF pressure/infrasound"
+                    if simultaneous_ehz_z is None or simultaneous_ehz_z < 4.0
+                    else "HDF event with elevated EHZ context"
+                ),
+            }
+        )
+
     OUT.parent.mkdir(parents=True, exist_ok=True)
-    OUT.write_text(json.dumps(result, indent=2) + "\n")
+    OUT.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
+    update_history(day_hdf, simultaneous_ehz_z, generated_utc)
+
+    if not day_hdf:
+        print("HDF data were unavailable; preserved channel status in output")
+
 
 if __name__ == "__main__":
     main()

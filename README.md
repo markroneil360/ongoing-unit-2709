@@ -1,24 +1,54 @@
-# Unit 2709 Infrasound & Seismic Pressure Data
+# Unit 2709 R6E8A Instrument Dashboard (Ongoing)
 
-A static, evidence-first dashboard for public Raspberry Shake station **AM.R6E8A.00** (Detroit, MI).
+Public single-page dashboard for Raspberry Shake station **AM.R6E8A** in Detroit.
 
-- **Primary channel — HDF:** very-low-frequency air-pressure changes, in pascals (Pa). Infrasound (below 20 Hz) is largely below ordinary human audibility; a calibrated pressure sensor is used to quantify it.
-- **Secondary channel — EHZ:** vertical ground-motion velocity, in µm/s, shown only as separate context. HDF and EHZ units are never mixed.
+- **Project span:** April 12, 2026 - Ongoing
+- **Primary channel:** HDF pressure / infrasound
+- **Secondary channel:** EHZ vertical motion
+- **Public page:** <https://markroneil360.github.io/ongoing-unit-2709/>
 
-All values are **response-corrected, per-minute RMS** with no interpolation. Each channel is compared only against its own deterministic peer baseline drawn from other public Raspberry Shake stations (same channel, units, frequency band, and day window). The band-limited Pa RMS metric is **not** a dB SPL exposure measurement and cannot by itself be used to establish harm.
+HDF and EHZ are always processed and reported independently. Missing samples remain unavailable and are never interpolated or set to zero.
 
-## Coverage
+## Live display and derived status
 
-The dashboard reports the **documented archived window** (the date range shown in the header). It is not a real-time feed: the fixed daily 24-hour report uses a **07:00 AM America/Detroit** cutoff and is generated after the Raspberry Shake FDSN archive delay. The header label reflects the actual latest archived data date and does not claim coverage up to the present. Days without retrievable data are recorded as gaps rather than interpolated.
+The homepage combines two different official-source paths:
 
-## Data & automation
+1. Raspberry Shake's supported DataView embeds display the current HDF and EHZ waveforms.
+2. `.github/workflows/update-daily-highest.yml` retrieves no more than 24 hours per FDSN request, runs `scripts/update_daily_highest.py`, and publishes a compact dual-channel status record at `data/daily-highest.json`.
 
-- `data/` — derived public aggregates (per-minute RMS caches and embeds, peer baselines, events, snapshot metadata). No raw MiniSEED is stored or redistributed.
-- `assets/` — independently generated composite snapshot images.
-- `tools/` — Python/Node utilities that build the derived data and run QA.
-- `.github/workflows/pages.yml` — deploys the static root to GitHub Pages via GitHub Actions.
-- `.github/workflows/daily-refresh.yml` — regenerates derived data once per day at the fixed 07:00 ET cutoff (DST-safe), committing only derived assets.
+Raw MiniSEED is streamed for processing and is not stored or redistributed in this repository.
 
-## Attribution
+## External references
 
-Data powered by **Raspberry Shake, S.A.**, a citizen-science project. Please visit [raspberryshake.org](https://raspberryshake.org) and join the Citizen Science Community. DOI: <https://doi.org/10.7914/SN/AM>.
+The dashboard names the approved comparison framework:
+
+- ISO 7196 for G-weighted infrasound measurement
+- ANSI/ASA S12.2 and ASHRAE RC/NC for room-noise criteria
+- Defra NANR45 for calibrated 1/3-octave low-frequency assessment
+- WHO night-noise guidance and ISO 1996 for the acoustic metrics they specify
+
+No standard is treated as interchangeable with another. Raw instrument counts are not labeled as dB(A), dB(C), dB(G), NC or RC. When calibration, frequency weighting, banding, averaging or coverage is insufficient, the result is shown as **N/A** and no monitoring tier is assigned.
+
+The four tiers describe duration relative to a valid named external reference:
+
+- Tier 1: within named reference
+- Tier 2: intermittent verified exceedance, each interval under 30 minutes
+- Tier 3: prolonged verified exceedance, 30-119 minutes
+- Tier 4: extended verified exceedance, 120 minutes or longer
+
+These are monitoring-priority categories, not medical, safety, causation or source-identification categories.
+
+## Reports
+
+`scripts/generate_reports.py` creates the two linked reports from derived JSON:
+
+- `downloads/R6E8A-24-hour-report.pdf`
+- `downloads/R6E8A-7-day-trailing-report.pdf`
+
+Each report keeps HDF and EHZ separate and includes the source-method limitations.
+
+## Verification
+
+Data are independently verifiable through [Raspberry Shake DataView](https://dataview.raspberryshake.org/) and the [Raspberry Shake FDSN service](https://data.raspberryshake.org/fdsnws/). Data powered by Raspberry Shake, S.A.; DOI: <https://doi.org/10.7914/SN/AM>.
+
+*This Data may lag.*
