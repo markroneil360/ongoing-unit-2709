@@ -72,16 +72,16 @@
     },
     {
       "event_date_et": "2026-08-04",
-      "display_time_et": "Aug 4 - 5:22:37 AM EST",
-      "event_start_utc": "2026-08-04T09:22:37.889000Z",
-      "event_end_utc": "2026-08-04T09:22:38.889000Z",
-      "duration_s": 1.0,
-      "dominant_frequency_hz": 8.1563,
-      "peak_rms_counts": 7038.3226,
-      "estimated_pressure_pa_rms_nominal": 0.125684,
-      "observed_seconds": 20803,
+      "display_time_et": "Aug 4 - 6:48:57 AM EST",
+      "event_start_utc": "2026-08-04T10:48:57.079000Z",
+      "event_end_utc": "2026-08-04T10:48:59.079000Z",
+      "duration_s": 2.0,
+      "dominant_frequency_hz": 2.3475,
+      "peak_rms_counts": 13519.2528,
+      "observed_seconds": 25004,
       "coverage_percent": 100.0,
-      "latest_sample_utc": "2026-08-04T09:46:43.889000Z"
+      "latest_sample_utc": "2026-08-04T10:56:44.079000Z",
+      "estimated_pressure_pa_rms_nominal": 0.241415
     }
   ],
   "archived_reference": {
@@ -96,5 +96,5 @@
     "source_commit": "a8d5637933b482271c8cd41dd24f8c6bc0ae7a46",
     "note": "Archived automated detector record. It is not a complete interval analysis of 2:30-3:00 AM."
   },
-  "generated_utc": "2026-08-04T10:18:07.272414Z"
+  "generated_utc": "2026-08-04T11:28:07.627865Z"
 }
