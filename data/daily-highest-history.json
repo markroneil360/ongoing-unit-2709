@@ -90,17 +90,20 @@
     },
     {
       "event_date_et": "2026-08-04",
-      "display_time_et": "Aug 4 - 1:30:38 AM EST",
-      "event_start_utc": "2026-08-04T05:30:37.819000Z",
-      "event_end_utc": "2026-08-04T05:30:42.819000Z",
-      "duration_s": 5.0,
-      "dominant_frequency_hz": 5.8886,
-      "peak_rms_counts": 5269.8458,
-      "daily_median_rms_counts": 892.1012,
-      "above_median_percent": 490.7,
-      "simultaneous_ehz_robust_z": 2.2,
-      "classification": "Predominantly HDF pressure/infrasound",
-      "source_commit": "37417526d0905bad9111e2893ff7aace9f111787"
+      "display_time_et": "Aug 4 - 3:19:06 AM EST",
+      "event_start_utc": "2026-08-04T07:19:06.079000Z",
+      "event_end_utc": "2026-08-04T07:19:08.079000Z",
+      "duration_s": 2.0,
+      "dominant_frequency_hz": 7.9734,
+      "peak_rms_counts": 7126.151,
+      "robust_z": 47.66,
+      "observed_seconds": 15685,
+      "coverage_percent": 100.0,
+      "latest_sample_utc": "2026-08-04T08:21:25.079000Z",
+      "daily_median_rms_counts": 845.8996,
+      "above_median_percent": 742.4,
+      "simultaneous_ehz_robust_z": 0.62,
+      "classification": "Predominantly HDF pressure/infrasound"
     }
   ],
   "archived_reference": {
@@ -117,5 +120,6 @@
     "classification": "Predominantly HDF pressure/infrasound",
     "source_commit": "a8d5637933b482271c8cd41dd24f8c6bc0ae7a46",
     "note": "Archived automated detector record. It is not a complete interval analysis of 2:30-3:00 AM."
-  }
+  },
+  "generated_utc": "2026-08-04T08:52:48.020882Z"
 }
