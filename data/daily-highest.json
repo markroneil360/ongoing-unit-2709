@@ -1,17 +1,17 @@
 {
   "schema_version": 3,
   "station": "AM.R6E8A",
-  "generated_utc": "2026-08-04T11:28:07.627865Z",
-  "analyzed_through_utc": "2026-08-04T10:56:43.532072Z",
-  "analyzed_through_et": "August 4, 2026, 6:56 AM Eastern Time",
+  "generated_utc": "2026-08-04T11:33:38.411312Z",
+  "analyzed_through_utc": "2026-08-04T11:02:14.427802Z",
+  "analyzed_through_et": "August 4, 2026, 7:02 AM Eastern Time",
   "requested_window_utc": {
-    "start": "2026-08-03T10:56:43.532072Z",
-    "end": "2026-08-04T10:56:43.532072Z"
+    "start": "2026-08-03T11:02:14.427802Z",
+    "end": "2026-08-04T11:02:14.427802Z"
   },
   "source": "Raspberry Shake FDSN dataselect",
   "source_urls": {
-    "HDF": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-08-03T10%3A56%3A43.532072Z&end=2026-08-04T10%3A56%3A43.532072Z&format=miniseed&nodata=404",
-    "EHZ": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=EHZ&start=2026-08-03T10%3A56%3A43.532072Z&end=2026-08-04T10%3A56%3A43.532072Z&format=miniseed&nodata=404"
+    "HDF": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-08-03T11%3A02%3A14.427802Z&end=2026-08-04T11%3A02%3A14.427802Z&format=miniseed&nodata=404",
+    "EHZ": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=EHZ&start=2026-08-03T11%3A02%3A14.427802Z&end=2026-08-04T11%3A02%3A14.427802Z&format=miniseed&nodata=404"
   },
   "archive_delay_minutes": 30,
   "channels": {
@@ -19,33 +19,33 @@
       "available": true,
       "role": "Primary pressure/infrasound",
       "units": "instrument counts (one-second RMS)",
-      "latest_sample_utc": "2026-08-04T10:56:44.079000Z",
+      "latest_sample_utc": "2026-08-04T11:02:15.359000Z",
       "coverage_percent_since_midnight": 100.0,
       "detroit_day_highest": {
         "event_date_et": "2026-08-04",
         "display_time_et": "Aug 4 - 6:48:57 AM EST",
-        "event_start_utc": "2026-08-04T10:48:57.079000Z",
-        "event_end_utc": "2026-08-04T10:48:59.079000Z",
-        "duration_s": 2.0,
-        "dominant_frequency_hz": 2.3475,
-        "peak_rms_counts": 13519.2528,
-        "observed_seconds": 25004,
+        "event_start_utc": "2026-08-04T10:48:57.359000Z",
+        "event_end_utc": "2026-08-04T10:48:58.359000Z",
+        "duration_s": 1.0,
+        "dominant_frequency_hz": 2.3549,
+        "peak_rms_counts": 13794.0332,
+        "observed_seconds": 25335,
         "coverage_percent": 100.0,
-        "latest_sample_utc": "2026-08-04T10:56:44.079000Z",
-        "estimated_pressure_pa_rms_nominal": 0.241415
+        "latest_sample_utc": "2026-08-04T11:02:15.359000Z",
+        "estimated_pressure_pa_rms_nominal": 0.246322
       },
       "trailing_24h_highest": {
         "event_date_et": "2026-08-03",
         "display_time_et": "Aug 3 - 7:00:02 PM EST",
-        "event_start_utc": "2026-08-03T22:59:46.079000Z",
-        "event_end_utc": "2026-08-03T23:00:07.079000Z",
-        "duration_s": 21.0,
-        "dominant_frequency_hz": 1.2969,
-        "peak_rms_counts": 354701.9798,
+        "event_start_utc": "2026-08-03T22:59:46.359000Z",
+        "event_end_utc": "2026-08-03T23:00:06.359000Z",
+        "duration_s": 20.0,
+        "dominant_frequency_hz": 1.2918,
+        "peak_rms_counts": 375231.1692,
         "observed_seconds": 86400,
         "coverage_percent": 100.0,
-        "latest_sample_utc": "2026-08-04T10:56:44.079000Z",
-        "estimated_pressure_pa_rms_nominal": 6.333964
+        "latest_sample_utc": "2026-08-04T11:02:15.359000Z",
+        "estimated_pressure_pa_rms_nominal": 6.700557
       },
       "error": null
     },
@@ -53,31 +53,31 @@
       "available": true,
       "role": "Secondary vertical motion",
       "units": "instrument counts (one-second RMS)",
-      "latest_sample_utc": "2026-08-04T10:56:44.299000Z",
+      "latest_sample_utc": "2026-08-04T11:02:15.279000Z",
       "coverage_percent_since_midnight": 100.0,
       "detroit_day_highest": {
         "event_date_et": "2026-08-04",
         "display_time_et": "Aug 4 - 12:51:51 AM EST",
-        "event_start_utc": "2026-08-04T04:51:45.299000Z",
-        "event_end_utc": "2026-08-04T04:51:53.299000Z",
+        "event_start_utc": "2026-08-04T04:51:45.279000Z",
+        "event_end_utc": "2026-08-04T04:51:53.279000Z",
         "duration_s": 8.0,
-        "dominant_frequency_hz": 5.0428,
-        "peak_rms_counts": 19734.3927,
-        "observed_seconds": 25004,
+        "dominant_frequency_hz": 5.0426,
+        "peak_rms_counts": 20107.1602,
+        "observed_seconds": 25335,
         "coverage_percent": 100.0,
-        "latest_sample_utc": "2026-08-04T10:56:44.299000Z"
+        "latest_sample_utc": "2026-08-04T11:02:15.279000Z"
       },
       "trailing_24h_highest": {
         "event_date_et": "2026-08-03",
         "display_time_et": "Aug 3 - 4:36:50 PM EST",
-        "event_start_utc": "2026-08-03T20:36:47.299000Z",
-        "event_end_utc": "2026-08-03T20:36:52.299000Z",
+        "event_start_utc": "2026-08-03T20:36:47.279000Z",
+        "event_end_utc": "2026-08-03T20:36:52.279000Z",
         "duration_s": 5.0,
-        "dominant_frequency_hz": 5.1778,
-        "peak_rms_counts": 24325.2808,
+        "dominant_frequency_hz": 5.1773,
+        "peak_rms_counts": 24607.6337,
         "observed_seconds": 86400,
         "coverage_percent": 100.0,
-        "latest_sample_utc": "2026-08-04T10:56:44.299000Z"
+        "latest_sample_utc": "2026-08-04T11:02:15.279000Z"
       },
       "error": null
     }
@@ -86,10 +86,10 @@
   "channel": "HDF",
   "event_date_et": "2026-08-04",
   "display_time_et": "Aug 4 - 6:48:57 AM EST",
-  "event_start_utc": "2026-08-04T10:48:57.079000Z",
-  "event_end_utc": "2026-08-04T10:48:59.079000Z",
-  "duration_s": 2.0,
-  "dominant_frequency_hz": 2.3475,
-  "peak_rms_counts": 13519.2528,
-  "estimated_pressure_pa_rms_nominal": 0.241415
+  "event_start_utc": "2026-08-04T10:48:57.359000Z",
+  "event_end_utc": "2026-08-04T10:48:58.359000Z",
+  "duration_s": 1.0,
+  "dominant_frequency_hz": 2.3549,
+  "peak_rms_counts": 13794.0332,
+  "estimated_pressure_pa_rms_nominal": 0.246322
 }
