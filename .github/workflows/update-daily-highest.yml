@@ -2,7 +2,7 @@ name: Update R6E8A live instrument status and reports
 
 on:
   schedule:
-    - cron: '37 * * * *'
+    - cron: '7,37 * * * *'
   workflow_dispatch:
   push:
     branches:
@@ -11,6 +11,8 @@ on:
     paths:
       - 'scripts/update_daily_highest.py'
       - 'scripts/generate_reports.py'
+      - 'scripts/sanity_check.py'
+      - 'index.html'
       - 'data/daily-highest-history.json'
       - '.github/workflows/update-daily-highest.yml'
 
@@ -50,9 +52,36 @@ jobs:
           for path in paths:
               if not path.exists() or path.stat().st_size < 5000:
                   raise SystemExit(f'Invalid report: {path}')
-              if not PdfReader(str(path)).pages:
-                  raise SystemExit(f'No PDF pages: {path}')
+              pages = PdfReader(str(path)).pages
+              if len(pages) != 2:
+                  raise SystemExit(f'Expected a 2-page report: {path}')
+              text = '\n'.join((page.extract_text() or '') for page in pages).lower()
+              for phrase in ('above median', 'same-channel context', 'same-day difference'):
+                  if phrase in text:
+                      raise SystemExit(f'Prohibited self-comparison in {path}: {phrase}')
+
+          data = __import__('json').loads(Path('data/daily-highest.json').read_text())
+          history = __import__('json').loads(Path('data/daily-highest-history.json').read_text())
+          prohibited_keys = {
+              'above_median_percent', 'above_window_median_percent',
+              'daily_median_rms_counts', 'window_median_rms_counts',
+              'multiple_of_median', 'multiple_of_window_median',
+          }
+          def walk(value):
+              if isinstance(value, dict):
+                  overlap = prohibited_keys.intersection(value)
+                  if overlap:
+                      raise SystemExit(f'Prohibited public self-comparison fields: {sorted(overlap)}')
+                  for child in value.values():
+                      walk(child)
+              elif isinstance(value, list):
+                  for child in value:
+                      walk(child)
+          walk(data)
+          walk(history)
           PY
+      - name: Run three-pass public rules sanity check
+        run: python scripts/sanity_check.py
       - name: Commit derived status and reports
         run: |
           git config user.name "github-actions[bot]"

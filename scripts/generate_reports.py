@@ -1,9 +1,14 @@
 #!/usr/bin/env python3
-"""Generate the two public R6E8A PDF reports from derived JSON only."""
+"""Create the R6E8A 24-hour and trailing-seven-day public PDF reports.
+
+The reports show HDF pressure first, keep EHZ separate, and compare R6E8A only
+with the four named external guidance families. Detector medians and other
+same-station baselines are intentionally excluded from every public page.
+"""
 from __future__ import annotations
 
+import html
 import json
-from datetime import datetime, timezone
 from pathlib import Path
 
 from reportlab.lib import colors
@@ -11,8 +16,8 @@ from reportlab.lib.enums import TA_CENTER, TA_LEFT
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
 from reportlab.lib.units import inch
-from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
+from reportlab.pdfbase import pdfmetrics
 from reportlab.platypus import (
     BaseDocTemplate,
     Frame,
@@ -29,512 +34,374 @@ from reportlab.platypus import (
 ROOT = Path(__file__).resolve().parents[1]
 LIVE_PATH = ROOT / "data" / "daily-highest.json"
 HISTORY_PATH = ROOT / "data" / "daily-highest-history.json"
-OUT_DIR = ROOT / "downloads"
-GREEN = colors.HexColor("#28d17c")
-DEEP_GREEN = colors.HexColor("#063b2d")
-INK = colors.HexColor("#13221d")
-MUTED = colors.HexColor("#52635d")
-LIGHT = colors.HexColor("#edf6f2")
-AMBER = colors.HexColor("#f4d88b")
-RED = colors.HexColor("#bf2e2e")
-LINE = colors.HexColor("#c9d8d1")
+ARCHIVE_PATH = ROOT / "data" / "unified_daily.json"
+OUT_24H = ROOT / "downloads" / "R6E8A-24-hour-report.pdf"
+OUT_7D = ROOT / "downloads" / "R6E8A-7-day-trailing-report.pdf"
+HDF_COUNTS_PER_PA = 56_000.0
+FONT_REGULAR = "R6E8A-DejaVu"
+FONT_BOLD = "R6E8A-DejaVu-Bold"
+pdfmetrics.registerFont(TTFont(FONT_REGULAR, "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"))
+pdfmetrics.registerFont(TTFont(FONT_BOLD, "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"))
 
-# DejaVu renders consistently in browsers and Poppler while keeping the PDFs
-# self-contained. ReportLab's built-in Helvetica remains a safe fallback.
-DEJAVU_DIR = Path("/usr/share/fonts/truetype/dejavu")
-if (DEJAVU_DIR / "DejaVuSans.ttf").exists():
-    pdfmetrics.registerFont(TTFont("R6E8A-Regular", DEJAVU_DIR / "DejaVuSans.ttf"))
-    pdfmetrics.registerFont(TTFont("R6E8A-Bold", DEJAVU_DIR / "DejaVuSans-Bold.ttf"))
-    FONT_REGULAR = "R6E8A-Regular"
-    FONT_BOLD = "R6E8A-Bold"
-else:
-    FONT_REGULAR = "Helvetica"
-    FONT_BOLD = "Helvetica-Bold"
+DEEP = colors.HexColor("#06110D")
+GREEN = colors.HexColor("#159957")
+GREEN_LIGHT = colors.HexColor("#DDF7E9")
+BLUE_LIGHT = colors.HexColor("#E6F3FF")
+AMBER_LIGHT = colors.HexColor("#FFF3D2")
+RED_LIGHT = colors.HexColor("#FFE8E9")
+INK = colors.HexColor("#102019")
+MUTED = colors.HexColor("#5D7067")
+LINE = colors.HexColor("#B8CEC3")
 
 
-def load_json(path: Path):
+def load(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def num(value, digits=1):
+def esc(value) -> str:
+    return html.escape("N/A" if value is None else str(value))
+
+
+def num(value, digits=1) -> str:
+    try:
+        return f"{float(value):,.{digits}f}"
+    except (TypeError, ValueError):
+        return "N/A"
+
+
+def pressure_pa(event: dict | None) -> float | None:
+    if not event:
+        return None
+    value = event.get("estimated_pressure_pa_rms_nominal")
+    if value is not None:
+        return float(value)
+    counts = event.get("peak_rms_counts")
+    return float(counts) / HDF_COUNTS_PER_PA if counts is not None else None
+
+
+def pressure_label(event: dict | None) -> str:
+    value = pressure_pa(event)
     if value is None:
         return "N/A"
-    return f"{float(value):,.{digits}f}"
-
-
-def event_from_live(live, channel="HDF", window="trailing_24h_highest"):
-    event = live.get("channels", {}).get(channel, {}).get(window)
-    if event:
-        return event
-    if channel == "HDF" and live.get("event_date_et"):
-        return {
-            "event_date_et": live.get("event_date_et"),
-            "display_time_et": live.get("display_time_et"),
-            "event_start_utc": live.get("event_start_utc"),
-            "event_end_utc": live.get("event_end_utc"),
-            "duration_s": live.get("duration_s"),
-            "dominant_frequency_hz": live.get("dominant_frequency_hz"),
-            "peak_rms_counts": live.get("peak_rms_counts"),
-            "window_median_rms_counts": live.get("daily_median_rms_counts"),
-            "above_window_median_percent": live.get("above_median_percent"),
-            "robust_z": live.get("hdf_robust_z"),
-        }
-    return None
+    digits = 2 if value >= 1 else 3 if value >= 0.1 else 4
+    return f"approximately {value:,.{digits}f} Pa RMS*"
 
 
 def styles():
-    sheet = getSampleStyleSheet()
+    base = getSampleStyleSheet()
     return {
         "title": ParagraphStyle(
-            "Title",
-            parent=sheet["Title"],
-            fontName=FONT_BOLD,
-            fontSize=20,
-            leading=23,
-            textColor=DEEP_GREEN,
-            alignment=TA_LEFT,
-            spaceAfter=8,
+            "Title", parent=base["Title"], fontName=FONT_BOLD, fontSize=22,
+            leading=24, textColor=colors.white, alignment=TA_LEFT, spaceAfter=5,
         ),
         "subtitle": ParagraphStyle(
-            "Subtitle",
-            parent=sheet["Normal"],
-            fontName=FONT_BOLD,
-            fontSize=10,
-            leading=14,
-            textColor=MUTED,
-            spaceAfter=14,
+            "Subtitle", parent=base["BodyText"], fontName=FONT_REGULAR, fontSize=8.5,
+            leading=11, textColor=colors.HexColor("#CFE5D9"), spaceAfter=0,
+        ),
+        "h1": ParagraphStyle(
+            "H1", parent=base["Heading1"], fontName=FONT_BOLD, fontSize=15,
+            leading=18, textColor=DEEP, spaceBefore=4, spaceAfter=7,
         ),
         "h2": ParagraphStyle(
-            "H2",
-            parent=sheet["Heading2"],
-            fontName=FONT_BOLD,
-            fontSize=13,
-            leading=16,
-            textColor=DEEP_GREEN,
-            spaceBefore=10,
-            spaceAfter=7,
+            "H2", parent=base["Heading2"], fontName=FONT_BOLD, fontSize=11,
+            leading=13, textColor=GREEN, spaceBefore=4, spaceAfter=5,
         ),
         "body": ParagraphStyle(
-            "Body",
-            parent=sheet["BodyText"],
-            fontName=FONT_REGULAR,
-            fontSize=9.2,
-            leading=13.2,
-            textColor=INK,
-            spaceAfter=7,
+            "Body", parent=base["BodyText"], fontName=FONT_REGULAR, fontSize=8.4,
+            leading=11.2, textColor=INK, spaceAfter=5,
         ),
         "small": ParagraphStyle(
-            "Small",
-            parent=sheet["BodyText"],
-            fontName=FONT_REGULAR,
-            fontSize=7.6,
-            leading=10.2,
-            textColor=MUTED,
-            spaceAfter=5,
+            "Small", parent=base["BodyText"], fontName=FONT_REGULAR, fontSize=7.1,
+            leading=9.1, textColor=MUTED, spaceAfter=3,
         ),
-        "callout": ParagraphStyle(
-            "Callout",
-            parent=sheet["BodyText"],
-            fontName=FONT_BOLD,
-            fontSize=9,
-            leading=13,
-            textColor=INK,
+        "card_label": ParagraphStyle(
+            "CardLabel", parent=base["BodyText"], fontName=FONT_BOLD, fontSize=6.8,
+            leading=8, textColor=MUTED, spaceAfter=3,
         ),
-        "cell": ParagraphStyle(
-            "Cell",
-            parent=sheet["BodyText"],
-            fontName=FONT_REGULAR,
-            fontSize=7.5,
-            leading=9.5,
-            textColor=INK,
+        "card_value": ParagraphStyle(
+            "CardValue", parent=base["BodyText"], fontName=FONT_BOLD, fontSize=11,
+            leading=13, textColor=DEEP, spaceAfter=2,
         ),
-        "cell_bold": ParagraphStyle(
-            "CellBold",
-            parent=sheet["BodyText"],
-            fontName=FONT_BOLD,
-            fontSize=7.5,
-            leading=9.5,
-            textColor=INK,
+        "table_head": ParagraphStyle(
+            "TableHead", parent=base["BodyText"], fontName=FONT_BOLD, fontSize=6.6,
+            leading=8, textColor=colors.white,
         ),
-        "cell_header": ParagraphStyle(
-            "CellHeader",
-            parent=sheet["BodyText"],
-            fontName=FONT_BOLD,
-            fontSize=7.5,
-            leading=9.5,
-            textColor=colors.white,
+        "table": ParagraphStyle(
+            "Table", parent=base["BodyText"], fontName=FONT_REGULAR, fontSize=6.7,
+            leading=8.4, textColor=INK,
+        ),
+        "table_bold": ParagraphStyle(
+            "TableBold", parent=base["BodyText"], fontName=FONT_BOLD, fontSize=6.7,
+            leading=8.4, textColor=INK,
+        ),
+        "center": ParagraphStyle(
+            "Center", parent=base["BodyText"], fontName=FONT_BOLD, fontSize=8.2,
+            leading=10, textColor=INK, alignment=TA_CENTER,
         ),
     }
 
 
-def page(canvas, doc):
-    canvas.saveState()
+def page_template(canvas, doc):
     width, height = letter
-    canvas.setFillColor(DEEP_GREEN)
-    canvas.rect(0, height - 0.28 * inch, width, 0.28 * inch, stroke=0, fill=1)
-    canvas.setStrokeColor(LINE)
-    canvas.line(0.55 * inch, 0.46 * inch, width - 0.55 * inch, 0.46 * inch)
+    canvas.saveState()
+    canvas.setFillColor(DEEP)
+    canvas.rect(0, height - 0.63 * inch, width, 0.63 * inch, fill=1, stroke=0)
+    canvas.setStrokeColor(GREEN)
+    canvas.setLineWidth(2)
+    canvas.line(0.48 * inch, 0.43 * inch, width - 0.48 * inch, 0.43 * inch)
     canvas.setFillColor(MUTED)
-    canvas.setFont(FONT_REGULAR, 7.5)
-    canvas.drawString(0.55 * inch, 0.28 * inch, "R6E8A - Unit 2709 instrument record")
-    canvas.drawRightString(width - 0.55 * inch, 0.28 * inch, f"Page {doc.page}")
+    canvas.setFont(FONT_REGULAR, 7)
+    canvas.drawString(0.5 * inch, 0.25 * inch, "R6E8A · April 12, 2026 - Ongoing · Eastern Time")
+    canvas.drawRightString(width - 0.5 * inch, 0.25 * inch, f"Page {doc.page}")
     canvas.restoreState()
 
 
-def document(path: Path):
-    doc = BaseDocTemplate(
-        str(path),
-        pagesize=letter,
-        leftMargin=0.55 * inch,
-        rightMargin=0.55 * inch,
-        topMargin=0.55 * inch,
-        bottomMargin=0.62 * inch,
-        title=path.stem,
-        author="Unit 2709 R6E8A Dashboard",
+def header_block(sty, title: str, subtitle: str):
+    table = Table(
+        [[Paragraph(title, sty["title"]), Paragraph(subtitle, sty["subtitle"])]] ,
+        colWidths=[4.9 * inch, 2.0 * inch],
     )
-    frame = Frame(doc.leftMargin, doc.bottomMargin, doc.width, doc.height, id="normal")
-    doc.addPageTemplates(PageTemplate(id="report", frames=frame, onPage=page))
-    return doc
-
-
-def metric_table(rows, sty):
-    data = [[Paragraph("Metric", sty["cell_header"]), Paragraph("Result", sty["cell_header"])]]
-    for label, value in rows:
-        data.append([Paragraph(str(label), sty["cell"]), Paragraph(str(value), sty["cell_bold"])])
-    table = Table(data, colWidths=[2.7 * inch, 3.9 * inch], repeatRows=1)
-    table.setStyle(
-        TableStyle(
-            [
-                ("BACKGROUND", (0, 0), (-1, 0), DEEP_GREEN),
-                ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
-                ("GRID", (0, 0), (-1, -1), 0.45, LINE),
-                ("BACKGROUND", (0, 1), (-1, -1), colors.white),
-                ("ROWBACKGROUNDS", (0, 1), (-1, -1), [colors.white, LIGHT]),
-                ("VALIGN", (0, 0), (-1, -1), "TOP"),
-                ("LEFTPADDING", (0, 0), (-1, -1), 7),
-                ("RIGHTPADDING", (0, 0), (-1, -1), 7),
-                ("TOPPADDING", (0, 0), (-1, -1), 6),
-                ("BOTTOMPADDING", (0, 0), (-1, -1), 6),
-            ]
-        )
-    )
+    table.setStyle(TableStyle([
+        ("BACKGROUND", (0, 0), (-1, -1), DEEP),
+        ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
+        ("LEFTPADDING", (0, 0), (-1, -1), 12),
+        ("RIGHTPADDING", (0, 0), (-1, -1), 12),
+        ("TOPPADDING", (0, 0), (-1, -1), 11),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 11),
+        ("BOX", (0, 0), (-1, -1), 0.5, GREEN),
+    ]))
     return table
 
 
-def tier_table(sty):
-    rows = [
-        ["Tier 1", "Within named reference", "At or below a valid external reference"],
-        ["Tier 2", "Intermittent exceedance", "Verified intervals, each under 30 minutes"],
-        ["Tier 3", "Prolonged exceedance", "One or more verified intervals of 30-119 minutes"],
-        ["Tier 4", "Extended exceedance", "One or more verified intervals of 120 minutes or longer"],
+def summary_cards(sty, live: dict):
+    hdf = ((live.get("channels") or {}).get("HDF") or {}).get("detroit_day_highest") or live
+    ehz = ((live.get("channels") or {}).get("EHZ") or {}).get("detroit_day_highest") or {}
+    cards = [
+        ("LATEST DUAL-CHANNEL CUTOFF", live.get("analyzed_through_et", "N/A"), "Latest processed point available from both channels."),
+        ("HDF PRESSURE LEADS", pressure_label(hdf), "Nominal one-second estimate; not a handbook grade."),
+        ("PRESSURE EVENT", hdf.get("display_time_et", "N/A"), f"{num(hdf.get('dominant_frequency_hz'), 4)} Hz · {num(hdf.get('duration_s'), 1)} sec detector window"),
+        ("EXTERNAL GUIDE RESULT", "Not yet gradeable", "No percentage or tier until the same required metric is measured."),
     ]
-    data = [[Paragraph("Tier", sty["cell_header"]), Paragraph("Meaning", sty["cell_header"]), Paragraph("Rule", sty["cell_header"])]]
-    data += [[Paragraph(cell, sty["cell"]) for cell in row] for row in rows]
-    table = Table(data, colWidths=[0.7 * inch, 1.8 * inch, 4.1 * inch], repeatRows=1)
-    table.setStyle(
-        TableStyle(
-            [
-                ("BACKGROUND", (0, 0), (-1, 0), DEEP_GREEN),
-                ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
-                ("ROWBACKGROUNDS", (0, 1), (-1, -1), [LIGHT, colors.white]),
-                ("GRID", (0, 0), (-1, -1), 0.45, LINE),
-                ("VALIGN", (0, 0), (-1, -1), "TOP"),
-                ("LEFTPADDING", (0, 0), (-1, -1), 6),
-                ("RIGHTPADDING", (0, 0), (-1, -1), 6),
-                ("TOPPADDING", (0, 0), (-1, -1), 5),
-                ("BOTTOMPADDING", (0, 0), (-1, -1), 5),
-            ]
-        )
-    )
+    cells = []
+    for label, value, note in cards:
+        cells.append([
+            Paragraph(label, sty["card_label"]),
+            Paragraph(esc(value), sty["card_value"]),
+            Paragraph(esc(note), sty["small"]),
+        ])
+    table = Table([cells], colWidths=[1.72 * inch] * 4)
+    table.setStyle(TableStyle([
+        ("BACKGROUND", (0, 0), (-1, -1), colors.white),
+        ("BOX", (0, 0), (-1, -1), 0.6, LINE),
+        ("INNERGRID", (0, 0), (-1, -1), 0.35, LINE),
+        ("VALIGN", (0, 0), (-1, -1), "TOP"),
+        ("LEFTPADDING", (0, 0), (-1, -1), 8),
+        ("RIGHTPADDING", (0, 0), (-1, -1), 8),
+        ("TOPPADDING", (0, 0), (-1, -1), 8),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 8),
+    ]))
     return table
 
 
 def benchmark_table(sty):
     rows = [
-        ("ISO 7196", "HDF frequency scope is relevant; calibrated G-weighted dB(G) is not currently computed."),
-        ("ANSI/ASA S12.2 and ASHRAE RC/NC", "N/A from raw HDF counts; calibrated octave-band room sound levels are required."),
-        ("Defra NANR45", "N/A until calibrated 1/3-octave values from 10-160 Hz are available."),
-        ("WHO night noise and ISO 1996", "N/A from HDF/EHZ counts; the required environmental acoustic metrics are not present."),
+        [
+            Paragraph("PUBLISHED GUIDE", sty["table_head"]),
+            Paragraph("OUTSIDE REFERENCE", sty["table_head"]),
+            Paragraph("R6E8A RESULT", sty["table_head"]),
+            Paragraph("WHY", sty["table_head"]),
+        ],
+        [
+            Paragraph("1 · ISO 7196<br/><font color='#159957'>Infrasound pressure</font>", sty["table_bold"]),
+            Paragraph("G-weighted pressure for 1-20 Hz. It is a measurement method and sets no danger limit.", sty["table"]),
+            Paragraph("N/A · dB(G) not yet computed", sty["table_bold"]),
+            Paragraph("Needs station-response correction to Pa and validated G weighting.", sty["table"]),
+        ],
+        [
+            Paragraph("2 · ANSI/ASA + ASHRAE<br/><font color='#159957'>Hotel room</font>", sty["table_bold"]),
+            Paragraph("Hotel room/suite target NC/RC 30; approximately 35 dBA and 60 dBC. Project target may vary ±5.", sty["table"]),
+            Paragraph("N/A · NC/RC not measured", sty["table_bold"]),
+            Paragraph("Needs a calibrated room survey with the required octave bands and positions.", sty["table"]),
+        ],
+        [
+            Paragraph("3 · Defra NANR45<br/><font color='#159957'>Low frequency</font>", sty["table_bold"]),
+            Paragraph("Indoor five-minute 1/3-octave night curve: 92 to 34 dB across 10-160 Hz.", sty["table"]),
+            Paragraph("N/A · full band set unavailable", sty["table_bold"]),
+            Paragraph("R6E8A cannot supply the required 50-160 Hz bands or full indoor procedure.", sty["table"]),
+        ],
+        [
+            Paragraph("4 · WHO + ISO 1996<br/><font color='#159957'>Night environment</font>", sty["table_bold"]),
+            Paragraph("30 dBA bedroom overnight; 40 dBA annual outside guideline; 55 dBA annual interim target.", sty["table"]),
+            Paragraph("N/A · dBA averages not measured", sty["table_bold"]),
+            Paragraph("Needs calibrated A-weighted sound and each guide’s location and averaging period.", sty["table"]),
+        ],
     ]
-    data = [[Paragraph("External reference", sty["cell_header"]), Paragraph("Current comparison status", sty["cell_header"])]]
-    data += [[Paragraph(a, sty["cell_bold"]), Paragraph(b, sty["cell"])] for a, b in rows]
-    table = Table(data, colWidths=[2.15 * inch, 4.45 * inch], repeatRows=1)
-    table.setStyle(
-        TableStyle(
-            [
-                ("BACKGROUND", (0, 0), (-1, 0), DEEP_GREEN),
-                ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
-                ("ROWBACKGROUNDS", (0, 1), (-1, -1), [colors.white, LIGHT]),
-                ("GRID", (0, 0), (-1, -1), 0.45, LINE),
-                ("VALIGN", (0, 0), (-1, -1), "TOP"),
-                ("LEFTPADDING", (0, 0), (-1, -1), 6),
-                ("RIGHTPADDING", (0, 0), (-1, -1), 6),
-                ("TOPPADDING", (0, 0), (-1, -1), 5),
-                ("BOTTOMPADDING", (0, 0), (-1, -1), 5),
-            ]
-        )
-    )
+    table = Table(rows, colWidths=[1.25 * inch, 2.15 * inch, 1.45 * inch, 2.05 * inch], repeatRows=1)
+    table.setStyle(TableStyle([
+        ("BACKGROUND", (0, 0), (-1, 0), DEEP),
+        ("BACKGROUND", (0, 1), (-1, 1), GREEN_LIGHT),
+        ("BACKGROUND", (0, 2), (-1, 2), BLUE_LIGHT),
+        ("BACKGROUND", (0, 3), (-1, 3), AMBER_LIGHT),
+        ("BACKGROUND", (0, 4), (-1, 4), colors.HexColor("#F1EAFF")),
+        ("GRID", (0, 0), (-1, -1), 0.35, LINE),
+        ("VALIGN", (0, 0), (-1, -1), "TOP"),
+        ("LEFTPADDING", (0, 0), (-1, -1), 6),
+        ("RIGHTPADDING", (0, 0), (-1, -1), 6),
+        ("TOPPADDING", (0, 0), (-1, -1), 6),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 6),
+    ]))
     return table
 
 
-def report_header(story, sty, title, subtitle):
-    story.append(Paragraph(title, sty["title"]))
-    story.append(Paragraph(subtitle, sty["subtitle"]))
-    note = Table(
-        [[Paragraph("* Account for up to 30 minutes of source-archive lag.", sty["callout"]) ]],
-        colWidths=[6.6 * inch],
-    )
-    note.setStyle(
-        TableStyle(
-            [
-                ("BACKGROUND", (0, 0), (-1, -1), AMBER),
-                ("BOX", (0, 0), (-1, -1), 0.7, colors.HexColor("#a77910")),
-                ("LEFTPADDING", (0, 0), (-1, -1), 9),
-                ("RIGHTPADDING", (0, 0), (-1, -1), 9),
-                ("TOPPADDING", (0, 0), (-1, -1), 7),
-                ("BOTTOMPADDING", (0, 0), (-1, -1), 7),
-            ]
-        )
-    )
-    story.extend([note, Spacer(1, 8)])
+def channel_details(sty, live: dict):
+    channels = live.get("channels") or {}
+    hdf_channel = channels.get("HDF") or {}
+    ehz_channel = channels.get("EHZ") or {}
+    hdf = hdf_channel.get("detroit_day_highest") or live
+    ehz = ehz_channel.get("detroit_day_highest") or {}
+    hdf_rows = [
+        [Paragraph("HDF · AIR PRESSURE", sty["table_head"]), ""],
+        [Paragraph("Availability", sty["table"]), Paragraph("Available" if hdf_channel.get("available") else "N/A", sty["table_bold"])],
+        [Paragraph("Highest detector event", sty["table"]), Paragraph(esc(hdf.get("display_time_et")), sty["table_bold"])],
+        [Paragraph("Nominal pressure", sty["table"]), Paragraph(esc(pressure_label(hdf)), sty["table_bold"])],
+        [Paragraph("Dominant frequency", sty["table"]), Paragraph(f"{num(hdf.get('dominant_frequency_hz'), 4)} Hz", sty["table_bold"])],
+        [Paragraph("Detector window", sty["table"]), Paragraph(f"{num(hdf.get('duration_s'), 1)} seconds", sty["table_bold"])],
+        [Paragraph("Outside-guide result", sty["table"]), Paragraph("N/A · unmatched metric", sty["table_bold"])],
+    ]
+    ehz_rows = [
+        [Paragraph("EHZ · VERTICAL MOTION", sty["table_head"]), ""],
+        [Paragraph("Availability", sty["table"]), Paragraph("Available" if ehz_channel.get("available") else "N/A", sty["table_bold"])],
+        [Paragraph("Highest detector event", sty["table"]), Paragraph(esc(ehz.get("display_time_et")), sty["table_bold"])],
+        [Paragraph("Instrument reading", sty["table"]), Paragraph(f"{num(ehz.get('peak_rms_counts'), 1)} counts", sty["table_bold"])],
+        [Paragraph("Dominant frequency", sty["table"]), Paragraph(f"{num(ehz.get('dominant_frequency_hz'), 4)} Hz", sty["table_bold"])],
+        [Paragraph("Detector window", sty["table"]), Paragraph(f"{num(ehz.get('duration_s'), 1)} seconds", sty["table_bold"])],
+        [Paragraph("Acoustic guides", sty["table"]), Paragraph("Not applicable to EHZ", sty["table_bold"])],
+    ]
+    def make(rows, accent):
+        t = Table(rows, colWidths=[1.45 * inch, 1.95 * inch])
+        t.setStyle(TableStyle([
+            ("SPAN", (0, 0), (1, 0)), ("BACKGROUND", (0, 0), (1, 0), accent),
+            ("GRID", (0, 0), (-1, -1), 0.35, LINE), ("VALIGN", (0, 0), (-1, -1), "TOP"),
+            ("LEFTPADDING", (0, 0), (-1, -1), 6), ("RIGHTPADDING", (0, 0), (-1, -1), 6),
+            ("TOPPADDING", (0, 0), (-1, -1), 5), ("BOTTOMPADDING", (0, 0), (-1, -1), 5),
+        ]))
+        return t
+    return Table([[make(hdf_rows, GREEN), make(ehz_rows, colors.HexColor("#3A82B7"))]], colWidths=[3.45 * inch, 3.45 * inch], style=[("VALIGN", (0, 0), (-1, -1), "TOP"), ("LEFTPADDING", (0, 0), (-1, -1), 0), ("RIGHTPADDING", (0, 0), (-1, -1), 0)])
 
 
-def build_24h(live, history, path):
-    sty = styles()
-    doc = document(path)
-    story = []
-    cutoff = live.get("analyzed_through_et", "latest available FDSN cutoff")
-    report_header(
-        story,
-        sty,
-        "R6E8A 24-Hour Instrument Report",
-        f"Unit 2709 | April 12, 2026 - Ongoing | Analyzed through {cutoff}",
-    )
-
-    hdf = event_from_live(live, "HDF")
-    ehz = event_from_live(live, "EHZ")
-    story.append(Paragraph("Quick summary", sty["h2"]))
-    if hdf:
-        story.append(
-            Paragraph(
-                "The highest HDF one-second RMS event in the available trailing window occurred at "
-                f"<b>{hdf.get('display_time_et', 'N/A')}</b>. HDF is the primary pressure/infrasound "
-                "channel. EHZ is reported separately as vertical-motion context; the two channels are "
-                "not combined and the record does not identify a source.",
-                sty["body"],
-            )
-        )
-    else:
-        story.append(Paragraph("No current HDF event summary was available. Values remain N/A.", sty["body"]))
-
-    story.append(Paragraph("HDF pressure/infrasound - trailing window", sty["h2"]))
-    story.append(
-        metric_table(
-            [
-                ("Highest event time", hdf.get("display_time_et", "N/A") if hdf else "N/A"),
-                ("Event duration", f"{num(hdf.get('duration_s'), 2)} seconds" if hdf else "N/A"),
-                ("Dominant frequency", f"{num(hdf.get('dominant_frequency_hz'), 4)} Hz" if hdf else "N/A"),
-                ("Peak one-second RMS", f"{num(hdf.get('peak_rms_counts'), 1)} instrument counts" if hdf else "N/A"),
-                ("Window median RMS", f"{num(hdf.get('window_median_rms_counts'), 1)} instrument counts" if hdf else "N/A"),
-                ("Difference from same-channel window median", f"{num(hdf.get('above_window_median_percent'), 1)}%" if hdf else "N/A"),
-            ],
-            sty,
-        )
-    )
-    story.append(
-        Paragraph(
-            "The percentage above the HDF window median is descriptive same-channel context only. "
-            "It is not an external-standard exceedance or a distribution-rank statistic.",
-            sty["small"],
-        )
-    )
-
-    story.append(Paragraph("EHZ vertical motion - separate channel", sty["h2"]))
-    story.append(
-        metric_table(
-            [
-                ("Highest event time", ehz.get("display_time_et", "N/A") if ehz else "N/A"),
-                ("Event duration", f"{num(ehz.get('duration_s'), 2)} seconds" if ehz else "N/A"),
-                ("Dominant frequency", f"{num(ehz.get('dominant_frequency_hz'), 4)} Hz" if ehz else "N/A"),
-                ("Peak one-second RMS", f"{num(ehz.get('peak_rms_counts'), 1)} instrument counts" if ehz else "N/A"),
-            ],
-            sty,
-        )
-    )
-    story.append(PageBreak())
-    story.append(Paragraph("Four-tier monitoring framework", sty["h2"]))
-    story.append(tier_table(sty))
-    story.append(
-        Paragraph(
-            "No tier is assigned from raw instrument counts. Tier assignment requires a valid named "
-            "external reference and the matching calibrated metric, weighting and averaging window.",
-            sty["small"],
-        )
-    )
-    story.append(Paragraph("External reference status", sty["h2"]))
-    story.append(benchmark_table(sty))
-    story.append(Paragraph("Sources and methods", sty["h2"]))
-    story.append(
-        Paragraph(
-            "Source: Raspberry Shake FDSN DataSelect for station AM.R6E8A. Official channel views: "
-            '<link href="https://dataview.raspberryshake.org/#/embed/AM/R6E8A/00/HDF">HDF DataView</link> and '
-            '<link href="https://dataview.raspberryshake.org/#/embed/AM/R6E8A/00/EHZ">EHZ DataView</link>. '
-            "Processing uses one-second RMS instrument counts with no interpolation across gaps. Missing "
-            "samples remain unavailable and are never set to zero.",
-            sty["body"],
-        )
-    )
-    story.append(
-        Paragraph(
-            "*This Data may lag. For personal verification, data can be found at "
-            '<link href="https://data.raspberryshake.org/fdsnws/">Raspberry Shake FDSN</link>.',
-            sty["small"],
-        )
-    )
-    doc.build(story)
-
-
-def build_7d(live, history, path):
-    sty = styles()
-    doc = document(path)
-    story = []
-    days = sorted(history.get("days", []), key=lambda item: item.get("event_date_et", ""))[-7:]
-    start_label = days[0].get("event_date_et", "N/A") if days else "N/A"
-    end_label = days[-1].get("event_date_et", "N/A") if days else "N/A"
-    report_header(
-        story,
-        sty,
-        "R6E8A Trailing 7-Day Instrument Report",
-        f"Unit 2709 | {start_label} through {end_label} | HDF and EHZ kept separate",
-    )
-    story.append(Paragraph("Daily HDF highest-event record", sty["h2"]))
-    headers = ["Date", "Time EST", "Dur.", "Freq.", "Peak RMS", "% above median", "EHZ z"]
-    data = [[Paragraph(item, sty["cell_header"]) for item in headers]]
+def history_table(sty, history: dict, limit: int):
+    days = sorted(history.get("days") or [], key=lambda item: str(item.get("event_date_et", "")))[-limit:]
+    rows = [[Paragraph(value, sty["table_head"]) for value in ("DATE", "HDF EVENT", "NOMINAL PA RMS*", "FREQUENCY", "DETECTOR WINDOW", "OUTSIDE GUIDE")]]
     for item in days:
-        time_label = item.get("display_time_et", "N/A").split(" - ")[-1]
-        data.append(
-            [
-                Paragraph(item.get("event_date_et", "N/A"), sty["cell"]),
-                Paragraph(time_label, sty["cell"]),
-                Paragraph(f"{num(item.get('duration_s'), 1)} s", sty["cell"]),
-                Paragraph(f"{num(item.get('dominant_frequency_hz'), 3)} Hz", sty["cell"]),
-                Paragraph(num(item.get("peak_rms_counts"), 0), sty["cell"]),
-                Paragraph(f"{num(item.get('above_median_percent'), 1)}%", sty["cell"]),
-                Paragraph(num(item.get("simultaneous_ehz_robust_z"), 2), sty["cell"]),
-            ]
-        )
-    table = Table(
-        data,
-        colWidths=[0.82 * inch, 1.02 * inch, 0.48 * inch, 0.65 * inch, 0.82 * inch, 1.0 * inch, 0.55 * inch],
-        repeatRows=1,
-    )
-    table.setStyle(
-        TableStyle(
-            [
-                ("BACKGROUND", (0, 0), (-1, 0), DEEP_GREEN),
-                ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
-                ("ROWBACKGROUNDS", (0, 1), (-1, -1), [colors.white, LIGHT]),
-                ("GRID", (0, 0), (-1, -1), 0.4, LINE),
-                ("VALIGN", (0, 0), (-1, -1), "TOP"),
-                ("LEFTPADDING", (0, 0), (-1, -1), 4),
-                ("RIGHTPADDING", (0, 0), (-1, -1), 4),
-                ("TOPPADDING", (0, 0), (-1, -1), 5),
-                ("BOTTOMPADDING", (0, 0), (-1, -1), 5),
-            ]
-        )
-    )
-    story.append(table)
-    story.append(
-        Paragraph(
-            "Daily percentage values are same-HDF-channel descriptive comparisons to each day's median. "
-            "They are not distribution-rank statistics and are not external-standard exceedances.",
-            sty["small"],
-        )
-    )
+        rows.append([
+            Paragraph(esc(item.get("event_date_et")), sty["table"]),
+            Paragraph(esc(item.get("display_time_et")), sty["table"]),
+            Paragraph(esc(pressure_label(item)), sty["table_bold"]),
+            Paragraph(f"{num(item.get('dominant_frequency_hz'), 4)} Hz", sty["table"]),
+            Paragraph(f"{num(item.get('duration_s'), 1)} sec", sty["table"]),
+            Paragraph("N/A", sty["table_bold"]),
+        ])
+    if len(rows) == 1:
+        rows.append([Paragraph("No preserved recent history available", sty["table"]), "", "", "", "", ""])
+    table = Table(rows, colWidths=[0.78 * inch, 1.55 * inch, 1.15 * inch, 0.9 * inch, 1.05 * inch, 1.25 * inch], repeatRows=1)
+    table.setStyle(TableStyle([
+        ("BACKGROUND", (0, 0), (-1, 0), DEEP), ("GRID", (0, 0), (-1, -1), 0.35, LINE),
+        ("VALIGN", (0, 0), (-1, -1), "TOP"), ("LEFTPADDING", (0, 0), (-1, -1), 5),
+        ("RIGHTPADDING", (0, 0), (-1, -1), 5), ("TOPPADDING", (0, 0), (-1, -1), 4),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 4),
+    ]))
+    return table
 
-    if days:
-        peak_day = max(days, key=lambda item: float(item.get("peak_rms_counts") or -1))
-        relative_day = max(days, key=lambda item: float(item.get("above_median_percent") or -1))
-        story.append(Paragraph("Seven-day instrument summary", sty["h2"]))
-        story.append(
-            metric_table(
-                [
-                    ("Highest HDF peak RMS day", f"{peak_day.get('event_date_et')} - {num(peak_day.get('peak_rms_counts'), 1)} counts"),
-                    ("Largest same-day relative difference", f"{relative_day.get('event_date_et')} - {num(relative_day.get('above_median_percent'), 1)}% above median"),
-                    ("Documented days in this report", str(len(days))),
-                    ("Channel handling", "HDF primary; EHZ independent vertical-motion context"),
-                ],
-                sty,
-            )
-        )
 
-    reference = history.get("archived_reference")
-    if reference:
-        story.append(Paragraph("August 3 early-morning archived detector reference", sty["h2"]))
-        callout = Table(
-            [[Paragraph(
-                f"{reference.get('display_time_et', 'N/A')}: {num(reference.get('duration_s'), 1)} s, "
-                f"{num(reference.get('dominant_frequency_hz'), 4)} Hz, "
-                f"{num(reference.get('peak_rms_counts'), 1)} HDF RMS counts, "
-                f"{num(reference.get('above_median_percent'), 1)}% above the then-current HDF median. "
-                "This preserved detector record is not a complete 2:30-3:00 AM interval analysis.",
-                sty["body"],
-            )]],
-            colWidths=[6.6 * inch],
-        )
-        callout.setStyle(
-            TableStyle(
-                [
-                    ("BACKGROUND", (0, 0), (-1, -1), LIGHT),
-                    ("BOX", (0, 0), (-1, -1), 0.7, GREEN),
-                    ("LEFTPADDING", (0, 0), (-1, -1), 9),
-                    ("RIGHTPADDING", (0, 0), (-1, -1), 9),
-                    ("TOPPADDING", (0, 0), (-1, -1), 8),
-                    ("BOTTOMPADDING", (0, 0), (-1, -1), 8),
-                ]
-            )
-        )
-        story.append(callout)
+def tier_table(sty):
+    rows = [
+        ["TIER 1", "TIER 2", "TIER 3", "TIER 4"],
+        ["Within named guide", "Intermittent exceedance", "Prolonged exceedance", "Extended exceedance"],
+        ["Matched result at/below guide", "Each interval under 30 min", "30-119 continuous min", "120+ continuous min"],
+    ]
+    data = [[Paragraph(cell, sty["center"] if row else sty["table_head"]) for cell in line] for row, line in enumerate(rows)]
+    table = Table(data, colWidths=[1.72 * inch] * 4)
+    table.setStyle(TableStyle([
+        ("BACKGROUND", (0, 0), (0, 0), GREEN), ("BACKGROUND", (1, 0), (1, 0), colors.HexColor("#C89A16")),
+        ("BACKGROUND", (2, 0), (2, 0), colors.HexColor("#D56A2E")), ("BACKGROUND", (3, 0), (3, 0), colors.HexColor("#D34249")),
+        ("GRID", (0, 0), (-1, -1), 0.35, LINE), ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
+        ("LEFTPADDING", (0, 0), (-1, -1), 5), ("RIGHTPADDING", (0, 0), (-1, -1), 5),
+        ("TOPPADDING", (0, 0), (-1, -1), 5), ("BOTTOMPADDING", (0, 0), (-1, -1), 5),
+    ]))
+    return table
 
-    story.append(PageBreak())
-    story.append(Paragraph("Four-tier monitoring framework", sty["h2"]))
-    story.append(tier_table(sty))
-    story.append(
+
+def footer_text(sty):
+    return [
+        Paragraph("Reading controls", sty["h2"]),
         Paragraph(
-            "No tier is assigned from the raw-count table above. A tier requires the matching calibrated "
-            "external-reference metric and a verified continuous duration.",
-            sty["small"],
-        )
-    )
-    story.append(Paragraph("External reference status", sty["h2"]))
-    story.append(benchmark_table(sty))
-    story.append(Paragraph("Sources and methods", sty["h2"]))
-    story.append(
-        Paragraph(
-            "Source: Raspberry Shake FDSN DataSelect and the repository's preserved hourly derived records. "
-            "Raw MiniSEED is not redistributed. HDF and EHZ are evaluated independently. Missing samples "
-            "remain unavailable and are never treated as zero. Official verification: "
-            '<link href="https://data.raspberryshake.org/fdsnws/">Raspberry Shake FDSN</link>.',
+            "HDF is air pressure; EHZ is vertical motion; their amplitudes are never combined. "
+            "Detector windows locate events, not time above a guide. Missing samples remain N/A.",
             sty["body"],
-        )
-    )
-    story.append(
+        ),
         Paragraph(
-            "*This Data may lag. Account for up to 30 minutes of source-archive lag.",
+            "*Nominal Pa = one-second HDF RMS counts ÷ 56,000 (manufacturer estimate, ±10%); response-uncorrected and unweighted; not a guide or safety grade.",
             sty["small"],
-        )
+        ),
+        Paragraph(
+            "<b>*Account for up to 30 minutes of lag.</b> For personal verification, use the "
+            "<link href='https://data.raspberryshake.org/fdsnws/'>Raspberry Shake source service</link>. "
+            "This report documents instrument records and published-guide readiness; it does not identify a source, cause, person, medical effect or safety condition.",
+            sty["small"],
+        ),
+    ]
+
+
+def build(path: Path, title: str, window_label: str, live: dict, history: dict):
+    sty = styles()
+    doc = BaseDocTemplate(
+        str(path), pagesize=letter, rightMargin=0.5 * inch, leftMargin=0.5 * inch,
+        topMargin=0.78 * inch, bottomMargin=0.55 * inch,
+        title=title, author="R6E8A Unit 2709",
     )
+    frame = Frame(doc.leftMargin, doc.bottomMargin, doc.width, doc.height, id="normal")
+    doc.addPageTemplates(PageTemplate(id="main", frames=[frame], onPage=page_template))
+    story = [
+        header_block(sty, title, f"{window_label}<br/>Pressure first · EHZ separate · outside guides only"),
+        Spacer(1, 0.12 * inch),
+        summary_cards(sty, live),
+        Spacer(1, 0.1 * inch),
+        Paragraph("Plain-language bottom line", sty["h2"]),
+        Table([[Paragraph(
+            "<b>Pressure activity is present in the HDF record.</b> The current feed supports a nominal pressure estimate, "
+            "but not a truthful percent-above, danger label, pass/fail result or monitoring tier under the four published guides.",
+            sty["body"],
+        )]], colWidths=[6.88 * inch], style=[("BACKGROUND", (0, 0), (-1, -1), GREEN_LIGHT), ("BOX", (0, 0), (-1, -1), 0.6, GREEN), ("LEFTPADDING", (0, 0), (-1, -1), 9), ("RIGHTPADDING", (0, 0), (-1, -1), 9), ("TOPPADDING", (0, 0), (-1, -1), 7), ("BOTTOMPADDING", (0, 0), (-1, -1), 4)]),
+        Spacer(1, 0.08 * inch),
+        Paragraph("Four published-guide comparison board", sty["h1"]),
+        Paragraph("Each row keeps the guide’s own units and duration. No same-station or peer-station baseline is used.", sty["body"]),
+        benchmark_table(sty),
+        PageBreak(),
+        Spacer(1, 0.16 * inch),
+        header_block(sty, "R6E8A event record", "HDF pressure leads<br/>EHZ motion remains separate"),
+        Spacer(1, 0.12 * inch),
+        channel_details(sty, live),
+        Spacer(1, 0.12 * inch),
+        Paragraph("Preserved recent HDF pressure events", sty["h1"]),
+        history_table(sty, history, 1 if "24-Hour" in title else 7),
+        Spacer(1, 0.1 * inch),
+        Paragraph("Monitoring-priority framework", sty["h1"]),
+        tier_table(sty),
+        Paragraph("Current tier: N/A. A detector window is not an outside-guide exceedance interval.", sty["small"]),
+        Spacer(1, 0.05 * inch),
+        *footer_text(sty),
+    ]
+    path.parent.mkdir(parents=True, exist_ok=True)
     doc.build(story)
 
 
 def main():
-    live = load_json(LIVE_PATH)
-    history = load_json(HISTORY_PATH)
-    OUT_DIR.mkdir(parents=True, exist_ok=True)
-    build_24h(live, history, OUT_DIR / "R6E8A-24-hour-report.pdf")
-    build_7d(live, history, OUT_DIR / "R6E8A-7-day-trailing-report.pdf")
-    print("Generated", OUT_DIR / "R6E8A-24-hour-report.pdf")
-    print("Generated", OUT_DIR / "R6E8A-7-day-trailing-report.pdf")
+    live = load(LIVE_PATH)
+    history = load(HISTORY_PATH)
+    build(OUT_24H, "R6E8A 24-Hour Pressure Report", "Latest processed 24-hour window", live, history)
+    build(OUT_7D, "R6E8A Trailing 7-Day Report", "Preserved recent daily detector record", live, history)
+    print(f"Wrote {OUT_24H}")
+    print(f"Wrote {OUT_7D}")
 
 
 if __name__ == "__main__":

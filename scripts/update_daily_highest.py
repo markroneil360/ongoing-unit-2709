@@ -27,6 +27,7 @@ FDSN = "https://data.raspberryshake.org/fdsnws/dataselect/1/query"
 ET = ZoneInfo("America/Detroit")
 OUT = Path("data/daily-highest.json")
 HISTORY = Path("data/daily-highest-history.json")
+HDF_COUNTS_PER_PA = 56_000.0
 
 
 def iso_utc(value: datetime) -> str:
@@ -186,22 +187,37 @@ def z_at(records, start: datetime, end: datetime, epoch: float) -> float | None:
     return round(float((nearest[1] - median) / mad), 2)
 
 
-def public_event(event):
+def public_event(event, channel: str):
     if event is None:
         return None
     clean = dict(event)
-    clean.pop("_peak_epoch", None)
+    for key in (
+        "_peak_epoch",
+        "window_median_rms_counts",
+        "above_window_median_percent",
+        "multiple_of_window_median",
+        "robust_z",
+    ):
+        clean.pop(key, None)
+    if channel == "HDF" and clean.get("peak_rms_counts") is not None:
+        clean["estimated_pressure_pa_rms_nominal"] = round(
+            float(clean["peak_rms_counts"]) / HDF_COUNTS_PER_PA, 6
+        )
     return clean
 
 
-def update_history(day_hdf, simultaneous_ehz_z, generated_utc):
+def update_history(day_hdf, generated_utc):
     if day_hdf is None:
         return
     history = {
         "station": "AM.R6E8A",
         "timezone": "America/Detroit",
-        "metric": "HDF one-second RMS instrument counts; same-channel daily context only",
-        "calibration_note": "Raw instrument counts are not dB(A), dB(C), dB(G), NC or RC.",
+        "metric": "HDF one-second RMS detector record with a nominal pressure estimate",
+        "calibration_note": (
+            "Estimated unweighted HDF pressure uses the manufacturer's nominal "
+            "56,000 counts/Pa sensitivity (estimated +/-10%). It is not response-corrected, "
+            "dB(A), dB(C), dB(G), NC, RC, or a standards-compliance result."
+        ),
         "days": [],
     }
     if HISTORY.exists():
@@ -212,18 +228,32 @@ def update_history(day_hdf, simultaneous_ehz_z, generated_utc):
         except (OSError, json.JSONDecodeError):
             pass
 
-    record = public_event(day_hdf)
-    record["daily_median_rms_counts"] = record.pop("window_median_rms_counts")
-    record["above_median_percent"] = record.pop("above_window_median_percent")
-    record.pop("multiple_of_window_median", None)
-    record["simultaneous_ehz_robust_z"] = simultaneous_ehz_z
-    record["classification"] = (
-        "Predominantly HDF pressure/infrasound"
-        if simultaneous_ehz_z is None or simultaneous_ehz_z < 4.0
-        else "HDF event with elevated EHZ context"
-    )
+    record = public_event(day_hdf, "HDF")
     date_key = record["event_date_et"]
-    days = [item for item in history.get("days", []) if item.get("event_date_et") != date_key]
+    public_keys = {
+        "event_date_et",
+        "display_time_et",
+        "event_start_utc",
+        "event_end_utc",
+        "duration_s",
+        "dominant_frequency_hz",
+        "peak_rms_counts",
+        "estimated_pressure_pa_rms_nominal",
+        "observed_seconds",
+        "coverage_percent",
+        "latest_sample_utc",
+        "source_commit",
+    }
+    days = []
+    for item in history.get("days", []):
+        if item.get("event_date_et") == date_key:
+            continue
+        cleaned = {key: value for key, value in item.items() if key in public_keys}
+        if cleaned.get("peak_rms_counts") is not None:
+            cleaned["estimated_pressure_pa_rms_nominal"] = round(
+                float(cleaned["peak_rms_counts"]) / HDF_COUNTS_PER_PA, 6
+            )
+        days.append(cleaned)
     days.append(record)
     days.sort(key=lambda item: item.get("event_date_et", ""))
     history["days"] = days[-60:]
@@ -269,11 +299,6 @@ def main():
     }
 
     day_hdf = detroit_day["HDF"]
-    simultaneous_ehz_z = None
-    if day_hdf is not None:
-        simultaneous_ehz_z = z_at(
-            records["EHZ"], day_start_et, cutoff_et, day_hdf["_peak_epoch"]
-        )
     generated_utc = iso_utc(datetime.now(timezone.utc))
 
     channels = {}
@@ -285,13 +310,13 @@ def main():
             "units": "instrument counts (one-second RMS)",
             "latest_sample_utc": event.get("latest_sample_utc") if event else None,
             "coverage_percent_since_midnight": event.get("coverage_percent") if event else 0.0,
-            "detroit_day_highest": public_event(event),
-            "trailing_24h_highest": public_event(trailing[channel]),
+            "detroit_day_highest": public_event(event, channel),
+            "trailing_24h_highest": public_event(trailing[channel], channel),
             "error": errors.get(channel),
         }
 
     result = {
-        "schema_version": 2,
+        "schema_version": 3,
         "station": "AM.R6E8A",
         "generated_utc": generated_utc,
         "analyzed_through_utc": iso_utc(cutoff_et),
@@ -307,7 +332,9 @@ def main():
         "archive_delay_minutes": 30,
         "channels": channels,
         "calibration_note": (
-            "Raw instrument counts are not converted to dB(A), dB(C), dB(G), NC or RC. "
+            "Estimated unweighted HDF pressure uses the manufacturer's nominal 56,000 "
+            "counts/Pa sensitivity (estimated +/-10%). It is not response-corrected, "
+            "dB(A), dB(C), dB(G), NC, RC, or a standards-compliance result. "
             "HDF and EHZ remain independent."
         ),
     }
@@ -324,22 +351,15 @@ def main():
                 "duration_s": day_hdf["duration_s"],
                 "dominant_frequency_hz": day_hdf["dominant_frequency_hz"],
                 "peak_rms_counts": day_hdf["peak_rms_counts"],
-                "daily_median_rms_counts": day_hdf["window_median_rms_counts"],
-                "above_median_percent": day_hdf["above_window_median_percent"],
-                "multiple_of_median": day_hdf["multiple_of_window_median"],
-                "hdf_robust_z": day_hdf["robust_z"],
-                "simultaneous_ehz_robust_z": simultaneous_ehz_z,
-                "classification": (
-                    "Predominantly HDF pressure/infrasound"
-                    if simultaneous_ehz_z is None or simultaneous_ehz_z < 4.0
-                    else "HDF event with elevated EHZ context"
+                "estimated_pressure_pa_rms_nominal": round(
+                    day_hdf["peak_rms_counts"] / HDF_COUNTS_PER_PA, 6
                 ),
             }
         )
 
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
-    update_history(day_hdf, simultaneous_ehz_z, generated_utc)
+    update_history(day_hdf, generated_utc)
 
     if not day_hdf:
         print("HDF data were unavailable; preserved channel status in output")
