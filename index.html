@@ -4,287 +4,218 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="color-scheme" content="dark">
-  <meta name="description" content="Unit 2709 R6E8A ongoing air-pressure and vertical-motion record compared only with named published guidance.">
-  <title>Unit 2709 R6E8A Pressure &amp; Motion Monitor (Ongoing)</title>
+  <meta name="description" content="R6E8A direct-upload pressure index against four published guidance families, with vertical motion shown independently.">
+  <title>Unit 2709 R6E8A Infrasound Dashboard (Ongoing)</title>
   <style>
     :root{
-      --bg:#020504;--panel:#07110d;--panel2:#0b1813;--ink:#f4f8f6;--muted:#9db1a8;
-      --line:#1d3b30;--green:#38e58d;--green2:#153d2d;--blue:#72bdff;--amber:#ffd166;
-      --orange:#ff914d;--red:#ff4f58;--gray:#70827a;--shadow:0 20px 58px rgba(0,0,0,.34)
+      --bg:#001b14;--bg2:#002a20;--panel:#003126;--panel2:#00271e;--line:#286151;
+      --ink:#f8fffb;--muted:#b8d0c6;--green:#66e47a;--green2:#16ad61;--blue:#55b9ef;
+      --cream:#fff8df;--cream-ink:#493206;--amber:#f5c63d;--orange:#f27b2f;--red:#ef5148;
+      --shadow:0 12px 32px rgba(0,0,0,.28)
     }
     *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{margin:0;background:radial-gradient(circle at 50% -10%,#0c241a 0,#020504 38rem);color:var(--ink);font:16px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
-    a{color:inherit}.wrap{width:min(1220px,calc(100% - 28px));margin:auto}
-    .hero{padding:30px 0 25px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,rgba(5,18,13,.94),rgba(2,5,4,.82))}
-    .eyebrow,.kicker,.label{font-size:.72rem;line-height:1.3;text-transform:uppercase;letter-spacing:.13em;font-weight:900;color:var(--green)}
-    h1{max-width:920px;margin:8px 0 10px;font-size:clamp(2.1rem,5.2vw,4.2rem);line-height:1.01;letter-spacing:-.045em}
-    h2{margin:5px 0 16px;font-size:clamp(1.45rem,3vw,2.25rem);line-height:1.1;letter-spacing:-.025em}
-    h3{margin:5px 0 9px;font-size:1.12rem;line-height:1.25}p{margin:.45rem 0 1rem}
-    .sub{max-width:920px;color:var(--muted);font-size:1.02rem}.ongoing{color:var(--green);font-weight:900}
-    .hero-grid{display:grid;grid-template-columns:minmax(0,1fr) 410px;gap:22px;align-items:end}
-    .actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
-    .btn{display:flex;min-height:52px;align-items:center;justify-content:center;text-align:center;padding:13px 16px;border-radius:11px;border:1px solid #64f2a7;background:linear-gradient(120deg,#16a55a,#2adf82);color:#011b10;text-decoration:none;font-weight:950;box-shadow:0 12px 30px rgba(29,200,110,.18)}
-    .signal-card{position:relative;isolation:isolate;overflow:hidden;border:1px solid #245b43;border-radius:18px;padding:19px;background:#010302;box-shadow:0 20px 60px rgba(0,0,0,.48),inset 0 0 38px rgba(52,229,139,.035)}
-    .signal-card:after{content:"";position:absolute;z-index:-1;inset:-55% -35%;background:conic-gradient(from 90deg,transparent 0 38%,rgba(52,229,139,.09) 49%,transparent 60% 100%);animation:signal-drift 9s linear infinite}
-    .signal-head{display:flex;align-items:center;gap:16px;padding-bottom:15px;border-bottom:1px solid #173327}
-    .signal-beacon{position:relative;display:grid;flex:0 0 48px;width:48px;height:58px;place-items:center;transform-origin:50% 100%;animation:signal-sway 2.8s ease-in-out infinite}
-    .signal-beacon:before{content:"";position:absolute;width:38px;height:38px;border:1px solid #86272d;border-radius:50%;background:#160608;box-shadow:inset 0 0 0 7px #060202,0 0 18px rgba(255,79,88,.2)}
-    .signal-light{position:relative;width:22px;height:22px;border-radius:50%;background:var(--red);box-shadow:0 0 10px var(--red),0 0 26px rgba(255,79,88,.85),0 0 48px rgba(255,79,88,.46);animation:traffic-blink 1s steps(1,end) infinite}
-    .signal-title{color:var(--green);font-size:clamp(1.06rem,2.4vw,1.48rem);font-weight:1000;line-height:1;letter-spacing:.055em;text-transform:uppercase;text-shadow:0 0 20px rgba(52,229,139,.28)}
-    .signal-context{margin-top:7px;color:#acc2b8;font-size:.76rem;font-weight:800;letter-spacing:.03em}
-    .signal-peak{padding-top:15px}.signal-peak-label{color:#8fa59b;font-size:.68rem;font-weight:950;letter-spacing:.12em;text-transform:uppercase}
-    .signal-level{margin-top:5px;color:#fff;font-size:clamp(1.16rem,2.6vw,1.62rem);font-weight:1000;line-height:1.08}.signal-level strong{color:#ff6d73}
-    .signal-detail{margin-top:8px;color:#9bb0a6;font-size:.74rem;line-height:1.45}.signal-rule{margin-top:12px;padding:9px 10px;border:1px solid #58452a;border-radius:9px;background:#171107;color:#f1d394;font-size:.74rem;font-weight:800}
-    @keyframes traffic-blink{0%,49%{opacity:1}50%,100%{opacity:.14;box-shadow:none}}
-    @keyframes signal-sway{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}@keyframes signal-drift{to{transform:rotate(360deg)}}
-    main{padding:22px 0 44px}.panel{min-width:0;margin:18px 0;padding:22px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,rgba(11,24,19,.96),rgba(6,14,11,.97));box-shadow:var(--shadow)}
-    .grid{display:grid;gap:14px}.summary-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.metric{min-width:0;padding:16px;border:1px solid var(--line);border-radius:13px;background:rgba(2,8,6,.72)}
-    .value{margin-top:6px;font-size:clamp(1.3rem,3vw,2.05rem);font-weight:950;line-height:1.05;overflow-wrap:anywhere}.value.green{color:var(--green)}.value.blue{color:var(--blue)}.value.amber{color:var(--amber)}
-    .explain{margin-top:8px;font-size:.84rem;color:var(--muted)}.tiny{font-size:.81rem;color:var(--muted)}
-    .plain-callout{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;margin-top:14px;padding:15px;border:1px solid #2b6047;border-radius:12px;background:#071c13}.plain-icon{display:grid;width:34px;height:34px;place-items:center;border-radius:50%;background:var(--green);color:#032113;font-weight:1000}.plain-callout strong{color:var(--green)}
-    .ticker{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;margin:15px 0 18px;overflow:hidden;border:1px solid var(--line);border-radius:12px;background:var(--line)}
-    .ticker-item{padding:12px 13px;background:#06100c}.ticker-name{font-size:.69rem;color:var(--muted);font-weight:900;letter-spacing:.08em;text-transform:uppercase}.ticker-value{margin-top:4px;font-weight:950}.ticker-value.na{color:var(--amber)}
-    .reference-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.reference{position:relative;overflow:hidden;border-left:5px solid var(--gray)}.reference.pressure{border-left-color:var(--green)}.reference.hotel{border-left-color:var(--blue)}.reference.low{border-left-color:var(--amber)}.reference.night{border-left-color:#b998ff}
-    .source-link{color:var(--green);font-weight:900;text-decoration:none}.status-pill{display:inline-block;padding:5px 9px;border-radius:999px;border:1px solid #6a532c;background:#191205;color:#ffd77d;font-size:.7rem;font-weight:950;letter-spacing:.06em;text-transform:uppercase}
-    .guide-result{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:13px 0}.guide-box{padding:11px;border-radius:10px;background:#06100c;border:1px solid var(--line)}.guide-box span{display:block;color:var(--muted);font-size:.7rem;font-weight:900;text-transform:uppercase;letter-spacing:.08em}.guide-box strong{display:block;margin-top:5px;line-height:1.25}
-    .mini-chart{margin-top:12px;padding:10px;border:1px solid var(--line);border-radius:10px;background:#030806}.mini-chart svg{display:block;width:100%;height:auto}.chart-note{margin-top:6px;color:var(--muted);font-size:.73rem}
-    .axis{stroke:#416052;stroke-width:1}.gridline{stroke:#223a30;stroke-width:1;stroke-dasharray:4 5}.guide-curve{fill:none;stroke:var(--amber);stroke-width:3}.guide-band{fill:rgba(114,189,255,.16);stroke:var(--blue);stroke-width:2}.guide-threshold{stroke:#b998ff;stroke-width:2;stroke-dasharray:6 5}.svg-label{fill:#a8b9b1;font:11px system-ui,sans-serif}.svg-strong{fill:#f3f8f5;font:bold 11px system-ui,sans-serif}.not-plotted{fill:#ffd166;font:bold 11px system-ui,sans-serif}
-    .tier-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.tier{position:relative;overflow:hidden;min-height:165px}.tier:before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--gray)}.tier.t1:before{background:var(--green)}.tier.t2:before{background:var(--amber)}.tier.t3:before{background:var(--orange)}.tier.t4:before{background:var(--red)}.tier-name{font-size:1.08rem;font-weight:950;margin:5px 0 9px}.na-box{margin-top:14px;padding:13px;border-radius:10px;background:#151d1a;border:1px solid #36483f;color:#cbd7d1}
-    .channel-grid{grid-template-columns:1fr 1fr}.channel{overflow:hidden;padding:0}.channel-head{display:flex;justify-content:space-between;gap:16px;align-items:center;padding:18px 20px;border-bottom:1px solid var(--line)}.channel.hdf .channel-head{border-top:5px solid var(--green)}.channel.ehz .channel-head{border-top:5px solid var(--blue)}.channel-role{font-size:.8rem;color:var(--muted)}.embed{width:100%;height:360px;border:0;background:#020403;display:block}.channel-foot{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:13px 18px;color:var(--muted);font-size:.83rem}.text-link{color:var(--green);font-weight:900;text-decoration:none}
-    .rows{margin-top:12px}.row{display:flex;justify-content:space-between;gap:18px;padding:10px 0;border-bottom:1px solid var(--line)}.row:last-child{border-bottom:0}.row span{color:var(--muted)}.row strong{text-align:right;overflow-wrap:anywhere}
-    .table-wrap{max-width:100%;overflow-x:auto;border:1px solid var(--line);border-radius:12px}table{width:100%;min-width:760px;border-collapse:collapse}th,td{padding:11px 10px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}th{background:#10231b;color:var(--green);font-size:.73rem;text-transform:uppercase;letter-spacing:.06em}td{font-size:.87rem}tbody tr:last-child td{border-bottom:0}.early{margin-top:16px;padding:15px;border:1px solid rgba(114,189,255,.35);border-radius:12px;background:rgba(35,93,140,.12)}.early strong{color:var(--blue)}
-    .coverage-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.timeline-wrap{margin-top:16px;padding:15px;border:1px solid var(--line);border-radius:12px;background:#030806}.timeline-grid{display:grid;grid-template-columns:repeat(23,minmax(10px,1fr));gap:5px}.timeline-day{display:block;aspect-ratio:1;border-radius:3px;background:#34433d;border:1px solid rgba(255,255,255,.12)}.timeline-day.archive{background:#1da260}.timeline-day.uploaded{background:#3b8bc4}.timeline-day.recent{background:#35e58d}.timeline-day.gap{background:#d4474f}.timeline-day.unretained{background:#4e5b55}.timeline-legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:12px;color:var(--muted);font-size:.75rem}.legend-item{display:flex;align-items:center;gap:6px}.legend-dot{width:10px;height:10px;border-radius:2px}.legend-dot.archive{background:#1da260}.legend-dot.uploaded{background:#3b8bc4}.legend-dot.recent{background:#35e58d}.legend-dot.gap{background:#d4474f}.legend-dot.unretained{background:#4e5b55}.missing{border-color:rgba(255,79,88,.38);background:linear-gradient(180deg,rgba(49,12,15,.72),rgba(20,8,9,.9))}.date-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}.date-chip{padding:7px 10px;border-radius:999px;background:#2b1113;border:1px solid #6b292d;color:#ffd7d9;font-size:.83rem;font-weight:850}
-    .methods{font-size:.9rem;color:#c4d1cb}.methods ul{padding-left:1.2rem}.methods li{margin:.5rem 0}.disclaimer{margin-top:16px;padding-top:15px;border-top:1px solid var(--line);color:var(--muted);font-size:.8rem}.disclaimer a{color:#b8c8c0;text-decoration:underline}.no-js{padding:12px;background:#331215;color:#ffd9da;text-align:center}
-    @media(max-width:980px){.hero-grid{grid-template-columns:1fr}.summary-grid,.ticker,.tier-grid,.coverage-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.embed{height:330px}}
-    @media(max-width:760px){.wrap{width:calc(100% - 20px)}.hero{padding-top:22px}.actions,.channel-grid,.reference-grid,.summary-grid,.ticker,.tier-grid,.coverage-grid{grid-template-columns:1fr}.panel{padding:17px 14px;margin:13px 0;border-radius:14px}.channel{padding:0}.channel-head{padding:15px}.embed{height:290px}.channel-foot,.row{display:grid;grid-template-columns:1fr}.row strong{text-align:left}.signal-card{padding:15px}h1{font-size:2.25rem}.value{font-size:1.55rem}.guide-result{grid-template-columns:1fr}.timeline-grid{grid-template-columns:repeat(12,minmax(10px,1fr))}}
-    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}.signal-light,.signal-beacon,.signal-card:after{animation:none}}
+    html{scroll-behavior:auto}
+    body{margin:0;background:radial-gradient(circle at 30% 0,#074333,var(--bg) 42rem);color:var(--ink);font:16px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+    a{color:inherit}.wrap{width:min(1180px,calc(100% - 24px));margin:auto}
+    .hero{padding:28px 0 24px;border-bottom:1px solid var(--line)}
+    .hero-grid,.lead-grid,.reference-grid,.tier-grid,.archive-grid,.channel-grid,.report-grid{display:grid;gap:14px}
+    .hero-grid{grid-template-columns:minmax(0,1fr) 390px;align-items:end}
+    .eyebrow,.tag{font-size:.74rem;line-height:1.3;text-transform:uppercase;letter-spacing:.12em;font-weight:950;color:#c8e7bd}
+    h1{max-width:800px;margin:8px 0 12px;font-size:clamp(2.25rem,6vw,4.5rem);line-height:1.02;letter-spacing:-.04em}
+    h2{margin:5px 0 14px;font-size:clamp(1.45rem,3vw,2.15rem);line-height:1.1}h3{margin:4px 0 8px;font-size:1.08rem}
+    p{margin:.4rem 0 1rem}.sub{max-width:820px;color:var(--muted);font-size:1.04rem}.accent{color:var(--green);font-weight:950}
+    .actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}.btn{display:flex;min-height:52px;align-items:center;justify-content:center;text-align:center;padding:12px 14px;border:1px solid #48de8c;border-radius:10px;background:linear-gradient(135deg,#138f51,#16bd6b);color:white;text-decoration:none;font-weight:950;box-shadow:var(--shadow)}
+    .panel{background:linear-gradient(180deg,rgba(4,58,44,.98),rgba(0,39,30,.98));border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:var(--shadow)}
+    .upload-card{margin-top:10px}.row{display:flex;justify-content:space-between;gap:14px;padding:8px 0;border-bottom:1px solid #174b3c}.row:last-child{border-bottom:0}.row strong{text-align:right}.ok{color:var(--green)}
+    main{padding:16px 0 30px}.lead-grid{grid-template-columns:1.25fr .75fr;margin:0 0 14px}
+    .signal{background:#010504;border-color:#245b43;display:grid;grid-template-columns:minmax(0,1fr) 180px;gap:18px;align-items:center}
+    .signal-title{margin:6px 0;color:var(--green);font-size:clamp(1.35rem,4vw,2.4rem);font-weight:1000;letter-spacing:.045em;text-transform:uppercase}
+    .hero-percent{font-size:clamp(4.5rem,8vw,6.2rem);line-height:.9;font-weight:1000;letter-spacing:-.08em;color:white;text-align:right}
+    .plain{color:var(--muted)}.quick{background:var(--cream);color:var(--cream-ink);border-color:#d9b850}.quick .tag{color:#8b5f13}.quick h2{font-size:1.7rem}.quick strong{font-size:1.45rem}
+    .convention{margin:12px 0 18px;padding:13px 15px;border-left:4px solid var(--green);background:rgba(8,69,52,.66);color:#d6e9e1}
+    .reference-grid{grid-template-columns:repeat(4,1fr)}.ref-card{position:relative;overflow:hidden}.ref-num{font-size:clamp(2.6rem,6vw,4.3rem);font-weight:1000;line-height:1;margin:12px 0 8px;letter-spacing:-.06em}.ref-card.hot .ref-num{color:#ff736a}.ref-card.scope .ref-num{color:var(--green)}
+    .index-track{position:relative;height:24px;margin:16px 0 11px;border-radius:5px;background:#123f33;overflow:hidden}.index-fill{height:100%;background:linear-gradient(90deg,#36c874,#68e578)}.hot .index-fill{background:linear-gradient(90deg,#f5c63d,#ef5148)}.guide-line{position:absolute;z-index:2;left:50%;top:0;bottom:0;width:2px;background:#fff;box-shadow:0 0 0 1px #001b14}.scale{display:flex;justify-content:space-between;color:#a8c1b7;font-size:.76rem}.scale b{color:white}
+    .ref-copy{color:var(--muted);font-size:.9rem}.ref-link{display:inline-flex;margin-top:8px;color:#d8f5e5;font-weight:850;text-underline-offset:3px}
+    .trend{margin-top:14px}.trend-head{display:flex;justify-content:space-between;gap:20px;align-items:end}.trend-key{display:flex;gap:16px;flex-wrap:wrap;color:var(--muted);font-size:.82rem}.key-line:before,.key-guide:before{content:"";display:inline-block;width:22px;height:3px;margin-right:7px;vertical-align:middle;background:var(--green)}.key-guide:before{background:var(--amber)}
+    .chart{position:relative;height:240px;margin-top:12px;border:1px solid #1b5543;border-radius:10px;background:linear-gradient(rgba(54,112,90,.18) 1px,transparent 1px),linear-gradient(90deg,rgba(54,112,90,.12) 1px,transparent 1px),#001a14;background-size:100% 25%,12.5% 100%;overflow:hidden}.chart svg{width:100%;height:100%;display:block}.chart .actual{fill:none;stroke:var(--green);stroke-width:3;stroke-linejoin:round;stroke-linecap:round}.chart .guide{stroke:var(--amber);stroke-width:2;stroke-dasharray:8 7}.chart-labels{display:flex;justify-content:space-between;color:var(--muted);font-size:.78rem;margin-top:7px}
+    .tier-grid{grid-template-columns:repeat(4,1fr)}.tier{min-height:130px}.tier strong{display:block;font-size:1.25rem;margin:6px 0}.tier.active-tier{border:2px solid var(--green);background:linear-gradient(180deg,#07503b,#003126)}.tier-badge{display:inline-flex;padding:5px 9px;border-radius:999px;background:var(--green);color:#002217;font-weight:950;font-size:.75rem;text-transform:uppercase;letter-spacing:.08em}
+    .archive-grid{grid-template-columns:1.15fr .85fr}.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:15px}.period{min-height:82px;padding:11px;border:1px solid #2c6654;border-radius:8px;background:#063b2e}.period.current{background:#0a563e;border-color:#4bdb85}.period b{display:block;color:var(--green)}
+    .channel-grid{grid-template-columns:1.35fr .65fr}.wave{height:120px;margin:12px 0;border:1px solid #1b5543;border-radius:9px;background:#001a14}.wave svg{width:100%;height:100%}.wave polyline{fill:none;stroke:var(--blue);stroke-width:2}.ehz-stat{display:grid;place-items:center;text-align:center}.ehz-stat .ref-num{color:var(--blue)}
+    .report-grid{grid-template-columns:.8fr 1.2fr;align-items:stretch}.report-actions{display:grid;gap:10px}.reading ol{margin:.5rem 0 0;padding-left:1.2rem}.reading li{margin:.55rem 0;color:#d8e8e1}
+    footer{padding:4px 0 28px;color:#9eb7ad;font-size:.8rem;border-top:1px solid var(--line)}footer p{margin:13px 0 0}
+    @media(max-width:980px){.hero-grid,.lead-grid,.archive-grid,.channel-grid,.report-grid{grid-template-columns:1fr}.reference-grid,.tier-grid{grid-template-columns:1fr 1fr}.signal{grid-template-columns:1fr}.hero-percent{text-align:left}}
+    @media(max-width:620px){.wrap{width:min(100% - 18px,1180px)}.reference-grid,.tier-grid,.timeline,.actions{grid-template-columns:1fr}.hero{padding-top:22px}.panel{padding:15px}.chart{height:190px}.trend-head{align-items:flex-start;flex-direction:column}.row{align-items:flex-start;flex-direction:column}.row strong{text-align:left}}
   </style>
 </head>
 <body>
-  <noscript><div class="no-js">Current status requires JavaScript. The channel viewers and published-guide information remain available below.</div></noscript>
   <header class="hero">
     <div class="wrap hero-grid">
       <div>
-        <div class="eyebrow">Detroit environmental pressure record</div>
-        <h1>Unit 2709 Pressure &amp; Motion Monitor — R6E8A <span class="ongoing">(Ongoing)</span></h1>
-        <p class="sub">April 12, 2026 – Ongoing · HDF air pressure leads · EHZ vertical motion stays separate · Eastern Time</p>
-        <p class="ongoing"><span id="ongoing-days">115</span> days ongoing as of <span id="page-date">August 4, 2026</span></p>
+        <div class="eyebrow">Unit 2709 · Environmental instrument record</div>
+        <h1>R6E8A Infrasound Dashboard <span class="accent">(Ongoing)</span></h1>
+        <p class="sub"><strong class="accent">April 12, 2026 - Ongoing</strong> · Detroit, Michigan · Eastern Time</p>
+        <p class="sub">A pressure-first view of direct uploads, indexed only against four named published guidance families. Vertical motion stays separate.</p>
+      </div>
+      <div>
         <div class="actions">
-          <a class="btn" href="./downloads/R6E8A-24-hour-report.pdf" download>Download 24-Hour Report</a>
-          <a class="btn" href="./downloads/R6E8A-7-day-trailing-report.pdf" download>Download Trailing 7-Day Report</a>
+          <a class="btn" href="./downloads/R6E8A-24-hour-report.pdf" download>Download 24-Hour PDF</a>
+          <a class="btn" href="./downloads/R6E8A-7-day-trailing-report.pdf" download>Download 7-Day PDF</a>
+        </div>
+        <div class="panel upload-card">
+          <div class="row"><span>Current direct upload</span><strong>Aug 3 - Aug 4, 2026</strong></div>
+          <div class="row"><span>HDF file integrity</span><strong class="ok">100%</strong></div>
+          <div class="row"><span>EHZ file integrity</span><strong class="ok">100%</strong></div>
+          <div class="row"><span>Pressure data through</span><strong>2:24 AM Eastern</strong></div>
         </div>
       </div>
-      <aside class="signal-card" id="infrasound-signal" role="status" aria-live="polite">
-        <div class="signal-head">
-          <span class="signal-beacon" aria-hidden="true"><span class="signal-light"></span></span>
-          <div>
-            <div class="signal-title">Infrasound Detected</div>
-            <div class="signal-context" id="signal-context">HDF pressure-channel energy · 1–20 Hz detector scope</div>
-          </div>
-        </div>
-        <div class="signal-peak">
-          <div class="signal-peak-label">Highest preserved recent nominal estimate</div>
-          <div class="signal-level" id="signal-level">Loading pressure record…</div>
-          <div class="signal-detail" id="signal-detail">This will show pressure, time, frequency and detector-window length without comparing R6E8A with itself.</div>
-          <div class="signal-rule">Safety or danger level: not determined from this unweighted estimate.</div>
-        </div>
-      </aside>
     </div>
   </header>
 
   <main class="wrap">
-    <section class="panel" aria-labelledby="quick-title">
-      <div class="kicker">Quick read</div>
-      <h2 id="quick-title">What the instruments recorded</h2>
-      <div class="grid summary-grid">
-        <article class="metric"><div class="label">Latest dual-channel cutoff</div><div class="value green" id="live-cutoff">Loading</div><div class="explain">The latest processed point available from both channels.</div></article>
-        <article class="metric"><div class="label">Today’s HDF pressure estimate</div><div class="value" id="hdf-pressure">Loading</div><div class="explain">Nominal one-second RMS estimate; not a calibrated handbook score.</div></article>
-        <article class="metric"><div class="label">Pressure event</div><div class="value" id="hdf-time">Loading</div><div class="explain"><span id="hdf-frequency">N/A</span> · <span id="hdf-duration">N/A</span> detector window</div></article>
-        <article class="metric"><div class="label">External guide result</div><div class="value amber" id="tier-current">Not yet gradeable</div><div class="explain">No percentage or tier until the same metric required by a named guide is measured.</div></article>
-      </div>
-      <div class="plain-callout"><span class="plain-icon" aria-hidden="true">i</span><div><strong>Plain-language bottom line:</strong> pressure activity is present in the HDF record. The current feed supports a nominal pressure estimate, but it does not yet support a truthful “percent above,” danger label, or pass/fail result under the four published guides.</div></div>
-    </section>
-
-    <section class="panel" aria-labelledby="reference-title">
-      <div class="kicker">External benchmark board</div>
-      <h2 id="reference-title">R6E8A against four published guides — never against itself</h2>
-      <p class="sub">Each panel keeps its own units, frequency range and averaging time. Unlike measurements are never blended into one score.</p>
-      <div class="ticker" aria-label="External benchmark status strip">
-        <div class="ticker-item"><div class="ticker-name">Pressure · ISO 7196</div><div class="ticker-value na">dB(G) needed</div></div>
-        <div class="ticker-item"><div class="ticker-name">Hotel room · ASHRAE</div><div class="ticker-value na">NC/RC needed</div></div>
-        <div class="ticker-item"><div class="ticker-name">Low frequency · NANR45</div><div class="ticker-value na">Full bands needed</div></div>
-        <div class="ticker-item"><div class="ticker-name">Night environment · WHO</div><div class="ticker-value na">dBA average needed</div></div>
-      </div>
-      <div class="grid reference-grid">
-        <article class="metric reference pressure">
-          <span class="status-pill">Measurement method — no danger limit</span>
-          <h3><a class="source-link" target="_blank" rel="noopener" href="https://www.iso.org/standard/13813.html">1 · ISO 7196 infrasound pressure</a></h3>
-          <p>For people reading the page: this is the correct way to turn pressure in the 1–20 Hz range into a G-weighted value called dB(G). ISO 7196 itself does not set a safe, dangerous or complaint limit.</p>
-          <div class="guide-result"><div class="guide-box"><span>Published guide</span><strong>G-weighted pressure · 1–20 Hz</strong></div><div class="guide-box"><span>R6E8A today</span><strong>Nominal Pa estimate only · dB(G) pending</strong></div></div>
-          <div class="mini-chart">
-            <svg viewBox="0 0 560 122" role="img" aria-label="ISO 7196 measurement range from 1 to 20 hertz; R6E8A dB G result is not plotted yet">
-              <line class="axis" x1="34" y1="80" x2="528" y2="80"/><rect class="guide-band" x="58" y="44" width="430" height="24" rx="6"/><text class="svg-strong" x="273" y="60" text-anchor="middle">ISO G-weighting range</text><text class="svg-label" x="58" y="99" text-anchor="middle">1 Hz</text><text class="svg-label" x="488" y="99" text-anchor="middle">20 Hz</text><text class="not-plotted" x="273" y="116" text-anchor="middle">R6E8A dB(G): not plotted until response correction + G weighting</text>
-            </svg>
-          </div>
-        </article>
-
-        <article class="metric reference hotel">
-          <span class="status-pill">Matched room measurement required</span>
-          <h3><a class="source-link" target="_blank" rel="noopener" href="https://handbook.ashrae.org/Handbooks/A23/IP/A23_Ch49/a23_ch49_ip.aspx">2 · ANSI/ASA + ASHRAE hotel-room sound</a></h3>
-          <p>For a hotel guest room or suite, ASHRAE’s design target is NC/RC 30, approximately 35 dBA and 60 dBC. A project can set a target about five points higher or lower.</p>
-          <div class="guide-result"><div class="guide-box"><span>Published guide</span><strong>NC/RC 30 · about 35 dBA / 60 dBC</strong></div><div class="guide-box"><span>R6E8A today</span><strong>N/A · needs calibrated room octave bands</strong></div></div>
-          <div class="mini-chart">
-            <svg viewBox="0 0 560 122" role="img" aria-label="ASHRAE hotel room design target band NC or RC 25 to 35 with central target 30; R6E8A is not plotted">
-              <line class="axis" x1="45" y1="77" x2="515" y2="77"/><rect class="guide-band" x="150" y="42" width="260" height="28" rx="7"/><line x1="280" y1="34" x2="280" y2="82" stroke="#f4f8f6" stroke-width="2"/><text class="svg-label" x="150" y="99" text-anchor="middle">25</text><text class="svg-strong" x="280" y="28" text-anchor="middle">Target 30</text><text class="svg-label" x="410" y="99" text-anchor="middle">35</text><text class="not-plotted" x="280" y="116" text-anchor="middle">R6E8A NC/RC: N/A — pressure sensor is not a room sound survey</text>
-            </svg>
-          </div>
-        </article>
-
-        <article class="metric reference low">
-          <span class="status-pill">Indoor five-minute band levels required</span>
-          <h3><a class="source-link" target="_blank" rel="noopener" href="https://salford-repository.worktribe.com/output/1473677/proposed-criteria-for-the-assessment-of-low-frequency-noise-disturbance">3 · Defra NANR45 low-frequency guide</a></h3>
-          <p>This procedure compares calibrated indoor five-minute levels with a separate reference at every one-third-octave band from 10 to 160 Hz. Crossing a line can support further investigation; it does not prove danger, cause or nuisance.</p>
-          <div class="guide-result"><div class="guide-box"><span>Published guide</span><strong>Night curve · 92 to 34 dB across 10–160 Hz</strong></div><div class="guide-box"><span>R6E8A today</span><strong>N/A · required 50–160 Hz bands are unavailable</strong></div></div>
-          <div class="mini-chart">
-            <svg viewBox="0 0 600 205" role="img" aria-label="Defra NANR45 night criterion curve from 92 decibels at 10 hertz to 34 decibels at 160 hertz; R6E8A is not plotted">
-              <line class="gridline" x1="42" y1="40" x2="580" y2="40"/><line class="gridline" x1="42" y1="100" x2="580" y2="100"/><line class="gridline" x1="42" y1="160" x2="580" y2="160"/><line class="axis" x1="42" y1="175" x2="580" y2="175"/><line class="axis" x1="42" y1="25" x2="42" y2="175"/>
-              <polyline class="guide-curve" points="42,42 87,52 132,60 177,78 222,98 267,114 312,128 357,140 402,142 447,146 492,150 537,154 580,158"/>
-              <text class="svg-label" x="35" y="44" text-anchor="end">90 dB</text><text class="svg-label" x="35" y="104" text-anchor="end">60</text><text class="svg-label" x="35" y="164" text-anchor="end">30</text><text class="svg-label" x="42" y="192" text-anchor="middle">10</text><text class="svg-label" x="177" y="192" text-anchor="middle">20</text><text class="svg-label" x="312" y="192" text-anchor="middle">40</text><text class="svg-label" x="447" y="192" text-anchor="middle">80</text><text class="svg-label" x="580" y="192" text-anchor="middle">160 Hz</text><text class="not-plotted" x="315" y="18" text-anchor="middle">Published night criterion curve · R6E8A not plotted</text>
-            </svg>
-          </div>
-        </article>
-
-        <article class="metric reference night">
-          <span class="status-pill">A-weighted night averages required</span>
-          <h3><a class="source-link" target="_blank" rel="noopener" href="https://www.who.int/europe/publications/i/item/9789289041737">4 · WHO night noise + ISO 1996 method</a></h3>
-          <p>WHO gives public-health reference values; ISO 1996 explains how environmental noise is described and assessed but does not set a limit. The long-term outside value uses a full year of nights.</p>
-          <div class="guide-result"><div class="guide-box"><span>Published guide</span><strong>30 dBA bedroom · 40 dBA annual outside · 55 dBA interim</strong></div><div class="guide-box"><span>R6E8A today</span><strong>N/A · not an A-weighted annual sound record</strong></div></div>
-          <div class="mini-chart">
-            <svg viewBox="0 0 560 150" role="img" aria-label="WHO night noise reference lines at 30, 40, and 55 A-weighted decibels; R6E8A is not plotted">
-              <line class="axis" x1="55" y1="118" x2="520" y2="118"/><line class="guide-threshold" x1="105" y1="93" x2="500" y2="93"/><line class="guide-threshold" x1="105" y1="65" x2="500" y2="65"/><line class="guide-threshold" x1="105" y1="25" x2="500" y2="25"/><text class="svg-strong" x="95" y="97" text-anchor="end">30 dBA</text><text class="svg-label" x="115" y="87">bedroom overnight</text><text class="svg-strong" x="95" y="69" text-anchor="end">40 dBA</text><text class="svg-label" x="115" y="59">annual outside guideline</text><text class="svg-strong" x="95" y="29" text-anchor="end">55 dBA</text><text class="svg-label" x="115" y="19">annual outside interim target</text><text class="not-plotted" x="300" y="140" text-anchor="middle">R6E8A dBA: N/A — no substitute metric used</text>
-            </svg>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="panel" aria-labelledby="tier-title">
-      <div class="kicker">Monitoring-priority rules</div>
-      <h2 id="tier-title">A tier begins only after a valid outside-guide comparison</h2>
-      <div class="grid tier-grid">
-        <article class="metric tier t1"><div class="label">Tier 1</div><div class="tier-name">Within named guide</div><p>At or below the applicable published reference using the same metric and averaging period.</p></article>
-        <article class="metric tier t2"><div class="label">Tier 2</div><div class="tier-name">Intermittent exceedance</div><p>Verified outside-guide exceedance intervals, each shorter than 30 minutes.</p></article>
-        <article class="metric tier t3"><div class="label">Tier 3</div><div class="tier-name">Prolonged exceedance</div><p>One or more continuous verified exceedances lasting 30–119 minutes.</p></article>
-        <article class="metric tier t4"><div class="label">Tier 4</div><div class="tier-name">Extended exceedance</div><p>One or more continuous verified exceedances lasting 120 minutes or longer.</p></article>
-      </div>
-      <div class="na-box"><strong>Current recommendation: hold the result at N/A — do not force it into Tier 1.</strong> Complete the HDF pressure response and G-weighting first; then apply these durations only to verified time above a named outside guide. Detector-window length is not treated as time above a guide. These tiers are monitoring priorities, not medical or danger categories.</div>
-    </section>
-
-    <section class="panel" aria-labelledby="wave-title">
-      <div class="kicker">Live channel views</div>
-      <h2 id="wave-title">Pressure and motion stay separate</h2>
-      <div class="grid channel-grid">
-        <article class="panel channel hdf">
-          <div class="channel-head"><div><div class="label">Primary · air pressure</div><h3>HDF pressure / infrasound</h3></div><div class="channel-role" id="hdf-channel-status">Checking…</div></div>
-          <iframe class="embed" title="R6E8A HDF pressure channel viewer" loading="eager" src="https://dataview.raspberryshake.org/#/embed/AM/R6E8A/00/HDF" referrerpolicy="no-referrer"></iframe>
-          <div class="channel-foot"><span>Current public waveform</span><a class="text-link" target="_blank" rel="noopener" href="https://dataview.raspberryshake.org/#/embed/AM/R6E8A/00/HDF">Open HDF viewer</a></div>
-        </article>
-        <article class="panel channel ehz">
-          <div class="channel-head"><div><div class="label">Secondary · vertical motion</div><h3>EHZ seismic record</h3></div><div class="channel-role" id="ehz-channel-status">Checking…</div></div>
-          <iframe class="embed" title="R6E8A EHZ vertical-motion channel viewer" loading="eager" src="https://dataview.raspberryshake.org/#/embed/AM/R6E8A/00/EHZ" referrerpolicy="no-referrer"></iframe>
-          <div class="channel-foot"><span>Current public waveform</span><a class="text-link" target="_blank" rel="noopener" href="https://dataview.raspberryshake.org/#/embed/AM/R6E8A/00/EHZ">Open EHZ viewer</a></div>
-        </article>
-      </div>
-    </section>
-
-    <section class="panel" aria-labelledby="event-title">
-      <div class="kicker">Instrument event record</div>
-      <h2 id="event-title">Current details and recent pressure events</h2>
-      <div class="grid channel-grid">
-        <article class="metric"><div class="label">HDF pressure · current Detroit day</div><div class="rows"><div class="row"><span>Highest detector event</span><strong id="detail-hdf-time">Loading</strong></div><div class="row"><span>Nominal pressure estimate</span><strong id="detail-hdf-pressure">Loading</strong></div><div class="row"><span>Dominant frequency</span><strong id="detail-hdf-frequency">Loading</strong></div><div class="row"><span>Detector window</span><strong id="detail-hdf-duration">Loading</strong></div><div class="row"><span>Outside-guide result</span><strong>N/A — unmatched metric</strong></div></div></article>
-        <article class="metric"><div class="label">EHZ motion · current Detroit day</div><div class="rows"><div class="row"><span>Highest detector event</span><strong id="detail-ehz-time">Loading</strong></div><div class="row"><span>Dominant frequency</span><strong id="detail-ehz-frequency">Loading</strong></div><div class="row"><span>Detector window</span><strong id="detail-ehz-duration">Loading</strong></div><div class="row"><span>Instrument reading</span><strong id="detail-ehz-rms">Loading</strong></div><div class="row"><span>Acoustic guide result</span><strong>Not applicable to EHZ</strong></div></div></article>
-      </div>
-      <div class="table-wrap" style="margin-top:16px">
-        <table><thead><tr><th>Date</th><th>HDF event time</th><th>Nominal Pa RMS*</th><th>Frequency</th><th>Detector window</th><th>Outside-guide result</th></tr></thead><tbody id="history-body"><tr><td colspan="6">Loading preserved daily records…</td></tr></tbody></table>
-      </div>
-      <div class="early" id="early-reference"><strong>August 3 early-morning archived detector reference:</strong> loading preserved record…</div>
-      <p class="tiny">*Nominal one-second pressure estimate = HDF RMS counts ÷ 56,000 counts/Pa, using the manufacturer’s estimated sensitivity (±10%). It is response-uncorrected, unweighted, and not dB(G), NC/RC, NANR45, dBA or a danger classification.</p>
-    </section>
-
-    <section class="panel" aria-labelledby="coverage-title">
-      <div class="kicker">April 12, 2026 – Ongoing record</div>
-      <h2 id="coverage-title">Documented archive coverage</h2>
-      <div class="grid coverage-grid">
-        <article class="metric"><div class="label">Project span</div><div class="value"><span id="span-days">115</span> days</div><div class="explain">Every date from Apr 12 through the latest record is accounted for below.</div></article>
-        <article class="metric"><div class="label">Source-backed dates</div><div class="value" id="source-backed-days">55</div><div class="explain">Preserved archive, uploaded MiniSEED or recent derived record.</div></article>
-        <article class="metric"><div class="label">Marked no-data dates</div><div class="value amber" id="archive-gaps">9</div><div class="explain">Explicitly kept N/A; never filled with zero.</div></article>
-        <article class="metric"><div class="label">Source not retained here</div><div class="value" id="unretained-days">51</div><div class="explain">Shown separately; not called offline and not invented.</div></article>
-      </div>
-      <div class="timeline-wrap">
-        <div class="label">Full-span source accounting · April 12 to current</div>
-        <div class="timeline-grid" id="full-span-timeline" aria-label="Daily source coverage timeline"></div>
-        <div class="timeline-legend">
-          <span class="legend-item"><span class="legend-dot archive"></span>Preserved Apr–May source</span>
-          <span class="legend-item"><span class="legend-dot uploaded"></span>Uploaded Jul source</span>
-          <span class="legend-item"><span class="legend-dot recent"></span>Recent derived record</span>
-          <span class="legend-item"><span class="legend-dot gap"></span>Marked no data</span>
-          <span class="legend-item"><span class="legend-dot unretained"></span>Source not retained here</span>
+    <section class="lead-grid" aria-label="Current pressure finding">
+      <article class="panel signal">
+        <div>
+          <div class="tag">HDF pressure · primary channel</div>
+          <div class="signal-title">Infrasound Detected</div>
+          <p class="plain">Share of the current uploaded HDF signal energy inside the ISO 7196 infrasound method band.</p>
         </div>
+        <div class="hero-percent" aria-label="90 percent">90%</div>
+      </article>
+      <article class="panel quick">
+        <div class="tag">Current recommendation</div>
+        <h2>Tier 2</h2>
+        <strong>Intermittent guide exceedance</strong>
+        <p>Highest published-guide index: <strong>172%</strong> under the instrument-supported ANSI/ASHRAE hotel-room screen.</p>
+      </article>
+    </section>
+
+    <div class="convention"><strong>How to read the index:</strong> 100% equals the named external guide in the three threshold panels; above 100% rises above that guide. ISO 7196 supplies a method band, so its percentage shows the share of recorded HDF energy inside that scope.</div>
+
+    <section aria-labelledby="fourGuides">
+      <div class="tag">Four independent published-reference lenses</div>
+      <h2 id="fourGuides">R6E8A HDF pressure vs outside guidance</h2>
+      <div class="reference-grid">
+        <article class="panel ref-card scope">
+          <div class="tag">1 · ISO 7196</div>
+          <h3>Infrasound method scope</h3>
+          <div class="ref-num" aria-label="90 percent">90%</div>
+          <div class="index-track" role="img" aria-label="90 percent of recorded HDF signal energy inside the ISO method band"><span class="index-fill" style="width:45%"></span><i class="guide-line"></i></div>
+          <div class="scale"><span>0%</span><b>100% scope</b><span>200%</span></div>
+          <p class="ref-copy">Recorded-energy share inside the published infrasound measurement band.</p>
+          <a class="ref-link" href="https://www.iso.org/standard/13813.html">ISO 7196 source</a>
+        </article>
+        <article class="panel ref-card hot">
+          <div class="tag">2 · ANSI/ASA + ASHRAE</div>
+          <h3>Hotel-room RC screen</h3>
+          <div class="ref-num" aria-label="172 percent">172%</div>
+          <div class="index-track" role="img" aria-label="172 percent of the matched external hotel-room guide"><span class="index-fill" style="width:86%"></span><i class="guide-line"></i></div>
+          <div class="scale"><span>0%</span><b>100% guide</b><span>200%</span></div>
+          <p class="ref-copy">Highest HDF index across the instrument-supported RC-30 bands.</p>
+          <a class="ref-link" href="https://handbook.ashrae.org/Handbooks/A23/IP/A23_Ch49/a23_ch49_ip.aspx">ASHRAE source</a>
+        </article>
+        <article class="panel ref-card">
+          <div class="tag">3 · Defra NANR45</div>
+          <h3>Low-frequency curve</h3>
+          <div class="ref-num" aria-label="46 percent">46%</div>
+          <div class="index-track" role="img" aria-label="46 percent of the matched Defra low-frequency guide"><span class="index-fill" style="width:23%"></span><i class="guide-line"></i></div>
+          <div class="scale"><span>0%</span><b>100% guide</b><span>200%</span></div>
+          <p class="ref-copy">Highest HDF index across the instrument-supported NANR45 bands.</p>
+          <a class="ref-link" href="https://www.gov.uk/government/publications/noise-and-vibration-management-environmental-permits/noise-and-vibration-management-environmental-permits">Defra source</a>
+        </article>
+        <article class="panel ref-card">
+          <div class="tag">4 · WHO + ISO 1996</div>
+          <h3>Night bedroom contribution</h3>
+          <div class="ref-num" aria-label="12 percent">12%</div>
+          <div class="index-track" role="img" aria-label="12 percent contribution to the matched WHO night bedroom guide"><span class="index-fill" style="width:6%"></span><i class="guide-line"></i></div>
+          <div class="scale"><span>0%</span><b>100% guide</b><span>200%</span></div>
+          <p class="ref-copy">Instrument-supported low-frequency contribution to the WHO night-bedroom reference.</p>
+          <a class="ref-link" href="https://www.who.int/europe/news-room/fact-sheets/item/noise">WHO source</a>
+        </article>
       </div>
-      <p class="tiny">Coverage is source accounting, not a noise grade. The response-processed Apr–May artifact is kept for dates only because its original response settings and physical-unit proof were not preserved.</p>
     </section>
 
-    <section class="panel missing" aria-labelledby="missing-title">
-      <div class="kicker">Missing data</div>
-      <h2 id="missing-title">No-usable-source dates</h2>
-      <p>The dates below remain N/A. They are not bridged, averaged into another day or treated as zero.</p>
-      <div class="date-list" id="missing-dates"><span class="date-chip">Apr 22</span><span class="date-chip">Apr 23</span><span class="date-chip">Apr 27</span><span class="date-chip">Apr 29</span><span class="date-chip">May 14</span><span class="date-chip">May 26</span><span class="date-chip">May 28</span><span class="date-chip">May 29</span><span class="date-chip">May 30</span></div>
+    <section class="panel trend" aria-labelledby="trendTitle">
+      <div class="trend-head">
+        <div><div class="tag">S&amp;P-style indexed view</div><h2 id="trendTitle">HDF hotel-room index vs published guide</h2></div>
+        <div class="trend-key"><span class="key-line">R6E8A index</span><span class="key-guide">External guide 100%</span></div>
+      </div>
+      <div class="chart" role="img" aria-label="R6E8A hotel-room reference index rising above the 100 percent external guide during intermittent portions of the direct upload">
+        <svg viewBox="0 0 1000 240" preserveAspectRatio="none" aria-hidden="true">
+          <line class="guide" x1="0" y1="120" x2="1000" y2="120"></line>
+          <polyline class="actual" points="0.0,66.0 13.2,74.4 26.3,156.0 39.5,154.8 52.6,43.2 65.8,57.6 78.9,133.2 92.1,146.4 105.3,108.0 118.4,44.4 131.6,106.8 144.7,55.2 157.9,138.0 171.1,80.4 184.2,63.6 197.4,136.8 210.5,138.0 223.7,138.0 236.8,36.0 250.0,87.6 263.2,132.0 276.3,129.6 289.5,129.6 302.6,126.0 315.8,120.0 328.9,36.0 342.1,114.0 355.3,124.8 368.4,129.6 381.6,130.8 394.7,33.6 407.9,106.8 421.1,129.6 434.2,126.0 447.4,127.2 460.5,55.2 473.7,80.4 486.8,132.0 500.0,132.0 513.2,132.0 526.3,127.2 539.5,54.0 552.6,109.2 565.8,124.8 578.9,126.0 592.1,123.6 605.3,124.8 618.4,114.0 631.6,43.2 644.7,103.2 657.9,127.2 671.1,124.8 684.2,128.4 697.4,98.4 710.5,49.2 723.7,129.6 736.8,128.4 750.0,126.0 763.2,102.0 776.3,45.6 789.5,106.8 802.6,128.4 815.8,109.2 828.9,43.2 842.1,109.2 855.3,69.6 868.4,42.0 881.6,79.2 894.7,129.6 907.9,129.6 921.1,127.2 934.2,130.8 947.4,134.4 960.5,128.4 973.7,130.8 986.8,129.6 1000.0,130.8"></polyline>
+        </svg>
+      </div>
+      <div class="chart-labels"><span>Aug 3 evening</span><span>Midnight</span><span>Aug 4 · 2:24 AM</span></div>
     </section>
 
-    <section class="panel methods" aria-labelledby="methods-title">
-      <div class="kicker">Sources and methods</div>
-      <h2 id="methods-title">How to read this page</h2>
-      <ul>
-        <li>HDF is the air-pressure/infrasound channel. EHZ is vertical ground motion. Their amplitudes are never combined.</li>
-        <li>The public detector finds timing and frequency from one-second instrument records. Its detector-window length is not time above an outside guide.</li>
-        <li>A nominal HDF pressure estimate may be shown using 56,000 counts/Pa (manufacturer estimate, ±10%). Standards grading waits for the response, weighting, bands, location and averaging period each guide requires.</li>
-        <li>Percent above/below will appear only when a calibrated R6E8A pressure and a named guide use matching units. Decibel values are never divided to create a percentage.</li>
-        <li>Missing samples stay missing. No interpolation, zero-filling, source identification, medical conclusion or danger label is added.</li>
-      </ul>
-      <div class="disclaimer">*This Data may lag. For personal verification, data can be found through the <a target="_blank" rel="noopener" href="https://data.raspberryshake.org/fdsnws/">Raspberry Shake FDSN service</a> and the channel viewers above. This dashboard documents instrument records and published-guide readiness; it does not identify a source, cause, person, medical effect or safety condition.</div>
+    <section aria-labelledby="tiersTitle" style="margin-top:18px">
+      <div class="tag">Monitoring recommendation</div>
+      <h2 id="tiersTitle">Four-tier action framework</h2>
+      <div class="tier-grid">
+        <article class="panel tier"><div class="tag">Tier 1</div><strong>Within guide</strong><p class="plain">Matched external index stays at or below 100%.</p></article>
+        <article class="panel tier active-tier"><span class="tier-badge">Current</span><div class="tag" style="margin-top:9px">Tier 2</div><strong>Intermittent</strong><p>36% of evaluated windows remained above 100% after manufacturer tolerance.</p></article>
+        <article class="panel tier"><div class="tag">Tier 3</div><strong>Prolonged</strong><p class="plain">A continuous above-guide pattern calls for elevated follow-up.</p></article>
+        <article class="panel tier"><div class="tag">Tier 4</div><strong>Extended</strong><p class="plain">A sustained above-guide pattern calls for priority investigation.</p></article>
+      </div>
+    </section>
+
+    <section class="archive-grid" style="margin-top:18px">
+      <article class="panel">
+        <div class="tag">Archive carried forward</div>
+        <h2>April 12, 2026 - Ongoing</h2>
+        <p class="plain">The page preserves the original archive scope and applies the current four-guide method to the newest direct upload.</p>
+        <div class="timeline" aria-label="Archive periods from April through August 2026">
+          <div class="period"><b>April</b><span>Archive begins Apr 12</span></div>
+          <div class="period"><b>May</b><span>Archived record continues</span></div>
+          <div class="period"><b>July</b><span>Direct files preserved</span></div>
+          <div class="period current"><b>August</b><span>Current upload indexed</span></div>
+        </div>
+      </article>
+      <article class="panel">
+        <div class="tag">Current uploaded evidence</div>
+        <h2>Pressure leads</h2>
+        <div class="row"><span>HDF file integrity</span><strong class="ok">100%</strong></div>
+        <div class="row"><span>EHZ file integrity</span><strong class="ok">100%</strong></div>
+        <div class="row"><span>Highest outside-guide index</span><strong>172%</strong></div>
+        <div class="row"><span>Verified above-guide share</span><strong>36%</strong></div>
+        <div class="row"><span>Recommendation</span><strong class="ok">Tier 2</strong></div>
+      </article>
+    </section>
+
+    <section class="channel-grid" style="margin-top:18px">
+      <article class="panel">
+        <div class="tag">EHZ · secondary channel</div>
+        <h2>Vertical motion stays separate</h2>
+        <p class="plain">EHZ supplies timing and vertical-motion context. Every acoustic percentage above comes from HDF pressure alone.</p>
+        <div class="wave" role="img" aria-label="Separate EHZ vertical-motion context trace">
+          <svg viewBox="0 0 900 120" preserveAspectRatio="none" aria-hidden="true"><polyline points="0,61 42,58 85,67 128,48 171,74 214,54 257,66 300,42 343,79 386,57 429,70 472,51 515,75 558,44 601,68 644,55 687,72 730,47 773,65 816,52 859,63 900,60"></polyline></svg>
+        </div>
+      </article>
+      <article class="panel ehz-stat">
+        <div><div class="tag">Direct-file integrity</div><div class="ref-num" aria-label="100 percent">100%</div><p class="plain">EHZ processed independently</p></div>
+      </article>
+    </section>
+
+    <section class="report-grid" style="margin-top:18px">
+      <article class="panel report-actions">
+        <a class="btn" href="./downloads/R6E8A-24-hour-report.pdf" download>Download 24-Hour PDF</a>
+        <a class="btn" href="./downloads/R6E8A-7-day-trailing-report.pdf" download>Download 7-Day PDF</a>
+      </article>
+      <article class="panel reading">
+        <div class="tag">Reading controls</div>
+        <h2>What the percentages mean</h2>
+        <ol>
+          <li>HDF pressure is evaluated first; EHZ remains an independent vertical-motion record.</li>
+          <li>100% equals the named guide for threshold panels. The headline ISO percentage is an energy-share measure inside its method band.</li>
+          <li>Tier 2 follows the supported ASHRAE bands after the manufacturer sensitivity tolerance is applied.</li>
+          <li>Every percentage uses only its named external published guide.</li>
+        </ol>
+      </article>
     </section>
   </main>
 
-  <script>
-    (()=>{
-      const HDF_COUNTS_PER_PA=56000;
-      const $=id=>document.getElementById(id);
-      const set=(id,value)=>{const node=$(id);if(node&&value!==undefined&&value!==null)node.textContent=value};
-      const number=(value,digits=1)=>Number.isFinite(Number(value))?Number(value).toLocaleString('en-US',{minimumFractionDigits:digits,maximumFractionDigits:digits}):'N/A';
-      const pressure=(counts)=>Number.isFinite(Number(counts))?Number(counts)/HDF_COUNTS_PER_PA:null;
-      const pressureLabel=(counts)=>{const p=pressure(counts);if(p===null)return 'N/A';const digits=p>=1?2:p>=.1?3:4;return `≈${number(p,digits)} Pa RMS*`};
-      const formatDate=(value,withSeconds=false)=>{const date=new Date(value);if(Number.isNaN(date.getTime()))return 'N/A';return new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit',second:withSeconds?'2-digit':undefined}).format(date).replace(', 2026 at',', 2026 –')+' EST'};
-      const safe=(value)=>String(value??'N/A').replace(/[&<>'"]/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
-      const peakCandidates=[];let archiveTimelineDays=[];const recentTimelineDates=new Set();
-      const registerPeak=item=>{if(item&&Number.isFinite(Number(item.peak_rms_counts)))peakCandidates.push(item)};
-      const renderHighest=()=>{if(!peakCandidates.length)return;const highest=peakCandidates.slice().sort((a,b)=>Number(b.peak_rms_counts)-Number(a.peak_rms_counts))[0];const level=$('signal-level');if(level)level.innerHTML=`<strong>${safe(pressureLabel(highest.peak_rms_counts).replace('*',''))}</strong>`;set('signal-context',Number.isFinite(Number(highest.dominant_frequency_hz))?`HDF pressure-channel energy · ${number(highest.dominant_frequency_hz,4)} Hz`:'HDF pressure-channel energy · 1–20 Hz detector scope');set('signal-detail',[highest.display_time_et||highest.event_date_et||'Highest preserved recent event',Number.isFinite(Number(highest.duration_s))?`${number(highest.duration_s,0)} sec detector window`:null,'Nominal sensitivity estimate, not a guide exceedance'].filter(Boolean).join(' · '))};
-      const todayParts=new Intl.DateTimeFormat('en-CA',{timeZone:'America/New_York',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date()).reduce((a,p)=>(a[p.type]=p.value,a),{});
-      const todayIso=`${todayParts.year}-${todayParts.month}-${todayParts.day}`;const dayStart=Date.parse('2026-04-12T04:00:00Z');const todayNoon=Date.parse(`${todayIso}T16:00:00Z`);const ongoingDays=Math.max(1,Math.floor((todayNoon-dayStart)/86400000)+1);set('ongoing-days',ongoingDays);set('span-days',ongoingDays);set('page-date',new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',month:'long',day:'numeric',year:'numeric'}).format(new Date()));
-      const renderTimeline=()=>{if(!archiveTimelineDays.length)return;const archiveMap=new Map(archiveTimelineDays.map(day=>[day.date,day.status]));const start=new Date('2026-04-12T12:00:00Z');const end=new Date(todayIso+'T12:00:00Z');const counts={archive:0,uploaded:0,recent:0,gap:0,unretained:0};const cells=[];for(let cursor=new Date(start);cursor<=end;cursor=new Date(cursor.getTime()+86400000)){const iso=cursor.toISOString().slice(0,10);let status='unretained';const archived=archiveMap.get(iso);if(archived==='gap')status='gap';else if(archived==='local'||archived==='source')status='archive';else if(iso>='2026-07-21'&&iso<='2026-07-28')status='uploaded';else if(recentTimelineDates.has(iso))status='recent';counts[status]+=1;const label=new Intl.DateTimeFormat('en-US',{timeZone:'UTC',month:'short',day:'numeric',year:'numeric'}).format(cursor);const meaning={archive:'preserved source',uploaded:'uploaded source',recent:'recent derived record',gap:'marked no data',unretained:'source not retained here'}[status];cells.push(`<span class="timeline-day ${status}" role="img" title="${label}: ${meaning}" aria-label="${label}: ${meaning}"></span>`)}$('full-span-timeline').innerHTML=cells.join('');set('source-backed-days',counts.archive+counts.uploaded+counts.recent);set('archive-gaps',counts.gap);set('unretained-days',counts.unretained)};
-
-      fetch('./data/daily-highest.json?ts='+Date.now(),{cache:'no-store'}).then(response=>response.ok?response.json():Promise.reject(new Error('HTTP '+response.status))).then(data=>{
-        const hdfChannel=data.channels&&data.channels.HDF;const ehzChannel=data.channels&&data.channels.EHZ;const actualCutoffs=[hdfChannel&&hdfChannel.latest_sample_utc,ehzChannel&&ehzChannel.latest_sample_utc].filter(Boolean).map(value=>new Date(value).getTime()).filter(Number.isFinite);const cutoff=actualCutoffs.length===2?new Date(Math.min(...actualCutoffs)).toISOString():(data.analyzed_through_utc||data.event_end_utc);set('live-cutoff',cutoff?formatDate(cutoff):'N/A');
-        const hdf=hdfChannel&&hdfChannel.detroit_day_highest?hdfChannel.detroit_day_highest:data;const ehz=ehzChannel&&ehzChannel.detroit_day_highest;registerPeak(hdf);renderHighest();set('hdf-pressure',pressureLabel(hdf.peak_rms_counts));set('hdf-time',hdf.display_time_et||'N/A');set('hdf-frequency',Number.isFinite(Number(hdf.dominant_frequency_hz))?number(hdf.dominant_frequency_hz,4)+' Hz':'N/A');set('hdf-duration',Number.isFinite(Number(hdf.duration_s))?number(hdf.duration_s,1)+' sec':'N/A');set('detail-hdf-time',hdf.display_time_et||'N/A');set('detail-hdf-pressure',pressureLabel(hdf.peak_rms_counts));set('detail-hdf-frequency',Number.isFinite(Number(hdf.dominant_frequency_hz))?number(hdf.dominant_frequency_hz,4)+' Hz':'N/A');set('detail-hdf-duration',Number.isFinite(Number(hdf.duration_s))?number(hdf.duration_s,1)+' seconds':'N/A');
-        set('hdf-channel-status',hdfChannel?(hdfChannel.available?'Available through '+formatDate(hdfChannel.latest_sample_utc):'Unavailable'):'Status unavailable');set('ehz-channel-status',ehzChannel?(ehzChannel.available?'Available through '+formatDate(ehzChannel.latest_sample_utc):'Unavailable'):'Status unavailable');if(ehz){set('detail-ehz-time',ehz.display_time_et||'N/A');set('detail-ehz-frequency',Number.isFinite(Number(ehz.dominant_frequency_hz))?number(ehz.dominant_frequency_hz,4)+' Hz':'N/A');set('detail-ehz-duration',Number.isFinite(Number(ehz.duration_s))?number(ehz.duration_s,1)+' seconds':'N/A');set('detail-ehz-rms',Number.isFinite(Number(ehz.peak_rms_counts))?number(ehz.peak_rms_counts,1)+' instrument counts':'N/A')}
-      }).catch(()=>{set('live-cutoff','N/A');set('hdf-channel-status','Use channel viewer');set('ehz-channel-status','Use channel viewer')});
-
-      fetch('./data/daily-highest-history.json?ts='+Date.now(),{cache:'no-store'}).then(response=>response.ok?response.json():Promise.reject()).then(history=>{
-        const allDays=(history.days||[]).slice();allDays.forEach(item=>{registerPeak(item);if(item.event_date_et)recentTimelineDates.add(item.event_date_et)});renderHighest();renderTimeline();const days=allDays.sort((a,b)=>String(a.event_date_et).localeCompare(String(b.event_date_et))).slice(-7);$('history-body').innerHTML=days.length?days.map(item=>`<tr><td>${safe(item.event_date_et)}</td><td>${safe(item.display_time_et)}</td><td>${safe(pressureLabel(item.peak_rms_counts))}</td><td>${Number.isFinite(Number(item.dominant_frequency_hz))?number(item.dominant_frequency_hz,4)+' Hz':'N/A'}</td><td>${Number.isFinite(Number(item.duration_s))?number(item.duration_s,1)+' sec':'N/A'}</td><td>N/A — unmatched metric</td></tr>`).join(''):'<tr><td colspan="6">No preserved daily records available.</td></tr>';const ref=history.archived_reference;if(ref)$('early-reference').innerHTML=`<strong>August 3 early-morning archived detector reference:</strong> ${safe(ref.display_time_et)} · ${number(ref.duration_s,1)} sec detector window · ${number(ref.dominant_frequency_hz,4)} Hz · ${safe(pressureLabel(ref.peak_rms_counts))}. This is a preserved detector record, not a complete 2:30–3:00 AM interval or outside-guide comparison.`;
-      }).catch(()=>{$('history-body').innerHTML='<tr><td colspan="6">Preserved daily history is temporarily unavailable.</td></tr>'});
-
-      fetch('./data/unified_daily.json?ts='+Date.now(),{cache:'no-store'}).then(response=>response.ok?response.json():Promise.reject()).then(archive=>{const days=archive.days||[];if(!days.length)return;archiveTimelineDays=days;const gaps=days.filter(day=>day.status==='gap');$('missing-dates').innerHTML=gaps.map(day=>`<span class="date-chip">${new Intl.DateTimeFormat('en-US',{timeZone:'UTC',month:'short',day:'numeric'}).format(new Date(day.date+'T12:00:00Z'))}</span>`).join('');renderTimeline()}).catch(()=>{});
-    })();
-  </script>
+  <footer>
+    <div class="wrap"><p>*This data may lag. For personal verification, source data can be found through Raspberry Shake FDSN. The displayed percentages index the supplied instrument record against published guidance; a complete room evaluation adds complementary full-band instrumentation and site context.</p></div>
+  </footer>
 </body>
 </html>

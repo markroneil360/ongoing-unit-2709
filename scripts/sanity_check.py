@@ -1,150 +1,170 @@
 #!/usr/bin/env python3
-"""Three independent public-artifact checks for the R6E8A dashboard."""
+"""Fail closed when public R6E8A output violates the locked display rules."""
+
 from __future__ import annotations
 
-import json
-import math
 import re
-from datetime import date, timedelta
+import json
+from html.parser import HTMLParser
 from pathlib import Path
 
 from pypdf import PdfReader
 
 
 ROOT = Path(__file__).resolve().parents[1]
-HDF_COUNTS_PER_PA = 56_000.0
-PROHIBITED_PUBLIC_KEYS = {
-    "above_median_percent",
-    "above_window_median_percent",
-    "daily_median_rms_counts",
-    "window_median_rms_counts",
-    "multiple_of_median",
-    "multiple_of_window_median",
-    "simultaneous_ehz_robust_z",
-    "classification",
-}
-PROHIBITED_PUBLIC_PHRASES = (
-    "above median",
-    "same-channel context",
-    "same-day difference",
-    "peer percentile",
-)
+INDEX = ROOT / "index.html"
+WORKFLOW = ROOT / ".github" / "workflows" / "update-daily-highest.yml"
+BENCHMARK = ROOT / "data" / "benchmark-index.json"
+PDFS = [
+    ROOT / "downloads" / "R6E8A-24-hour-report.pdf",
+    ROOT / "downloads" / "R6E8A-7-day-trailing-report.pdf",
+]
 
 
-def load(name: str) -> dict:
-    return json.loads((ROOT / name).read_text(encoding="utf-8"))
+class PublicHTML(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.text: list[str] = []
+        self.attrs: list[str] = []
+        self.hrefs: list[str] = []
+        self.suppressed = 0
+
+    def handle_data(self, data: str):
+        if not self.suppressed:
+            self.text.append(data)
+
+    def handle_starttag(self, tag: str, attrs):
+        if tag in {"style", "script"}:
+            self.suppressed += 1
+            return
+        if self.suppressed:
+            return
+        for key, value in attrs:
+            if value is None:
+                continue
+            if key in {"aria-label", "alt", "title"}:
+                self.attrs.append(value)
+            if key == "href":
+                self.hrefs.append(value)
+
+    def handle_endtag(self, tag: str):
+        if tag in {"style", "script"} and self.suppressed:
+            self.suppressed -= 1
 
 
-def walk_keys(value, path="root"):
-    if isinstance(value, dict):
-        overlap = PROHIBITED_PUBLIC_KEYS.intersection(value)
-        assert not overlap, f"prohibited keys at {path}: {sorted(overlap)}"
-        for key, child in value.items():
-            walk_keys(child, f"{path}.{key}")
-    elif isinstance(value, list):
-        for index, child in enumerate(value):
-            walk_keys(child, f"{path}[{index}]")
+def require(condition: bool, message: str):
+    if not condition:
+        raise AssertionError(message)
 
 
-def check_structure_and_rules():
-    source = (ROOT / "index.html").read_text(encoding="utf-8")
-    lower = source.lower()
-    for phrase in PROHIBITED_PUBLIC_PHRASES:
-        assert phrase not in lower, f"prohibited public wording: {phrase}"
-    required = (
-        "ISO 7196",
-        "ANSI/ASA + ASHRAE",
-        "Defra NANR45",
-        "WHO night noise + ISO 1996",
-        "Tier 1",
-        "Tier 2",
-        "Tier 3",
-        "Tier 4",
-        "Current recommendation: hold the result at N/A",
-        "Infrasound Detected",
-    )
-    for phrase in required:
-        assert phrase in source, f"missing required public element: {phrase}"
-    assert source.index("HDF pressure / infrasound") < source.index("EHZ seismic record")
-    assert source.index('id="missing-title"') < source.index('id="methods-title"')
-    visible = re.sub(r"<script[\s\S]*?</script>|<style[\s\S]*?</style>", " ", source, flags=re.I)
-    visible = re.sub(r"<[^>]+>", " ", visible)
-    assert len(re.findall(r"\bFDSN\b", visible, flags=re.I)) == 1
-    print("PASS 1/3 - public structure, HDF priority, four guides, four tiers, and wording")
+def normalize(value: str) -> str:
+    return re.sub(r"\s+", " ", value).strip()
 
 
-def check_data_and_math():
-    live = load("data/daily-highest.json")
-    history = load("data/daily-highest-history.json")
-    archive = load("data/unified_daily.json")
-    walk_keys(live)
-    walk_keys(history)
-    assert live.get("schema_version") == 3
-    channels = live["channels"]
-    assert set(channels) == {"HDF", "EHZ"}
-    assert channels["HDF"]["available"] and channels["EHZ"]["available"]
-    assert "pressure" in channels["HDF"]["role"].lower()
-    assert "vertical" in channels["EHZ"]["role"].lower()
-
-    hdf_events = [
-        channels["HDF"]["detroit_day_highest"],
-        channels["HDF"]["trailing_24h_highest"],
-        *history["days"],
-        history["archived_reference"],
+def assert_public_text(value: str, label: str):
+    lowered = value.lower()
+    banned_phrases = [
+        "n/a",
+        "not yet",
+        "pending",
+        "unavailable",
+        "not determined",
+        "not gradeable",
+        "source not retained",
+        "not applicable",
+        "same-day median",
+        "trailing median",
+        "percentile",
+        "peer station",
+        "other station",
+        "z score",
+        "z-score",
     ]
-    for event in hdf_events:
-        expected = float(event["peak_rms_counts"]) / HDF_COUNTS_PER_PA
-        actual = float(event["estimated_pressure_pa_rms_nominal"])
-        assert math.isclose(actual, expected, rel_tol=0, abs_tol=5e-7), (event.get("event_date_et"), actual, expected)
+    for phrase in banned_phrases:
+        require(phrase not in lowered, f"{label}: prohibited phrase {phrase!r}")
 
-    archive_days = archive["days"]
-    assert len(archive_days) == 49
-    assert archive_days[0]["date"] == "2026-04-12" and archive_days[-1]["date"] == "2026-05-30"
-    assert sum(day["status"] == "gap" for day in archive_days) == 9
-    assert sum(day["status"] in {"local", "source"} for day in archive_days) == 40
-    history_dates = {day["event_date_et"] for day in history["days"]}
-    assert len(history_dates) == len(history["days"]) == 7
-    span = (date.fromisoformat("2026-08-04") - date.fromisoformat("2026-04-12")).days + 1
-    source_backed = 40 + 8 + len(history_dates)
-    unretained = span - source_backed - 9
-    assert (span, source_backed, unretained) == (115, 55, 51)
-    print("PASS 2/3 - dual-channel data, pressure conversion, dates, gaps, and full-span accounting")
+    banned_measure_patterns = {
+        "pressure units": r"(?i)\b(?:pa|pascal|pascals)\b",
+        "frequency units": r"(?i)\b(?:hz|hertz)\b",
+        "level units": r"(?i)\bdb(?:a|c|g)?\b",
+        "raw counts": r"(?i)\bcounts?\b",
+        "raw durations": r"(?i)\b\d+(?:\.\d+)?\s*(?:sec(?:ond)?s?|min(?:ute)?s?)\b",
+    }
+    for name, pattern in banned_measure_patterns.items():
+        require(re.search(pattern, value) is None, f"{label}: visible {name}")
+
+    for family in ("ISO 7196", "ANSI/ASA", "ASHRAE", "NANR45", "WHO", "ISO 1996"):
+        require(family.lower() in lowered, f"{label}: missing {family}")
+    for tier in ("Tier 1", "Tier 2", "Tier 3", "Tier 4"):
+        require(tier.lower() in lowered, f"{label}: missing {tier}")
+    for pct in ("90%", "172%", "46%", "12%", "36%", "100%"):
+        require(pct in value, f"{label}: missing {pct}")
+
+
+def check_html():
+    source = INDEX.read_text(encoding="utf-8")
+    parser = PublicHTML()
+    parser.feed(source)
+    visible = normalize(" ".join(parser.text + parser.attrs))
+    assert_public_text(visible, "index.html")
+    require(visible.lower().find("hdf file integrity") < visible.lower().find("ehz file integrity"), "HDF must appear before EHZ")
+    require(visible.lower().count("fdsn") == 1, "FDSN must appear exactly once")
+    require("Infrasound Detected" in visible, "static infrasound finding missing")
+    require("Current recommendation Tier 2" in visible, "current Tier 2 recommendation missing")
+    require("April 12, 2026 - Ongoing" in visible, "archive scope missing")
+
+    lower_source = source.lower()
+    for token in ("animation:", "@keyframes", "signal-light", "signal-beacon", "traffic-blink", "signal-sway"):
+        require(token not in lower_source, f"movement token remains: {token}")
+    require("<script" not in lower_source, "public dashboard must be pre-rendered without JavaScript")
+    require("<iframe" not in lower_source, "public dashboard must be complete without network frames")
+    require("fetch(" not in lower_source, "public dashboard must be complete without fetch")
+
+    for href in parser.hrefs:
+        if href.startswith(("http://", "https://", "#", "mailto:")):
+            continue
+        target = (ROOT / href.split("#", 1)[0].split("?", 1)[0]).resolve()
+        require(target.exists(), f"broken local link: {href}")
+
+
+def check_workflow():
+    value = WORKFLOW.read_text(encoding="utf-8").lower()
+    require("workflow_dispatch" in value, "manual workflow trigger missing")
+    require("schedule:" not in value, "scheduled feed remains")
+    require("push:" not in value, "push-triggered feed remains")
+    require("contents: write" not in value, "workflow write permission remains")
+    require("update_daily_highest" not in value, "network updater remains wired into workflow")
 
 
 def check_pdfs():
-    paths = (
-        ROOT / "downloads" / "R6E8A-24-hour-report.pdf",
-        ROOT / "downloads" / "R6E8A-7-day-trailing-report.pdf",
-    )
-    for path in paths:
-        raw = path.read_bytes()
-        assert raw.startswith(b"%PDF-") and b"%%EOF" in raw[-1024:]
+    for path in PDFS:
+        require(path.exists() and path.stat().st_size > 5000, f"invalid PDF file: {path.name}")
         reader = PdfReader(str(path))
-        assert len(reader.pages) == 2
-        text = "\n".join((page.extract_text() or "") for page in reader.pages)
-        lower = text.lower()
-        for phrase in PROHIBITED_PUBLIC_PHRASES:
-            assert phrase not in lower, f"{path.name}: {phrase}"
-        for phrase in ("ISO 7196", "ASHRAE", "NANR45", "WHO", "TIER 1", "TIER 4"):
-            assert phrase.lower() in lower, f"{path.name}: missing {phrase}"
-        assert "account for up to 30 minutes of lag" in lower
-        uris = []
-        for page in reader.pages:
-            for annotation in page.get("/Annots", []):
-                obj = annotation.get_object()
-                action = obj.get("/A")
-                if action and action.get("/URI"):
-                    uris.append(str(action.get("/URI")))
-        assert any("raspberryshake.org" in uri for uri in uris), f"{path.name}: missing verification link"
-    print("PASS 3/3 - two-page PDF integrity, text rules, and verification links")
+        require(len(reader.pages) == 2, f"{path.name}: expected two pages")
+        text_value = normalize(" ".join(page.extract_text() or "" for page in reader.pages))
+        assert_public_text(text_value, path.name)
+        require(text_value.lower().count("fdsn") == 1, f"{path.name}: FDSN must appear once")
+        require("Current recommendation" in text_value, f"{path.name}: recommendation missing")
 
 
-def main():
-    check_structure_and_rules()
-    check_data_and_math()
-    check_pdfs()
-    print("SANITY CHECK: 3/3 PASS")
+def check_benchmark_data():
+    payload = json.loads(BENCHMARK.read_text(encoding="utf-8"))
+    values = payload["external_indices_pct"]
+    require(round(values["iso_7196_method_band_energy_share"]) == 90, "ISO rounded value mismatch")
+    require(round(values["ansi_asa_ashrae_rc30_supported_band_max"]) == 172, "ASHRAE rounded value mismatch")
+    require(round(values["defra_nanr45_supported_band_max"]) == 46, "Defra rounded value mismatch")
+    require(round(values["who_iso1996_supported_band_contribution_max"]) == 12, "WHO rounded value mismatch")
+    require(round(values["sensitivity_tolerant_above_guide_window_share"]) == 36, "Tier share mismatch")
+    require(payload["tier_recommendation"]["tier"] == "Tier 2", "Tier recommendation mismatch")
+    require(payload["current_direct_upload"]["hdf_file_integrity_pct"] == 100, "HDF integrity mismatch")
+    require(payload["current_direct_upload"]["ehz_file_integrity_pct"] == 100, "EHZ integrity mismatch")
+    series = payload["rc30_supported_band_series_pct"]
+    require(len(series) == 77 and max(series) == 172, "trend series mismatch")
 
 
 if __name__ == "__main__":
-    main()
+    check_html()
+    check_workflow()
+    check_pdfs()
+    check_benchmark_data()
+    print("R6E8A percentage-only public output: PASS")
