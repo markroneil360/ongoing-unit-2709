@@ -1,20 +1,29 @@
 {
   "station": "AM.R6E8A.00",
-  "generated_et": "2026-08-10 03:50:00 AM EDT",
-  "source": "Raspberry Shake public FDSN DataSelect / latest repository-verified raw files",
+  "generated_utc": "2026-08-10T10:00:11.756035+00:00",
+  "generated_et": "2026-08-10 06:00:11 AM EDT",
+  "window_start_utc": "2026-08-10T09:05:11.756035+00:00",
+  "window_end_utc": "2026-08-10T09:25:11.756035+00:00",
   "channels": {
     "HDF": {
+      "channel": "HDF",
       "ok": true,
-      "latest_sample_et": "2026-08-09 12:35:31 PM EDT",
       "coverage_pct": 100.0,
-      "status": "latest repository-verified raw HDF boundary"
+      "segments": 1,
+      "latest_sample_utc": "2026-08-10T09:25:13.291000+00:00",
+      "latest_sample_et": "2026-08-10 05:25:13 AM EDT",
+      "url": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-08-10T09:05:11.756035&end=2026-08-10T09:25:11.756035&format=miniseed&nodata=404"
     },
     "EHZ": {
+      "channel": "EHZ",
       "ok": true,
-      "latest_sample_et": "2026-08-09 12:35:23 PM EDT",
       "coverage_pct": 100.0,
-      "status": "latest repository-verified raw EHZ boundary"
+      "segments": 1,
+      "latest_sample_utc": "2026-08-10T09:25:13.711000+00:00",
+      "latest_sample_et": "2026-08-10 05:25:13 AM EDT",
+      "url": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=EHZ&start=2026-08-10T09:05:11.756035&end=2026-08-10T09:25:11.756035&format=miniseed&nodata=404"
     }
   },
+  "source": "Raspberry Shake public FDSN DataSelect",
   "display_note": "*This Data may lag. Missing acquisition time is not scored as zero, quiet, normal, compliant, or below benchmark."
 }
