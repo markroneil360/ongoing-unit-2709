@@ -15,9 +15,36 @@
 .big{display:block;font-size:2rem;line-height:1.05;margin:10px 0;font-weight:950}.counter{font-size:3.2rem;font-weight:950;line-height:1}.red{color:var(--red)}.green{color:var(--green)}.amber{color:var(--amber)}.metric{min-height:160px}.metric .scope{font-size:.82rem;color:var(--muted)}.event-table,.bench-table,.gap-table,.recon-table{width:100%;border-collapse:collapse}.event-table th,.event-table td,.bench-table th,.bench-table td,.gap-table th,.gap-table td,.recon-table th,.recon-table td{padding:11px 9px;text-align:left;vertical-align:top;border-bottom:1px solid #26372f}.event-table th,.bench-table th,.gap-table th,.recon-table th{font-size:.71rem;text-transform:uppercase;letter-spacing:.08em;color:#9fb5aa}.event-table tr.priority td{background:rgba(255,98,88,.065)}.rank{font-size:1.15rem;font-weight:950}.duration{font-weight:950;color:white}.chip{display:inline-flex;align-items:center;gap:6px;padding:4px 8px;border-radius:999px;font-size:.74rem;font-weight:950}.chip.red{background:var(--red2);color:#ffaaa4;border:1px solid #63231f}.chip.green{background:#0d2418;color:#8ff0b7}.chip.neutral{background:#18211d;color:#b5c2bb}.arrow{font-size:1.05rem;font-weight:950}.callout{padding:16px;border-radius:10px;border:1px solid #6f2925;background:#251414}.callout strong{color:#ffaba4}.method{background:#0b1310}.method ul{padding-left:1.2rem;margin:.5rem 0}.method li{margin:.45rem 0;color:#cedbd4}.source-link{display:inline-block;margin-top:8px;color:#bcefd7;text-underline-offset:3px}.note{padding:13px 15px;border-left:4px solid var(--blue);background:#0b1620;border-radius:9px;color:#c6d9e8}.coverage-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.coverage-grid .panel{min-height:140px}.impact{border-color:#6a2925}.impact ul{margin:.5rem 0;padding-left:1.25rem}.impact li{margin:.55rem 0}.headline{border:1px solid #762824;background:linear-gradient(180deg,#291211,#160b0b)}.headline .big{color:#ff8b84}.fine{font-size:.78rem;color:var(--muted)}footer{border-top:1px solid var(--line);padding:18px 0 30px;color:#93a69c;font-size:.8rem}
 @media(max-width:930px){.hero-grid,.focus-grid,.two,.channels{grid-template-columns:1fr}.three,.four,.coverage-grid{grid-template-columns:1fr 1fr}.event-table,.bench-table,.gap-table,.recon-table{display:block;overflow-x:auto}.actions{grid-template-columns:1fr 1fr}}
 @media(max-width:600px){.wrap{width:min(100% - 16px,1180px)}.three,.four,.coverage-grid,.actions{grid-template-columns:1fr}.panel{padding:15px}.row{align-items:flex-start;flex-direction:column}.row strong{text-align:left}h1{font-size:2.55rem}.event-table,.bench-table,.gap-table,.recon-table{font-size:.84rem}}
+
+/* OpenRouter-inspired evidence flow: compact selectors, ranked activity, expandable detail. */
+:root{--lime:#c8ff00;--lime-ink:#172000;--soft:#151b18;--soft2:#0b100e;--violet:#a888ff}
+.or-nav{position:sticky;top:0;z-index:30;background:rgba(5,7,6,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.or-nav-inner{width:min(1180px,calc(100% - 24px));margin:auto;display:flex;gap:8px;padding:9px 0;overflow:auto;scrollbar-width:none}.or-nav-inner::-webkit-scrollbar{display:none}
+.or-nav a{white-space:nowrap;text-decoration:none;padding:9px 13px;border:1px solid #29362f;border-radius:9px;background:#0d1210;color:#c9d4ce;font-size:.82rem;font-weight:850}.or-nav a:first-child{background:var(--lime);color:var(--lime-ink);border-color:var(--lime)}
+.or-shell{border:1px solid #2b3832;border-radius:16px;background:linear-gradient(180deg,#0c110f,#070a09);overflow:hidden;box-shadow:var(--shadow)}
+.or-section-title{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:15px 18px;background:#141a17;border-bottom:1px solid #2a3630}.or-section-title h2{margin:0;font-size:1.05rem}.or-section-title .chev{font-size:1.35rem;color:#cbd6d0}.or-body{padding:20px}
+.evidence-kicker{display:flex;align-items:center;gap:9px;color:var(--lime);font-size:.72rem;font-weight:950;text-transform:uppercase;letter-spacing:.13em}.evidence-dot{width:8px;height:8px;border-radius:50%;background:var(--lime);box-shadow:0 0 14px rgba(200,255,0,.8)}
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}.stat-card{min-height:142px;padding:16px;border:1px solid #2b3832;border-radius:12px;background:#0b100e}.stat-card strong{display:block;margin:8px 0 5px;font-size:clamp(1.75rem,4vw,2.6rem);line-height:1;color:#fff;letter-spacing:-.04em}.stat-card.priority{border-color:#7f332f;background:linear-gradient(180deg,#261311,#100b0a)}.stat-card.priority strong{color:#ff766e}.stat-card .label{font-weight:850}.stat-card .detail{color:var(--muted);font-size:.78rem}
+.proof-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:12px}.proof-card{padding:18px;border:1px solid #2a3831;border-radius:12px;background:#0b100e}.proof-card h3{font-size:1.15rem}.proof-card.alert{border-color:#74302b;background:#1a0e0d}.proof-card.alert h3{color:#ff8c85}.proof-card .analogy{margin-top:13px;padding:12px;border-left:3px solid var(--lime);background:#10170f;color:#dce7df;border-radius:6px}
+.data-note{display:flex;gap:9px;align-items:flex-start;margin-top:12px;padding:12px;border-radius:9px;background:#0d1712;border:1px solid #254331;color:#bcd1c5}.data-note b{color:var(--lime)}
+.band-stack{display:grid;grid-template-columns:1fr 1fr;gap:15px}.band-chart,.hour-chart{display:flex;align-items:flex-end;gap:5px;height:220px;padding:28px 10px 27px;border:1px solid #29362f;border-radius:12px;background:#080c0a;position:relative}.chart-column{height:100%;flex:1;display:flex;align-items:flex-end;justify-content:center;position:relative}.chart-bar{width:100%;max-width:52px;min-height:2px;border-radius:5px 5px 0 0;background:linear-gradient(180deg,var(--violet),#4f6cff)}.chart-column.hot .chart-bar{background:linear-gradient(180deg,#ff695f,#b82f29)}.chart-label{position:absolute;bottom:-22px;font-size:.68rem;color:#9fb0a7}.chart-value{position:absolute;bottom:calc(var(--bar-height) + 5px);font-size:.65rem;color:#dce5e0;white-space:nowrap}.hour-chart{gap:2px}.hour-chart .chart-bar{max-width:none;background:linear-gradient(180deg,#51c8ff,#3666f7)}.hour-chart .chart-column.night .chart-bar{background:linear-gradient(180deg,#ff6058,#ad2c29)}
+.legend-line{display:flex;flex-wrap:wrap;gap:12px;margin:10px 0 0;color:var(--muted);font-size:.75rem}.legend-line span:before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:#5275ff;margin-right:6px}.legend-line span.hot:before{background:#ff6058}
+.rank-list{border:1px solid #29362f;border-radius:12px;overflow:hidden}.rank-row{display:grid;grid-template-columns:42px minmax(0,1fr) 128px;gap:12px;align-items:center;padding:13px 14px;border-bottom:1px solid #243029}.rank-row:last-child{border-bottom:0}.rank-number{color:#8fa197;font-weight:900}.rank-title{font-size:1rem;font-weight:900}.rank-meta{color:var(--muted);font-size:.78rem}.rank-duration{text-align:right;font-weight:950;color:#fff}
+.event-tools{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:14px 0}.event-tools input{flex:1;min-width:210px;padding:11px 12px;border:1px solid #34433b;border-radius:9px;background:#080c0a;color:#fff}.filter-btn{padding:10px 12px;border:1px solid #33423a;border-radius:9px;background:#101612;color:#cad5cf;font-weight:850;cursor:pointer}.filter-btn.active{background:var(--lime);color:var(--lime-ink);border-color:var(--lime)}
+.event-details{border:1px solid #2b3932;border-radius:11px;background:#0a0e0c;margin:8px 0;overflow:hidden}.event-details summary{cursor:pointer;list-style:none;display:grid;grid-template-columns:95px minmax(0,1fr) 90px;gap:12px;align-items:center;padding:13px 14px}.event-details summary::-webkit-details-marker{display:none}.event-details[open] summary{background:#151b18;border-bottom:1px solid #2b3932}.event-id{font-weight:950;color:var(--lime)}.event-time{font-weight:800}.event-share{color:var(--muted);font-size:.76rem}.event-minutes{text-align:right;font-weight:950}.hour-wrap{overflow:auto;padding:10px}.hour-table{width:100%;min-width:760px;border-collapse:collapse;font-size:.78rem}.hour-table th,.hour-table td{padding:8px;border-bottom:1px solid #233029;text-align:left}.hour-table th{color:#9eafa6;text-transform:uppercase;letter-spacing:.07em;font-size:.66rem}.empty{padding:22px;text-align:center;color:var(--muted)}
+.download-row{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}.outline-btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:10px 14px;border:1px solid #53685c;border-radius:9px;text-decoration:none;font-weight:900;background:#111713}.outline-btn.primary{background:var(--lime);border-color:var(--lime);color:var(--lime-ink)}
+.bottom-rail{display:none}.integrity-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.hash-card{padding:12px;border:1px solid #28362f;border-radius:9px;background:#090d0b}.hash-card code{display:block;margin-top:6px;color:#aebdb5;word-break:break-all;font-size:.67rem}
+@media(max-width:930px){.stat-grid,.proof-grid,.band-stack{grid-template-columns:1fr 1fr}.integrity-grid{grid-template-columns:1fr}}
+@media(max-width:650px){body{padding-bottom:78px}.or-nav-inner{width:calc(100% - 16px)}.stat-grid,.proof-grid,.band-stack{grid-template-columns:1fr}.or-body{padding:14px}.rank-row{grid-template-columns:32px minmax(0,1fr) 84px;padding:12px 10px}.event-details summary{grid-template-columns:72px minmax(0,1fr) 66px;padding:12px 10px}.chart-value{display:none}.bottom-rail{position:fixed;display:grid;grid-template-columns:1fr 1fr;gap:8px;left:0;right:0;bottom:0;z-index:40;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(7,10,9,.95);backdrop-filter:blur(16px);border-top:1px solid #2a3831}.bottom-rail a{min-height:48px;border:1px solid #34423b;border-radius:10px;display:flex;align-items:center;justify-content:center;text-align:center;text-decoration:none;font-weight:900;background:#0c110f}.bottom-rail a:last-child{background:var(--lime);color:var(--lime-ink);border-color:var(--lime)}}
+
 </style>
 </head>
 <body>
+
+<nav class="or-nav" aria-label="Dashboard sections"><div class="or-nav-inner">
+<a href="#verified-summary">Verified summary</a><a href="#hdf48-activity">Activity</a><a href="#hdf48-events">112 events</a><a href="#hdf48-validation">Validation</a><a href="#existing-record">Prior record</a>
+</div></nav>
+
 <header class="hero"><div class="wrap hero-grid">
 <div><div class="eyebrow">Unit 2709 · AM.R6E8A · HDF pressure / infrasound primary</div><h1>Confirmed Infrasound <span>(Ongoing)</span></h1><p class="sub"><strong>April 12, 2026 — Ongoing</strong> · Detroit, Michigan · Eastern Time</p><p class="sub">Management view centered on prolonged pressure-channel activity, low-frequency concentration, nighttime timing, externally published acoustic benchmarks, and verified data coverage. HDF pressure and EHZ vertical motion remain separate measurements.</p></div>
 <div><div class="actions"><a class="btn" href="./downloads/R6E8A-24-hour-report.pdf" download>Download 24-Hour Report</a><a class="btn" href="./downloads/R6E8A-7-day-trailing-report.pdf" download>Download 7-Day Trailing</a></div><div class="panel status"><div class="row"><span>Current HDF source status</span><strong id="hdf-status" class="ok">Loading hourly FDSN status…</strong></div><div class="row"><span>Current EHZ source status</span><strong id="ehz-status" class="ok">Loading hourly FDSN status…</strong></div><div class="row"><span>Status generated</span><strong id="status-generated">—</strong></div><div class="row"><span>Source of record</span><strong>Raspberry Shake public FDSN</strong></div></div></div>
@@ -25,6 +52,61 @@
 <main class="wrap">
 
 <section class="panel focus"><div class="focus-grid"><div><div class="tag">Primary low-frequency review band</div><h2>4–8 Hz priority band · 7 Hz highlighted</h2><p class="muted">The dashboard gives special visibility to recorded pressure energy in the 4–8 Hz region and to prolonged low-frequency events outside that band. Frequency, calibrated magnitude where available, duration, recurrence, nighttime timing, and coverage are shown together.</p><div class="freqbar" role="img" aria-label="Frequency scale from zero to twenty hertz with four to eight hertz highlighted in red and seven hertz marked"><div class="band"></div><div class="seven"></div><span class="f0">0</span><span class="f4">4</span><span class="f7">7</span><span class="f8">8</span><span class="f20">20 Hz</span></div></div><div class="focus-note"><strong>Management reading rule</strong>Red identifies the problem-focused records: prolonged HDF pressure activity, method-matched exceedances, and measured spectral features in the priority low-frequency region. Frequency alone is not converted into a medical dose.</div></div></section>
+
+
+<section id="verified-summary" class="section or-shell">
+  <div class="or-section-title"><h2>▦ Verified HDF 4–8 Hz sustained-activity dataset</h2><span class="chev">⌄</span></div>
+  <div class="or-body">
+    <div class="evidence-kicker"><span class="evidence-dot"></span>April 12–August 11, 2026 analysis window · available data only</div>
+    <h2 style="margin-top:10px">The recurring pattern is documented. Exposure magnitude and source still require calibrated onsite measurement.</h2>
+    <p class="muted">Every number in this section comes from the preserved HDF analysis and its hour-level event ledger. HDF pressure remains separate from EHZ ground motion.</p>
+    <div class="stat-grid">
+      <article class="stat-card priority"><span class="label">4–8 Hz-dominant time</span><strong id="stat-band-hours">—</strong><span class="detail" id="stat-band-detail">Loading verified data…</span></article>
+      <article class="stat-card"><span class="label">Sustained events ≥15 min</span><strong id="stat-events">—</strong><span class="detail">consecutive complete HDF minutes</span></article>
+      <article class="stat-card"><span class="label">Events ≥30 min</span><strong id="stat-events-30">—</strong><span class="detail" id="stat-events-60">—</span></article>
+      <article class="stat-card"><span class="label">Longest event</span><strong id="stat-longest">—</strong><span class="detail">continuous 4–8 Hz band dominance</span></article>
+    </div>
+    <div class="proof-grid">
+      <article class="proof-card alert"><div class="tag">Priority hazard review</div><h3>Why this cannot be dismissed as a single spike</h3><p>The qualifying record contains repeated events lasting from 15 minutes to 161 minutes. The recurrence and duration justify independent environmental and occupational-health investigation.</p><div class="analogy"><strong>Analogy:</strong> this is like a smoke detector repeatedly activating for long intervals. The record is enough to require investigation, while the detector alone cannot identify the source or measure a person's dose.</div></article>
+      <article class="proof-card"><div class="tag">What “dominant” means</div><h3>A spectral vote, not a single pure tone</h3><p>For each complete minute, mean spectral power density in 4–8 Hz was compared with 1–4, 8–16 and 16–20 Hz. A minute entered this dataset only when 4–8 Hz won that comparison.</p><div class="analogy"><strong>Analogy:</strong> imagine four shelves holding parts of the same signal. “4–8 Hz dominant” means that shelf held the largest share—not that every item was on it.</div></article>
+    </div>
+    <div class="data-note"><b>✓</b><span><strong>Missing-data rule:</strong> unavailable minutes are excluded rather than entered as quiet, normal, compliant or zero.</span></div>
+  </div>
+</section>
+
+<section id="hdf48-activity" class="section or-shell">
+  <div class="or-section-title"><h2>⌁ Activity · qualifying sustained-event minutes</h2><span class="chev">⌄</span></div>
+  <div class="or-body">
+    <p class="muted">These charts describe the 112 events that met the ≥15-minute rule. They do not convert raw counts into pascals or dB(G).</p>
+    <div class="band-stack">
+      <article><h3>By month</h3><div id="month-chart" class="band-chart" role="img" aria-label="Qualifying sustained event minutes by month"></div></article>
+      <article><h3>By clock hour · Eastern Time</h3><div id="hour-chart" class="hour-chart" role="img" aria-label="Qualifying sustained event minutes by local clock hour"></div><div class="legend-line"><span>Day / evening</span><span class="hot">10 PM–7 AM</span></div></article>
+    </div>
+    <div style="margin-top:18px"><h3>Longest verified events</h3><div id="top-events" class="rank-list"><div class="empty">Loading ranked events…</div></div></div>
+  </div>
+</section>
+
+<section id="hdf48-events" class="section or-shell">
+  <div class="or-section-title"><h2>☷ Complete event ledger · hour-by-hour evidence</h2><span class="chev">⌄</span></div>
+  <div class="or-body">
+    <p class="muted">Open any event to see every clock-hour segment, its event minutes, modal narrow-bin peak, 4–8 Hz power share and raw HDF RMS counts.</p>
+    <div class="event-tools"><input id="event-search" type="search" placeholder="Search event ID or date…" aria-label="Search events"><button class="filter-btn active" data-min="15">All ≥15m</button><button class="filter-btn" data-min="30">≥30m</button><button class="filter-btn" data-min="60">≥60m</button></div>
+    <div id="event-ledger"><div class="empty">Loading all 112 verified events…</div></div>
+    <div class="download-row"><a class="outline-btn primary" href="./downloads/R6E8A_HDF_4-8Hz_Sustained_Event_Report_2026-08-11.pdf.b64" data-pdf-b64 data-filename="R6E8A_HDF_4-8Hz_Sustained_Event_Report_2026-08-11.pdf">Download complete 24-page report</a><a class="outline-btn" href="./downloads/R6E8A_HDF_4-8Hz_Hourly_Event_Data_2026-08-11.csv" download>Download hour-level CSV</a></div>
+  </div>
+</section>
+
+<section id="hdf48-validation" class="section or-shell">
+  <div class="or-section-title"><h2>⌘ Independent validation blueprint</h2><span class="chev">⌄</span></div>
+  <div class="or-body">
+    <div class="proof-grid"><article class="proof-card"><div class="tag">Verified by this dataset</div><h3>Recurring sustained HDF band dominance</h3><p>112 events, 182 hour-level rows, full event timestamps, 56 selected source files and cryptographic integrity identifiers are preserved in the report.</p></article><article class="proof-card"><div class="tag">Required next measurement</div><h3>Calibrated pressure + vibration</h3><p>Commission an acoustical engineer or industrial hygienist to colocate a calibrated low-frequency microphone or pressure sensor with a calibrated tri-axis vibration sensor for at least 72 hours.</p></article></div>
+    <div class="callout" style="margin-top:12px"><strong>Interpretation boundary:</strong> this dataset establishes the recurring timing and spectral classification. Raw counts do not by themselves establish calibrated sound-pressure exposure, source, intent or medical causation. The report explains how to close that measurement gap.</div>
+    <div class="integrity-grid" style="margin-top:12px"><article class="hash-card">Analysis JSON<code id="hash-analysis">—</code></article><article class="hash-card">Hourly CSV<code id="hash-csv">—</code></article><article class="hash-card">Report PDF<code id="hash-pdf">—</code></article></div>
+    <div class="download-row"><a class="outline-btn" href="https://data.raspberryshake.org/fdsnws/">Verify through Raspberry Shake FDSN</a><a class="outline-btn" href="https://dataview.raspberryshake.org/#/embed/AM/R6E8A/00/HDF">Open official HDF DataView</a></div>
+  </div>
+</section>
+
+<div id="existing-record" class="section evidence-kicker" style="padding:8px 2px"><span class="evidence-dot"></span>Previously approved dashboard record continues below</div>
 
 <section class="section headline panel"><div class="tag">Hard sustained record</div><h2>Five documented HDF intervals over 30 minutes</h2><div class="three"><article><span class="counter red">4</span><p><strong>preserved ≥45-minute episodes</strong><br><span class="muted">July 27–28 ledger</span></p></article><article><strong class="big">10 hr 45 min</strong><p class="muted">combined duration of the four preserved ≥45-minute intervals</p></article><article><strong class="big">49 min</strong><p class="muted">additional July 3 archive-detector interval; shown separately because it used an earlier event rule</p></article></div></section>
 
@@ -86,5 +168,54 @@
   }
 })();
 </script>
+
+<div class="bottom-rail" aria-label="Quick downloads"><a href="#hdf48-events">View events</a><a href="./downloads/R6E8A_HDF_4-8Hz_Sustained_Event_Report_2026-08-11.pdf.b64" data-pdf-b64 data-filename="R6E8A_HDF_4-8Hz_Sustained_Event_Report_2026-08-11.pdf">Download report</a></div>
+
+
+<script>
+(()=>{
+  const DATA_URL='./data/R6E8A-HDF-4-8Hz-sustained-events.json';
+  const esc=value=>String(value).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+  const duration=minutes=>minutes>=60?`${Math.floor(minutes/60)}h ${minutes%60}m`:`${minutes}m`;
+  const clock=hour=>hour===0?'12a':hour<12?`${hour}a`:hour===12?'12p':`${hour-12}p`;
+  let events=[]; let minFilter=15;
+  function bars(target,items,label,value,night=false){
+    const max=Math.max(...items.map(value),1); target.innerHTML=items.map(item=>{const v=value(item),h=Math.max(2,Math.round(v/max*100));const isNight=night&&(item.hour>=22||item.hour<7);return `<div class="chart-column ${isNight?'night hot':''}" style="--bar-height:${h}%"><span class="chart-value">${Math.round(v/60)}h</span><div class="chart-bar" style="height:${h}%"></div><span class="chart-label">${esc(label(item))}</span></div>`}).join('');
+  }
+  function renderTop(top){document.getElementById('top-events').innerHTML=top.map((e,i)=>`<div class="rank-row"><span class="rank-number">${i+1}.</span><div><div class="rank-title">${esc(e.id)} · ${esc(e.start_et)}</div><div class="rank-meta">Mean 4–8 Hz share ${e.mean_4_8_share_percent.toFixed(1)}% · ${e.hour_rows.length} hour row${e.hour_rows.length===1?'':'s'}</div></div><div class="rank-duration">${duration(e.duration_minutes)}</div></div>`).join('')}
+  function eventHtml(e){const rows=e.hour_rows.map(r=>`<tr><td>${esc(r.segment_start_et)}–${esc(r.segment_end_et.split(', ').pop())}</td><td>${r.minutes}</td><td>${r.modal_peak_hz.toFixed(2)} Hz</td><td>${r.modal_peak_minutes}</td><td>${r.mean_4_8_share_percent.toFixed(1)}%</td><td>${Math.round(r.mean_rms_counts).toLocaleString()}</td><td>${Math.round(r.max_rms_counts).toLocaleString()}</td></tr>`).join('');return `<details class="event-details"><summary><span class="event-id">${esc(e.id)}</span><span><span class="event-time">${esc(e.start_et)}</span><br><span class="event-share">to ${esc(e.end_et)} · mean 4–8 share ${e.mean_4_8_share_percent.toFixed(1)}%</span></span><span class="event-minutes">${duration(e.duration_minutes)}</span></summary><div class="hour-wrap"><table class="hour-table"><thead><tr><th>Segment ET</th><th>Min</th><th>Modal peak</th><th>Modal min</th><th>4–8 share</th><th>Mean RMS*</th><th>Max RMS*</th></tr></thead><tbody>${rows}</tbody></table><p class="fine">*Raw HDF counts; not pascals or dB(G). Narrow-bin modal peak and four-band dominance answer different questions.</p></div></details>`}
+  function renderLedger(){const q=document.getElementById('event-search').value.trim().toLowerCase();const filtered=events.filter(e=>e.duration_minutes>=minFilter&&(!q||`${e.id} ${e.start_et} ${e.end_et}`.toLowerCase().includes(q)));document.getElementById('event-ledger').innerHTML=filtered.length?filtered.map(eventHtml).join(''):`<div class="empty">No events match this filter.</div>`}
+  document.querySelectorAll('.filter-btn').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');minFilter=Number(btn.dataset.min);renderLedger()}));
+  document.getElementById('event-search').addEventListener('input',renderLedger);
+  document.querySelectorAll('[data-pdf-b64]').forEach(link=>link.addEventListener('click',async event=>{
+    event.preventDefault();
+    const response=await fetch(link.getAttribute('href'));
+    if(!response.ok) return;
+    const encoded=(await response.text()).trim();
+    const binary=atob(encoded);const bytes=new Uint8Array(binary.length);
+    for(let i=0;i<binary.length;i++)bytes[i]=binary.charCodeAt(i);
+    const objectUrl=URL.createObjectURL(new Blob([bytes],{type:'application/pdf'}));
+    const save=document.createElement('a');save.href=objectUrl;save.download=link.dataset.filename;save.click();
+    setTimeout(()=>URL.revokeObjectURL(objectUrl),1000);
+  }));
+  fetch(DATA_URL,{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('data');return r.json()}).then(d=>{
+    events=d.events;const s=d.summary;
+    document.getElementById('stat-band-hours').textContent=`${s.dominant_4_8_hours.toFixed(1)} hours`;
+    document.getElementById('stat-band-detail').textContent=`${s.dominant_4_8_minutes.toLocaleString()} minutes · ${s.dominant_4_8_percent.toFixed(2)}% of analyzed minutes`;
+    document.getElementById('stat-events').textContent=s.sustained_event_count_15.toLocaleString();
+    document.getElementById('stat-events-30').textContent=s.sustained_event_count_30.toLocaleString();
+    document.getElementById('stat-events-60').textContent=`${s.sustained_event_count_60} lasted at least 60 minutes`;
+    document.getElementById('stat-longest').textContent=duration(s.longest_event_minutes);
+    bars(document.getElementById('month-chart'),d.qualifying_event_minutes_by_month,x=>x.month,x=>x.minutes);
+    bars(document.getElementById('hour-chart'),d.qualifying_event_minutes_by_hour_et,x=>clock(x.hour),x=>x.minutes,true);
+    renderTop(d.top_events);renderLedger();
+    document.getElementById('hash-analysis').textContent=d.integrity.analysis_sha256;
+    document.getElementById('hash-csv').textContent=d.integrity.hourly_csv_sha256;
+    document.getElementById('hash-pdf').textContent=d.integrity.report_pdf_sha256;
+  }).catch(()=>{document.getElementById('event-ledger').innerHTML='<div class="empty">Verified data file is temporarily unavailable. Use the report download or FDSN source.</div>'});
+})();
+</script>
+
 </body>
 </html>
+
