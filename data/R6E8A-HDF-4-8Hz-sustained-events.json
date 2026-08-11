@@ -1,0 +1,3992 @@
+{
+  "schema_version": 1,
+  "station": "AM.R6E8A.00",
+  "channel": "HDF",
+  "display_timezone": "America/Detroit",
+  "analysis_window_et": {
+    "start": "Apr 12, 2026 12:00 AM EDT",
+    "end": "Aug 11, 2026 12:01 AM EDT"
+  },
+  "available_data_et": {
+    "start": "Apr 25, 2026 8:00 PM EDT",
+    "end": "Aug 9, 2026 12:35 PM EDT"
+  },
+  "summary": {
+    "source_file_count": 56,
+    "analyzed_minutes": 69495,
+    "analyzed_hours": 1158.25,
+    "requested_period_coverage_percent": 39.88425273628528,
+    "dominant_4_8_minutes": 17160,
+    "dominant_4_8_hours": 286.0,
+    "dominant_4_8_percent": 24.692423915389597,
+    "sustained_event_count_15": 112,
+    "sustained_event_count_30": 53,
+    "sustained_event_count_60": 17,
+    "sustained_event_minutes": 4490,
+    "sustained_event_hours": 74.83333333333333,
+    "longest_event_minutes": 161,
+    "hour_level_rows": 182
+  },
+  "dominant_bands": [
+    {
+      "band": "1-4 Hz",
+      "minutes": 42072,
+      "percent": 60.53960716598316
+    },
+    {
+      "band": "4-8 Hz",
+      "minutes": 17160,
+      "percent": 24.692423915389597
+    },
+    {
+      "band": "8-16 Hz",
+      "minutes": 10086,
+      "percent": 14.513274336283185
+    },
+    {
+      "band": "16-20 Hz",
+      "minutes": 177,
+      "percent": 0.2546945823440535
+    }
+  ],
+  "global_spectral_peaks": [
+    {
+      "frequency_hz": 0.55,
+      "share_of_0_5_20hz_power": 0.03363189155891589
+    },
+    {
+      "frequency_hz": 0.95,
+      "share_of_0_5_20hz_power": 0.02859563104941439
+    },
+    {
+      "frequency_hz": 0.75,
+      "share_of_0_5_20hz_power": 0.027559363898739923
+    },
+    {
+      "frequency_hz": 1.15,
+      "share_of_0_5_20hz_power": 0.022868385340436687
+    },
+    {
+      "frequency_hz": 1.55,
+      "share_of_0_5_20hz_power": 0.02076817507852976
+    },
+    {
+      "frequency_hz": 1.35,
+      "share_of_0_5_20hz_power": 0.0206794500411382
+    },
+    {
+      "frequency_hz": 1.75,
+      "share_of_0_5_20hz_power": 0.015370584251918012
+    },
+    {
+      "frequency_hz": 1.95,
+      "share_of_0_5_20hz_power": 0.01269868595849709
+    },
+    {
+      "frequency_hz": 5.75,
+      "share_of_0_5_20hz_power": 0.011756619307984217
+    },
+    {
+      "frequency_hz": 10.95,
+      "share_of_0_5_20hz_power": 0.011340946679644576
+    }
+  ],
+  "qualifying_event_minutes_by_month": [
+    {
+      "month": "Apr",
+      "minutes": 2129
+    },
+    {
+      "month": "May",
+      "minutes": 0
+    },
+    {
+      "month": "Jun",
+      "minutes": 525
+    },
+    {
+      "month": "Jul",
+      "minutes": 1329
+    },
+    {
+      "month": "Aug",
+      "minutes": 507
+    }
+  ],
+  "qualifying_event_minutes_by_hour_et": [
+    {
+      "hour": 0,
+      "minutes": 69
+    },
+    {
+      "hour": 1,
+      "minutes": 87
+    },
+    {
+      "hour": 2,
+      "minutes": 138
+    },
+    {
+      "hour": 3,
+      "minutes": 222
+    },
+    {
+      "hour": 4,
+      "minutes": 119
+    },
+    {
+      "hour": 5,
+      "minutes": 9
+    },
+    {
+      "hour": 6,
+      "minutes": 84
+    },
+    {
+      "hour": 7,
+      "minutes": 38
+    },
+    {
+      "hour": 8,
+      "minutes": 22
+    },
+    {
+      "hour": 9,
+      "minutes": 17
+    },
+    {
+      "hour": 10,
+      "minutes": 51
+    },
+    {
+      "hour": 11,
+      "minutes": 138
+    },
+    {
+      "hour": 12,
+      "minutes": 290
+    },
+    {
+      "hour": 13,
+      "minutes": 398
+    },
+    {
+      "hour": 14,
+      "minutes": 395
+    },
+    {
+      "hour": 15,
+      "minutes": 351
+    },
+    {
+      "hour": 16,
+      "minutes": 297
+    },
+    {
+      "hour": 17,
+      "minutes": 306
+    },
+    {
+      "hour": 18,
+      "minutes": 249
+    },
+    {
+      "hour": 19,
+      "minutes": 250
+    },
+    {
+      "hour": 20,
+      "minutes": 347
+    },
+    {
+      "hour": 21,
+      "minutes": 248
+    },
+    {
+      "hour": 22,
+      "minutes": 219
+    },
+    {
+      "hour": 23,
+      "minutes": 146
+    }
+  ],
+  "top_events": [
+    {
+      "id": "H4-096",
+      "start_et": "Jul 27, 2026 2:17 AM EDT",
+      "end_et": "Jul 27, 2026 4:58 AM EDT",
+      "start_utc": "2026-07-27T06:17:00.000Z",
+      "end_utc": "2026-07-27T08:58:00.000Z",
+      "duration_minutes": 161,
+      "mean_4_8_share_percent": 36.907448393465415,
+      "max_rms_counts": 3168.5905414440454,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jul 27, 2026 2:00 AM EDT",
+          "segment_start_et": "Jul 27, 2026 2:17 AM EDT",
+          "segment_end_et": "Jul 27, 2026 3:00 AM EDT",
+          "minutes": 43,
+          "modal_peak_hz": 10.75,
+          "modal_peak_minutes": 5,
+          "mean_rms_counts": 2818.8350515523944,
+          "max_rms_counts": 3006.918382572576,
+          "mean_4_8_share_percent": 36.671998864432034
+        },
+        {
+          "hour_start_et": "Jul 27, 2026 3:00 AM EDT",
+          "segment_start_et": "Jul 27, 2026 3:00 AM EDT",
+          "segment_end_et": "Jul 27, 2026 4:00 AM EDT",
+          "minutes": 60,
+          "modal_peak_hz": 10.85,
+          "modal_peak_minutes": 9,
+          "mean_rms_counts": 2831.7264406873824,
+          "max_rms_counts": 3011.1474757309843,
+          "mean_4_8_share_percent": 37.499680482437455
+        },
+        {
+          "hour_start_et": "Jul 27, 2026 4:00 AM EDT",
+          "segment_start_et": "Jul 27, 2026 4:00 AM EDT",
+          "segment_end_et": "Jul 27, 2026 4:58 AM EDT",
+          "minutes": 58,
+          "modal_peak_hz": 5.75,
+          "modal_peak_minutes": 6,
+          "mean_rms_counts": 2885.16711797523,
+          "max_rms_counts": 3168.5905414440454,
+          "mean_4_8_share_percent": 36.46935191777767
+        }
+      ]
+    },
+    {
+      "id": "H4-017",
+      "start_et": "Apr 27, 2026 2:29 PM EDT",
+      "end_et": "Apr 27, 2026 5:05 PM EDT",
+      "start_utc": "2026-04-27T18:29:00.000Z",
+      "end_utc": "2026-04-27T21:05:00.000Z",
+      "duration_minutes": 156,
+      "mean_4_8_share_percent": 35.915814091977886,
+      "max_rms_counts": 3589.645539396145,
+      "hour_rows": [
+        {
+          "hour_start_et": "Apr 27, 2026 2:00 PM EDT",
+          "segment_start_et": "Apr 27, 2026 2:29 PM EDT",
+          "segment_end_et": "Apr 27, 2026 3:00 PM EDT",
+          "minutes": 31,
+          "modal_peak_hz": 10.95,
+          "modal_peak_minutes": 6,
+          "mean_rms_counts": 2932.125791112397,
+          "max_rms_counts": 3307.6166260602176,
+          "mean_4_8_share_percent": 36.61974859281636
+        },
+        {
+          "hour_start_et": "Apr 27, 2026 3:00 PM EDT",
+          "segment_start_et": "Apr 27, 2026 3:00 PM EDT",
+          "segment_end_et": "Apr 27, 2026 4:00 PM EDT",
+          "minutes": 60,
+          "modal_peak_hz": 5.75,
+          "modal_peak_minutes": 7,
+          "mean_rms_counts": 3026.7461206305074,
+          "max_rms_counts": 3589.645539396145,
+          "mean_4_8_share_percent": 35.52111114832144
+        },
+        {
+          "hour_start_et": "Apr 27, 2026 4:00 PM EDT",
+          "segment_start_et": "Apr 27, 2026 4:00 PM EDT",
+          "segment_end_et": "Apr 27, 2026 5:00 PM EDT",
+          "minutes": 60,
+          "modal_peak_hz": 10.95,
+          "modal_peak_minutes": 8,
+          "mean_rms_counts": 2930.9062908686697,
+          "max_rms_counts": 3475.2255590822087,
+          "mean_4_8_share_percent": 35.94586282061795
+        },
+        {
+          "hour_start_et": "Apr 27, 2026 5:00 PM EDT",
+          "segment_start_et": "Apr 27, 2026 5:00 PM EDT",
+          "segment_end_et": "Apr 27, 2026 5:05 PM EDT",
+          "minutes": 5,
+          "modal_peak_hz": 5.35,
+          "modal_peak_minutes": 1,
+          "mean_rms_counts": 2840.422762196359,
+          "max_rms_counts": 3062.3104827507773,
+          "mean_4_8_share_percent": 35.92727076697627
+        }
+      ]
+    },
+    {
+      "id": "H4-098",
+      "start_et": "Jul 27, 2026 9:23 PM EDT",
+      "end_et": "Jul 27, 2026 11:40 PM EDT",
+      "start_utc": "2026-07-28T01:23:00.000Z",
+      "end_utc": "2026-07-28T03:40:00.000Z",
+      "duration_minutes": 137,
+      "mean_4_8_share_percent": 38.12838334314026,
+      "max_rms_counts": 3596.2645256172705,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jul 27, 2026 9:00 PM EDT",
+          "segment_start_et": "Jul 27, 2026 9:23 PM EDT",
+          "segment_end_et": "Jul 27, 2026 10:00 PM EDT",
+          "minutes": 37,
+          "modal_peak_hz": 10.85,
+          "modal_peak_minutes": 6,
+          "mean_rms_counts": 2962.436811155885,
+          "max_rms_counts": 3596.2645256172705,
+          "mean_4_8_share_percent": 37.227409835842316
+        },
+        {
+          "hour_start_et": "Jul 27, 2026 10:00 PM EDT",
+          "segment_start_et": "Jul 27, 2026 10:00 PM EDT",
+          "segment_end_et": "Jul 27, 2026 11:00 PM EDT",
+          "minutes": 60,
+          "modal_peak_hz": 5.75,
+          "modal_peak_minutes": 9,
+          "mean_rms_counts": 2996.7692827388933,
+          "max_rms_counts": 3306.634431095408,
+          "mean_4_8_share_percent": 39.1313571007178
+        },
+        {
+          "hour_start_et": "Jul 27, 2026 11:00 PM EDT",
+          "segment_start_et": "Jul 27, 2026 11:00 PM EDT",
+          "segment_end_et": "Jul 27, 2026 11:40 PM EDT",
+          "minutes": 40,
+          "modal_peak_hz": 10.95,
+          "modal_peak_minutes": 5,
+          "mean_rms_counts": 3025.4148487479733,
+          "max_rms_counts": 3475.461967622849,
+          "mean_4_8_share_percent": 37.457323201024565
+        }
+      ]
+    },
+    {
+      "id": "H4-013",
+      "start_et": "Apr 26, 2026 7:15 PM EDT",
+      "end_et": "Apr 26, 2026 9:21 PM EDT",
+      "start_utc": "2026-04-26T23:15:00.000Z",
+      "end_utc": "2026-04-27T01:21:00.000Z",
+      "duration_minutes": 126,
+      "mean_4_8_share_percent": 37.164531151502025,
+      "max_rms_counts": 3435.220820055272,
+      "hour_rows": [
+        {
+          "hour_start_et": "Apr 26, 2026 7:00 PM EDT",
+          "segment_start_et": "Apr 26, 2026 7:15 PM EDT",
+          "segment_end_et": "Apr 26, 2026 8:00 PM EDT",
+          "minutes": 45,
+          "modal_peak_hz": 10.65,
+          "modal_peak_minutes": 5,
+          "mean_rms_counts": 2842.176872446404,
+          "max_rms_counts": 3052.8748751295534,
+          "mean_4_8_share_percent": 37.07977793282742
+        },
+        {
+          "hour_start_et": "Apr 26, 2026 8:00 PM EDT",
+          "segment_start_et": "Apr 26, 2026 8:00 PM EDT",
+          "segment_end_et": "Apr 26, 2026 9:00 PM EDT",
+          "minutes": 60,
+          "modal_peak_hz": 10.75,
+          "modal_peak_minutes": 6,
+          "mean_rms_counts": 2861.1962881720524,
+          "max_rms_counts": 3435.220820055272,
+          "mean_4_8_share_percent": 37.161026733127194
+        },
+        {
+          "hour_start_et": "Apr 26, 2026 9:00 PM EDT",
+          "segment_start_et": "Apr 26, 2026 9:00 PM EDT",
+          "segment_end_et": "Apr 26, 2026 9:21 PM EDT",
+          "minutes": 21,
+          "modal_peak_hz": 11.05,
+          "modal_peak_minutes": 4,
+          "mean_rms_counts": 2794.8537996922796,
+          "max_rms_counts": 3131.5145095001503,
+          "mean_4_8_share_percent": 37.356157815447105
+        }
+      ]
+    },
+    {
+      "id": "H4-011",
+      "start_et": "Apr 26, 2026 4:18 PM EDT",
+      "end_et": "Apr 26, 2026 6:08 PM EDT",
+      "start_utc": "2026-04-26T20:18:00.000Z",
+      "end_utc": "2026-04-26T22:08:00.000Z",
+      "duration_minutes": 110,
+      "mean_4_8_share_percent": 36.958740556992055,
+      "max_rms_counts": 3859.960809857433,
+      "hour_rows": [
+        {
+          "hour_start_et": "Apr 26, 2026 4:00 PM EDT",
+          "segment_start_et": "Apr 26, 2026 4:18 PM EDT",
+          "segment_end_et": "Apr 26, 2026 5:00 PM EDT",
+          "minutes": 42,
+          "modal_peak_hz": 5.75,
+          "modal_peak_minutes": 4,
+          "mean_rms_counts": 2906.9102458805,
+          "max_rms_counts": 3152.0720476949696,
+          "mean_4_8_share_percent": 37.23982518973052
+        },
+        {
+          "hour_start_et": "Apr 26, 2026 5:00 PM EDT",
+          "segment_start_et": "Apr 26, 2026 5:00 PM EDT",
+          "segment_end_et": "Apr 26, 2026 6:00 PM EDT",
+          "minutes": 60,
+          "modal_peak_hz": 10.95,
+          "modal_peak_minutes": 6,
+          "mean_rms_counts": 2891.362472589954,
+          "max_rms_counts": 3277.9683949742357,
+          "mean_4_8_share_percent": 36.41121655013733
+        },
+        {
+          "hour_start_et": "Apr 26, 2026 6:00 PM EDT",
+          "segment_start_et": "Apr 26, 2026 6:00 PM EDT",
+          "segment_end_et": "Apr 26, 2026 6:08 PM EDT",
+          "minutes": 8,
+          "modal_peak_hz": 5.65,
+          "modal_peak_minutes": 2,
+          "mean_rms_counts": 3010.5275408869643,
+          "max_rms_counts": 3859.960809857433,
+          "mean_4_8_share_percent": 39.589476286525276
+        }
+      ]
+    },
+    {
+      "id": "H4-034",
+      "start_et": "Apr 28, 2026 8:21 PM EDT",
+      "end_et": "Apr 28, 2026 9:53 PM EDT",
+      "start_utc": "2026-04-29T00:21:00.000Z",
+      "end_utc": "2026-04-29T01:53:00.000Z",
+      "duration_minutes": 92,
+      "mean_4_8_share_percent": 38.01319734285372,
+      "max_rms_counts": 3390.3947042084756,
+      "hour_rows": [
+        {
+          "hour_start_et": "Apr 28, 2026 8:00 PM EDT",
+          "segment_start_et": "Apr 28, 2026 8:21 PM EDT",
+          "segment_end_et": "Apr 28, 2026 9:00 PM EDT",
+          "minutes": 39,
+          "modal_peak_hz": 5.75,
+          "modal_peak_minutes": 4,
+          "mean_rms_counts": 2819.83297961078,
+          "max_rms_counts": 3172.870069960693,
+          "mean_4_8_share_percent": 37.93407268736957
+        },
+        {
+          "hour_start_et": "Apr 28, 2026 9:00 PM EDT",
+          "segment_start_et": "Apr 28, 2026 9:00 PM EDT",
+          "segment_end_et": "Apr 28, 2026 9:53 PM EDT",
+          "minutes": 53,
+          "modal_peak_hz": 10.75,
+          "modal_peak_minutes": 8,
+          "mean_rms_counts": 2780.9006189512115,
+          "max_rms_counts": 3390.3947042084756,
+          "mean_4_8_share_percent": 38.07142114594584
+        }
+      ]
+    },
+    {
+      "id": "H4-093",
+      "start_et": "Jul 23, 2026 9:10 PM EDT",
+      "end_et": "Jul 23, 2026 10:42 PM EDT",
+      "start_utc": "2026-07-24T01:10:00.000Z",
+      "end_utc": "2026-07-24T02:42:00.000Z",
+      "duration_minutes": 92,
+      "mean_4_8_share_percent": 38.27586125003264,
+      "max_rms_counts": 3370.6879334777254,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jul 23, 2026 9:00 PM EDT",
+          "segment_start_et": "Jul 23, 2026 9:10 PM EDT",
+          "segment_end_et": "Jul 23, 2026 10:00 PM EDT",
+          "minutes": 50,
+          "modal_peak_hz": 5.45,
+          "modal_peak_minutes": 6,
+          "mean_rms_counts": 3019.5458288303826,
+          "max_rms_counts": 3370.6879334777254,
+          "mean_4_8_share_percent": 38.255073284833244
+        },
+        {
+          "hour_start_et": "Jul 23, 2026 10:00 PM EDT",
+          "segment_start_et": "Jul 23, 2026 10:00 PM EDT",
+          "segment_end_et": "Jul 23, 2026 10:42 PM EDT",
+          "minutes": 42,
+          "modal_peak_hz": 10.85,
+          "modal_peak_minutes": 5,
+          "mean_rms_counts": 2965.203252450192,
+          "max_rms_counts": 3277.4924665021354,
+          "mean_4_8_share_percent": 38.30060882765095
+        }
+      ]
+    },
+    {
+      "id": "H4-052",
+      "start_et": "Jun 29, 2026 1:17 PM EDT",
+      "end_et": "Jun 29, 2026 2:48 PM EDT",
+      "start_utc": "2026-06-29T17:17:00.000Z",
+      "end_utc": "2026-06-29T18:48:00.000Z",
+      "duration_minutes": 91,
+      "mean_4_8_share_percent": 37.83582122511796,
+      "max_rms_counts": 3738.71919908966,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jun 29, 2026 1:00 PM EDT",
+          "segment_start_et": "Jun 29, 2026 1:17 PM EDT",
+          "segment_end_et": "Jun 29, 2026 2:00 PM EDT",
+          "minutes": 43,
+          "modal_peak_hz": 10.95,
+          "modal_peak_minutes": 9,
+          "mean_rms_counts": 2985.65942962434,
+          "max_rms_counts": 3597.781430696418,
+          "mean_4_8_share_percent": 37.647653384531225
+        },
+        {
+          "hour_start_et": "Jun 29, 2026 2:00 PM EDT",
+          "segment_start_et": "Jun 29, 2026 2:00 PM EDT",
+          "segment_end_et": "Jun 29, 2026 2:48 PM EDT",
+          "minutes": 48,
+          "modal_peak_hz": 10.75,
+          "modal_peak_minutes": 6,
+          "mean_rms_counts": 3142.5505532466545,
+          "max_rms_counts": 3738.71919908966,
+          "mean_4_8_share_percent": 38.004388248976944
+        }
+      ]
+    },
+    {
+      "id": "H4-010",
+      "start_et": "Apr 26, 2026 2:45 PM EDT",
+      "end_et": "Apr 26, 2026 4:15 PM EDT",
+      "start_utc": "2026-04-26T18:45:00.000Z",
+      "end_utc": "2026-04-26T20:15:00.000Z",
+      "duration_minutes": 90,
+      "mean_4_8_share_percent": 35.90645725824609,
+      "max_rms_counts": 4378.909299985476,
+      "hour_rows": [
+        {
+          "hour_start_et": "Apr 26, 2026 2:00 PM EDT",
+          "segment_start_et": "Apr 26, 2026 2:45 PM EDT",
+          "segment_end_et": "Apr 26, 2026 3:00 PM EDT",
+          "minutes": 15,
+          "modal_peak_hz": 0.55,
+          "modal_peak_minutes": 7,
+          "mean_rms_counts": 3691.125310939176,
+          "max_rms_counts": 4041.691776699044,
+          "mean_4_8_share_percent": 33.545934840619665
+        },
+        {
+          "hour_start_et": "Apr 26, 2026 3:00 PM EDT",
+          "segment_start_et": "Apr 26, 2026 3:00 PM EDT",
+          "segment_end_et": "Apr 26, 2026 4:00 PM EDT",
+          "minutes": 60,
+          "modal_peak_hz": 5.55,
+          "modal_peak_minutes": 5,
+          "mean_rms_counts": 3084.9371390617102,
+          "max_rms_counts": 4378.909299985476,
+          "mean_4_8_share_percent": 36.32599477071869
+        },
+        {
+          "hour_start_et": "Apr 26, 2026 4:00 PM EDT",
+          "segment_start_et": "Apr 26, 2026 4:00 PM EDT",
+          "segment_end_et": "Apr 26, 2026 4:15 PM EDT",
+          "minutes": 15,
+          "modal_peak_hz": 8.15,
+          "modal_peak_minutes": 3,
+          "mean_rms_counts": 3004.596831730988,
+          "max_rms_counts": 3241.442444108172,
+          "mean_4_8_share_percent": 36.588829625982115
+        }
+      ]
+    },
+    {
+      "id": "H4-027",
+      "start_et": "Apr 28, 2026 3:11 PM EDT",
+      "end_et": "Apr 28, 2026 4:34 PM EDT",
+      "start_utc": "2026-04-28T19:11:00.000Z",
+      "end_utc": "2026-04-28T20:34:00.000Z",
+      "duration_minutes": 83,
+      "mean_4_8_share_percent": 35.09494031940254,
+      "max_rms_counts": 4162.006034407151,
+      "hour_rows": [
+        {
+          "hour_start_et": "Apr 28, 2026 3:00 PM EDT",
+          "segment_start_et": "Apr 28, 2026 3:11 PM EDT",
+          "segment_end_et": "Apr 28, 2026 4:00 PM EDT",
+          "minutes": 49,
+          "modal_peak_hz": 10.85,
+          "modal_peak_minutes": 5,
+          "mean_rms_counts": 3130.9253376875554,
+          "max_rms_counts": 3992.8915772940236,
+          "mean_4_8_share_percent": 35.31107849093145
+        },
+        {
+          "hour_start_et": "Apr 28, 2026 4:00 PM EDT",
+          "segment_start_et": "Apr 28, 2026 4:00 PM EDT",
+          "segment_end_et": "Apr 28, 2026 4:34 PM EDT",
+          "minutes": 34,
+          "modal_peak_hz": 11.65,
+          "modal_peak_minutes": 5,
+          "mean_rms_counts": 3168.9380320255473,
+          "max_rms_counts": 4162.006034407151,
+          "mean_4_8_share_percent": 34.78344707219912
+        }
+      ]
+    }
+  ],
+  "events": [
+    {
+      "id": "H4-001",
+      "start_et": "Apr 25, 2026 8:07 PM EDT",
+      "end_et": "Apr 25, 2026 8:25 PM EDT",
+      "start_utc": "2026-04-26T00:07:00.000Z",
+      "end_utc": "2026-04-26T00:25:00.000Z",
+      "duration_minutes": 18,
+      "mean_4_8_share_percent": 37.293133157225796,
+      "max_rms_counts": 3393.8825255778497,
+      "hour_rows": [
+        {
+          "hour_start_et": "Apr 25, 2026 8:00 PM EDT",
+          "segment_start_et": "Apr 25, 2026 8:07 PM EDT",
+          "segment_end_et": "Apr 25, 2026 8:25 PM EDT",
+          "minutes": 18,
+          "modal_peak_hz": 11.75,
+          "modal_peak_minutes": 5,
+          "mean_rms_counts": 3061.4593992400346,
+          "max_rms_counts": 3393.8825255778497,
+          "mean_4_8_share_percent": 37.293133157225796
+        }
+      ]
+    },
+    {
+      "id": "H4-002",
+      "start_et": "Apr 25, 2026 8:30 PM EDT",
+      "end_et": "Apr 25, 2026 9:24 PM EDT",
+      "start_utc": "2026-04-26T00:30:00.000Z",
+      "end_utc": "2026-04-26T01:24:00.000Z",
+      "duration_minutes": 54,
+      "mean_4_8_share_percent": 37.644288560300325,
+      "max_rms_counts": 3577.511792431847,
+      "hour_rows": [
+        {
+          "hour_start_et": "Apr 25, 2026 8:00 PM EDT",
+          "segment_start_et": "Apr 25, 2026 8:30 PM EDT",
+          "segment_end_et": "Apr 25, 2026 9:00 PM EDT",
+          "minutes": 30,
+          "modal_peak_hz": 5.75,
+          "modal_peak_minutes": 5,
+          "mean_rms_counts": 3057.1542478117876,
+          "max_rms_counts": 3577.511792431847,
+          "mean_4_8_share_percent": 37.94574724924596
+        },
+        {
+          "hour_start_et": "Apr 25, 2026 9:00 PM EDT",
+          "segment_start_et": "Apr 25, 2026 9:00 PM EDT",
+          "segment_end_et": "Apr 25, 2026 9:24 PM EDT",
+          "minutes": 24,
+          "modal_peak_hz": 5.75,
+          "modal_peak_minutes": 5,
+          "mean_rms_counts": 3073.1500781235027,
+          "max_rms_counts": 3411.8312350870033,
+          "mean_4_8_share_percent": 37.267465199118284
+        }
+      ]
+    },
+    {
+      "id": "H4-003",
+      "start_et": "Apr 25, 2026 9:31 PM EDT",
+      "end_et": "Apr 25, 2026 10:30 PM EDT",
+      "start_utc": "2026-04-26T01:31:00.000Z",
+      "end_utc": "2026-04-26T02:30:00.000Z",
+      "duration_minutes": 59,
+      "mean_4_8_share_percent": 39.16160275337256,
+      "max_rms_counts": 3752.5175172252007,
+      "hour_rows": [
+        {
+          "hour_start_et": "Apr 25, 2026 9:00 PM EDT",
+          "segment_start_et": "Apr 25, 2026 9:31 PM EDT",
+          "segment_end_et": "Apr 25, 2026 10:00 PM EDT",
+          "minutes": 29,
+          "modal_peak_hz": 10.95,
+          "modal_peak_minutes": 4,
+          "mean_rms_counts": 3174.317631607462,
+          "max_rms_counts": 3752.5175172252007,
+          "mean_4_8_share_percent": 38.70820213684305
+        },
+        {
+          "hour_start_et": "Apr 25, 2026 10:00 PM EDT",
+          "segment_start_et": "Apr 25, 2026 10:00 PM EDT",
+          "segment_end_et": "Apr 25, 2026 10:30 PM EDT",
+          "minutes": 30,
+          "modal_peak_hz": 5.75,
+          "modal_peak_minutes": 3,
+          "mean_rms_counts": 3041.628375142298,
+          "max_rms_counts": 3213.0877516390256,
+          "mean_4_8_share_percent": 39.59989001601777
+        }
+      ]
+    },
+    {
+      "id": "H4-004",
+      "start_et": "Apr 25, 2026 10:50 PM EDT",
+      "end_et": "Apr 26, 2026 12:00 AM EDT",
+      "start_utc": "2026-04-26T02:50:00.000Z",
+      "end_utc": "2026-04-26T04:00:00.000Z",
+      "duration_minutes": 70,
+      "mean_4_8_share_percent": 38.71867891370858,
+      "max_rms_counts": 3244.321282137961,
+      "hour_rows": [
+        {
+          "hour_start_et": "Apr 25, 2026 10:00 PM EDT",
+          "segment_start_et": "Apr 25, 2026 10:50 PM EDT",
+          "segment_end_et": "Apr 25, 2026 11:00 PM EDT",
+          "minutes": 10,
+          "modal_peak_hz": 5.45,
+          "modal_peak_minutes": 2,
+          "mean_rms_counts": 2937.9792440732144,
+          "max_rms_counts": 3017.930702396258,
+          "mean_4_8_share_percent": 37.15689259316061
+        },
+        {
+          "hour_start_et": "Apr 25, 2026 11:00 PM EDT",
+          "segment_start_et": "Apr 25, 2026 11:00 PM EDT",
+          "segment_end_et": "Apr 26, 2026 12:00 AM EDT",
+          "minutes": 60,
+          "modal_peak_hz": 5.75,
+          "modal_peak_minutes": 7,
+          "mean_rms_counts": 2941.2333373460087,
+          "max_rms_counts": 3244.321282137961,
+          "mean_4_8_share_percent": 38.97897663379993
+        }
+      ]
+    },
+    {
+      "id": "H4-005",
+      "start_et": "Apr 26, 2026 12:25 AM EDT",
+      "end_et": "Apr 26, 2026 12:48 AM EDT",
+      "start_utc": "2026-04-26T04:25:00.000Z",
+      "end_utc": "2026-04-26T04:48:00.000Z",
+      "duration_minutes": 23,
+      "mean_4_8_share_percent": 39.91264043106179,
+      "max_rms_counts": 3092.963180816695,
+      "hour_rows": [
+        {
+          "hour_start_et": "Apr 26, 2026 12:00 AM EDT",
+          "segment_start_et": "Apr 26, 2026 12:25 AM EDT",
+          "segment_end_et": "Apr 26, 2026 12:48 AM EDT",
+          "minutes": 23,
+          "modal_peak_hz": 10.85,
+          "modal_peak_minutes": 4,
+          "mean_rms_counts": 2905.0235873006427,
+          "max_rms_counts": 3092.963180816695,
+          "mean_4_8_share_percent": 39.91264043106179
+        }
+      ]
+    },
+    {
+      "id": "H4-006",
+      "start_et": "Apr 26, 2026 12:30 PM EDT",
+      "end_et": "Apr 26, 2026 1:01 PM EDT",
+      "start_utc": "2026-04-26T16:30:00.000Z",
+      "end_utc": "2026-04-26T17:01:00.000Z",
+      "duration_minutes": 31,
+      "mean_4_8_share_percent": 37.59223111287881,
+      "max_rms_counts": 3982.2803988525575,
+      "hour_rows": [
+        {
+          "hour_start_et": "Apr 26, 2026 12:00 PM EDT",
+          "segment_start_et": "Apr 26, 2026 12:30 PM EDT",
+          "segment_end_et": "Apr 26, 2026 1:00 PM EDT",
+          "minutes": 30,
+          "modal_peak_hz": 5.65,
+          "modal_peak_minutes": 5,
+          "mean_rms_counts": 3309.893390553075,
+          "max_rms_counts": 3982.2803988525575,
+          "mean_4_8_share_percent": 37.49379725885459
+        },
+        {
+          "hour_start_et": "Apr 26, 2026 1:00 PM EDT",
+          "segment_start_et": "Apr 26, 2026 1:00 PM EDT",
+          "segment_end_et": "Apr 26, 2026 1:01 PM EDT",
+          "minutes": 1,
+          "modal_peak_hz": 7.45,
+          "modal_peak_minutes": 1,
+          "mean_rms_counts": 3036.997918411293,
+          "max_rms_counts": 3036.997918411293,
+          "mean_4_8_share_percent": 40.54524673360536
+        }
+      ]
+    },
+    {
+      "id": "H4-007",
+      "start_et": "Apr 26, 2026 1:02 PM EDT",
+      "end_et": "Apr 26, 2026 1:57 PM EDT",
+      "start_utc": "2026-04-26T17:02:00.000Z",
+      "end_utc": "2026-04-26T17:57:00.000Z",
+      "duration_minutes": 55,
+      "mean_4_8_share_percent": 38.67151054096358,
+      "max_rms_counts": 3717.9084325963536,
+      "hour_rows": [
+        {
+          "hour_start_et": "Apr 26, 2026 1:00 PM EDT",
+          "segment_start_et": "Apr 26, 2026 1:02 PM EDT",
+          "segment_end_et": "Apr 26, 2026 1:57 PM EDT",
+          "minutes": 55,
+          "modal_peak_hz": 5.65,
+          "modal_peak_minutes": 6,
+          "mean_rms_counts": 3058.754657255771,
+          "max_rms_counts": 3717.9084325963536,
+          "mean_4_8_share_percent": 38.67151054096358
+        }
+      ]
+    },
+    {
+      "id": "H4-008",
+      "start_et": "Apr 26, 2026 1:58 PM EDT",
+      "end_et": "Apr 26, 2026 2:18 PM EDT",
+      "start_utc": "2026-04-26T17:58:00.000Z",
+      "end_utc": "2026-04-26T18:18:00.000Z",
+      "duration_minutes": 20,
+      "mean_4_8_share_percent": 36.04645161220507,
+      "max_rms_counts": 3683.2704114682174,
+      "hour_rows": [
+        {
+          "hour_start_et": "Apr 26, 2026 1:00 PM EDT",
+          "segment_start_et": "Apr 26, 2026 1:58 PM EDT",
+          "segment_end_et": "Apr 26, 2026 2:00 PM EDT",
+          "minutes": 2,
+          "modal_peak_hz": 11.65,
+          "modal_peak_minutes": 2,
+          "mean_rms_counts": 3054.4116801428836,
+          "max_rms_counts": 3183.3223248609693,
+          "mean_4_8_share_percent": 33.41977162868093
+        },
+        {
+          "hour_start_et": "Apr 26, 2026 2:00 PM EDT",
+          "segment_start_et": "Apr 26, 2026 2:00 PM EDT",
+          "segment_end_et": "Apr 26, 2026 2:18 PM EDT",
+          "minutes": 18,
+          "modal_peak_hz": 10.95,
+          "modal_peak_minutes": 4,
+          "mean_rms_counts": 3091.091439206765,
+          "max_rms_counts": 3683.2704114682174,
+          "mean_4_8_share_percent": 36.33830494370775
+        }
+      ]
+    },
+    {
+      "id": "H4-009",
+      "start_et": "Apr 26, 2026 2:19 PM EDT",
+      "end_et": "Apr 26, 2026 2:36 PM EDT",
+      "start_utc": "2026-04-26T18:19:00.000Z",
+      "end_utc": "2026-04-26T18:36:00.000Z",
+      "duration_minutes": 17,
+      "mean_4_8_share_percent": 34.65287346801059,
+      "max_rms_counts": 4334.158469307735,
+      "hour_rows": [
+        {
+          "hour_start_et": "Apr 26, 2026 2:00 PM EDT",
+          "segment_start_et": "Apr 26, 2026 2:19 PM EDT",
+          "segment_end_et": "Apr 26, 2026 2:36 PM EDT",
+          "minutes": 17,
+          "modal_peak_hz": 0.55,
+          "modal_peak_minutes": 2,
+          "mean_rms_counts": 3307.598230895816,
+          "max_rms_counts": 4334.158469307735,
+          "mean_4_8_share_percent": 34.65287346801059
+        }
+      ]
+    },
+    {
+      "id": "H4-010",
+      "start_et": "Apr 26, 2026 2:45 PM EDT",
+      "end_et": "Apr 26, 2026 4:15 PM EDT",
+      "start_utc": "2026-04-26T18:45:00.000Z",
+      "end_utc": "2026-04-26T20:15:00.000Z",
+      "duration_minutes": 90,
+      "mean_4_8_share_percent": 35.90645725824609,
+      "max_rms_counts": 4378.909299985476,
+      "hour_rows": [
+        {
+          "hour_start_et": "Apr 26, 2026 2:00 PM EDT",
+          "segment_start_et": "Apr 26, 2026 2:45 PM EDT",
+          "segment_end_et": "Apr 26, 2026 3:00 PM EDT",
+          "minutes": 15,
+          "modal_peak_hz": 0.55,
+          "modal_peak_minutes": 7,
+          "mean_rms_counts": 3691.125310939176,
+          "max_rms_counts": 4041.691776699044,
+          "mean_4_8_share_percent": 33.545934840619665
+        },
+        {
+          "hour_start_et": "Apr 26, 2026 3:00 PM EDT",
+          "segment_start_et": "Apr 26, 2026 3:00 PM EDT",
+          "segment_end_et": "Apr 26, 2026 4:00 PM EDT",
+          "minutes": 60,
+          "modal_peak_hz": 5.55,
+          "modal_peak_minutes": 5,
+          "mean_rms_counts": 3084.9371390617102,
+          "max_rms_counts": 4378.909299985476,
+          "mean_4_8_share_percent": 36.32599477071869
+        },
+        {
+          "hour_start_et": "Apr 26, 2026 4:00 PM EDT",
+          "segment_start_et": "Apr 26, 2026 4:00 PM EDT",
+          "segment_end_et": "Apr 26, 2026 4:15 PM EDT",
+          "minutes": 15,
+          "modal_peak_hz": 8.15,
+          "modal_peak_minutes": 3,
+          "mean_rms_counts": 3004.596831730988,
+          "max_rms_counts": 3241.442444108172,
+          "mean_4_8_share_percent": 36.588829625982115
+        }
+      ]
+    },
+    {
+      "id": "H4-011",
+      "start_et": "Apr 26, 2026 4:18 PM EDT",
+      "end_et": "Apr 26, 2026 6:08 PM EDT",
+      "start_utc": "2026-04-26T20:18:00.000Z",
+      "end_utc": "2026-04-26T22:08:00.000Z",
+      "duration_minutes": 110,
+      "mean_4_8_share_percent": 36.958740556992055,
+      "max_rms_counts": 3859.960809857433,
+      "hour_rows": [
+        {
+          "hour_start_et": "Apr 26, 2026 4:00 PM EDT",
+          "segment_start_et": "Apr 26, 2026 4:18 PM EDT",
+          "segment_end_et": "Apr 26, 2026 5:00 PM EDT",
+          "minutes": 42,
+          "modal_peak_hz": 5.75,
+          "modal_peak_minutes": 4,
+          "mean_rms_counts": 2906.9102458805,
+          "max_rms_counts": 3152.0720476949696,
+          "mean_4_8_share_percent": 37.23982518973052
+        },
+        {
+          "hour_start_et": "Apr 26, 2026 5:00 PM EDT",
+          "segment_start_et": "Apr 26, 2026 5:00 PM EDT",
+          "segment_end_et": "Apr 26, 2026 6:00 PM EDT",
+          "minutes": 60,
+          "modal_peak_hz": 10.95,
+          "modal_peak_minutes": 6,
+          "mean_rms_counts": 2891.362472589954,
+          "max_rms_counts": 3277.9683949742357,
+          "mean_4_8_share_percent": 36.41121655013733
+        },
+        {
+          "hour_start_et": "Apr 26, 2026 6:00 PM EDT",
+          "segment_start_et": "Apr 26, 2026 6:00 PM EDT",
+          "segment_end_et": "Apr 26, 2026 6:08 PM EDT",
+          "minutes": 8,
+          "modal_peak_hz": 5.65,
+          "modal_peak_minutes": 2,
+          "mean_rms_counts": 3010.5275408869643,
+          "max_rms_counts": 3859.960809857433,
+          "mean_4_8_share_percent": 39.589476286525276
+        }
+      ]
+    },
+    {
+      "id": "H4-012",
+      "start_et": "Apr 26, 2026 6:09 PM EDT",
+      "end_et": "Apr 26, 2026 6:51 PM EDT",
+      "start_utc": "2026-04-26T22:09:00.000Z",
+      "end_utc": "2026-04-26T22:51:00.000Z",
+      "duration_minutes": 42,
+      "mean_4_8_share_percent": 37.53685525537184,
+      "max_rms_counts": 3473.9270838118605,
+      "hour_rows": [
+        {
+          "hour_start_et": "Apr 26, 2026 6:00 PM EDT",
+          "segment_start_et": "Apr 26, 2026 6:09 PM EDT",
+          "segment_end_et": "Apr 26, 2026 6:51 PM EDT",
+          "minutes": 42,
+          "modal_peak_hz": 10.75,
+          "modal_peak_minutes": 6,
+          "mean_rms_counts": 2824.1700549655047,
+          "max_rms_counts": 3473.9270838118605,
+          "mean_4_8_share_percent": 37.53685525537184
+        }
+      ]
+    },
+    {
+      "id": "H4-013",
+      "start_et": "Apr 26, 2026 7:15 PM EDT",
+      "end_et": "Apr 26, 2026 9:21 PM EDT",
+      "start_utc": "2026-04-26T23:15:00.000Z",
+      "end_utc": "2026-04-27T01:21:00.000Z",
+      "duration_minutes": 126,
+      "mean_4_8_share_percent": 37.164531151502025,
+      "max_rms_counts": 3435.220820055272,
+      "hour_rows": [
+        {
+          "hour_start_et": "Apr 26, 2026 7:00 PM EDT",
+          "segment_start_et": "Apr 26, 2026 7:15 PM EDT",
+          "segment_end_et": "Apr 26, 2026 8:00 PM EDT",
+          "minutes": 45,
+          "modal_peak_hz": 10.65,
+          "modal_peak_minutes": 5,
+          "mean_rms_counts": 2842.176872446404,
+          "max_rms_counts": 3052.8748751295534,
+          "mean_4_8_share_percent": 37.07977793282742
+        },
+        {
+          "hour_start_et": "Apr 26, 2026 8:00 PM EDT",
+          "segment_start_et": "Apr 26, 2026 8:00 PM EDT",
+          "segment_end_et": "Apr 26, 2026 9:00 PM EDT",
+          "minutes": 60,
+          "modal_peak_hz": 10.75,
+          "modal_peak_minutes": 6,
+          "mean_rms_counts": 2861.1962881720524,
+          "max_rms_counts": 3435.220820055272,
+          "mean_4_8_share_percent": 37.161026733127194
+        },
+        {
+          "hour_start_et": "Apr 26, 2026 9:00 PM EDT",
+          "segment_start_et": "Apr 26, 2026 9:00 PM EDT",
+          "segment_end_et": "Apr 26, 2026 9:21 PM EDT",
+          "minutes": 21,
+          "modal_peak_hz": 11.05,
+          "modal_peak_minutes": 4,
+          "mean_rms_counts": 2794.8537996922796,
+          "max_rms_counts": 3131.5145095001503,
+          "mean_4_8_share_percent": 37.356157815447105
+        }
+      ]
+    },
+    {
+      "id": "H4-014",
+      "start_et": "Apr 27, 2026 12:22 PM EDT",
+      "end_et": "Apr 27, 2026 12:53 PM EDT",
+      "start_utc": "2026-04-27T16:22:00.000Z",
+      "end_utc": "2026-04-27T16:53:00.000Z",
+      "duration_minutes": 31,
+      "mean_4_8_share_percent": 38.29224474548546,
+      "max_rms_counts": 3200.3448302694896,
+      "hour_rows": [
+        {
+          "hour_start_et": "Apr 27, 2026 12:00 PM EDT",
+          "segment_start_et": "Apr 27, 2026 12:22 PM EDT",
+          "segment_end_et": "Apr 27, 2026 12:53 PM EDT",
+          "minutes": 31,
+          "modal_peak_hz": 5.65,
+          "modal_peak_minutes": 4,
+          "mean_rms_counts": 2941.4577054042934,
+          "max_rms_counts": 3200.3448302694896,
+          "mean_4_8_share_percent": 38.29224474548546
+        }
+      ]
+    },
+    {
+      "id": "H4-015",
+      "start_et": "Apr 27, 2026 1:11 PM EDT",
+      "end_et": "Apr 27, 2026 1:37 PM EDT",
+      "start_utc": "2026-04-27T17:11:00.000Z",
+      "end_utc": "2026-04-27T17:37:00.000Z",
+      "duration_minutes": 26,
+      "mean_4_8_share_percent": 37.0908512145206,
+      "max_rms_counts": 3111.7900413853226,
+      "hour_rows": [
+        {
+          "hour_start_et": "Apr 27, 2026 1:00 PM EDT",
+          "segment_start_et": "Apr 27, 2026 1:11 PM EDT",
+          "segment_end_et": "Apr 27, 2026 1:37 PM EDT",
+          "minutes": 26,
+          "modal_peak_hz": 10.75,
+          "modal_peak_minutes": 4,
+          "mean_rms_counts": 2943.8237351714392,
+          "max_rms_counts": 3111.7900413853226,
+          "mean_4_8_share_percent": 37.0908512145206
+        }
+      ]
+    },
+    {
+      "id": "H4-016",
+      "start_et": "Apr 27, 2026 1:41 PM EDT",
+      "end_et": "Apr 27, 2026 2:28 PM EDT",
+      "start_utc": "2026-04-27T17:41:00.000Z",
+      "end_utc": "2026-04-27T18:28:00.000Z",
+      "duration_minutes": 47,
+      "mean_4_8_share_percent": 36.75459279898934,
+      "max_rms_counts": 3416.900816092454,
+      "hour_rows": [
+        {
+          "hour_start_et": "Apr 27, 2026 1:00 PM EDT",
+          "segment_start_et": "Apr 27, 2026 1:41 PM EDT",
+          "segment_end_et": "Apr 27, 2026 2:00 PM EDT",
+          "minutes": 19,
+          "modal_peak_hz": 8.35,
+          "modal_peak_minutes": 4,
+          "mean_rms_counts": 2951.1862127879976,
+          "max_rms_counts": 3416.900816092454,
+          "mean_4_8_share_percent": 38.06476788610129
+        },
+        {
+          "hour_start_et": "Apr 27, 2026 2:00 PM EDT",
+          "segment_start_et": "Apr 27, 2026 2:00 PM EDT",
+          "segment_end_et": "Apr 27, 2026 2:28 PM EDT",
+          "minutes": 28,
+          "modal_peak_hz": 11.65,
+          "modal_peak_minutes": 5,
+          "mean_rms_counts": 3046.4656852112344,
+          "max_rms_counts": 3342.3843363408478,
+          "mean_4_8_share_percent": 35.8655454184491
+        }
+      ]
+    },
+    {
+      "id": "H4-017",
+      "start_et": "Apr 27, 2026 2:29 PM EDT",
+      "end_et": "Apr 27, 2026 5:05 PM EDT",
+      "start_utc": "2026-04-27T18:29:00.000Z",
+      "end_utc": "2026-04-27T21:05:00.000Z",
+      "duration_minutes": 156,
+      "mean_4_8_share_percent": 35.915814091977886,
+      "max_rms_counts": 3589.645539396145,
+      "hour_rows": [
+        {
+          "hour_start_et": "Apr 27, 2026 2:00 PM EDT",
+          "segment_start_et": "Apr 27, 2026 2:29 PM EDT",
+          "segment_end_et": "Apr 27, 2026 3:00 PM EDT",
+          "minutes": 31,
+          "modal_peak_hz": 10.95,
+          "modal_peak_minutes": 6,
+          "mean_rms_counts": 2932.125791112397,
+          "max_rms_counts": 3307.6166260602176,
+          "mean_4_8_share_percent": 36.61974859281636
+        },
+        {
+          "hour_start_et": "Apr 27, 2026 3:00 PM EDT",
+          "segment_start_et": "Apr 27, 2026 3:00 PM EDT",
+          "segment_end_et": "Apr 27, 2026 4:00 PM EDT",
+          "minutes": 60,
+          "modal_peak_hz": 5.75,
+          "modal_peak_minutes": 7,
+          "mean_rms_counts": 3026.7461206305074,
+          "max_rms_counts": 3589.645539396145,
+          "mean_4_8_share_percent": 35.52111114832144
+        },
+        {
+          "hour_start_et": "Apr 27, 2026 4:00 PM EDT",
+          "segment_start_et": "Apr 27, 2026 4:00 PM EDT",
+          "segment_end_et": "Apr 27, 2026 5:00 PM EDT",
+          "minutes": 60,
+          "modal_peak_hz": 10.95,
+          "modal_peak_minutes": 8,
+          "mean_rms_counts": 2930.9062908686697,
+          "max_rms_counts": 3475.2255590822087,
+          "mean_4_8_share_percent": 35.94586282061795
+        },
+        {
+          "hour_start_et": "Apr 27, 2026 5:00 PM EDT",
+          "segment_start_et": "Apr 27, 2026 5:00 PM EDT",
+          "segment_end_et": "Apr 27, 2026 5:05 PM EDT",
+          "minutes": 5,
+          "modal_peak_hz": 5.35,
+          "modal_peak_minutes": 1,
+          "mean_rms_counts": 2840.422762196359,
+          "max_rms_counts": 3062.3104827507773,
+          "mean_4_8_share_percent": 35.92727076697627
+        }
+      ]
+    },
+    {
+      "id": "H4-018",
+      "start_et": "Apr 27, 2026 5:06 PM EDT",
+      "end_et": "Apr 27, 2026 5:54 PM EDT",
+      "start_utc": "2026-04-27T21:06:00.000Z",
+      "end_utc": "2026-04-27T21:54:00.000Z",
+      "duration_minutes": 48,
+      "mean_4_8_share_percent": 35.503420058657014,
+      "max_rms_counts": 3957.1714246862084,
+      "hour_rows": [
+        {
+          "hour_start_et": "Apr 27, 2026 5:00 PM EDT",
+          "segment_start_et": "Apr 27, 2026 5:06 PM EDT",
+          "segment_end_et": "Apr 27, 2026 5:54 PM EDT",
+          "minutes": 48,
+          "modal_peak_hz": 10.95,
+          "modal_peak_minutes": 7,
+          "mean_rms_counts": 2981.9022259624576,
+          "max_rms_counts": 3957.1714246862084,
+          "mean_4_8_share_percent": 35.503420058657014
+        }
+      ]
+    },
+    {
+      "id": "H4-019",
+      "start_et": "Apr 27, 2026 6:05 PM EDT",
+      "end_et": "Apr 27, 2026 6:56 PM EDT",
+      "start_utc": "2026-04-27T22:05:00.000Z",
+      "end_utc": "2026-04-27T22:56:00.000Z",
+      "duration_minutes": 51,
+      "mean_4_8_share_percent": 35.69294467143699,
+      "max_rms_counts": 3457.3474859762664,
+      "hour_rows": [
+        {
+          "hour_start_et": "Apr 27, 2026 6:00 PM EDT",
+          "segment_start_et": "Apr 27, 2026 6:05 PM EDT",
+          "segment_end_et": "Apr 27, 2026 6:56 PM EDT",
+          "minutes": 51,
+          "modal_peak_hz": 10.85,
+          "modal_peak_minutes": 7,
+          "mean_rms_counts": 2884.4409943402566,
+          "max_rms_counts": 3457.3474859762664,
+          "mean_4_8_share_percent": 35.69294467143699
+        }
+      ]
+    },
+    {
+      "id": "H4-020",
+      "start_et": "Apr 27, 2026 7:49 PM EDT",
+      "end_et": "Apr 27, 2026 8:29 PM EDT",
+      "start_utc": "2026-04-27T23:49:00.000Z",
+      "end_utc": "2026-04-28T00:29:00.000Z",
+      "duration_minutes": 40,
+      "mean_4_8_share_percent": 32.70235447875355,
+      "max_rms_counts": 4718.796294145126,
+      "hour_rows": [
+        {
+          "hour_start_et": "Apr 27, 2026 7:00 PM EDT",
+          "segment_start_et": "Apr 27, 2026 7:49 PM EDT",
+          "segment_end_et": "Apr 27, 2026 8:00 PM EDT",
+          "minutes": 11,
+          "modal_peak_hz": 0.65,
+          "modal_peak_minutes": 3,
+          "mean_rms_counts": 3499.456932577808,
+          "max_rms_counts": 3917.2499576612795,
+          "mean_4_8_share_percent": 33.14496224177957
+        },
+        {
+          "hour_start_et": "Apr 27, 2026 8:00 PM EDT",
+          "segment_start_et": "Apr 27, 2026 8:00 PM EDT",
+          "segment_end_et": "Apr 27, 2026 8:29 PM EDT",
+          "minutes": 29,
+          "modal_peak_hz": 0.55,
+          "modal_peak_minutes": 8,
+          "mean_rms_counts": 3803.958012588823,
+          "max_rms_counts": 4718.796294145126,
+          "mean_4_8_share_percent": 32.53446877553678
+        }
+      ]
+    },
+    {
+      "id": "H4-021",
+      "start_et": "Apr 27, 2026 8:30 PM EDT",
+      "end_et": "Apr 27, 2026 9:01 PM EDT",
+      "start_utc": "2026-04-28T00:30:00.000Z",
+      "end_utc": "2026-04-28T01:01:00.000Z",
+      "duration_minutes": 31,
+      "mean_4_8_share_percent": 35.17117390012189,
+      "max_rms_counts": 3206.3137749731663,
+      "hour_rows": [
+        {
+          "hour_start_et": "Apr 27, 2026 8:00 PM EDT",
+          "segment_start_et": "Apr 27, 2026 8:30 PM EDT",
+          "segment_end_et": "Apr 27, 2026 9:00 PM EDT",
+          "minutes": 30,
+          "modal_peak_hz": 10.75,
+          "modal_peak_minutes": 4,
+          "mean_rms_counts": 2976.1931189428133,
+          "max_rms_counts": 3206.3137749731663,
+          "mean_4_8_share_percent": 35.30193696202269
+        },
+        {
+          "hour_start_et": "Apr 27, 2026 9:00 PM EDT",
+          "segment_start_et": "Apr 27, 2026 9:00 PM EDT",
+          "segment_end_et": "Apr 27, 2026 9:01 PM EDT",
+          "minutes": 1,
+          "modal_peak_hz": 10.85,
+          "modal_peak_minutes": 1,
+          "mean_rms_counts": 3066.694353925725,
+          "max_rms_counts": 3066.694353925725,
+          "mean_4_8_share_percent": 31.24828204309797
+        }
+      ]
+    },
+    {
+      "id": "H4-022",
+      "start_et": "Apr 28, 2026 11:05 AM EDT",
+      "end_et": "Apr 28, 2026 12:03 PM EDT",
+      "start_utc": "2026-04-28T15:05:00.000Z",
+      "end_utc": "2026-04-28T16:03:00.000Z",
+      "duration_minutes": 58,
+      "mean_4_8_share_percent": 33.85679534515003,
+      "max_rms_counts": 6702.442585938428,
+      "hour_rows": [
+        {
+          "hour_start_et": "Apr 28, 2026 11:00 AM EDT",
+          "segment_start_et": "Apr 28, 2026 11:05 AM EDT",
+          "segment_end_et": "Apr 28, 2026 12:00 PM EDT",
+          "minutes": 55,
+          "modal_peak_hz": 0.55,
+          "modal_peak_minutes": 14,
+          "mean_rms_counts": 4308.47470246765,
+          "max_rms_counts": 6702.442585938428,
+          "mean_4_8_share_percent": 33.901127848651655
+        },
+        {
+          "hour_start_et": "Apr 28, 2026 12:00 PM EDT",
+          "segment_start_et": "Apr 28, 2026 12:00 PM EDT",
+          "segment_end_et": "Apr 28, 2026 12:03 PM EDT",
+          "minutes": 3,
+          "modal_peak_hz": 0.55,
+          "modal_peak_minutes": 2,
+          "mean_rms_counts": 3750.0070487759076,
+          "max_rms_counts": 3957.609413858102,
+          "mean_4_8_share_percent": 33.04403278095368
+        }
+      ]
+    },
+    {
+      "id": "H4-023",
+      "start_et": "Apr 28, 2026 12:22 PM EDT",
+      "end_et": "Apr 28, 2026 12:51 PM EDT",
+      "start_utc": "2026-04-28T16:22:00.000Z",
+      "end_utc": "2026-04-28T16:51:00.000Z",
+      "duration_minutes": 29,
+      "mean_4_8_share_percent": 32.83194008913905,
+      "max_rms_counts": 5869.515067957892,
+      "hour_rows": [
+        {
+          "hour_start_et": "Apr 28, 2026 12:00 PM EDT",
+          "segment_start_et": "Apr 28, 2026 12:22 PM EDT",
+          "segment_end_et": "Apr 28, 2026 12:51 PM EDT",
+          "minutes": 29,
+          "modal_peak_hz": 0.55,
+          "modal_peak_minutes": 9,
+          "mean_rms_counts": 4073.5439986132797,
+          "max_rms_counts": 5869.515067957892,
+          "mean_4_8_share_percent": 32.83194008913905
+        }
+      ]
+    },
+    {
+      "id": "H4-024",
+      "start_et": "Apr 28, 2026 12:52 PM EDT",
+      "end_et": "Apr 28, 2026 1:21 PM EDT",
+      "start_utc": "2026-04-28T16:52:00.000Z",
+      "end_utc": "2026-04-28T17:21:00.000Z",
+      "duration_minutes": 29,
+      "mean_4_8_share_percent": 35.377470831538446,
+      "max_rms_counts": 5101.045997500207,
+      "hour_rows": [
+        {
+          "hour_start_et": "Apr 28, 2026 12:00 PM EDT",
+          "segment_start_et": "Apr 28, 2026 12:52 PM EDT",
+          "segment_end_et": "Apr 28, 2026 1:00 PM EDT",
+          "minutes": 8,
+          "modal_peak_hz": 0.55,
+          "modal_peak_minutes": 2,
+          "mean_rms_counts": 4067.65793707266,
+          "max_rms_counts": 5012.604658052778,
+          "mean_4_8_share_percent": 35.12153952860482
+        },
+        {
+          "hour_start_et": "Apr 28, 2026 1:00 PM EDT",
+          "segment_start_et": "Apr 28, 2026 1:00 PM EDT",
+          "segment_end_et": "Apr 28, 2026 1:21 PM EDT",
+          "minutes": 21,
+          "modal_peak_hz": 0.55,
+          "modal_peak_minutes": 5,
+          "mean_rms_counts": 3514.0825756163927,
+          "max_rms_counts": 5101.045997500207,
+          "mean_4_8_share_percent": 35.474968470751264
+        }
+      ]
+    },
+    {
+      "id": "H4-025",
+      "start_et": "Apr 28, 2026 1:27 PM EDT",
+      "end_et": "Apr 28, 2026 2:32 PM EDT",
+      "start_utc": "2026-04-28T17:27:00.000Z",
+      "end_utc": "2026-04-28T18:32:00.000Z",
+      "duration_minutes": 65,
+      "mean_4_8_share_percent": 35.97360153255193,
+      "max_rms_counts": 5628.025444103799,
+      "hour_rows": [
+        {
+          "hour_start_et": "Apr 28, 2026 1:00 PM EDT",
+          "segment_start_et": "Apr 28, 2026 1:27 PM EDT",
+          "segment_end_et": "Apr 28, 2026 2:00 PM EDT",
+          "minutes": 33,
+          "modal_peak_hz": 11.75,
+          "modal_peak_minutes": 8,
+          "mean_rms_counts": 3361.1869703223824,
+          "max_rms_counts": 3822.714393235904,
+          "mean_4_8_share_percent": 36.093566524877055
+        },
+        {
+          "hour_start_et": "Apr 28, 2026 2:00 PM EDT",
+          "segment_start_et": "Apr 28, 2026 2:00 PM EDT",
+          "segment_end_et": "Apr 28, 2026 2:32 PM EDT",
+          "minutes": 32,
+          "modal_peak_hz": 10.55,
+          "modal_peak_minutes": 3,
+          "mean_rms_counts": 3677.5893654431716,
+          "max_rms_counts": 5628.025444103799,
+          "mean_4_8_share_percent": 35.84988763421665
+        }
+      ]
+    },
+    {
+      "id": "H4-026",
+      "start_et": "Apr 28, 2026 2:34 PM EDT",
+      "end_et": "Apr 28, 2026 2:55 PM EDT",
+      "start_utc": "2026-04-28T18:34:00.000Z",
+      "end_utc": "2026-04-28T18:55:00.000Z",
+      "duration_minutes": 21,
+      "mean_4_8_share_percent": 33.90525388700097,
+      "max_rms_counts": 4870.845819152496,
+      "hour_rows": [
+        {
+          "hour_start_et": "Apr 28, 2026 2:00 PM EDT",
+          "segment_start_et": "Apr 28, 2026 2:34 PM EDT",
+          "segment_end_et": "Apr 28, 2026 2:55 PM EDT",
+          "minutes": 21,
+          "modal_peak_hz": 0.55,
+          "modal_peak_minutes": 3,
+          "mean_rms_counts": 3627.7883510560664,
+          "max_rms_counts": 4870.845819152496,
+          "mean_4_8_share_percent": 33.90525388700097
+        }
+      ]
+    },
+    {
+      "id": "H4-027",
+      "start_et": "Apr 28, 2026 3:11 PM EDT",
+      "end_et": "Apr 28, 2026 4:34 PM EDT",
+      "start_utc": "2026-04-28T19:11:00.000Z",
+      "end_utc": "2026-04-28T20:34:00.000Z",
+      "duration_minutes": 83,
+      "mean_4_8_share_percent": 35.09494031940254,
+      "max_rms_counts": 4162.006034407151,
+      "hour_rows": [
+        {
+          "hour_start_et": "Apr 28, 2026 3:00 PM EDT",
+          "segment_start_et": "Apr 28, 2026 3:11 PM EDT",
+          "segment_end_et": "Apr 28, 2026 4:00 PM EDT",
+          "minutes": 49,
+          "modal_peak_hz": 10.85,
+          "modal_peak_minutes": 5,
+          "mean_rms_counts": 3130.9253376875554,
+          "max_rms_counts": 3992.8915772940236,
+          "mean_4_8_share_percent": 35.31107849093145
+        },
+        {
+          "hour_start_et": "Apr 28, 2026 4:00 PM EDT",
+          "segment_start_et": "Apr 28, 2026 4:00 PM EDT",
+          "segment_end_et": "Apr 28, 2026 4:34 PM EDT",
+          "minutes": 34,
+          "modal_peak_hz": 11.65,
+          "modal_peak_minutes": 5,
+          "mean_rms_counts": 3168.9380320255473,
+          "max_rms_counts": 4162.006034407151,
+          "mean_4_8_share_percent": 34.78344707219912
+        }
+      ]
+    },
+    {
+      "id": "H4-028",
+      "start_et": "Apr 28, 2026 4:35 PM EDT",
+      "end_et": "Apr 28, 2026 4:55 PM EDT",
+      "start_utc": "2026-04-28T20:35:00.000Z",
+      "end_utc": "2026-04-28T20:55:00.000Z",
+      "duration_minutes": 20,
+      "mean_4_8_share_percent": 36.27394183730112,
+      "max_rms_counts": 3919.4315705550853,
+      "hour_rows": [
+        {
+          "hour_start_et": "Apr 28, 2026 4:00 PM EDT",
+          "segment_start_et": "Apr 28, 2026 4:35 PM EDT",
+          "segment_end_et": "Apr 28, 2026 4:55 PM EDT",
+          "minutes": 20,
+          "modal_peak_hz": 10.65,
+          "modal_peak_minutes": 5,
+          "mean_rms_counts": 3130.299934710935,
+          "max_rms_counts": 3919.4315705550853,
+          "mean_4_8_share_percent": 36.27394183730112
+        }
+      ]
+    },
+    {
+      "id": "H4-029",
+      "start_et": "Apr 28, 2026 4:58 PM EDT",
+      "end_et": "Apr 28, 2026 5:16 PM EDT",
+      "start_utc": "2026-04-28T20:58:00.000Z",
+      "end_utc": "2026-04-28T21:16:00.000Z",
+      "duration_minutes": 18,
+      "mean_4_8_share_percent": 37.6846688283724,
+      "max_rms_counts": 3447.8726775549526,
+      "hour_rows": [
+        {
+          "hour_start_et": "Apr 28, 2026 4:00 PM EDT",
+          "segment_start_et": "Apr 28, 2026 4:58 PM EDT",
+          "segment_end_et": "Apr 28, 2026 5:00 PM EDT",
+          "minutes": 2,
+          "modal_peak_hz": 7.75,
+          "modal_peak_minutes": 2,
+          "mean_rms_counts": 2919.890429904532,
+          "max_rms_counts": 3035.053540423401,
+          "mean_4_8_share_percent": 42.94863644240093
+        },
+        {
+          "hour_start_et": "Apr 28, 2026 5:00 PM EDT",
+          "segment_start_et": "Apr 28, 2026 5:00 PM EDT",
+          "segment_end_et": "Apr 28, 2026 5:16 PM EDT",
+          "minutes": 16,
+          "modal_peak_hz": 10.95,
+          "modal_peak_minutes": 3,
+          "mean_rms_counts": 3038.0804979064064,
+          "max_rms_counts": 3447.8726775549526,
+          "mean_4_8_share_percent": 37.02667287661883
+        }
+      ]
+    },
+    {
+      "id": "H4-030",
+      "start_et": "Apr 28, 2026 5:17 PM EDT",
+      "end_et": "Apr 28, 2026 5:54 PM EDT",
+      "start_utc": "2026-04-28T21:17:00.000Z",
+      "end_utc": "2026-04-28T21:54:00.000Z",
+      "duration_minutes": 37,
+      "mean_4_8_share_percent": 35.156230974701245,
+      "max_rms_counts": 4743.272543014573,
+      "hour_rows": [
+        {
+          "hour_start_et": "Apr 28, 2026 5:00 PM EDT",
+          "segment_start_et": "Apr 28, 2026 5:17 PM EDT",
+          "segment_end_et": "Apr 28, 2026 5:54 PM EDT",
+          "minutes": 37,
+          "modal_peak_hz": 10.95,
+          "modal_peak_minutes": 6,
+          "mean_rms_counts": 3131.9506937829997,
+          "max_rms_counts": 4743.272543014573,
+          "mean_4_8_share_percent": 35.156230974701245
+        }
+      ]
+    },
+    {
+      "id": "H4-031",
+      "start_et": "Apr 28, 2026 6:06 PM EDT",
+      "end_et": "Apr 28, 2026 6:25 PM EDT",
+      "start_utc": "2026-04-28T22:06:00.000Z",
+      "end_utc": "2026-04-28T22:25:00.000Z",
+      "duration_minutes": 19,
+      "mean_4_8_share_percent": 35.67110094238243,
+      "max_rms_counts": 3444.7905079136476,
+      "hour_rows": [
+        {
+          "hour_start_et": "Apr 28, 2026 6:00 PM EDT",
+          "segment_start_et": "Apr 28, 2026 6:06 PM EDT",
+          "segment_end_et": "Apr 28, 2026 6:25 PM EDT",
+          "minutes": 19,
+          "modal_peak_hz": 8.35,
+          "modal_peak_minutes": 2,
+          "mean_rms_counts": 2959.112450120446,
+          "max_rms_counts": 3444.7905079136476,
+          "mean_4_8_share_percent": 35.67110094238243
+        }
+      ]
+    },
+    {
+      "id": "H4-032",
+      "start_et": "Apr 28, 2026 6:56 PM EDT",
+      "end_et": "Apr 28, 2026 7:31 PM EDT",
+      "start_utc": "2026-04-28T22:56:00.000Z",
+      "end_utc": "2026-04-28T23:31:00.000Z",
+      "duration_minutes": 35,
+      "mean_4_8_share_percent": 36.57553190415219,
+      "max_rms_counts": 3545.5636676541185,
+      "hour_rows": [
+        {
+          "hour_start_et": "Apr 28, 2026 6:00 PM EDT",
+          "segment_start_et": "Apr 28, 2026 6:56 PM EDT",
+          "segment_end_et": "Apr 28, 2026 7:00 PM EDT",
+          "minutes": 4,
+          "modal_peak_hz": 5.55,
+          "modal_peak_minutes": 1,
+          "mean_rms_counts": 2770.0044011837235,
+          "max_rms_counts": 2882.085565412845,
+          "mean_4_8_share_percent": 37.5090035483829
+        },
+        {
+          "hour_start_et": "Apr 28, 2026 7:00 PM EDT",
+          "segment_start_et": "Apr 28, 2026 7:00 PM EDT",
+          "segment_end_et": "Apr 28, 2026 7:31 PM EDT",
+          "minutes": 31,
+          "modal_peak_hz": 10.65,
+          "modal_peak_minutes": 5,
+          "mean_rms_counts": 2925.768373220554,
+          "max_rms_counts": 3545.5636676541185,
+          "mean_4_8_share_percent": 36.455083950057904
+        }
+      ]
+    },
+    {
+      "id": "H4-033",
+      "start_et": "Apr 28, 2026 7:32 PM EDT",
+      "end_et": "Apr 28, 2026 8:20 PM EDT",
+      "start_utc": "2026-04-28T23:32:00.000Z",
+      "end_utc": "2026-04-29T00:20:00.000Z",
+      "duration_minutes": 48,
+      "mean_4_8_share_percent": 37.24033846215475,
+      "max_rms_counts": 3323.4933078512963,
+      "hour_rows": [
+        {
+          "hour_start_et": "Apr 28, 2026 7:00 PM EDT",
+          "segment_start_et": "Apr 28, 2026 7:32 PM EDT",
+          "segment_end_et": "Apr 28, 2026 8:00 PM EDT",
+          "minutes": 28,
+          "modal_peak_hz": 10.75,
+          "modal_peak_minutes": 4,
+          "mean_rms_counts": 2893.2274311833094,
+          "max_rms_counts": 3323.4933078512963,
+          "mean_4_8_share_percent": 36.697423580277956
+        },
+        {
+          "hour_start_et": "Apr 28, 2026 8:00 PM EDT",
+          "segment_start_et": "Apr 28, 2026 8:00 PM EDT",
+          "segment_end_et": "Apr 28, 2026 8:20 PM EDT",
+          "minutes": 20,
+          "modal_peak_hz": 5.65,
+          "modal_peak_minutes": 3,
+          "mean_rms_counts": 2817.9763010235993,
+          "max_rms_counts": 3065.9790037851835,
+          "mean_4_8_share_percent": 38.00041929678227
+        }
+      ]
+    },
+    {
+      "id": "H4-034",
+      "start_et": "Apr 28, 2026 8:21 PM EDT",
+      "end_et": "Apr 28, 2026 9:53 PM EDT",
+      "start_utc": "2026-04-29T00:21:00.000Z",
+      "end_utc": "2026-04-29T01:53:00.000Z",
+      "duration_minutes": 92,
+      "mean_4_8_share_percent": 38.01319734285372,
+      "max_rms_counts": 3390.3947042084756,
+      "hour_rows": [
+        {
+          "hour_start_et": "Apr 28, 2026 8:00 PM EDT",
+          "segment_start_et": "Apr 28, 2026 8:21 PM EDT",
+          "segment_end_et": "Apr 28, 2026 9:00 PM EDT",
+          "minutes": 39,
+          "modal_peak_hz": 5.75,
+          "modal_peak_minutes": 4,
+          "mean_rms_counts": 2819.83297961078,
+          "max_rms_counts": 3172.870069960693,
+          "mean_4_8_share_percent": 37.93407268736957
+        },
+        {
+          "hour_start_et": "Apr 28, 2026 9:00 PM EDT",
+          "segment_start_et": "Apr 28, 2026 9:00 PM EDT",
+          "segment_end_et": "Apr 28, 2026 9:53 PM EDT",
+          "minutes": 53,
+          "modal_peak_hz": 10.75,
+          "modal_peak_minutes": 8,
+          "mean_rms_counts": 2780.9006189512115,
+          "max_rms_counts": 3390.3947042084756,
+          "mean_4_8_share_percent": 38.07142114594584
+        }
+      ]
+    },
+    {
+      "id": "H4-035",
+      "start_et": "Apr 28, 2026 9:54 PM EDT",
+      "end_et": "Apr 28, 2026 11:12 PM EDT",
+      "start_utc": "2026-04-29T01:54:00.000Z",
+      "end_utc": "2026-04-29T03:12:00.000Z",
+      "duration_minutes": 78,
+      "mean_4_8_share_percent": 37.69644225456689,
+      "max_rms_counts": 3239.2960394107204,
+      "hour_rows": [
+        {
+          "hour_start_et": "Apr 28, 2026 9:00 PM EDT",
+          "segment_start_et": "Apr 28, 2026 9:54 PM EDT",
+          "segment_end_et": "Apr 28, 2026 10:00 PM EDT",
+          "minutes": 6,
+          "modal_peak_hz": 0.55,
+          "modal_peak_minutes": 1,
+          "mean_rms_counts": 2811.044734868921,
+          "max_rms_counts": 3081.617208285462,
+          "mean_4_8_share_percent": 36.578886439240385
+        },
+        {
+          "hour_start_et": "Apr 28, 2026 10:00 PM EDT",
+          "segment_start_et": "Apr 28, 2026 10:00 PM EDT",
+          "segment_end_et": "Apr 28, 2026 11:00 PM EDT",
+          "minutes": 60,
+          "modal_peak_hz": 10.85,
+          "modal_peak_minutes": 7,
+          "mean_rms_counts": 2771.034711713829,
+          "max_rms_counts": 3239.2960394107204,
+          "mean_4_8_share_percent": 37.73348887976588
+        },
+        {
+          "hour_start_et": "Apr 28, 2026 11:00 PM EDT",
+          "segment_start_et": "Apr 28, 2026 11:00 PM EDT",
+          "segment_end_et": "Apr 28, 2026 11:12 PM EDT",
+          "minutes": 12,
+          "modal_peak_hz": 5.75,
+          "modal_peak_minutes": 2,
+          "mean_rms_counts": 2748.5418931975023,
+          "max_rms_counts": 2922.234713223083,
+          "mean_4_8_share_percent": 38.06998703623521
+        }
+      ]
+    },
+    {
+      "id": "H4-036",
+      "start_et": "Apr 30, 2026 1:57 PM EDT",
+      "end_et": "Apr 30, 2026 3:03 PM EDT",
+      "start_utc": "2026-04-30T17:57:00.000Z",
+      "end_utc": "2026-04-30T19:03:00.000Z",
+      "duration_minutes": 66,
+      "mean_4_8_share_percent": 39.163053225945696,
+      "max_rms_counts": 3647.0278429738337,
+      "hour_rows": [
+        {
+          "hour_start_et": "Apr 30, 2026 1:00 PM EDT",
+          "segment_start_et": "Apr 30, 2026 1:57 PM EDT",
+          "segment_end_et": "Apr 30, 2026 2:00 PM EDT",
+          "minutes": 3,
+          "modal_peak_hz": 10.55,
+          "modal_peak_minutes": 1,
+          "mean_rms_counts": 2973.8260774762166,
+          "max_rms_counts": 3042.4828396132625,
+          "mean_4_8_share_percent": 38.08846847631145
+        },
+        {
+          "hour_start_et": "Apr 30, 2026 2:00 PM EDT",
+          "segment_start_et": "Apr 30, 2026 2:00 PM EDT",
+          "segment_end_et": "Apr 30, 2026 3:00 PM EDT",
+          "minutes": 60,
+          "modal_peak_hz": 5.75,
+          "modal_peak_minutes": 7,
+          "mean_rms_counts": 3024.7737210950436,
+          "max_rms_counts": 3647.0278429738337,
+          "mean_4_8_share_percent": 39.32966944999558
+        },
+        {
+          "hour_start_et": "Apr 30, 2026 3:00 PM EDT",
+          "segment_start_et": "Apr 30, 2026 3:00 PM EDT",
+          "segment_end_et": "Apr 30, 2026 3:03 PM EDT",
+          "minutes": 3,
+          "modal_peak_hz": 5.55,
+          "modal_peak_minutes": 1,
+          "mean_rms_counts": 3325.443463063726,
+          "max_rms_counts": 3457.6530275510927,
+          "mean_4_8_share_percent": 36.905313494582124
+        }
+      ]
+    },
+    {
+      "id": "H4-037",
+      "start_et": "Apr 30, 2026 3:06 PM EDT",
+      "end_et": "Apr 30, 2026 4:01 PM EDT",
+      "start_utc": "2026-04-30T19:06:00.000Z",
+      "end_utc": "2026-04-30T20:01:00.000Z",
+      "duration_minutes": 55,
+      "mean_4_8_share_percent": 37.857519233566,
+      "max_rms_counts": 3732.4623515077374,
+      "hour_rows": [
+        {
+          "hour_start_et": "Apr 30, 2026 3:00 PM EDT",
+          "segment_start_et": "Apr 30, 2026 3:06 PM EDT",
+          "segment_end_et": "Apr 30, 2026 4:00 PM EDT",
+          "minutes": 54,
+          "modal_peak_hz": 10.75,
+          "modal_peak_minutes": 5,
+          "mean_rms_counts": 3244.7904686836237,
+          "max_rms_counts": 3732.4623515077374,
+          "mean_4_8_share_percent": 37.735932265192076
+        },
+        {
+          "hour_start_et": "Apr 30, 2026 4:00 PM EDT",
+          "segment_start_et": "Apr 30, 2026 4:00 PM EDT",
+          "segment_end_et": "Apr 30, 2026 4:01 PM EDT",
+          "minutes": 1,
+          "modal_peak_hz": 5.75,
+          "modal_peak_minutes": 1,
+          "mean_rms_counts": 2967.1268687247507,
+          "max_rms_counts": 2967.1268687247507,
+          "mean_4_8_share_percent": 44.42321552575817
+        }
+      ]
+    },
+    {
+      "id": "H4-038",
+      "start_et": "Apr 30, 2026 4:06 PM EDT",
+      "end_et": "Apr 30, 2026 5:19 PM EDT",
+      "start_utc": "2026-04-30T20:06:00.000Z",
+      "end_utc": "2026-04-30T21:19:00.000Z",
+      "duration_minutes": 73,
+      "mean_4_8_share_percent": 36.77731978295223,
+      "max_rms_counts": 4820.82744850127,
+      "hour_rows": [
+        {
+          "hour_start_et": "Apr 30, 2026 4:00 PM EDT",
+          "segment_start_et": "Apr 30, 2026 4:06 PM EDT",
+          "segment_end_et": "Apr 30, 2026 5:00 PM EDT",
+          "minutes": 54,
+          "modal_peak_hz": 10.85,
+          "modal_peak_minutes": 8,
+          "mean_rms_counts": 3216.49352458131,
+          "max_rms_counts": 4820.82744850127,
+          "mean_4_8_share_percent": 36.650722099649386
+        },
+        {
+          "hour_start_et": "Apr 30, 2026 5:00 PM EDT",
+          "segment_start_et": "Apr 30, 2026 5:00 PM EDT",
+          "segment_end_et": "Apr 30, 2026 5:19 PM EDT",
+          "minutes": 19,
+          "modal_peak_hz": 5.75,
+          "modal_peak_minutes": 3,
+          "mean_rms_counts": 3153.295140074923,
+          "max_rms_counts": 3944.8538184039257,
+          "mean_4_8_share_percent": 37.13712372497085
+        }
+      ]
+    },
+    {
+      "id": "H4-039",
+      "start_et": "Apr 30, 2026 5:29 PM EDT",
+      "end_et": "Apr 30, 2026 6:04 PM EDT",
+      "start_utc": "2026-04-30T21:29:00.000Z",
+      "end_utc": "2026-04-30T22:04:00.000Z",
+      "duration_minutes": 35,
+      "mean_4_8_share_percent": 36.823301800091116,
+      "max_rms_counts": 3921.9526229202534,
+      "hour_rows": [
+        {
+          "hour_start_et": "Apr 30, 2026 5:00 PM EDT",
+          "segment_start_et": "Apr 30, 2026 5:29 PM EDT",
+          "segment_end_et": "Apr 30, 2026 6:00 PM EDT",
+          "minutes": 31,
+          "modal_peak_hz": 5.75,
+          "modal_peak_minutes": 3,
+          "mean_rms_counts": 3237.8205575748048,
+          "max_rms_counts": 3921.9526229202534,
+          "mean_4_8_share_percent": 36.691280036610294
+        },
+        {
+          "hour_start_et": "Apr 30, 2026 6:00 PM EDT",
+          "segment_start_et": "Apr 30, 2026 6:00 PM EDT",
+          "segment_end_et": "Apr 30, 2026 6:04 PM EDT",
+          "minutes": 4,
+          "modal_peak_hz": 5.55,
+          "modal_peak_minutes": 1,
+          "mean_rms_counts": 3093.8028913058924,
+          "max_rms_counts": 3206.8632375382967,
+          "mean_4_8_share_percent": 37.8464704670675
+        }
+      ]
+    },
+    {
+      "id": "H4-040",
+      "start_et": "Apr 30, 2026 6:05 PM EDT",
+      "end_et": "Apr 30, 2026 6:41 PM EDT",
+      "start_utc": "2026-04-30T22:05:00.000Z",
+      "end_utc": "2026-04-30T22:41:00.000Z",
+      "duration_minutes": 36,
+      "mean_4_8_share_percent": 36.643158260185885,
+      "max_rms_counts": 5423.159937800823,
+      "hour_rows": [
+        {
+          "hour_start_et": "Apr 30, 2026 6:00 PM EDT",
+          "segment_start_et": "Apr 30, 2026 6:05 PM EDT",
+          "segment_end_et": "Apr 30, 2026 6:41 PM EDT",
+          "minutes": 36,
+          "modal_peak_hz": 0.55,
+          "modal_peak_minutes": 5,
+          "mean_rms_counts": 3268.7484927309456,
+          "max_rms_counts": 5423.159937800823,
+          "mean_4_8_share_percent": 36.643158260185885
+        }
+      ]
+    },
+    {
+      "id": "H4-041",
+      "start_et": "Apr 30, 2026 6:42 PM EDT",
+      "end_et": "Apr 30, 2026 7:12 PM EDT",
+      "start_utc": "2026-04-30T22:42:00.000Z",
+      "end_utc": "2026-04-30T23:12:00.000Z",
+      "duration_minutes": 30,
+      "mean_4_8_share_percent": 36.43247780988483,
+      "max_rms_counts": 3495.910716733346,
+      "hour_rows": [
+        {
+          "hour_start_et": "Apr 30, 2026 6:00 PM EDT",
+          "segment_start_et": "Apr 30, 2026 6:42 PM EDT",
+          "segment_end_et": "Apr 30, 2026 7:00 PM EDT",
+          "minutes": 18,
+          "modal_peak_hz": 10.35,
+          "modal_peak_minutes": 2,
+          "mean_rms_counts": 3046.095348868189,
+          "max_rms_counts": 3280.262033222272,
+          "mean_4_8_share_percent": 36.79297489007191
+        },
+        {
+          "hour_start_et": "Apr 30, 2026 7:00 PM EDT",
+          "segment_start_et": "Apr 30, 2026 7:00 PM EDT",
+          "segment_end_et": "Apr 30, 2026 7:12 PM EDT",
+          "minutes": 12,
+          "modal_peak_hz": 10.75,
+          "modal_peak_minutes": 2,
+          "mean_rms_counts": 3078.9432647074223,
+          "max_rms_counts": 3495.910716733346,
+          "mean_4_8_share_percent": 35.8917321896042
+        }
+      ]
+    },
+    {
+      "id": "H4-042",
+      "start_et": "Apr 30, 2026 7:13 PM EDT",
+      "end_et": "Apr 30, 2026 8:10 PM EDT",
+      "start_utc": "2026-04-30T23:13:00.000Z",
+      "end_utc": "2026-05-01T00:10:00.000Z",
+      "duration_minutes": 57,
+      "mean_4_8_share_percent": 36.332216293403434,
+      "max_rms_counts": 3506.581213524545,
+      "hour_rows": [
+        {
+          "hour_start_et": "Apr 30, 2026 7:00 PM EDT",
+          "segment_start_et": "Apr 30, 2026 7:13 PM EDT",
+          "segment_end_et": "Apr 30, 2026 8:00 PM EDT",
+          "minutes": 47,
+          "modal_peak_hz": 10.95,
+          "modal_peak_minutes": 7,
+          "mean_rms_counts": 2969.547872964177,
+          "max_rms_counts": 3506.581213524545,
+          "mean_4_8_share_percent": 36.68261477553973
+        },
+        {
+          "hour_start_et": "Apr 30, 2026 8:00 PM EDT",
+          "segment_start_et": "Apr 30, 2026 8:00 PM EDT",
+          "segment_end_et": "Apr 30, 2026 8:10 PM EDT",
+          "minutes": 10,
+          "modal_peak_hz": 8.05,
+          "modal_peak_minutes": 1,
+          "mean_rms_counts": 3081.518558800197,
+          "max_rms_counts": 3427.62729505829,
+          "mean_4_8_share_percent": 34.68534342736284
+        }
+      ]
+    },
+    {
+      "id": "H4-043",
+      "start_et": "Jun 17, 2026 6:06 AM EDT",
+      "end_et": "Jun 17, 2026 6:25 AM EDT",
+      "start_utc": "2026-06-17T10:06:00.000Z",
+      "end_utc": "2026-06-17T10:25:00.000Z",
+      "duration_minutes": 19,
+      "mean_4_8_share_percent": 38.59401656789218,
+      "max_rms_counts": 3429.992992402463,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jun 17, 2026 6:00 AM EDT",
+          "segment_start_et": "Jun 17, 2026 6:06 AM EDT",
+          "segment_end_et": "Jun 17, 2026 6:25 AM EDT",
+          "minutes": 19,
+          "modal_peak_hz": 10.95,
+          "modal_peak_minutes": 4,
+          "mean_rms_counts": 3079.200057929616,
+          "max_rms_counts": 3429.992992402463,
+          "mean_4_8_share_percent": 38.59401656789218
+        }
+      ]
+    },
+    {
+      "id": "H4-044",
+      "start_et": "Jun 22, 2026 2:46 AM EDT",
+      "end_et": "Jun 22, 2026 3:40 AM EDT",
+      "start_utc": "2026-06-22T06:46:00.000Z",
+      "end_utc": "2026-06-22T07:40:00.000Z",
+      "duration_minutes": 54,
+      "mean_4_8_share_percent": 39.1836608287969,
+      "max_rms_counts": 3144.684251758822,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jun 22, 2026 2:00 AM EDT",
+          "segment_start_et": "Jun 22, 2026 2:46 AM EDT",
+          "segment_end_et": "Jun 22, 2026 3:00 AM EDT",
+          "minutes": 14,
+          "modal_peak_hz": 5.65,
+          "modal_peak_minutes": 4,
+          "mean_rms_counts": 3020.5149992558227,
+          "max_rms_counts": 3144.684251758822,
+          "mean_4_8_share_percent": 40.862610457480116
+        },
+        {
+          "hour_start_et": "Jun 22, 2026 3:00 AM EDT",
+          "segment_start_et": "Jun 22, 2026 3:00 AM EDT",
+          "segment_end_et": "Jun 22, 2026 3:40 AM EDT",
+          "minutes": 40,
+          "modal_peak_hz": 5.95,
+          "modal_peak_minutes": 4,
+          "mean_rms_counts": 2842.7124457421473,
+          "max_rms_counts": 3091.179958253048,
+          "mean_4_8_share_percent": 38.59602845875777
+        }
+      ]
+    },
+    {
+      "id": "H4-045",
+      "start_et": "Jun 23, 2026 11:57 PM EDT",
+      "end_et": "Jun 24, 2026 12:20 AM EDT",
+      "start_utc": "2026-06-24T03:57:00.000Z",
+      "end_utc": "2026-06-24T04:20:00.000Z",
+      "duration_minutes": 23,
+      "mean_4_8_share_percent": 38.48574266221979,
+      "max_rms_counts": 3327.7463133012016,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jun 23, 2026 11:00 PM EDT",
+          "segment_start_et": "Jun 23, 2026 11:57 PM EDT",
+          "segment_end_et": "Jun 24, 2026 12:00 AM EDT",
+          "minutes": 3,
+          "modal_peak_hz": 5.65,
+          "modal_peak_minutes": 1,
+          "mean_rms_counts": 3135.0254151937224,
+          "max_rms_counts": 3327.7463133012016,
+          "mean_4_8_share_percent": 37.4121800993151
+        },
+        {
+          "hour_start_et": "Jun 24, 2026 12:00 AM EDT",
+          "segment_start_et": "Jun 24, 2026 12:00 AM EDT",
+          "segment_end_et": "Jun 24, 2026 12:20 AM EDT",
+          "minutes": 20,
+          "modal_peak_hz": 10.85,
+          "modal_peak_minutes": 3,
+          "mean_rms_counts": 2948.8493190113136,
+          "max_rms_counts": 3294.0600982802284,
+          "mean_4_8_share_percent": 38.64677704665549
+        }
+      ]
+    },
+    {
+      "id": "H4-046",
+      "start_et": "Jun 24, 2026 12:34 AM EDT",
+      "end_et": "Jun 24, 2026 1:09 AM EDT",
+      "start_utc": "2026-06-24T04:34:00.000Z",
+      "end_utc": "2026-06-24T05:09:00.000Z",
+      "duration_minutes": 35,
+      "mean_4_8_share_percent": 39.24702901814639,
+      "max_rms_counts": 36220.01265546812,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jun 24, 2026 12:00 AM EDT",
+          "segment_start_et": "Jun 24, 2026 12:34 AM EDT",
+          "segment_end_et": "Jun 24, 2026 1:00 AM EDT",
+          "minutes": 26,
+          "modal_peak_hz": 5.45,
+          "modal_peak_minutes": 3,
+          "mean_rms_counts": 4181.759194996184,
+          "max_rms_counts": 36220.01265546812,
+          "mean_4_8_share_percent": 39.98160146667908
+        },
+        {
+          "hour_start_et": "Jun 24, 2026 1:00 AM EDT",
+          "segment_start_et": "Jun 24, 2026 1:00 AM EDT",
+          "segment_end_et": "Jun 24, 2026 1:09 AM EDT",
+          "minutes": 9,
+          "modal_peak_hz": 5.75,
+          "modal_peak_minutes": 3,
+          "mean_rms_counts": 2736.0970159583285,
+          "max_rms_counts": 3152.836814603217,
+          "mean_4_8_share_percent": 37.12493083349643
+        }
+      ]
+    },
+    {
+      "id": "H4-047",
+      "start_et": "Jun 28, 2026 2:45 AM EDT",
+      "end_et": "Jun 28, 2026 3:14 AM EDT",
+      "start_utc": "2026-06-28T06:45:00.000Z",
+      "end_utc": "2026-06-28T07:14:00.000Z",
+      "duration_minutes": 29,
+      "mean_4_8_share_percent": 38.81525688674906,
+      "max_rms_counts": 3334.077744076965,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jun 28, 2026 2:00 AM EDT",
+          "segment_start_et": "Jun 28, 2026 2:45 AM EDT",
+          "segment_end_et": "Jun 28, 2026 3:00 AM EDT",
+          "minutes": 15,
+          "modal_peak_hz": 10.85,
+          "modal_peak_minutes": 4,
+          "mean_rms_counts": 2847.124230248249,
+          "max_rms_counts": 3040.9711829326106,
+          "mean_4_8_share_percent": 39.097003709792745
+        },
+        {
+          "hour_start_et": "Jun 28, 2026 3:00 AM EDT",
+          "segment_start_et": "Jun 28, 2026 3:00 AM EDT",
+          "segment_end_et": "Jun 28, 2026 3:14 AM EDT",
+          "minutes": 14,
+          "modal_peak_hz": 10.95,
+          "modal_peak_minutes": 3,
+          "mean_rms_counts": 3044.7016230616905,
+          "max_rms_counts": 3334.077744076965,
+          "mean_4_8_share_percent": 38.513385290630815
+        }
+      ]
+    },
+    {
+      "id": "H4-048",
+      "start_et": "Jun 28, 2026 3:27 AM EDT",
+      "end_et": "Jun 28, 2026 4:26 AM EDT",
+      "start_utc": "2026-06-28T07:27:00.000Z",
+      "end_utc": "2026-06-28T08:26:00.000Z",
+      "duration_minutes": 59,
+      "mean_4_8_share_percent": 40.345879543684774,
+      "max_rms_counts": 3090.319807346803,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jun 28, 2026 3:00 AM EDT",
+          "segment_start_et": "Jun 28, 2026 3:27 AM EDT",
+          "segment_end_et": "Jun 28, 2026 4:00 AM EDT",
+          "minutes": 33,
+          "modal_peak_hz": 5.65,
+          "modal_peak_minutes": 3,
+          "mean_rms_counts": 2876.358095286649,
+          "max_rms_counts": 3090.319807346803,
+          "mean_4_8_share_percent": 40.510749106135385
+        },
+        {
+          "hour_start_et": "Jun 28, 2026 4:00 AM EDT",
+          "segment_start_et": "Jun 28, 2026 4:00 AM EDT",
+          "segment_end_et": "Jun 28, 2026 4:26 AM EDT",
+          "minutes": 26,
+          "modal_peak_hz": 7.85,
+          "modal_peak_minutes": 3,
+          "mean_rms_counts": 2893.3469340914507,
+          "max_rms_counts": 3001.1856710349166,
+          "mean_4_8_share_percent": 40.13662202211285
+        }
+      ]
+    },
+    {
+      "id": "H4-049",
+      "start_et": "Jun 28, 2026 1:13 PM EDT",
+      "end_et": "Jun 28, 2026 1:36 PM EDT",
+      "start_utc": "2026-06-28T17:13:00.000Z",
+      "end_utc": "2026-06-28T17:36:00.000Z",
+      "duration_minutes": 23,
+      "mean_4_8_share_percent": 37.82848137880684,
+      "max_rms_counts": 3200.918165505504,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jun 28, 2026 1:00 PM EDT",
+          "segment_start_et": "Jun 28, 2026 1:13 PM EDT",
+          "segment_end_et": "Jun 28, 2026 1:36 PM EDT",
+          "minutes": 23,
+          "modal_peak_hz": 5.75,
+          "modal_peak_minutes": 2,
+          "mean_rms_counts": 2975.909662322179,
+          "max_rms_counts": 3200.918165505504,
+          "mean_4_8_share_percent": 37.82848137880684
+        }
+      ]
+    },
+    {
+      "id": "H4-050",
+      "start_et": "Jun 28, 2026 1:45 PM EDT",
+      "end_et": "Jun 28, 2026 2:21 PM EDT",
+      "start_utc": "2026-06-28T17:45:00.000Z",
+      "end_utc": "2026-06-28T18:21:00.000Z",
+      "duration_minutes": 36,
+      "mean_4_8_share_percent": 38.68573119756968,
+      "max_rms_counts": 3394.777874834605,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jun 28, 2026 1:00 PM EDT",
+          "segment_start_et": "Jun 28, 2026 1:45 PM EDT",
+          "segment_end_et": "Jun 28, 2026 2:00 PM EDT",
+          "minutes": 15,
+          "modal_peak_hz": 10.95,
+          "modal_peak_minutes": 3,
+          "mean_rms_counts": 2950.974717710107,
+          "max_rms_counts": 3394.777874834605,
+          "mean_4_8_share_percent": 37.89647502140529
+        },
+        {
+          "hour_start_et": "Jun 28, 2026 2:00 PM EDT",
+          "segment_start_et": "Jun 28, 2026 2:00 PM EDT",
+          "segment_end_et": "Jun 28, 2026 2:21 PM EDT",
+          "minutes": 21,
+          "modal_peak_hz": 5.75,
+          "modal_peak_minutes": 3,
+          "mean_rms_counts": 2865.6316574195685,
+          "max_rms_counts": 3114.493907198297,
+          "mean_4_8_share_percent": 39.24948560911567
+        }
+      ]
+    },
+    {
+      "id": "H4-051",
+      "start_et": "Jun 29, 2026 12:31 PM EDT",
+      "end_et": "Jun 29, 2026 12:52 PM EDT",
+      "start_utc": "2026-06-29T16:31:00.000Z",
+      "end_utc": "2026-06-29T16:52:00.000Z",
+      "duration_minutes": 21,
+      "mean_4_8_share_percent": 38.02204585339955,
+      "max_rms_counts": 4649.121679795734,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jun 29, 2026 12:00 PM EDT",
+          "segment_start_et": "Jun 29, 2026 12:31 PM EDT",
+          "segment_end_et": "Jun 29, 2026 12:52 PM EDT",
+          "minutes": 21,
+          "modal_peak_hz": 10.75,
+          "modal_peak_minutes": 3,
+          "mean_rms_counts": 2951.961445474444,
+          "max_rms_counts": 4649.121679795734,
+          "mean_4_8_share_percent": 38.02204585339955
+        }
+      ]
+    },
+    {
+      "id": "H4-052",
+      "start_et": "Jun 29, 2026 1:17 PM EDT",
+      "end_et": "Jun 29, 2026 2:48 PM EDT",
+      "start_utc": "2026-06-29T17:17:00.000Z",
+      "end_utc": "2026-06-29T18:48:00.000Z",
+      "duration_minutes": 91,
+      "mean_4_8_share_percent": 37.83582122511796,
+      "max_rms_counts": 3738.71919908966,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jun 29, 2026 1:00 PM EDT",
+          "segment_start_et": "Jun 29, 2026 1:17 PM EDT",
+          "segment_end_et": "Jun 29, 2026 2:00 PM EDT",
+          "minutes": 43,
+          "modal_peak_hz": 10.95,
+          "modal_peak_minutes": 9,
+          "mean_rms_counts": 2985.65942962434,
+          "max_rms_counts": 3597.781430696418,
+          "mean_4_8_share_percent": 37.647653384531225
+        },
+        {
+          "hour_start_et": "Jun 29, 2026 2:00 PM EDT",
+          "segment_start_et": "Jun 29, 2026 2:00 PM EDT",
+          "segment_end_et": "Jun 29, 2026 2:48 PM EDT",
+          "minutes": 48,
+          "modal_peak_hz": 10.75,
+          "modal_peak_minutes": 6,
+          "mean_rms_counts": 3142.5505532466545,
+          "max_rms_counts": 3738.71919908966,
+          "mean_4_8_share_percent": 38.004388248976944
+        }
+      ]
+    },
+    {
+      "id": "H4-053",
+      "start_et": "Jun 29, 2026 3:25 PM EDT",
+      "end_et": "Jun 29, 2026 3:44 PM EDT",
+      "start_utc": "2026-06-29T19:25:00.000Z",
+      "end_utc": "2026-06-29T19:44:00.000Z",
+      "duration_minutes": 19,
+      "mean_4_8_share_percent": 37.93324896890698,
+      "max_rms_counts": 3430.891362396122,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jun 29, 2026 3:00 PM EDT",
+          "segment_start_et": "Jun 29, 2026 3:25 PM EDT",
+          "segment_end_et": "Jun 29, 2026 3:44 PM EDT",
+          "minutes": 19,
+          "modal_peak_hz": 7.85,
+          "modal_peak_minutes": 2,
+          "mean_rms_counts": 3043.7973431806254,
+          "max_rms_counts": 3430.891362396122,
+          "mean_4_8_share_percent": 37.93324896890698
+        }
+      ]
+    },
+    {
+      "id": "H4-054",
+      "start_et": "Jun 29, 2026 6:35 PM EDT",
+      "end_et": "Jun 29, 2026 6:50 PM EDT",
+      "start_utc": "2026-06-29T22:35:00.000Z",
+      "end_utc": "2026-06-29T22:50:00.000Z",
+      "duration_minutes": 15,
+      "mean_4_8_share_percent": 36.581382934125045,
+      "max_rms_counts": 3818.7875525517343,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jun 29, 2026 6:00 PM EDT",
+          "segment_start_et": "Jun 29, 2026 6:35 PM EDT",
+          "segment_end_et": "Jun 29, 2026 6:50 PM EDT",
+          "minutes": 15,
+          "modal_peak_hz": 0.55,
+          "modal_peak_minutes": 3,
+          "mean_rms_counts": 3128.555007038749,
+          "max_rms_counts": 3818.7875525517343,
+          "mean_4_8_share_percent": 36.581382934125045
+        }
+      ]
+    },
+    {
+      "id": "H4-055",
+      "start_et": "Jun 29, 2026 7:03 PM EDT",
+      "end_et": "Jun 29, 2026 7:19 PM EDT",
+      "start_utc": "2026-06-29T23:03:00.000Z",
+      "end_utc": "2026-06-29T23:19:00.000Z",
+      "duration_minutes": 16,
+      "mean_4_8_share_percent": 38.56329025329544,
+      "max_rms_counts": 3677.0607410716693,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jun 29, 2026 7:00 PM EDT",
+          "segment_start_et": "Jun 29, 2026 7:03 PM EDT",
+          "segment_end_et": "Jun 29, 2026 7:19 PM EDT",
+          "minutes": 16,
+          "modal_peak_hz": 10.75,
+          "modal_peak_minutes": 2,
+          "mean_rms_counts": 3069.6162319198675,
+          "max_rms_counts": 3677.0607410716693,
+          "mean_4_8_share_percent": 38.56329025329544
+        }
+      ]
+    },
+    {
+      "id": "H4-056",
+      "start_et": "Jun 30, 2026 5:51 AM EDT",
+      "end_et": "Jun 30, 2026 6:42 AM EDT",
+      "start_utc": "2026-06-30T09:51:00.000Z",
+      "end_utc": "2026-06-30T10:42:00.000Z",
+      "duration_minutes": 51,
+      "mean_4_8_share_percent": 39.22149099415644,
+      "max_rms_counts": 4055.5093663869557,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jun 30, 2026 5:00 AM EDT",
+          "segment_start_et": "Jun 30, 2026 5:51 AM EDT",
+          "segment_end_et": "Jun 30, 2026 6:00 AM EDT",
+          "minutes": 9,
+          "modal_peak_hz": 10.95,
+          "modal_peak_minutes": 3,
+          "mean_rms_counts": 3051.545532223424,
+          "max_rms_counts": 3277.1914649983787,
+          "mean_4_8_share_percent": 37.79399337932076
+        },
+        {
+          "hour_start_et": "Jun 30, 2026 6:00 AM EDT",
+          "segment_start_et": "Jun 30, 2026 6:00 AM EDT",
+          "segment_end_et": "Jun 30, 2026 6:42 AM EDT",
+          "minutes": 42,
+          "modal_peak_hz": 11.05,
+          "modal_peak_minutes": 6,
+          "mean_rms_counts": 2970.475067580686,
+          "max_rms_counts": 4055.5093663869557,
+          "mean_4_8_share_percent": 39.52738334019266
+        }
+      ]
+    },
+    {
+      "id": "H4-057",
+      "start_et": "Jun 30, 2026 7:34 AM EDT",
+      "end_et": "Jun 30, 2026 8:08 AM EDT",
+      "start_utc": "2026-06-30T11:34:00.000Z",
+      "end_utc": "2026-06-30T12:08:00.000Z",
+      "duration_minutes": 34,
+      "mean_4_8_share_percent": 34.52472709229757,
+      "max_rms_counts": 3685.937000987945,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jun 30, 2026 7:00 AM EDT",
+          "segment_start_et": "Jun 30, 2026 7:34 AM EDT",
+          "segment_end_et": "Jun 30, 2026 8:00 AM EDT",
+          "minutes": 26,
+          "modal_peak_hz": 10.95,
+          "modal_peak_minutes": 4,
+          "mean_rms_counts": 2981.2646022816434,
+          "max_rms_counts": 3685.937000987945,
+          "mean_4_8_share_percent": 33.78197642679626
+        },
+        {
+          "hour_start_et": "Jun 30, 2026 8:00 AM EDT",
+          "segment_start_et": "Jun 30, 2026 8:00 AM EDT",
+          "segment_end_et": "Jun 30, 2026 8:08 AM EDT",
+          "minutes": 8,
+          "modal_peak_hz": 5.05,
+          "modal_peak_minutes": 1,
+          "mean_rms_counts": 2910.9325993688817,
+          "max_rms_counts": 3158.3552112486063,
+          "mean_4_8_share_percent": 36.93866675517678
+        }
+      ]
+    },
+    {
+      "id": "H4-058",
+      "start_et": "Jul 14, 2026 8:02 PM EDT",
+      "end_et": "Jul 14, 2026 8:25 PM EDT",
+      "start_utc": "2026-07-15T00:02:00.000Z",
+      "end_utc": "2026-07-15T00:25:00.000Z",
+      "duration_minutes": 23,
+      "mean_4_8_share_percent": 38.84785175097537,
+      "max_rms_counts": 4184.398435142776,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jul 14, 2026 8:00 PM EDT",
+          "segment_start_et": "Jul 14, 2026 8:02 PM EDT",
+          "segment_end_et": "Jul 14, 2026 8:25 PM EDT",
+          "minutes": 23,
+          "modal_peak_hz": 5.75,
+          "modal_peak_minutes": 4,
+          "mean_rms_counts": 3240.3670394024566,
+          "max_rms_counts": 4184.398435142776,
+          "mean_4_8_share_percent": 38.84785175097537
+        }
+      ]
+    },
+    {
+      "id": "H4-059",
+      "start_et": "Jul 15, 2026 11:54 AM EDT",
+      "end_et": "Jul 15, 2026 12:12 PM EDT",
+      "start_utc": "2026-07-15T15:54:00.000Z",
+      "end_utc": "2026-07-15T16:12:00.000Z",
+      "duration_minutes": 18,
+      "mean_4_8_share_percent": 35.74999550838561,
+      "max_rms_counts": 4701.987787088932,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jul 15, 2026 11:00 AM EDT",
+          "segment_start_et": "Jul 15, 2026 11:54 AM EDT",
+          "segment_end_et": "Jul 15, 2026 12:00 PM EDT",
+          "minutes": 6,
+          "modal_peak_hz": 11.05,
+          "modal_peak_minutes": 2,
+          "mean_rms_counts": 2987.312785994676,
+          "max_rms_counts": 3167.1354981212185,
+          "mean_4_8_share_percent": 35.72944199013533
+        },
+        {
+          "hour_start_et": "Jul 15, 2026 12:00 PM EDT",
+          "segment_start_et": "Jul 15, 2026 12:00 PM EDT",
+          "segment_end_et": "Jul 15, 2026 12:12 PM EDT",
+          "minutes": 12,
+          "modal_peak_hz": 10.65,
+          "modal_peak_minutes": 2,
+          "mean_rms_counts": 3093.1314939515983,
+          "max_rms_counts": 4701.987787088932,
+          "mean_4_8_share_percent": 35.760272267510764
+        }
+      ]
+    },
+    {
+      "id": "H4-060",
+      "start_et": "Jul 15, 2026 1:11 PM EDT",
+      "end_et": "Jul 15, 2026 1:26 PM EDT",
+      "start_utc": "2026-07-15T17:11:00.000Z",
+      "end_utc": "2026-07-15T17:26:00.000Z",
+      "duration_minutes": 15,
+      "mean_4_8_share_percent": 35.859946940846235,
+      "max_rms_counts": 3495.574973388881,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jul 15, 2026 1:00 PM EDT",
+          "segment_start_et": "Jul 15, 2026 1:11 PM EDT",
+          "segment_end_et": "Jul 15, 2026 1:26 PM EDT",
+          "minutes": 15,
+          "modal_peak_hz": 10.95,
+          "modal_peak_minutes": 3,
+          "mean_rms_counts": 2937.848520398571,
+          "max_rms_counts": 3495.574973388881,
+          "mean_4_8_share_percent": 35.859946940846235
+        }
+      ]
+    },
+    {
+      "id": "H4-061",
+      "start_et": "Jul 15, 2026 1:33 PM EDT",
+      "end_et": "Jul 15, 2026 1:50 PM EDT",
+      "start_utc": "2026-07-15T17:33:00.000Z",
+      "end_utc": "2026-07-15T17:50:00.000Z",
+      "duration_minutes": 17,
+      "mean_4_8_share_percent": 36.51011960272771,
+      "max_rms_counts": 3278.843148276115,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jul 15, 2026 1:00 PM EDT",
+          "segment_start_et": "Jul 15, 2026 1:33 PM EDT",
+          "segment_end_et": "Jul 15, 2026 1:50 PM EDT",
+          "minutes": 17,
+          "modal_peak_hz": 11.05,
+          "modal_peak_minutes": 3,
+          "mean_rms_counts": 2899.1298578082888,
+          "max_rms_counts": 3278.843148276115,
+          "mean_4_8_share_percent": 36.51011960272771
+        }
+      ]
+    },
+    {
+      "id": "H4-062",
+      "start_et": "Jul 15, 2026 2:26 PM EDT",
+      "end_et": "Jul 15, 2026 3:08 PM EDT",
+      "start_utc": "2026-07-15T18:26:00.000Z",
+      "end_utc": "2026-07-15T19:08:00.000Z",
+      "duration_minutes": 42,
+      "mean_4_8_share_percent": 37.56711639485594,
+      "max_rms_counts": 3200.5150854888334,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jul 15, 2026 2:00 PM EDT",
+          "segment_start_et": "Jul 15, 2026 2:26 PM EDT",
+          "segment_end_et": "Jul 15, 2026 3:00 PM EDT",
+          "minutes": 34,
+          "modal_peak_hz": 10.85,
+          "modal_peak_minutes": 4,
+          "mean_rms_counts": 2921.560005391334,
+          "max_rms_counts": 3200.5150854888334,
+          "mean_4_8_share_percent": 37.418082409963255
+        },
+        {
+          "hour_start_et": "Jul 15, 2026 3:00 PM EDT",
+          "segment_start_et": "Jul 15, 2026 3:00 PM EDT",
+          "segment_end_et": "Jul 15, 2026 3:08 PM EDT",
+          "minutes": 8,
+          "modal_peak_hz": 10.65,
+          "modal_peak_minutes": 2,
+          "mean_rms_counts": 2840.6673594729923,
+          "max_rms_counts": 2921.64372993467,
+          "mean_4_8_share_percent": 38.20051083064983
+        }
+      ]
+    },
+    {
+      "id": "H4-063",
+      "start_et": "Jul 15, 2026 3:09 PM EDT",
+      "end_et": "Jul 15, 2026 4:02 PM EDT",
+      "start_utc": "2026-07-15T19:09:00.000Z",
+      "end_utc": "2026-07-15T20:02:00.000Z",
+      "duration_minutes": 53,
+      "mean_4_8_share_percent": 36.46284084054435,
+      "max_rms_counts": 4108.036708214354,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jul 15, 2026 3:00 PM EDT",
+          "segment_start_et": "Jul 15, 2026 3:09 PM EDT",
+          "segment_end_et": "Jul 15, 2026 4:00 PM EDT",
+          "minutes": 51,
+          "modal_peak_hz": 11.15,
+          "modal_peak_minutes": 7,
+          "mean_rms_counts": 3013.7742322097824,
+          "max_rms_counts": 4108.036708214354,
+          "mean_4_8_share_percent": 36.44525643401657
+        },
+        {
+          "hour_start_et": "Jul 15, 2026 4:00 PM EDT",
+          "segment_start_et": "Jul 15, 2026 4:00 PM EDT",
+          "segment_end_et": "Jul 15, 2026 4:02 PM EDT",
+          "minutes": 2,
+          "modal_peak_hz": 10.65,
+          "modal_peak_minutes": 1,
+          "mean_rms_counts": 2941.741668305153,
+          "max_rms_counts": 2976.406328507513,
+          "mean_4_8_share_percent": 36.911243207002585
+        }
+      ]
+    },
+    {
+      "id": "H4-064",
+      "start_et": "Jul 15, 2026 4:18 PM EDT",
+      "end_et": "Jul 15, 2026 4:35 PM EDT",
+      "start_utc": "2026-07-15T20:18:00.000Z",
+      "end_utc": "2026-07-15T20:35:00.000Z",
+      "duration_minutes": 17,
+      "mean_4_8_share_percent": 36.67605619060701,
+      "max_rms_counts": 3317.4595928205704,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jul 15, 2026 4:00 PM EDT",
+          "segment_start_et": "Jul 15, 2026 4:18 PM EDT",
+          "segment_end_et": "Jul 15, 2026 4:35 PM EDT",
+          "minutes": 17,
+          "modal_peak_hz": 5.55,
+          "modal_peak_minutes": 3,
+          "mean_rms_counts": 2982.7393613347017,
+          "max_rms_counts": 3317.4595928205704,
+          "mean_4_8_share_percent": 36.67605619060701
+        }
+      ]
+    },
+    {
+      "id": "H4-065",
+      "start_et": "Jul 15, 2026 4:42 PM EDT",
+      "end_et": "Jul 15, 2026 5:02 PM EDT",
+      "start_utc": "2026-07-15T20:42:00.000Z",
+      "end_utc": "2026-07-15T21:02:00.000Z",
+      "duration_minutes": 20,
+      "mean_4_8_share_percent": 36.676848778207,
+      "max_rms_counts": 3410.155784035292,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jul 15, 2026 4:00 PM EDT",
+          "segment_start_et": "Jul 15, 2026 4:42 PM EDT",
+          "segment_end_et": "Jul 15, 2026 5:00 PM EDT",
+          "minutes": 18,
+          "modal_peak_hz": 5.75,
+          "modal_peak_minutes": 2,
+          "mean_rms_counts": 3040.4168859424553,
+          "max_rms_counts": 3410.155784035292,
+          "mean_4_8_share_percent": 36.84753783311067
+        },
+        {
+          "hour_start_et": "Jul 15, 2026 5:00 PM EDT",
+          "segment_start_et": "Jul 15, 2026 5:00 PM EDT",
+          "segment_end_et": "Jul 15, 2026 5:02 PM EDT",
+          "minutes": 2,
+          "modal_peak_hz": 5.95,
+          "modal_peak_minutes": 1,
+          "mean_rms_counts": 3024.790647295882,
+          "max_rms_counts": 3026.362908682513,
+          "mean_4_8_share_percent": 35.140647284073964
+        }
+      ]
+    },
+    {
+      "id": "H4-066",
+      "start_et": "Jul 15, 2026 5:11 PM EDT",
+      "end_et": "Jul 15, 2026 6:00 PM EDT",
+      "start_utc": "2026-07-15T21:11:00.000Z",
+      "end_utc": "2026-07-15T22:00:00.000Z",
+      "duration_minutes": 49,
+      "mean_4_8_share_percent": 36.650920755297314,
+      "max_rms_counts": 4477.085702895722,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jul 15, 2026 5:00 PM EDT",
+          "segment_start_et": "Jul 15, 2026 5:11 PM EDT",
+          "segment_end_et": "Jul 15, 2026 6:00 PM EDT",
+          "minutes": 49,
+          "modal_peak_hz": 10.95,
+          "modal_peak_minutes": 7,
+          "mean_rms_counts": 3090.7849494699653,
+          "max_rms_counts": 4477.085702895722,
+          "mean_4_8_share_percent": 36.650920755297314
+        }
+      ]
+    },
+    {
+      "id": "H4-067",
+      "start_et": "Jul 15, 2026 6:19 PM EDT",
+      "end_et": "Jul 15, 2026 6:48 PM EDT",
+      "start_utc": "2026-07-15T22:19:00.000Z",
+      "end_utc": "2026-07-15T22:48:00.000Z",
+      "duration_minutes": 29,
+      "mean_4_8_share_percent": 37.642861946876124,
+      "max_rms_counts": 4160.262325335529,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jul 15, 2026 6:00 PM EDT",
+          "segment_start_et": "Jul 15, 2026 6:19 PM EDT",
+          "segment_end_et": "Jul 15, 2026 6:48 PM EDT",
+          "minutes": 29,
+          "modal_peak_hz": 5.65,
+          "modal_peak_minutes": 3,
+          "mean_rms_counts": 3107.0296078068077,
+          "max_rms_counts": 4160.262325335529,
+          "mean_4_8_share_percent": 37.642861946876124
+        }
+      ]
+    },
+    {
+      "id": "H4-068",
+      "start_et": "Jul 15, 2026 7:09 PM EDT",
+      "end_et": "Jul 15, 2026 7:30 PM EDT",
+      "start_utc": "2026-07-15T23:09:00.000Z",
+      "end_utc": "2026-07-15T23:30:00.000Z",
+      "duration_minutes": 21,
+      "mean_4_8_share_percent": 36.9650949430832,
+      "max_rms_counts": 3753.4764820501123,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jul 15, 2026 7:00 PM EDT",
+          "segment_start_et": "Jul 15, 2026 7:09 PM EDT",
+          "segment_end_et": "Jul 15, 2026 7:30 PM EDT",
+          "minutes": 21,
+          "modal_peak_hz": 10.95,
+          "modal_peak_minutes": 3,
+          "mean_rms_counts": 3212.628984494383,
+          "max_rms_counts": 3753.4764820501123,
+          "mean_4_8_share_percent": 36.9650949430832
+        }
+      ]
+    },
+    {
+      "id": "H4-069",
+      "start_et": "Jul 15, 2026 7:36 PM EDT",
+      "end_et": "Jul 15, 2026 7:54 PM EDT",
+      "start_utc": "2026-07-15T23:36:00.000Z",
+      "end_utc": "2026-07-15T23:54:00.000Z",
+      "duration_minutes": 18,
+      "mean_4_8_share_percent": 39.00547161922401,
+      "max_rms_counts": 3662.08160811485,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jul 15, 2026 7:00 PM EDT",
+          "segment_start_et": "Jul 15, 2026 7:36 PM EDT",
+          "segment_end_et": "Jul 15, 2026 7:54 PM EDT",
+          "minutes": 18,
+          "modal_peak_hz": 5.85,
+          "modal_peak_minutes": 5,
+          "mean_rms_counts": 3131.304748650997,
+          "max_rms_counts": 3662.08160811485,
+          "mean_4_8_share_percent": 39.00547161922401
+        }
+      ]
+    },
+    {
+      "id": "H4-070",
+      "start_et": "Jul 16, 2026 2:50 PM EDT",
+      "end_et": "Jul 16, 2026 3:06 PM EDT",
+      "start_utc": "2026-07-16T18:50:00.000Z",
+      "end_utc": "2026-07-16T19:06:00.000Z",
+      "duration_minutes": 16,
+      "mean_4_8_share_percent": 37.07654345474378,
+      "max_rms_counts": 3417.9650839610435,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jul 16, 2026 2:00 PM EDT",
+          "segment_start_et": "Jul 16, 2026 2:50 PM EDT",
+          "segment_end_et": "Jul 16, 2026 3:00 PM EDT",
+          "minutes": 10,
+          "modal_peak_hz": 10.75,
+          "modal_peak_minutes": 2,
+          "mean_rms_counts": 2884.9924992596298,
+          "max_rms_counts": 3170.0556229074487,
+          "mean_4_8_share_percent": 37.02988129903774
+        },
+        {
+          "hour_start_et": "Jul 16, 2026 3:00 PM EDT",
+          "segment_start_et": "Jul 16, 2026 3:00 PM EDT",
+          "segment_end_et": "Jul 16, 2026 3:06 PM EDT",
+          "minutes": 6,
+          "modal_peak_hz": 5.15,
+          "modal_peak_minutes": 1,
+          "mean_rms_counts": 3001.709510608016,
+          "max_rms_counts": 3417.9650839610435,
+          "mean_4_8_share_percent": 37.154313714253846
+        }
+      ]
+    },
+    {
+      "id": "H4-071",
+      "start_et": "Jul 17, 2026 4:15 PM EDT",
+      "end_et": "Jul 17, 2026 4:30 PM EDT",
+      "start_utc": "2026-07-17T20:15:00.000Z",
+      "end_utc": "2026-07-17T20:30:00.000Z",
+      "duration_minutes": 15,
+      "mean_4_8_share_percent": 37.648802900147544,
+      "max_rms_counts": 3069.06966550524,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jul 17, 2026 4:00 PM EDT",
+          "segment_start_et": "Jul 17, 2026 4:15 PM EDT",
+          "segment_end_et": "Jul 17, 2026 4:30 PM EDT",
+          "minutes": 15,
+          "modal_peak_hz": 11.05,
+          "modal_peak_minutes": 5,
+          "mean_rms_counts": 2834.302842837124,
+          "max_rms_counts": 3069.06966550524,
+          "mean_4_8_share_percent": 37.648802900147544
+        }
+      ]
+    },
+    {
+      "id": "H4-072",
+      "start_et": "Jul 17, 2026 4:39 PM EDT",
+      "end_et": "Jul 17, 2026 4:56 PM EDT",
+      "start_utc": "2026-07-17T20:39:00.000Z",
+      "end_utc": "2026-07-17T20:56:00.000Z",
+      "duration_minutes": 17,
+      "mean_4_8_share_percent": 35.69102167405852,
+      "max_rms_counts": 3678.781986536639,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jul 17, 2026 4:00 PM EDT",
+          "segment_start_et": "Jul 17, 2026 4:39 PM EDT",
+          "segment_end_et": "Jul 17, 2026 4:56 PM EDT",
+          "minutes": 17,
+          "modal_peak_hz": 10.75,
+          "modal_peak_minutes": 3,
+          "mean_rms_counts": 3018.0937265900766,
+          "max_rms_counts": 3678.781986536639,
+          "mean_4_8_share_percent": 35.69102167405852
+        }
+      ]
+    },
+    {
+      "id": "H4-073",
+      "start_et": "Jul 17, 2026 5:27 PM EDT",
+      "end_et": "Jul 17, 2026 5:42 PM EDT",
+      "start_utc": "2026-07-17T21:27:00.000Z",
+      "end_utc": "2026-07-17T21:42:00.000Z",
+      "duration_minutes": 15,
+      "mean_4_8_share_percent": 37.42141961458208,
+      "max_rms_counts": 3397.736664452514,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jul 17, 2026 5:00 PM EDT",
+          "segment_start_et": "Jul 17, 2026 5:27 PM EDT",
+          "segment_end_et": "Jul 17, 2026 5:42 PM EDT",
+          "minutes": 15,
+          "modal_peak_hz": 5.85,
+          "modal_peak_minutes": 2,
+          "mean_rms_counts": 2959.354219056482,
+          "max_rms_counts": 3397.736664452514,
+          "mean_4_8_share_percent": 37.42141961458208
+        }
+      ]
+    },
+    {
+      "id": "H4-074",
+      "start_et": "Jul 18, 2026 11:50 AM EDT",
+      "end_et": "Jul 18, 2026 12:06 PM EDT",
+      "start_utc": "2026-07-18T15:50:00.000Z",
+      "end_utc": "2026-07-18T16:06:00.000Z",
+      "duration_minutes": 16,
+      "mean_4_8_share_percent": 35.1770970011792,
+      "max_rms_counts": 5295.478599055324,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jul 18, 2026 11:00 AM EDT",
+          "segment_start_et": "Jul 18, 2026 11:50 AM EDT",
+          "segment_end_et": "Jul 18, 2026 12:00 PM EDT",
+          "minutes": 10,
+          "modal_peak_hz": 0.55,
+          "modal_peak_minutes": 3,
+          "mean_rms_counts": 3768.2188831210015,
+          "max_rms_counts": 5295.478599055324,
+          "mean_4_8_share_percent": 34.37265439738354
+        },
+        {
+          "hour_start_et": "Jul 18, 2026 12:00 PM EDT",
+          "segment_start_et": "Jul 18, 2026 12:00 PM EDT",
+          "segment_end_et": "Jul 18, 2026 12:06 PM EDT",
+          "minutes": 6,
+          "modal_peak_hz": 5.65,
+          "modal_peak_minutes": 2,
+          "mean_rms_counts": 3101.879806110777,
+          "max_rms_counts": 3274.3082157811546,
+          "mean_4_8_share_percent": 36.51783467417195
+        }
+      ]
+    },
+    {
+      "id": "H4-075",
+      "start_et": "Jul 18, 2026 12:13 PM EDT",
+      "end_et": "Jul 18, 2026 12:47 PM EDT",
+      "start_utc": "2026-07-18T16:13:00.000Z",
+      "end_utc": "2026-07-18T16:47:00.000Z",
+      "duration_minutes": 34,
+      "mean_4_8_share_percent": 36.370257723169054,
+      "max_rms_counts": 3566.465434168643,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jul 18, 2026 12:00 PM EDT",
+          "segment_start_et": "Jul 18, 2026 12:13 PM EDT",
+          "segment_end_et": "Jul 18, 2026 12:47 PM EDT",
+          "minutes": 34,
+          "modal_peak_hz": 10.95,
+          "modal_peak_minutes": 6,
+          "mean_rms_counts": 3152.718447254089,
+          "max_rms_counts": 3566.465434168643,
+          "mean_4_8_share_percent": 36.370257723169054
+        }
+      ]
+    },
+    {
+      "id": "H4-076",
+      "start_et": "Jul 18, 2026 12:55 PM EDT",
+      "end_et": "Jul 18, 2026 1:14 PM EDT",
+      "start_utc": "2026-07-18T16:55:00.000Z",
+      "end_utc": "2026-07-18T17:14:00.000Z",
+      "duration_minutes": 19,
+      "mean_4_8_share_percent": 36.04557287800722,
+      "max_rms_counts": 6272.266211588646,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jul 18, 2026 12:00 PM EDT",
+          "segment_start_et": "Jul 18, 2026 12:55 PM EDT",
+          "segment_end_et": "Jul 18, 2026 1:00 PM EDT",
+          "minutes": 5,
+          "modal_peak_hz": 10.95,
+          "modal_peak_minutes": 2,
+          "mean_rms_counts": 3209.843950857826,
+          "max_rms_counts": 3505.8144834854647,
+          "mean_4_8_share_percent": 36.420928471016055
+        },
+        {
+          "hour_start_et": "Jul 18, 2026 1:00 PM EDT",
+          "segment_start_et": "Jul 18, 2026 1:00 PM EDT",
+          "segment_end_et": "Jul 18, 2026 1:14 PM EDT",
+          "minutes": 14,
+          "modal_peak_hz": 0.55,
+          "modal_peak_minutes": 3,
+          "mean_rms_counts": 3865.058866237188,
+          "max_rms_counts": 6272.266211588646,
+          "mean_4_8_share_percent": 35.9115173090755
+        }
+      ]
+    },
+    {
+      "id": "H4-077",
+      "start_et": "Jul 18, 2026 1:15 PM EDT",
+      "end_et": "Jul 18, 2026 1:43 PM EDT",
+      "start_utc": "2026-07-18T17:15:00.000Z",
+      "end_utc": "2026-07-18T17:43:00.000Z",
+      "duration_minutes": 28,
+      "mean_4_8_share_percent": 35.27483814082788,
+      "max_rms_counts": 6183.527830140256,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jul 18, 2026 1:00 PM EDT",
+          "segment_start_et": "Jul 18, 2026 1:15 PM EDT",
+          "segment_end_et": "Jul 18, 2026 1:43 PM EDT",
+          "minutes": 28,
+          "modal_peak_hz": 0.55,
+          "modal_peak_minutes": 6,
+          "mean_rms_counts": 4248.478769081649,
+          "max_rms_counts": 6183.527830140256,
+          "mean_4_8_share_percent": 35.27483814082788
+        }
+      ]
+    },
+    {
+      "id": "H4-078",
+      "start_et": "Jul 18, 2026 2:13 PM EDT",
+      "end_et": "Jul 18, 2026 2:42 PM EDT",
+      "start_utc": "2026-07-18T18:13:00.000Z",
+      "end_utc": "2026-07-18T18:42:00.000Z",
+      "duration_minutes": 29,
+      "mean_4_8_share_percent": 34.52070237249167,
+      "max_rms_counts": 7523.185552040158,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jul 18, 2026 2:00 PM EDT",
+          "segment_start_et": "Jul 18, 2026 2:13 PM EDT",
+          "segment_end_et": "Jul 18, 2026 2:42 PM EDT",
+          "minutes": 29,
+          "modal_peak_hz": 0.55,
+          "modal_peak_minutes": 8,
+          "mean_rms_counts": 5198.649813169975,
+          "max_rms_counts": 7523.185552040158,
+          "mean_4_8_share_percent": 34.52070237249167
+        }
+      ]
+    },
+    {
+      "id": "H4-079",
+      "start_et": "Jul 18, 2026 2:49 PM EDT",
+      "end_et": "Jul 18, 2026 3:16 PM EDT",
+      "start_utc": "2026-07-18T18:49:00.000Z",
+      "end_utc": "2026-07-18T19:16:00.000Z",
+      "duration_minutes": 27,
+      "mean_4_8_share_percent": 34.32512606653382,
+      "max_rms_counts": 8775.210031746628,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jul 18, 2026 2:00 PM EDT",
+          "segment_start_et": "Jul 18, 2026 2:49 PM EDT",
+          "segment_end_et": "Jul 18, 2026 3:00 PM EDT",
+          "minutes": 11,
+          "modal_peak_hz": 0.55,
+          "modal_peak_minutes": 2,
+          "mean_rms_counts": 5251.012974001837,
+          "max_rms_counts": 8775.210031746628,
+          "mean_4_8_share_percent": 34.5674231252976
+        },
+        {
+          "hour_start_et": "Jul 18, 2026 3:00 PM EDT",
+          "segment_start_et": "Jul 18, 2026 3:00 PM EDT",
+          "segment_end_et": "Jul 18, 2026 3:16 PM EDT",
+          "minutes": 16,
+          "modal_peak_hz": 0.55,
+          "modal_peak_minutes": 4,
+          "mean_rms_counts": 4999.735101751823,
+          "max_rms_counts": 7098.162397017283,
+          "mean_4_8_share_percent": 34.15854683863371
+        }
+      ]
+    },
+    {
+      "id": "H4-080",
+      "start_et": "Jul 18, 2026 3:32 PM EDT",
+      "end_et": "Jul 18, 2026 3:57 PM EDT",
+      "start_utc": "2026-07-18T19:32:00.000Z",
+      "end_utc": "2026-07-18T19:57:00.000Z",
+      "duration_minutes": 25,
+      "mean_4_8_share_percent": 32.49450954673606,
+      "max_rms_counts": 7495.018729401335,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jul 18, 2026 3:00 PM EDT",
+          "segment_start_et": "Jul 18, 2026 3:32 PM EDT",
+          "segment_end_et": "Jul 18, 2026 3:57 PM EDT",
+          "minutes": 25,
+          "modal_peak_hz": 0.55,
+          "modal_peak_minutes": 6,
+          "mean_rms_counts": 5266.9269539760835,
+          "max_rms_counts": 7495.018729401335,
+          "mean_4_8_share_percent": 32.49450954673606
+        }
+      ]
+    },
+    {
+      "id": "H4-081",
+      "start_et": "Jul 20, 2026 7:51 AM EDT",
+      "end_et": "Jul 20, 2026 8:14 AM EDT",
+      "start_utc": "2026-07-20T11:51:00.000Z",
+      "end_utc": "2026-07-20T12:14:00.000Z",
+      "duration_minutes": 23,
+      "mean_4_8_share_percent": 39.12300891117933,
+      "max_rms_counts": 3125.55525974632,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jul 20, 2026 7:00 AM EDT",
+          "segment_start_et": "Jul 20, 2026 7:51 AM EDT",
+          "segment_end_et": "Jul 20, 2026 8:00 AM EDT",
+          "minutes": 9,
+          "modal_peak_hz": 5.75,
+          "modal_peak_minutes": 2,
+          "mean_rms_counts": 3003.7567154827675,
+          "max_rms_counts": 3108.8291232205706,
+          "mean_4_8_share_percent": 38.8535890008287
+        },
+        {
+          "hour_start_et": "Jul 20, 2026 8:00 AM EDT",
+          "segment_start_et": "Jul 20, 2026 8:00 AM EDT",
+          "segment_end_et": "Jul 20, 2026 8:14 AM EDT",
+          "minutes": 14,
+          "modal_peak_hz": 10.75,
+          "modal_peak_minutes": 2,
+          "mean_rms_counts": 3002.2398682042476,
+          "max_rms_counts": 3125.55525974632,
+          "mean_4_8_share_percent": 39.296207424976174
+        }
+      ]
+    },
+    {
+      "id": "H4-082",
+      "start_et": "Jul 20, 2026 8:00 PM EDT",
+      "end_et": "Jul 20, 2026 8:18 PM EDT",
+      "start_utc": "2026-07-21T00:00:00.000Z",
+      "end_utc": "2026-07-21T00:18:00.000Z",
+      "duration_minutes": 18,
+      "mean_4_8_share_percent": 37.53561046223583,
+      "max_rms_counts": 3537.3518229318965,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jul 20, 2026 8:00 PM EDT",
+          "segment_start_et": "Jul 20, 2026 8:00 PM EDT",
+          "segment_end_et": "Jul 20, 2026 8:18 PM EDT",
+          "minutes": 18,
+          "modal_peak_hz": 10.75,
+          "modal_peak_minutes": 3,
+          "mean_rms_counts": 3007.5426193583553,
+          "max_rms_counts": 3537.3518229318965,
+          "mean_4_8_share_percent": 37.53561046223583
+        }
+      ]
+    },
+    {
+      "id": "H4-083",
+      "start_et": "Jul 20, 2026 8:19 PM EDT",
+      "end_et": "Jul 20, 2026 8:36 PM EDT",
+      "start_utc": "2026-07-21T00:19:00.000Z",
+      "end_utc": "2026-07-21T00:36:00.000Z",
+      "duration_minutes": 17,
+      "mean_4_8_share_percent": 36.541467071237975,
+      "max_rms_counts": 3147.0180865588645,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jul 20, 2026 8:00 PM EDT",
+          "segment_start_et": "Jul 20, 2026 8:19 PM EDT",
+          "segment_end_et": "Jul 20, 2026 8:36 PM EDT",
+          "minutes": 17,
+          "modal_peak_hz": 5.55,
+          "modal_peak_minutes": 2,
+          "mean_rms_counts": 2944.039019657775,
+          "max_rms_counts": 3147.0180865588645,
+          "mean_4_8_share_percent": 36.541467071237975
+        }
+      ]
+    },
+    {
+      "id": "H4-084",
+      "start_et": "Jul 20, 2026 8:38 PM EDT",
+      "end_et": "Jul 20, 2026 9:00 PM EDT",
+      "start_utc": "2026-07-21T00:38:00.000Z",
+      "end_utc": "2026-07-21T01:00:00.000Z",
+      "duration_minutes": 22,
+      "mean_4_8_share_percent": 36.236961542413695,
+      "max_rms_counts": 3681.855305789904,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jul 20, 2026 8:00 PM EDT",
+          "segment_start_et": "Jul 20, 2026 8:38 PM EDT",
+          "segment_end_et": "Jul 20, 2026 9:00 PM EDT",
+          "minutes": 22,
+          "modal_peak_hz": 11.75,
+          "modal_peak_minutes": 6,
+          "mean_rms_counts": 3249.8818379009303,
+          "max_rms_counts": 3681.855305789904,
+          "mean_4_8_share_percent": 36.236961542413695
+        }
+      ]
+    },
+    {
+      "id": "H4-085",
+      "start_et": "Jul 20, 2026 9:17 PM EDT",
+      "end_et": "Jul 20, 2026 9:35 PM EDT",
+      "start_utc": "2026-07-21T01:17:00.000Z",
+      "end_utc": "2026-07-21T01:35:00.000Z",
+      "duration_minutes": 18,
+      "mean_4_8_share_percent": 38.253559726552794,
+      "max_rms_counts": 3042.2602732548835,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jul 20, 2026 9:00 PM EDT",
+          "segment_start_et": "Jul 20, 2026 9:17 PM EDT",
+          "segment_end_et": "Jul 20, 2026 9:35 PM EDT",
+          "minutes": 18,
+          "modal_peak_hz": 5.75,
+          "modal_peak_minutes": 3,
+          "mean_rms_counts": 2903.116101503989,
+          "max_rms_counts": 3042.2602732548835,
+          "mean_4_8_share_percent": 38.253559726552794
+        }
+      ]
+    },
+    {
+      "id": "H4-086",
+      "start_et": "Jul 21, 2026 10:01 AM EDT",
+      "end_et": "Jul 21, 2026 10:20 AM EDT",
+      "start_utc": "2026-07-21T14:01:00.000Z",
+      "end_utc": "2026-07-21T14:20:00.000Z",
+      "duration_minutes": 19,
+      "mean_4_8_share_percent": 37.44573086902271,
+      "max_rms_counts": 4754.28417802652,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jul 21, 2026 10:00 AM EDT",
+          "segment_start_et": "Jul 21, 2026 10:01 AM EDT",
+          "segment_end_et": "Jul 21, 2026 10:20 AM EDT",
+          "minutes": 19,
+          "modal_peak_hz": 10.75,
+          "modal_peak_minutes": 4,
+          "mean_rms_counts": 3386.660545633228,
+          "max_rms_counts": 4754.28417802652,
+          "mean_4_8_share_percent": 37.44573086902271
+        }
+      ]
+    },
+    {
+      "id": "H4-087",
+      "start_et": "Jul 21, 2026 12:30 PM EDT",
+      "end_et": "Jul 21, 2026 12:58 PM EDT",
+      "start_utc": "2026-07-21T16:30:00.000Z",
+      "end_utc": "2026-07-21T16:58:00.000Z",
+      "duration_minutes": 28,
+      "mean_4_8_share_percent": 35.359821787059374,
+      "max_rms_counts": 4177.149556258548,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jul 21, 2026 12:00 PM EDT",
+          "segment_start_et": "Jul 21, 2026 12:30 PM EDT",
+          "segment_end_et": "Jul 21, 2026 12:58 PM EDT",
+          "minutes": 28,
+          "modal_peak_hz": 5.75,
+          "modal_peak_minutes": 4,
+          "mean_rms_counts": 3381.78227777755,
+          "max_rms_counts": 4177.149556258548,
+          "mean_4_8_share_percent": 35.359821787059374
+        }
+      ]
+    },
+    {
+      "id": "H4-088",
+      "start_et": "Jul 21, 2026 12:59 PM EDT",
+      "end_et": "Jul 21, 2026 1:20 PM EDT",
+      "start_utc": "2026-07-21T16:59:00.000Z",
+      "end_utc": "2026-07-21T17:20:00.000Z",
+      "duration_minutes": 21,
+      "mean_4_8_share_percent": 35.54524370450521,
+      "max_rms_counts": 4802.757736653654,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jul 21, 2026 12:00 PM EDT",
+          "segment_start_et": "Jul 21, 2026 12:59 PM EDT",
+          "segment_end_et": "Jul 21, 2026 1:00 PM EDT",
+          "minutes": 1,
+          "modal_peak_hz": 11.75,
+          "modal_peak_minutes": 1,
+          "mean_rms_counts": 3163.6612258534606,
+          "max_rms_counts": 3163.6612258534606,
+          "mean_4_8_share_percent": 32.05316076018204
+        },
+        {
+          "hour_start_et": "Jul 21, 2026 1:00 PM EDT",
+          "segment_start_et": "Jul 21, 2026 1:00 PM EDT",
+          "segment_end_et": "Jul 21, 2026 1:20 PM EDT",
+          "minutes": 20,
+          "modal_peak_hz": 5.75,
+          "modal_peak_minutes": 3,
+          "mean_rms_counts": 3686.1783095658348,
+          "max_rms_counts": 4802.757736653654,
+          "mean_4_8_share_percent": 35.71984785172136
+        }
+      ]
+    },
+    {
+      "id": "H4-089",
+      "start_et": "Jul 21, 2026 1:30 PM EDT",
+      "end_et": "Jul 21, 2026 1:51 PM EDT",
+      "start_utc": "2026-07-21T17:30:00.000Z",
+      "end_utc": "2026-07-21T17:51:00.000Z",
+      "duration_minutes": 21,
+      "mean_4_8_share_percent": 35.85295267601079,
+      "max_rms_counts": 6237.2885188218015,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jul 21, 2026 1:00 PM EDT",
+          "segment_start_et": "Jul 21, 2026 1:30 PM EDT",
+          "segment_end_et": "Jul 21, 2026 1:51 PM EDT",
+          "minutes": 21,
+          "modal_peak_hz": 10.75,
+          "modal_peak_minutes": 3,
+          "mean_rms_counts": 4011.4156974939992,
+          "max_rms_counts": 6237.2885188218015,
+          "mean_4_8_share_percent": 35.85295267601079
+        }
+      ]
+    },
+    {
+      "id": "H4-090",
+      "start_et": "Jul 21, 2026 10:43 PM EDT",
+      "end_et": "Jul 21, 2026 11:31 PM EDT",
+      "start_utc": "2026-07-22T02:43:00.000Z",
+      "end_utc": "2026-07-22T03:31:00.000Z",
+      "duration_minutes": 48,
+      "mean_4_8_share_percent": 36.3683409431629,
+      "max_rms_counts": 4085.422516869113,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jul 21, 2026 10:00 PM EDT",
+          "segment_start_et": "Jul 21, 2026 10:43 PM EDT",
+          "segment_end_et": "Jul 21, 2026 11:00 PM EDT",
+          "minutes": 17,
+          "modal_peak_hz": 5.75,
+          "modal_peak_minutes": 2,
+          "mean_rms_counts": 3344.3836050153423,
+          "max_rms_counts": 4085.422516869113,
+          "mean_4_8_share_percent": 34.24769670801137
+        },
+        {
+          "hour_start_et": "Jul 21, 2026 11:00 PM EDT",
+          "segment_start_et": "Jul 21, 2026 11:00 PM EDT",
+          "segment_end_et": "Jul 21, 2026 11:31 PM EDT",
+          "minutes": 31,
+          "modal_peak_hz": 10.95,
+          "modal_peak_minutes": 4,
+          "mean_rms_counts": 3148.3049073117886,
+          "max_rms_counts": 3547.708459464065,
+          "mean_4_8_share_percent": 37.531274878568574
+        }
+      ]
+    },
+    {
+      "id": "H4-091",
+      "start_et": "Jul 22, 2026 12:17 PM EDT",
+      "end_et": "Jul 22, 2026 12:41 PM EDT",
+      "start_utc": "2026-07-22T16:17:00.000Z",
+      "end_utc": "2026-07-22T16:41:00.000Z",
+      "duration_minutes": 24,
+      "mean_4_8_share_percent": 35.42534478759754,
+      "max_rms_counts": 3309.267366750789,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jul 22, 2026 12:00 PM EDT",
+          "segment_start_et": "Jul 22, 2026 12:17 PM EDT",
+          "segment_end_et": "Jul 22, 2026 12:41 PM EDT",
+          "minutes": 24,
+          "modal_peak_hz": 10.85,
+          "modal_peak_minutes": 5,
+          "mean_rms_counts": 3097.8054760817213,
+          "max_rms_counts": 3309.267366750789,
+          "mean_4_8_share_percent": 35.42534478759754
+        }
+      ]
+    },
+    {
+      "id": "H4-092",
+      "start_et": "Jul 23, 2026 8:44 PM EDT",
+      "end_et": "Jul 23, 2026 9:09 PM EDT",
+      "start_utc": "2026-07-24T00:44:00.000Z",
+      "end_utc": "2026-07-24T01:09:00.000Z",
+      "duration_minutes": 25,
+      "mean_4_8_share_percent": 40.096376795364755,
+      "max_rms_counts": 3338.1385652025183,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jul 23, 2026 8:00 PM EDT",
+          "segment_start_et": "Jul 23, 2026 8:44 PM EDT",
+          "segment_end_et": "Jul 23, 2026 9:00 PM EDT",
+          "minutes": 16,
+          "modal_peak_hz": 5.65,
+          "modal_peak_minutes": 3,
+          "mean_rms_counts": 3157.3030576150404,
+          "max_rms_counts": 3338.1385652025183,
+          "mean_4_8_share_percent": 40.33129373555083
+        },
+        {
+          "hour_start_et": "Jul 23, 2026 9:00 PM EDT",
+          "segment_start_et": "Jul 23, 2026 9:00 PM EDT",
+          "segment_end_et": "Jul 23, 2026 9:09 PM EDT",
+          "minutes": 9,
+          "modal_peak_hz": 10.95,
+          "modal_peak_minutes": 2,
+          "mean_rms_counts": 3063.1199961689654,
+          "max_rms_counts": 3224.8565812382694,
+          "mean_4_8_share_percent": 39.6787466794784
+        }
+      ]
+    },
+    {
+      "id": "H4-093",
+      "start_et": "Jul 23, 2026 9:10 PM EDT",
+      "end_et": "Jul 23, 2026 10:42 PM EDT",
+      "start_utc": "2026-07-24T01:10:00.000Z",
+      "end_utc": "2026-07-24T02:42:00.000Z",
+      "duration_minutes": 92,
+      "mean_4_8_share_percent": 38.27586125003264,
+      "max_rms_counts": 3370.6879334777254,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jul 23, 2026 9:00 PM EDT",
+          "segment_start_et": "Jul 23, 2026 9:10 PM EDT",
+          "segment_end_et": "Jul 23, 2026 10:00 PM EDT",
+          "minutes": 50,
+          "modal_peak_hz": 5.45,
+          "modal_peak_minutes": 6,
+          "mean_rms_counts": 3019.5458288303826,
+          "max_rms_counts": 3370.6879334777254,
+          "mean_4_8_share_percent": 38.255073284833244
+        },
+        {
+          "hour_start_et": "Jul 23, 2026 10:00 PM EDT",
+          "segment_start_et": "Jul 23, 2026 10:00 PM EDT",
+          "segment_end_et": "Jul 23, 2026 10:42 PM EDT",
+          "minutes": 42,
+          "modal_peak_hz": 10.85,
+          "modal_peak_minutes": 5,
+          "mean_rms_counts": 2965.203252450192,
+          "max_rms_counts": 3277.4924665021354,
+          "mean_4_8_share_percent": 38.30060882765095
+        }
+      ]
+    },
+    {
+      "id": "H4-094",
+      "start_et": "Jul 27, 2026 1:02 AM EDT",
+      "end_et": "Jul 27, 2026 1:58 AM EDT",
+      "start_utc": "2026-07-27T05:02:00.000Z",
+      "end_utc": "2026-07-27T05:58:00.000Z",
+      "duration_minutes": 56,
+      "mean_4_8_share_percent": 36.77447140205166,
+      "max_rms_counts": 3375.7620023159193,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jul 27, 2026 1:00 AM EDT",
+          "segment_start_et": "Jul 27, 2026 1:02 AM EDT",
+          "segment_end_et": "Jul 27, 2026 1:58 AM EDT",
+          "minutes": 56,
+          "modal_peak_hz": 10.65,
+          "modal_peak_minutes": 6,
+          "mean_rms_counts": 2891.0173450248917,
+          "max_rms_counts": 3375.7620023159193,
+          "mean_4_8_share_percent": 36.77447140205166
+        }
+      ]
+    },
+    {
+      "id": "H4-095",
+      "start_et": "Jul 27, 2026 1:59 AM EDT",
+      "end_et": "Jul 27, 2026 2:16 AM EDT",
+      "start_utc": "2026-07-27T05:59:00.000Z",
+      "end_utc": "2026-07-27T06:16:00.000Z",
+      "duration_minutes": 17,
+      "mean_4_8_share_percent": 36.198474196268755,
+      "max_rms_counts": 2921.5900525923225,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jul 27, 2026 1:00 AM EDT",
+          "segment_start_et": "Jul 27, 2026 1:59 AM EDT",
+          "segment_end_et": "Jul 27, 2026 2:00 AM EDT",
+          "minutes": 1,
+          "modal_peak_hz": 8.55,
+          "modal_peak_minutes": 1,
+          "mean_rms_counts": 2909.7597866337805,
+          "max_rms_counts": 2909.7597866337805,
+          "mean_4_8_share_percent": 33.91290185577568
+        },
+        {
+          "hour_start_et": "Jul 27, 2026 2:00 AM EDT",
+          "segment_start_et": "Jul 27, 2026 2:00 AM EDT",
+          "segment_end_et": "Jul 27, 2026 2:16 AM EDT",
+          "minutes": 16,
+          "modal_peak_hz": 10.95,
+          "modal_peak_minutes": 3,
+          "mean_rms_counts": 2825.586563310398,
+          "max_rms_counts": 2921.5900525923225,
+          "mean_4_8_share_percent": 36.34132246754957
+        }
+      ]
+    },
+    {
+      "id": "H4-096",
+      "start_et": "Jul 27, 2026 2:17 AM EDT",
+      "end_et": "Jul 27, 2026 4:58 AM EDT",
+      "start_utc": "2026-07-27T06:17:00.000Z",
+      "end_utc": "2026-07-27T08:58:00.000Z",
+      "duration_minutes": 161,
+      "mean_4_8_share_percent": 36.907448393465415,
+      "max_rms_counts": 3168.5905414440454,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jul 27, 2026 2:00 AM EDT",
+          "segment_start_et": "Jul 27, 2026 2:17 AM EDT",
+          "segment_end_et": "Jul 27, 2026 3:00 AM EDT",
+          "minutes": 43,
+          "modal_peak_hz": 10.75,
+          "modal_peak_minutes": 5,
+          "mean_rms_counts": 2818.8350515523944,
+          "max_rms_counts": 3006.918382572576,
+          "mean_4_8_share_percent": 36.671998864432034
+        },
+        {
+          "hour_start_et": "Jul 27, 2026 3:00 AM EDT",
+          "segment_start_et": "Jul 27, 2026 3:00 AM EDT",
+          "segment_end_et": "Jul 27, 2026 4:00 AM EDT",
+          "minutes": 60,
+          "modal_peak_hz": 10.85,
+          "modal_peak_minutes": 9,
+          "mean_rms_counts": 2831.7264406873824,
+          "max_rms_counts": 3011.1474757309843,
+          "mean_4_8_share_percent": 37.499680482437455
+        },
+        {
+          "hour_start_et": "Jul 27, 2026 4:00 AM EDT",
+          "segment_start_et": "Jul 27, 2026 4:00 AM EDT",
+          "segment_end_et": "Jul 27, 2026 4:58 AM EDT",
+          "minutes": 58,
+          "modal_peak_hz": 5.75,
+          "modal_peak_minutes": 6,
+          "mean_rms_counts": 2885.16711797523,
+          "max_rms_counts": 3168.5905414440454,
+          "mean_4_8_share_percent": 36.46935191777767
+        }
+      ]
+    },
+    {
+      "id": "H4-097",
+      "start_et": "Jul 27, 2026 1:30 PM EDT",
+      "end_et": "Jul 27, 2026 1:49 PM EDT",
+      "start_utc": "2026-07-27T17:30:00.000Z",
+      "end_utc": "2026-07-27T17:49:00.000Z",
+      "duration_minutes": 19,
+      "mean_4_8_share_percent": 35.74342508268858,
+      "max_rms_counts": 6184.771085539305,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jul 27, 2026 1:00 PM EDT",
+          "segment_start_et": "Jul 27, 2026 1:30 PM EDT",
+          "segment_end_et": "Jul 27, 2026 1:49 PM EDT",
+          "minutes": 19,
+          "modal_peak_hz": 10.85,
+          "modal_peak_minutes": 3,
+          "mean_rms_counts": 3428.898860420908,
+          "max_rms_counts": 6184.771085539305,
+          "mean_4_8_share_percent": 35.74342508268858
+        }
+      ]
+    },
+    {
+      "id": "H4-098",
+      "start_et": "Jul 27, 2026 9:23 PM EDT",
+      "end_et": "Jul 27, 2026 11:40 PM EDT",
+      "start_utc": "2026-07-28T01:23:00.000Z",
+      "end_utc": "2026-07-28T03:40:00.000Z",
+      "duration_minutes": 137,
+      "mean_4_8_share_percent": 38.12838334314026,
+      "max_rms_counts": 3596.2645256172705,
+      "hour_rows": [
+        {
+          "hour_start_et": "Jul 27, 2026 9:00 PM EDT",
+          "segment_start_et": "Jul 27, 2026 9:23 PM EDT",
+          "segment_end_et": "Jul 27, 2026 10:00 PM EDT",
+          "minutes": 37,
+          "modal_peak_hz": 10.85,
+          "modal_peak_minutes": 6,
+          "mean_rms_counts": 2962.436811155885,
+          "max_rms_counts": 3596.2645256172705,
+          "mean_4_8_share_percent": 37.227409835842316
+        },
+        {
+          "hour_start_et": "Jul 27, 2026 10:00 PM EDT",
+          "segment_start_et": "Jul 27, 2026 10:00 PM EDT",
+          "segment_end_et": "Jul 27, 2026 11:00 PM EDT",
+          "minutes": 60,
+          "modal_peak_hz": 5.75,
+          "modal_peak_minutes": 9,
+          "mean_rms_counts": 2996.7692827388933,
+          "max_rms_counts": 3306.634431095408,
+          "mean_4_8_share_percent": 39.1313571007178
+        },
+        {
+          "hour_start_et": "Jul 27, 2026 11:00 PM EDT",
+          "segment_start_et": "Jul 27, 2026 11:00 PM EDT",
+          "segment_end_et": "Jul 27, 2026 11:40 PM EDT",
+          "minutes": 40,
+          "modal_peak_hz": 10.95,
+          "modal_peak_minutes": 5,
+          "mean_rms_counts": 3025.4148487479733,
+          "max_rms_counts": 3475.461967622849,
+          "mean_4_8_share_percent": 37.457323201024565
+        }
+      ]
+    },
+    {
+      "id": "H4-099",
+      "start_et": "Aug 1, 2026 2:57 AM EDT",
+      "end_et": "Aug 1, 2026 4:17 AM EDT",
+      "start_utc": "2026-08-01T06:57:00.000Z",
+      "end_utc": "2026-08-01T08:17:00.000Z",
+      "duration_minutes": 80,
+      "mean_4_8_share_percent": 38.10894945873745,
+      "max_rms_counts": 3117.711775695163,
+      "hour_rows": [
+        {
+          "hour_start_et": "Aug 1, 2026 2:00 AM EDT",
+          "segment_start_et": "Aug 1, 2026 2:57 AM EDT",
+          "segment_end_et": "Aug 1, 2026 3:00 AM EDT",
+          "minutes": 3,
+          "modal_peak_hz": 5.95,
+          "modal_peak_minutes": 1,
+          "mean_rms_counts": 2932.621035083621,
+          "max_rms_counts": 2990.7903425638547,
+          "mean_4_8_share_percent": 36.897200583361546
+        },
+        {
+          "hour_start_et": "Aug 1, 2026 3:00 AM EDT",
+          "segment_start_et": "Aug 1, 2026 3:00 AM EDT",
+          "segment_end_et": "Aug 1, 2026 4:00 AM EDT",
+          "minutes": 60,
+          "modal_peak_hz": 10.95,
+          "modal_peak_minutes": 8,
+          "mean_rms_counts": 2858.252723766362,
+          "max_rms_counts": 3117.711775695163,
+          "mean_4_8_share_percent": 38.1461590233753
+        },
+        {
+          "hour_start_et": "Aug 1, 2026 4:00 AM EDT",
+          "segment_start_et": "Aug 1, 2026 4:00 AM EDT",
+          "segment_end_et": "Aug 1, 2026 4:17 AM EDT",
+          "minutes": 17,
+          "modal_peak_hz": 11.05,
+          "modal_peak_minutes": 3,
+          "mean_rms_counts": 2858.6722303325246,
+          "max_rms_counts": 2976.6055801857756,
+          "mean_4_8_share_percent": 38.19145962037604
+        }
+      ]
+    },
+    {
+      "id": "H4-100",
+      "start_et": "Aug 1, 2026 6:37 AM EDT",
+      "end_et": "Aug 1, 2026 7:03 AM EDT",
+      "start_utc": "2026-08-01T10:37:00.000Z",
+      "end_utc": "2026-08-01T11:03:00.000Z",
+      "duration_minutes": 26,
+      "mean_4_8_share_percent": 38.434066539139465,
+      "max_rms_counts": 3372.90847527866,
+      "hour_rows": [
+        {
+          "hour_start_et": "Aug 1, 2026 6:00 AM EDT",
+          "segment_start_et": "Aug 1, 2026 6:37 AM EDT",
+          "segment_end_et": "Aug 1, 2026 7:00 AM EDT",
+          "minutes": 23,
+          "modal_peak_hz": 5.15,
+          "modal_peak_minutes": 3,
+          "mean_rms_counts": 2897.0180950059694,
+          "max_rms_counts": 3372.90847527866,
+          "mean_4_8_share_percent": 38.586668643993804
+        },
+        {
+          "hour_start_et": "Aug 1, 2026 7:00 AM EDT",
+          "segment_start_et": "Aug 1, 2026 7:00 AM EDT",
+          "segment_end_et": "Aug 1, 2026 7:03 AM EDT",
+          "minutes": 3,
+          "modal_peak_hz": 5.25,
+          "modal_peak_minutes": 2,
+          "mean_rms_counts": 2876.0692051514447,
+          "max_rms_counts": 3027.0064188124147,
+          "mean_4_8_share_percent": 37.26411706858947
+        }
+      ]
+    },
+    {
+      "id": "H4-101",
+      "start_et": "Aug 1, 2026 10:24 AM EDT",
+      "end_et": "Aug 1, 2026 10:53 AM EDT",
+      "start_utc": "2026-08-01T14:24:00.000Z",
+      "end_utc": "2026-08-01T14:53:00.000Z",
+      "duration_minutes": 29,
+      "mean_4_8_share_percent": 37.56503431845593,
+      "max_rms_counts": 3185.645618117841,
+      "hour_rows": [
+        {
+          "hour_start_et": "Aug 1, 2026 10:00 AM EDT",
+          "segment_start_et": "Aug 1, 2026 10:24 AM EDT",
+          "segment_end_et": "Aug 1, 2026 10:53 AM EDT",
+          "minutes": 29,
+          "modal_peak_hz": 5.15,
+          "modal_peak_minutes": 4,
+          "mean_rms_counts": 2880.2747500940427,
+          "max_rms_counts": 3185.645618117841,
+          "mean_4_8_share_percent": 37.56503431845593
+        }
+      ]
+    },
+    {
+      "id": "H4-102",
+      "start_et": "Aug 1, 2026 12:14 PM EDT",
+      "end_et": "Aug 1, 2026 12:29 PM EDT",
+      "start_utc": "2026-08-01T16:14:00.000Z",
+      "end_utc": "2026-08-01T16:29:00.000Z",
+      "duration_minutes": 15,
+      "mean_4_8_share_percent": 38.82497455105731,
+      "max_rms_counts": 3154.526423424388,
+      "hour_rows": [
+        {
+          "hour_start_et": "Aug 1, 2026 12:00 PM EDT",
+          "segment_start_et": "Aug 1, 2026 12:14 PM EDT",
+          "segment_end_et": "Aug 1, 2026 12:29 PM EDT",
+          "minutes": 15,
+          "modal_peak_hz": 10.75,
+          "modal_peak_minutes": 3,
+          "mean_rms_counts": 2893.91024905332,
+          "max_rms_counts": 3154.526423424388,
+          "mean_4_8_share_percent": 38.82497455105731
+        }
+      ]
+    },
+    {
+      "id": "H4-103",
+      "start_et": "Aug 1, 2026 1:28 PM EDT",
+      "end_et": "Aug 1, 2026 1:51 PM EDT",
+      "start_utc": "2026-08-01T17:28:00.000Z",
+      "end_utc": "2026-08-01T17:51:00.000Z",
+      "duration_minutes": 23,
+      "mean_4_8_share_percent": 37.10259824906342,
+      "max_rms_counts": 3725.0904890066595,
+      "hour_rows": [
+        {
+          "hour_start_et": "Aug 1, 2026 1:00 PM EDT",
+          "segment_start_et": "Aug 1, 2026 1:28 PM EDT",
+          "segment_end_et": "Aug 1, 2026 1:51 PM EDT",
+          "minutes": 23,
+          "modal_peak_hz": 10.75,
+          "modal_peak_minutes": 4,
+          "mean_rms_counts": 3070.409335303979,
+          "max_rms_counts": 3725.0904890066595,
+          "mean_4_8_share_percent": 37.10259824906342
+        }
+      ]
+    },
+    {
+      "id": "H4-104",
+      "start_et": "Aug 1, 2026 2:11 PM EDT",
+      "end_et": "Aug 1, 2026 2:31 PM EDT",
+      "start_utc": "2026-08-01T18:11:00.000Z",
+      "end_utc": "2026-08-01T18:31:00.000Z",
+      "duration_minutes": 20,
+      "mean_4_8_share_percent": 37.18569937718668,
+      "max_rms_counts": 3154.1502423393404,
+      "hour_rows": [
+        {
+          "hour_start_et": "Aug 1, 2026 2:00 PM EDT",
+          "segment_start_et": "Aug 1, 2026 2:11 PM EDT",
+          "segment_end_et": "Aug 1, 2026 2:31 PM EDT",
+          "minutes": 20,
+          "modal_peak_hz": 10.95,
+          "modal_peak_minutes": 5,
+          "mean_rms_counts": 2949.0089548349147,
+          "max_rms_counts": 3154.1502423393404,
+          "mean_4_8_share_percent": 37.18569937718668
+        }
+      ]
+    },
+    {
+      "id": "H4-105",
+      "start_et": "Aug 1, 2026 5:36 PM EDT",
+      "end_et": "Aug 1, 2026 6:23 PM EDT",
+      "start_utc": "2026-08-01T21:36:00.000Z",
+      "end_utc": "2026-08-01T22:23:00.000Z",
+      "duration_minutes": 47,
+      "mean_4_8_share_percent": 37.86518024291486,
+      "max_rms_counts": 4700.8982846366,
+      "hour_rows": [
+        {
+          "hour_start_et": "Aug 1, 2026 5:00 PM EDT",
+          "segment_start_et": "Aug 1, 2026 5:36 PM EDT",
+          "segment_end_et": "Aug 1, 2026 6:00 PM EDT",
+          "minutes": 24,
+          "modal_peak_hz": 5.75,
+          "modal_peak_minutes": 4,
+          "mean_rms_counts": 3001.3656827285795,
+          "max_rms_counts": 3294.5719113868686,
+          "mean_4_8_share_percent": 37.69038335427391
+        },
+        {
+          "hour_start_et": "Aug 1, 2026 6:00 PM EDT",
+          "segment_start_et": "Aug 1, 2026 6:00 PM EDT",
+          "segment_end_et": "Aug 1, 2026 6:23 PM EDT",
+          "minutes": 23,
+          "modal_peak_hz": 5.65,
+          "modal_peak_minutes": 3,
+          "mean_rms_counts": 3072.493336268138,
+          "max_rms_counts": 4700.8982846366,
+          "mean_4_8_share_percent": 38.04757699627931
+        }
+      ]
+    },
+    {
+      "id": "H4-106",
+      "start_et": "Aug 1, 2026 7:39 PM EDT",
+      "end_et": "Aug 1, 2026 8:15 PM EDT",
+      "start_utc": "2026-08-01T23:39:00.000Z",
+      "end_utc": "2026-08-02T00:15:00.000Z",
+      "duration_minutes": 36,
+      "mean_4_8_share_percent": 38.04757746704549,
+      "max_rms_counts": 3321.9881699718417,
+      "hour_rows": [
+        {
+          "hour_start_et": "Aug 1, 2026 7:00 PM EDT",
+          "segment_start_et": "Aug 1, 2026 7:39 PM EDT",
+          "segment_end_et": "Aug 1, 2026 8:00 PM EDT",
+          "minutes": 21,
+          "modal_peak_hz": 10.75,
+          "modal_peak_minutes": 4,
+          "mean_rms_counts": 2996.4958182814635,
+          "max_rms_counts": 3264.371327943042,
+          "mean_4_8_share_percent": 37.32037171867956
+        },
+        {
+          "hour_start_et": "Aug 1, 2026 8:00 PM EDT",
+          "segment_start_et": "Aug 1, 2026 8:00 PM EDT",
+          "segment_end_et": "Aug 1, 2026 8:15 PM EDT",
+          "minutes": 15,
+          "modal_peak_hz": 5.65,
+          "modal_peak_minutes": 2,
+          "mean_rms_counts": 3089.324020647616,
+          "max_rms_counts": 3321.9881699718417,
+          "mean_4_8_share_percent": 39.06566551475778
+        }
+      ]
+    },
+    {
+      "id": "H4-107",
+      "start_et": "Aug 2, 2026 1:39 AM EDT",
+      "end_et": "Aug 2, 2026 2:01 AM EDT",
+      "start_utc": "2026-08-02T05:39:00.000Z",
+      "end_utc": "2026-08-02T06:01:00.000Z",
+      "duration_minutes": 22,
+      "mean_4_8_share_percent": 36.58681464893812,
+      "max_rms_counts": 3703.9397394314524,
+      "hour_rows": [
+        {
+          "hour_start_et": "Aug 2, 2026 1:00 AM EDT",
+          "segment_start_et": "Aug 2, 2026 1:39 AM EDT",
+          "segment_end_et": "Aug 2, 2026 2:00 AM EDT",
+          "minutes": 21,
+          "modal_peak_hz": 10.55,
+          "modal_peak_minutes": 3,
+          "mean_rms_counts": 3173.060013079381,
+          "max_rms_counts": 3703.9397394314524,
+          "mean_4_8_share_percent": 36.54837671109706
+        },
+        {
+          "hour_start_et": "Aug 2, 2026 2:00 AM EDT",
+          "segment_start_et": "Aug 2, 2026 2:00 AM EDT",
+          "segment_end_et": "Aug 2, 2026 2:01 AM EDT",
+          "minutes": 1,
+          "modal_peak_hz": 5.85,
+          "modal_peak_minutes": 1,
+          "mean_rms_counts": 2903.2953280223905,
+          "max_rms_counts": 2903.2953280223905,
+          "mean_4_8_share_percent": 37.39401134360032
+        }
+      ]
+    },
+    {
+      "id": "H4-108",
+      "start_et": "Aug 2, 2026 4:42 AM EDT",
+      "end_et": "Aug 2, 2026 5:00 AM EDT",
+      "start_utc": "2026-08-02T08:42:00.000Z",
+      "end_utc": "2026-08-02T09:00:00.000Z",
+      "duration_minutes": 18,
+      "mean_4_8_share_percent": 36.14327683117563,
+      "max_rms_counts": 3698.508011533599,
+      "hour_rows": [
+        {
+          "hour_start_et": "Aug 2, 2026 4:00 AM EDT",
+          "segment_start_et": "Aug 2, 2026 4:42 AM EDT",
+          "segment_end_et": "Aug 2, 2026 5:00 AM EDT",
+          "minutes": 18,
+          "modal_peak_hz": 10.95,
+          "modal_peak_minutes": 3,
+          "mean_rms_counts": 3150.2917028250613,
+          "max_rms_counts": 3698.508011533599,
+          "mean_4_8_share_percent": 36.14327683117563
+        }
+      ]
+    },
+    {
+      "id": "H4-109",
+      "start_et": "Aug 2, 2026 10:57 AM EDT",
+      "end_et": "Aug 2, 2026 11:52 AM EDT",
+      "start_utc": "2026-08-02T14:57:00.000Z",
+      "end_utc": "2026-08-02T15:52:00.000Z",
+      "duration_minutes": 55,
+      "mean_4_8_share_percent": 32.14036792685958,
+      "max_rms_counts": 4954.545108906931,
+      "hour_rows": [
+        {
+          "hour_start_et": "Aug 2, 2026 10:00 AM EDT",
+          "segment_start_et": "Aug 2, 2026 10:57 AM EDT",
+          "segment_end_et": "Aug 2, 2026 11:00 AM EDT",
+          "minutes": 3,
+          "modal_peak_hz": 0.65,
+          "modal_peak_minutes": 2,
+          "mean_rms_counts": 3787.7650192252527,
+          "max_rms_counts": 3837.398805329339,
+          "mean_4_8_share_percent": 28.641162123216308
+        },
+        {
+          "hour_start_et": "Aug 2, 2026 11:00 AM EDT",
+          "segment_start_et": "Aug 2, 2026 11:00 AM EDT",
+          "segment_end_et": "Aug 2, 2026 11:52 AM EDT",
+          "minutes": 52,
+          "modal_peak_hz": 0.55,
+          "modal_peak_minutes": 14,
+          "mean_rms_counts": 3806.357019539177,
+          "max_rms_counts": 4954.545108906931,
+          "mean_4_8_share_percent": 32.342245184762085
+        }
+      ]
+    },
+    {
+      "id": "H4-110",
+      "start_et": "Aug 3, 2026 2:14 AM EDT",
+      "end_et": "Aug 3, 2026 3:15 AM EDT",
+      "start_utc": "2026-08-03T06:14:00.000Z",
+      "end_utc": "2026-08-03T07:15:00.000Z",
+      "duration_minutes": 61,
+      "mean_4_8_share_percent": 38.283939759345614,
+      "max_rms_counts": 4405.538232880877,
+      "hour_rows": [
+        {
+          "hour_start_et": "Aug 3, 2026 2:00 AM EDT",
+          "segment_start_et": "Aug 3, 2026 2:14 AM EDT",
+          "segment_end_et": "Aug 3, 2026 3:00 AM EDT",
+          "minutes": 46,
+          "modal_peak_hz": 5.55,
+          "modal_peak_minutes": 7,
+          "mean_rms_counts": 2677.8435723188522,
+          "max_rms_counts": 4405.538232880877,
+          "mean_4_8_share_percent": 38.46516400483987
+        },
+        {
+          "hour_start_et": "Aug 3, 2026 3:00 AM EDT",
+          "segment_start_et": "Aug 3, 2026 3:00 AM EDT",
+          "segment_end_et": "Aug 3, 2026 3:15 AM EDT",
+          "minutes": 15,
+          "modal_peak_hz": 11.15,
+          "modal_peak_minutes": 2,
+          "mean_rms_counts": 2672.9756548245214,
+          "max_rms_counts": 3003.402721745214,
+          "mean_4_8_share_percent": 37.72818540649656
+        }
+      ]
+    },
+    {
+      "id": "H4-111",
+      "start_et": "Aug 3, 2026 9:13 AM EDT",
+      "end_et": "Aug 3, 2026 9:30 AM EDT",
+      "start_utc": "2026-08-03T13:13:00.000Z",
+      "end_utc": "2026-08-03T13:30:00.000Z",
+      "duration_minutes": 17,
+      "mean_4_8_share_percent": 39.33773233162329,
+      "max_rms_counts": 3445.2539553942597,
+      "hour_rows": [
+        {
+          "hour_start_et": "Aug 3, 2026 9:00 AM EDT",
+          "segment_start_et": "Aug 3, 2026 9:13 AM EDT",
+          "segment_end_et": "Aug 3, 2026 9:30 AM EDT",
+          "minutes": 17,
+          "modal_peak_hz": 5.75,
+          "modal_peak_minutes": 3,
+          "mean_rms_counts": 2994.1711903737273,
+          "max_rms_counts": 3445.2539553942597,
+          "mean_4_8_share_percent": 39.33773233162329
+        }
+      ]
+    },
+    {
+      "id": "H4-112",
+      "start_et": "Aug 3, 2026 11:45 AM EDT",
+      "end_et": "Aug 3, 2026 12:43 PM EDT",
+      "start_utc": "2026-08-03T15:45:00.000Z",
+      "end_utc": "2026-08-03T16:43:00.000Z",
+      "duration_minutes": 58,
+      "mean_4_8_share_percent": 37.508977047828004,
+      "max_rms_counts": 3749.6327533616764,
+      "hour_rows": [
+        {
+          "hour_start_et": "Aug 3, 2026 11:00 AM EDT",
+          "segment_start_et": "Aug 3, 2026 11:45 AM EDT",
+          "segment_end_et": "Aug 3, 2026 12:00 PM EDT",
+          "minutes": 15,
+          "modal_peak_hz": 11.75,
+          "modal_peak_minutes": 3,
+          "mean_rms_counts": 3117.3832408033186,
+          "max_rms_counts": 3395.7197686626664,
+          "mean_4_8_share_percent": 37.25542443457808
+        },
+        {
+          "hour_start_et": "Aug 3, 2026 12:00 PM EDT",
+          "segment_start_et": "Aug 3, 2026 12:00 PM EDT",
+          "segment_end_et": "Aug 3, 2026 12:43 PM EDT",
+          "minutes": 43,
+          "modal_peak_hz": 11.15,
+          "modal_peak_minutes": 5,
+          "mean_rms_counts": 3017.1651356455873,
+          "max_rms_counts": 3749.6327533616764,
+          "mean_4_8_share_percent": 37.597425633845404
+        }
+      ]
+    }
+  ],
+  "interpretation": {
+    "verified": "Recurring HDF intervals in which mean spectral power density across 4-8 Hz exceeded the comparison bands for at least 15 consecutive complete minutes.",
+    "not_established": "Raw HDF counts do not by themselves establish calibrated pressure exposure, source, intent, or medical causation.",
+    "next_step": "Independent onsite low-frequency pressure and tri-axis vibration measurements with traceable calibration."
+  },
+  "missing_data_rule": "Missing samples and dates are excluded. A gap is not converted to zero, quiet, normal, compliant, or below benchmark.",
+  "integrity": {
+    "analysis_sha256": "7d6d8ab79ee1099552d12c262ecfa02fceae595293758eefb38daa5a0e54e148",
+    "hourly_csv_sha256": "2a1e9d622f651c15ff13983543370e9f1348e15ecaf86fd494ebf8259617e7c6",
+    "report_pdf_sha256": "272c1bf44900727e5dc746fccbf8b2b2951af24ab8ab28b4a1207cf00a4574e3"
+  }
+}
