@@ -10,7 +10,7 @@
 :root{--bg:#050706;--panel:#0d1411;--panel2:#111b16;--line:#2a3b33;--ink:#f5faf7;--muted:#a9bab1;--green:#55e49c;--blue:#75c2ff;--amber:#f2c75d;--red:#ff6258;--red2:#351314;--red3:#8f201b;--shadow:0 14px 34px rgba(0,0,0,.3)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 14% -6%,#10271e 0,transparent 32rem),var(--bg);color:var(--ink);font:15px/1.55 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}a{color:inherit}.wrap{width:min(1180px,calc(100% - 24px));margin:auto}.panel{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:15px;padding:20px;box-shadow:var(--shadow)}
 .hero{padding:34px 0 26px;border-bottom:1px solid var(--line)}.hero-grid,.two,.three,.four,.channels{display:grid;gap:14px}.hero-grid{grid-template-columns:minmax(0,1fr) 360px;align-items:end}.two{grid-template-columns:1fr 1fr}.three{grid-template-columns:repeat(3,1fr)}.four{grid-template-columns:repeat(4,1fr)}.channels{grid-template-columns:1.3fr .7fr}.eyebrow,.tag{font-size:.72rem;text-transform:uppercase;letter-spacing:.13em;font-weight:950;color:var(--green)}h1{margin:8px 0 14px;font-size:clamp(2.5rem,7vw,5.3rem);line-height:.98;letter-spacing:-.055em}h1 span{color:var(--green)}h2{margin:6px 0 12px;font-size:clamp(1.45rem,3vw,2.2rem);line-height:1.08}h3{margin:4px 0 8px}.sub,.muted{color:var(--muted)}
-.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}.btn{display:flex;min-height:52px;align-items:center;justify-content:center;text-align:center;padding:12px 14px;border:1px solid #57dfa2;border-radius:10px;background:linear-gradient(135deg,#117d50,#18ad6c);color:#fff;text-decoration:none;font-weight:950}.status{margin-top:10px}.row{display:flex;justify-content:space-between;gap:14px;padding:8px 0;border-bottom:1px solid #23352d}.row:last-child{border-bottom:0}.row strong{text-align:right}.ok{color:var(--green)}main{padding:18px 0 34px}.section{margin-top:16px}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}.btn{display:flex;min-height:52px;align-items:center;justify-content:center;text-align:center;padding:12px 14px;border:1px solid #57dfa2;border-radius:10px;background:linear-gradient(135deg,#117d50,#18ad6c);color:#fff;text-decoration:none;font-weight:950}.status{margin-top:10px}.row{display:flex;justify-content:space-between;gap:14px;padding:8px 0;border-bottom:1px solid #23352d}.row:last-child{border-bottom:0}.row strong{text-align:right}.ok{color:var(--green)}.stale-source{color:var(--red)!important;font-weight:950}.stale-source::before{content:"";display:inline-block;width:.78rem;height:.78rem;margin-right:.48rem;border-radius:50%;vertical-align:-.04rem;background:var(--red);box-shadow:0 0 0 .2rem rgba(255,98,88,.22);animation:stalePulse 1s steps(2,end) infinite}@keyframes stalePulse{50%{opacity:.22;transform:scale(.82)}}@media(prefers-reduced-motion:reduce){.stale-source::before{animation:none}}main{padding:18px 0 34px}.section{margin-top:16px}
 .focus{border:2px solid #426e59;background:linear-gradient(180deg,#0f2119,#0a100d)}.focus-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:18px;align-items:center}.freqbar{position:relative;height:82px;margin:16px 0 5px;border:1px solid #355247;border-radius:12px;background:#07100c;overflow:hidden}.freqbar .band{position:absolute;left:20%;width:20%;top:0;bottom:0;background:linear-gradient(90deg,rgba(255,98,88,.20),rgba(255,98,88,.42))}.freqbar .seven{position:absolute;left:35%;top:0;bottom:0;width:3px;background:var(--red)}.freqbar span{position:absolute;bottom:7px;font-size:.75rem;color:#cdd9d3}.f0{left:1%}.f4{left:19.2%}.f7{left:33.6%;color:#ffaca6!important;font-weight:950}.f8{left:39.2%}.f20{right:1%}.focus-note{padding:15px;border-left:4px solid var(--red);border-radius:9px;background:#241111;color:#ffd2ce}.focus-note strong{display:block;color:white;margin-bottom:4px}
 .big{display:block;font-size:2rem;line-height:1.05;margin:10px 0;font-weight:950}.counter{font-size:3.2rem;font-weight:950;line-height:1}.red{color:var(--red)}.green{color:var(--green)}.amber{color:var(--amber)}.metric{min-height:160px}.metric .scope{font-size:.82rem;color:var(--muted)}.event-table,.bench-table,.gap-table,.recon-table{width:100%;border-collapse:collapse}.event-table th,.event-table td,.bench-table th,.bench-table td,.gap-table th,.gap-table td,.recon-table th,.recon-table td{padding:11px 9px;text-align:left;vertical-align:top;border-bottom:1px solid #26372f}.event-table th,.bench-table th,.gap-table th,.recon-table th{font-size:.71rem;text-transform:uppercase;letter-spacing:.08em;color:#9fb5aa}.event-table tr.priority td{background:rgba(255,98,88,.065)}.rank{font-size:1.15rem;font-weight:950}.duration{font-weight:950;color:white}.chip{display:inline-flex;align-items:center;gap:6px;padding:4px 8px;border-radius:999px;font-size:.74rem;font-weight:950}.chip.red{background:var(--red2);color:#ffaaa4;border:1px solid #63231f}.chip.green{background:#0d2418;color:#8ff0b7}.chip.neutral{background:#18211d;color:#b5c2bb}.arrow{font-size:1.05rem;font-weight:950}.callout{padding:16px;border-radius:10px;border:1px solid #6f2925;background:#251414}.callout strong{color:#ffaba4}.method{background:#0b1310}.method ul{padding-left:1.2rem;margin:.5rem 0}.method li{margin:.45rem 0;color:#cedbd4}.source-link{display:inline-block;margin-top:8px;color:#bcefd7;text-underline-offset:3px}.note{padding:13px 15px;border-left:4px solid var(--blue);background:#0b1620;border-radius:9px;color:#c6d9e8}.coverage-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.coverage-grid .panel{min-height:140px}.impact{border-color:#6a2925}.impact ul{margin:.5rem 0;padding-left:1.25rem}.impact li{margin:.55rem 0}.headline{border:1px solid #762824;background:linear-gradient(180deg,#291211,#160b0b)}.headline .big{color:#ff8b84}.fine{font-size:.78rem;color:var(--muted)}footer{border-top:1px solid var(--line);padding:18px 0 30px;color:#93a69c;font-size:.8rem}
 @media(max-width:930px){.hero-grid,.focus-grid,.two,.channels{grid-template-columns:1fr}.three,.four,.coverage-grid{grid-template-columns:1fr 1fr}.event-table,.bench-table,.gap-table,.recon-table{display:block;overflow-x:auto}.actions{grid-template-columns:1fr 1fr}}
@@ -151,20 +151,32 @@
 <section class="section panel"><div class="tag">10-pass publication QA</div><h2>Locked checks</h2><div class="two"><ul><li>Duration arithmetic reconciled.</li><li>All displayed >30-minute event intervals source-checked.</li><li>HDF/EHZ units kept separate.</li><li>External benchmark vs self-baseline distinction enforced.</li><li>ASHRAE 65 dB comparison uses calibrated 16 Hz octave data.</li></ul><ul><li>WHO dBA guidance not falsely converted from unweighted HDF bands.</li><li>4–8 Hz features transcribed from calibrated spectral analysis.</li><li>Missing time excluded from denominators.</li><li>Former July 73.38 dB / 82-minute claims reconciled.</li><li>Hourly public-FDSN status automation enabled.</li></ul></div></section>
 
 </main>
-<footer><div class="wrap"><strong>R6E8A · April 12, 2026 — Ongoing</strong><br>*This Data may lag. Missing acquisition intervals are excluded from all calculations. For personal verification, use Raspberry Shake public FDSN and DataView.</div></footer>
+<footer><div class="wrap"><strong>R6E8A · April 12, 2026 — Ongoing</strong><br>*Account for up to 30 minutes of source lag. Missing acquisition intervals are excluded from all calculations. For personal verification, use Raspberry Shake public FDSN and DataView.</div></footer>
 <script>
 (async()=>{
+  const hdf=document.getElementById('hdf-status');
+  const ehz=document.getElementById('ehz-status');
+  const generated=document.getElementById('status-generated');
+  const showRefreshDifficulty=(message)=>{
+    [hdf,ehz,generated].forEach(node=>node.classList.add('stale-source'));
+    generated.textContent=message;
+  };
   try{
     const r=await fetch('./data/current-status.json',{cache:'no-store'});
     if(!r.ok) throw new Error('status');
     const s=await r.json();
     const h=s.channels&&s.channels.HDF; const e=s.channels&&s.channels.EHZ;
-    document.getElementById('hdf-status').textContent=h&&h.latest_sample_et?h.latest_sample_et:(h&&h.ok?'FDSN available':'Status unavailable');
-    document.getElementById('ehz-status').textContent=e&&e.latest_sample_et?e.latest_sample_et:(e&&e.ok?'FDSN available':'Status unavailable');
-    document.getElementById('status-generated').textContent=s.generated_et||'—';
+    hdf.textContent=h&&h.latest_sample_et?h.latest_sample_et:(h&&h.ok?'FDSN available':'Status unavailable');
+    ehz.textContent=e&&e.latest_sample_et?e.latest_sample_et:(e&&e.ok?'FDSN available':'Status unavailable');
+    generated.textContent=s.generated_et||'—';
+    const generatedAt=Date.parse(s.generated_utc||'');
+    if(!Number.isFinite(generatedAt)||Date.now()-generatedAt>60*60*1000){
+      showRefreshDifficulty((s.generated_et||'Last published verification')+' · automatic FDSN refresh delayed');
+    }
   }catch(_){
-    document.getElementById('hdf-status').textContent='Latest published verification retained';
-    document.getElementById('ehz-status').textContent='Latest published verification retained';
+    hdf.textContent='Latest published verification retained';
+    ehz.textContent='Latest published verification retained';
+    showRefreshDifficulty('Automatic FDSN refresh delayed');
   }
 })();
 </script>
