@@ -1,29 +1,29 @@
 {
   "station": "AM.R6E8A.00",
-  "generated_utc": "2026-08-14T15:51:50.998458+00:00",
-  "generated_et": "2026-08-14 11:51:50 AM EDT",
-  "window_start_utc": "2026-08-14T14:56:50.998458+00:00",
-  "window_end_utc": "2026-08-14T15:16:50.998458+00:00",
+  "generated_utc": "2026-08-14T16:28:21.320099+00:00",
+  "generated_et": "2026-08-14 12:28:21 PM EDT",
+  "window_start_utc": "2026-08-14T15:33:21.320099+00:00",
+  "window_end_utc": "2026-08-14T15:53:21.320099+00:00",
   "channels": {
     "HDF": {
       "channel": "HDF",
       "ok": true,
-      "coverage_pct": 100,
+      "coverage_pct": 100.0,
       "segments": 1,
-      "latest_sample_utc": "2026-08-14T15:16:51.681000+00:00",
-      "latest_sample_et": "2026-08-14 11:16:51 AM EDT",
-      "url": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-08-14T14:56:50.998458&end=2026-08-14T15:16:50.998458&format=miniseed&nodata=404"
+      "latest_sample_utc": "2026-08-14T15:53:21.481000+00:00",
+      "latest_sample_et": "2026-08-14 11:53:21 AM EDT",
+      "url": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-08-14T15:33:21.320099&end=2026-08-14T15:53:21.320099&format=miniseed&nodata=404"
     },
     "EHZ": {
       "channel": "EHZ",
       "ok": true,
-      "coverage_pct": 100,
+      "coverage_pct": 100.0,
       "segments": 1,
-      "latest_sample_utc": "2026-08-14T15:16:52.411000+00:00",
-      "latest_sample_et": "2026-08-14 11:16:52 AM EDT",
-      "url": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=EHZ&start=2026-08-14T14:56:50.998458&end=2026-08-14T15:16:50.998458&format=miniseed&nodata=404"
+      "latest_sample_utc": "2026-08-14T15:53:22.531000+00:00",
+      "latest_sample_et": "2026-08-14 11:53:22 AM EDT",
+      "url": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=EHZ&start=2026-08-14T15:33:21.320099&end=2026-08-14T15:53:21.320099&format=miniseed&nodata=404"
     }
   },
   "source": "Raspberry Shake public FDSN DataSelect",
-  "display_note": "*Data can be up to 20 minutes delayed. Missing acquisition time is not scored as zero, quiet, normal, compliant, or below benchmark."
+  "display_note": "*This Data may lag. Missing acquisition time is not scored as zero, quiet, normal, compliant, or below benchmark."
 }
