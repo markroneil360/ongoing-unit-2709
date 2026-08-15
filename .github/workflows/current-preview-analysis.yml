@@ -1,5 +1,6 @@
 name: R6E8A current preview analysis
 
+# isolated preview-only calculation branch
 on:
   push:
     branches:
@@ -35,9 +36,7 @@ jobs:
           TZ=ZoneInfo('America/Detroit')
           BASE='https://data.raspberryshake.org/fdsnws/dataselect/1/query'
           start=datetime.fromisoformat('2026-08-12T19:13:00+00:00')
-          # use the most recent confirmed current-status sample cutoff
           end=datetime.fromisoformat('2026-08-15T20:20:00+00:00')
-          sr_expected=100.0
           counts_per_pa=56000.0
           ref_pa=20e-6
           bands=[('1-4',1,4),('4-8',4,8),('8-16',8,16),('16-20',16,20)]
@@ -52,7 +51,6 @@ jobs:
                   if getattr(e,'code',None)==404: return None,url
                   raise
 
-          # collect and merge in 6h chunks
           traces=[]; urls=[]
           cur=start
           while cur < end:
@@ -67,7 +65,6 @@ jobs:
           st=st.split()
 
           minute_rows=[]
-          # clock-aligned complete minutes only
           minute_epoch=int(start.timestamp()//60)*60
           end_epoch=int(end.timestamp()//60)*60
           for ep in range(minute_epoch,end_epoch,60):
@@ -78,8 +75,6 @@ jobs:
                   sl=tr.slice(a,b-1/tr.stats.sampling_rate,nearest_sample=False)
                   if len(sl.data): chunks.append(sl)
               if not chunks: continue
-              # Require a single continuous minute with essentially all expected samples.
-              # If multiple fragments exist, combine only if timestamps reconcile after merge.
               ss=Stream(chunks); ss.merge(method=0); ss=ss.split()
               if len(ss)!=1: continue
               tr=ss[0]
@@ -97,7 +92,6 @@ jobs:
                   mask=(f>=lo)&(f<hi if hi<20 else f<=hi)
                   vals[name]=float(np.mean(p[mask])) if np.any(mask) else float('nan')
               dom=max(vals,key=vals.get)
-              # band-limited RMS using 4-8 Hz PSD integral approximation
               m=(f>=4)&(f<8)
               rms_counts=math.sqrt(float(np.trapz(p[m],f[m]))) if np.any(m) else float('nan')
               rms_pa=rms_counts/counts_per_pa
@@ -105,15 +99,13 @@ jobs:
               minute_rows.append({'epoch':ep,'utc':datetime.fromtimestamp(ep,timezone.utc).isoformat(),
                                   'dominant':dom,'spl48_db':spl})
 
-          # preserve minute gaps: only consecutive epochs can join into a run
           rows=sorted(minute_rows,key=lambda r:r['epoch'])
           dom48=[r for r in rows if r['dominant']=='4-8']
           runs=[]; cur_run=[]
           for r in rows:
               if r['dominant']=='4-8':
                   if cur_run and r['epoch']!=cur_run[-1]['epoch']+60:
-                      if cur_run: runs.append(cur_run)
-                      cur_run=[]
+                      runs.append(cur_run); cur_run=[]
                   cur_run.append(r)
               else:
                   if cur_run: runs.append(cur_run); cur_run=[]
@@ -136,10 +128,8 @@ jobs:
               return total
           night30=[run for run in c30 if night_overlap(run)>=30]
 
-          # Baseline corrected archive through 2026-08-12 19:12Z
           baseline={'analyzed_minutes':148544,'dom48_minutes':55159,'events15':604,'events30':323,
                     'events60':159,'sustained_minutes':31858,'night30':73,'longest_minutes':664}
-          # Since last old event ended well before the cutoff, no run-boundary merge is needed.
           updated={
             'generated_utc':datetime.now(timezone.utc).isoformat(),
             'analysis_start_utc':start.isoformat(),
