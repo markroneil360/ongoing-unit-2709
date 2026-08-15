@@ -2,224 +2,258 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="dark">
-<meta name="description" content="Unit 2709 R6E8A pressure and infrasound dashboard: prolonged HDF events, method-matched external acoustic benchmarks, nighttime health context, exact coverage, and published FDSN source checks.">
-<title>Confirmed Infrasound (Ongoing) — Unit 2709 R6E8A</title>
+<title>R6E8A Local Approval Preview — Current through 5:02 PM EST</title>
 <style>
-:root{--bg:#050706;--panel:#0d1411;--panel2:#111b16;--line:#2a3b33;--ink:#f5faf7;--muted:#a9bab1;--green:#55e49c;--blue:#75c2ff;--amber:#f2c75d;--red:#ff6258;--red2:#351314;--red3:#8f201b;--shadow:0 14px 34px rgba(0,0,0,.3)}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 14% -6%,#10271e 0,transparent 32rem),var(--bg);color:var(--ink);font:15px/1.55 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}a{color:inherit}.wrap{width:min(1180px,calc(100% - 24px));margin:auto}.panel{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:15px;padding:20px;box-shadow:var(--shadow)}
-.hero{padding:34px 0 26px;border-bottom:1px solid var(--line)}.hero-grid,.two,.three,.four,.channels{display:grid;gap:14px}.hero-grid{grid-template-columns:minmax(0,1fr) 360px;align-items:end}.two{grid-template-columns:1fr 1fr}.three{grid-template-columns:repeat(3,1fr)}.four{grid-template-columns:repeat(4,1fr)}.channels{grid-template-columns:1.3fr .7fr}.eyebrow,.tag{font-size:.72rem;text-transform:uppercase;letter-spacing:.13em;font-weight:950;color:var(--green)}h1{margin:8px 0 14px;font-size:clamp(2.5rem,7vw,5.3rem);line-height:.98;letter-spacing:-.055em}h1 span{color:var(--green)}h2{margin:6px 0 12px;font-size:clamp(1.45rem,3vw,2.2rem);line-height:1.08}h3{margin:4px 0 8px}.sub,.muted{color:var(--muted)}
-.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}.btn{display:flex;min-height:52px;align-items:center;justify-content:center;text-align:center;padding:12px 14px;border:1px solid #57dfa2;border-radius:10px;background:linear-gradient(135deg,#117d50,#18ad6c);color:#fff;text-decoration:none;font-weight:950}.status{margin-top:10px}.row{display:flex;justify-content:space-between;gap:14px;padding:8px 0;border-bottom:1px solid #23352d}.row:last-child{border-bottom:0}.row strong{text-align:right}.ok{color:var(--green)}main{padding:18px 0 34px}.section{margin-top:16px}
-.focus{border:2px solid #426e59;background:linear-gradient(180deg,#0f2119,#0a100d)}.focus-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:18px;align-items:center}.freqbar{position:relative;height:82px;margin:16px 0 5px;border:1px solid #355247;border-radius:12px;background:#07100c;overflow:hidden}.freqbar .band{position:absolute;left:20%;width:20%;top:0;bottom:0;background:linear-gradient(90deg,rgba(255,98,88,.20),rgba(255,98,88,.42))}.freqbar .seven{position:absolute;left:35%;top:0;bottom:0;width:3px;background:var(--red)}.freqbar span{position:absolute;bottom:7px;font-size:.75rem;color:#cdd9d3}.f0{left:1%}.f4{left:19.2%}.f7{left:33.6%;color:#ffaca6!important;font-weight:950}.f8{left:39.2%}.f20{right:1%}.focus-note{padding:15px;border-left:4px solid var(--red);border-radius:9px;background:#241111;color:#ffd2ce}.focus-note strong{display:block;color:white;margin-bottom:4px}
-.big{display:block;font-size:2rem;line-height:1.05;margin:10px 0;font-weight:950}.counter{font-size:3.2rem;font-weight:950;line-height:1}.red{color:var(--red)}.green{color:var(--green)}.amber{color:var(--amber)}.metric{min-height:160px}.metric .scope{font-size:.82rem;color:var(--muted)}.event-table,.bench-table,.gap-table,.recon-table{width:100%;border-collapse:collapse}.event-table th,.event-table td,.bench-table th,.bench-table td,.gap-table th,.gap-table td,.recon-table th,.recon-table td{padding:11px 9px;text-align:left;vertical-align:top;border-bottom:1px solid #26372f}.event-table th,.bench-table th,.gap-table th,.recon-table th{font-size:.71rem;text-transform:uppercase;letter-spacing:.08em;color:#9fb5aa}.event-table tr.priority td{background:rgba(255,98,88,.065)}.rank{font-size:1.15rem;font-weight:950}.duration{font-weight:950;color:white}.chip{display:inline-flex;align-items:center;gap:6px;padding:4px 8px;border-radius:999px;font-size:.74rem;font-weight:950}.chip.red{background:var(--red2);color:#ffaaa4;border:1px solid #63231f}.chip.green{background:#0d2418;color:#8ff0b7}.chip.neutral{background:#18211d;color:#b5c2bb}.arrow{font-size:1.05rem;font-weight:950}.callout{padding:16px;border-radius:10px;border:1px solid #6f2925;background:#251414}.callout strong{color:#ffaba4}.method{background:#0b1310}.method ul{padding-left:1.2rem;margin:.5rem 0}.method li{margin:.45rem 0;color:#cedbd4}.source-link{display:inline-block;margin-top:8px;color:#bcefd7;text-underline-offset:3px}.note{padding:13px 15px;border-left:4px solid var(--blue);background:#0b1620;border-radius:9px;color:#c6d9e8}.coverage-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.coverage-grid .panel{min-height:140px}.impact{border-color:#6a2925}.impact ul{margin:.5rem 0;padding-left:1.25rem}.impact li{margin:.55rem 0}.headline{border:1px solid #762824;background:linear-gradient(180deg,#291211,#160b0b)}.headline .big{color:#ff8b84}.fine{font-size:.78rem;color:var(--muted)}footer{border-top:1px solid var(--line);padding:18px 0 30px;color:#93a69c;font-size:.8rem}
-@media(max-width:930px){.hero-grid,.focus-grid,.two,.channels{grid-template-columns:1fr}.three,.four,.coverage-grid{grid-template-columns:1fr 1fr}.event-table,.bench-table,.gap-table,.recon-table{display:block;overflow-x:auto}.actions{grid-template-columns:1fr 1fr}}
-@media(max-width:600px){.wrap{width:min(100% - 16px,1180px)}.three,.four,.coverage-grid,.actions{grid-template-columns:1fr}.panel{padding:15px}.row{align-items:flex-start;flex-direction:column}.row strong{text-align:left}h1{font-size:2.55rem}.event-table,.bench-table,.gap-table,.recon-table{font-size:.84rem}}
-
-/* OpenRouter-inspired evidence flow: compact selectors, ranked activity, expandable detail. */
-:root{--lime:#c8ff00;--lime-ink:#172000;--soft:#151b18;--soft2:#0b100e;--violet:#a888ff}
-.or-nav{position:sticky;top:0;z-index:30;background:rgba(5,7,6,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
-.or-nav-inner{width:min(1180px,calc(100% - 24px));margin:auto;display:flex;gap:8px;padding:9px 0;overflow:auto;scrollbar-width:none}.or-nav-inner::-webkit-scrollbar{display:none}
-.or-nav a{white-space:nowrap;text-decoration:none;padding:9px 13px;border:1px solid #29362f;border-radius:9px;background:#0d1210;color:#c9d4ce;font-size:.82rem;font-weight:850}.or-nav a:first-child{background:var(--lime);color:var(--lime-ink);border-color:var(--lime)}
-.or-shell{border:1px solid #2b3832;border-radius:16px;background:linear-gradient(180deg,#0c110f,#070a09);overflow:hidden;box-shadow:var(--shadow)}
-.or-section-title{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:15px 18px;background:#141a17;border-bottom:1px solid #2a3630}.or-section-title h2{margin:0;font-size:1.05rem}.or-section-title .chev{font-size:1.35rem;color:#cbd6d0}.or-body{padding:20px}
-.evidence-kicker{display:flex;align-items:center;gap:9px;color:var(--lime);font-size:.72rem;font-weight:950;text-transform:uppercase;letter-spacing:.13em}.evidence-dot{width:8px;height:8px;border-radius:50%;background:var(--lime);box-shadow:0 0 14px rgba(200,255,0,.8)}
-.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}.stat-card{min-height:142px;padding:16px;border:1px solid #2b3832;border-radius:12px;background:#0b100e}.stat-card strong{display:block;margin:8px 0 5px;font-size:clamp(1.75rem,4vw,2.6rem);line-height:1;color:#fff;letter-spacing:-.04em}.stat-card.priority{border-color:#7f332f;background:linear-gradient(180deg,#261311,#100b0a)}.stat-card.priority strong{color:#ff766e}.stat-card .label{font-weight:850}.stat-card .detail{color:var(--muted);font-size:.78rem}
-.proof-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:12px}.proof-card{padding:18px;border:1px solid #2a3831;border-radius:12px;background:#0b100e}.proof-card h3{font-size:1.15rem}.proof-card.alert{border-color:#74302b;background:#1a0e0d}.proof-card.alert h3{color:#ff8c85}.proof-card .analogy{margin-top:13px;padding:12px;border-left:3px solid var(--lime);background:#10170f;color:#dce7df;border-radius:6px}
-.data-note{display:flex;gap:9px;align-items:flex-start;margin-top:12px;padding:12px;border-radius:9px;background:#0d1712;border:1px solid #254331;color:#bcd1c5}.data-note b{color:var(--lime)}
-.band-stack{display:grid;grid-template-columns:1fr 1fr;gap:15px}.band-chart,.hour-chart{display:flex;align-items:flex-end;gap:5px;height:220px;padding:28px 10px 27px;border:1px solid #29362f;border-radius:12px;background:#080c0a;position:relative}.chart-column{height:100%;flex:1;display:flex;align-items:flex-end;justify-content:center;position:relative}.chart-bar{width:100%;max-width:52px;min-height:2px;border-radius:5px 5px 0 0;background:linear-gradient(180deg,var(--violet),#4f6cff)}.chart-column.hot .chart-bar{background:linear-gradient(180deg,#ff695f,#b82f29)}.chart-label{position:absolute;bottom:-22px;font-size:.68rem;color:#9fb0a7}.chart-value{position:absolute;bottom:calc(var(--bar-height) + 5px);font-size:.65rem;color:#dce5e0;white-space:nowrap}.hour-chart{gap:2px}.hour-chart .chart-bar{max-width:none;background:linear-gradient(180deg,#51c8ff,#3666f7)}.hour-chart .chart-column.night .chart-bar{background:linear-gradient(180deg,#ff6058,#ad2c29)}
-.legend-line{display:flex;flex-wrap:wrap;gap:12px;margin:10px 0 0;color:var(--muted);font-size:.75rem}.legend-line span:before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:#5275ff;margin-right:6px}.legend-line span.hot:before{background:#ff6058}
-.rank-list{border:1px solid #29362f;border-radius:12px;overflow:hidden}.rank-row{display:grid;grid-template-columns:42px minmax(0,1fr) 128px;gap:12px;align-items:center;padding:13px 14px;border-bottom:1px solid #243029}.rank-row:last-child{border-bottom:0}.rank-number{color:#8fa197;font-weight:900}.rank-title{font-size:1rem;font-weight:900}.rank-meta{color:var(--muted);font-size:.78rem}.rank-duration{text-align:right;font-weight:950;color:#fff}
-.event-tools{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:14px 0}.event-tools input{flex:1;min-width:210px;padding:11px 12px;border:1px solid #34433b;border-radius:9px;background:#080c0a;color:#fff}.filter-btn{padding:10px 12px;border:1px solid #33423a;border-radius:9px;background:#101612;color:#cad5cf;font-weight:850;cursor:pointer}.filter-btn.active{background:var(--lime);color:var(--lime-ink);border-color:var(--lime)}
-.event-details{border:1px solid #2b3932;border-radius:11px;background:#0a0e0c;margin:8px 0;overflow:hidden}.event-details summary{cursor:pointer;list-style:none;display:grid;grid-template-columns:95px minmax(0,1fr) 90px;gap:12px;align-items:center;padding:13px 14px}.event-details summary::-webkit-details-marker{display:none}.event-details[open] summary{background:#151b18;border-bottom:1px solid #2b3932}.event-id{font-weight:950;color:var(--lime)}.event-time{font-weight:800}.event-share{color:var(--muted);font-size:.76rem}.event-minutes{text-align:right;font-weight:950}.hour-wrap{overflow:auto;padding:10px}.hour-table{width:100%;min-width:760px;border-collapse:collapse;font-size:.78rem}.hour-table th,.hour-table td{padding:8px;border-bottom:1px solid #233029;text-align:left}.hour-table th{color:#9eafa6;text-transform:uppercase;letter-spacing:.07em;font-size:.66rem}.empty{padding:22px;text-align:center;color:var(--muted)}
-.download-row{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}.outline-btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:10px 14px;border:1px solid #53685c;border-radius:9px;text-decoration:none;font-weight:900;background:#111713}.outline-btn.primary{background:var(--lime);border-color:var(--lime);color:var(--lime-ink)}
-.bottom-rail{display:none}.integrity-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.hash-card{padding:12px;border:1px solid #28362f;border-radius:9px;background:#090d0b}.hash-card code{display:block;margin-top:6px;color:#aebdb5;word-break:break-all;font-size:.67rem}
-@media(max-width:930px){.stat-grid,.proof-grid,.band-stack{grid-template-columns:1fr 1fr}.integrity-grid{grid-template-columns:1fr}}
-@media(max-width:650px){body{padding-bottom:78px}.or-nav-inner{width:calc(100% - 16px)}.stat-grid,.proof-grid,.band-stack{grid-template-columns:1fr}.or-body{padding:14px}.rank-row{grid-template-columns:32px minmax(0,1fr) 84px;padding:12px 10px}.event-details summary{grid-template-columns:72px minmax(0,1fr) 66px;padding:12px 10px}.chart-value{display:none}.bottom-rail{position:fixed;display:grid;grid-template-columns:1fr 1fr;gap:8px;left:0;right:0;bottom:0;z-index:40;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(7,10,9,.95);backdrop-filter:blur(16px);border-top:1px solid #2a3831}.bottom-rail a{min-height:48px;border:1px solid #34423b;border-radius:10px;display:flex;align-items:center;justify-content:center;text-align:center;text-decoration:none;font-weight:900;background:#0c110f}.bottom-rail a:last-child{background:var(--lime);color:var(--lime-ink);border-color:var(--lime)}}
-
+:root {
+  --bg:#050706; --panel:#0d1411; --panel2:#111b16; --line:#2a3b33;
+  --ink:#f5faf7; --muted:#a9bab1; --lime:#c8ff00; --green:#55e49c;
+  --red:#ff6258; --amber:#f2c75d; --blue:#75c2ff; --violet:#a888ff;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:radial-gradient(circle at 12% -4%,#10271e 0,transparent 30rem),var(--bg);
+  color:var(--ink);font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif
+}
+.wrap{width:min(100% - 18px,1100px);margin:auto}
+header{padding:22px 0 16px;border-bottom:1px solid var(--line)}
+.badge{display:inline-flex;padding:6px 9px;border:1px solid #66752b;border-radius:999px;color:var(--lime);
+font-size:.72rem;font-weight:950;letter-spacing:.08em;text-transform:uppercase}
+h1{margin:10px 0 5px;font-size:clamp(2.1rem,9vw,4.7rem);line-height:.95;letter-spacing:-.052em}
+h1 span{color:var(--lime)} h2{font-size:1.2rem;margin:0 0 10px} h3{margin:0 0 7px}
+.sub,.small,.detail{color:var(--muted)} .small{font-size:.79rem} .detail{font-size:.83rem}
+.status{margin-top:14px;padding:13px;border:1px solid #386048;border-radius:12px;background:#0a120e}
+.status strong{color:var(--green)}
+.download-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.download-btn{display:flex;min-height:52px;align-items:center;justify-content:center;text-align:center;padding:12px 14px;
+border:1px solid #57dfa2;border-radius:10px;background:linear-gradient(135deg,#117d50,#18ad6c);
+color:#fff;text-decoration:none;font-weight:950}
+main{padding:14px 0 38px} .section{margin-top:14px}
+.grid{display:grid;gap:10px} .g2{grid-template-columns:repeat(2,1fr)} .g3{grid-template-columns:repeat(3,1fr)}
+.panel{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:14px;padding:15px}
+.card{min-height:150px;border:1px solid var(--line);border-radius:12px;padding:14px;background:#0a0f0d}
+.card.primary{border-color:#738719;background:linear-gradient(180deg,#17210b,#0a0f0d)}
+.card.alert{border-color:#7a302b;background:linear-gradient(180deg,#291311,#100b0a)}
+.card.blue{border-color:#365e81;background:linear-gradient(180deg,#0e1923,#0a0f0d)}
+.label{font-size:.75rem;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.055em}
+.value{font-size:clamp(2.15rem,9vw,3.8rem);font-weight:950;letter-spacing:-.055em;line-height:1;margin:8px 0}
+.primary .value{color:var(--lime)} .alert .value{color:#ff7e77} .blue .value{color:var(--blue)}
+.events-word{display:block;font-size:1rem;font-weight:950;text-transform:uppercase;letter-spacing:.025em;margin-top:4px}
+.recon,.funnel{display:grid;gap:11px}
+.rr{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px}
+.track{grid-column:1/-1;height:11px;border-radius:99px;background:#1a211e;overflow:hidden}
+.fill{height:100%;border-radius:99px;background:var(--lime)} .fill.blue{background:var(--blue)}
+.fill.red{background:var(--red)} .fill.amber{background:var(--amber)}
+.math{padding:13px;border-left:4px solid var(--lime);background:#10170f;border-radius:8px;margin-top:12px}
+.math b{color:var(--lime)}
+.ordinance{border:2px solid #84352f;background:linear-gradient(180deg,#2b1211,#160b0b)}
+.source-pill{display:inline-block;margin-top:5px;padding:5px 8px;border:1px solid #87514c;border-radius:999px;
+color:#ffd0cd;font-size:.76rem;font-weight:900}
+.info-box{padding:14px;border:1px solid var(--line);border-radius:12px;background:#0b100e;min-height:205px}
+.info-box .src{margin-top:10px;font-size:.77rem;color:#b7c5bf} q{color:#fff;font-weight:750}
+.context-note{padding:11px;border-left:4px solid var(--amber);background:#19160c;border-radius:8px;color:#e8ddbd}
+.clock{margin-top:13px}
+.clockbar{height:38px;border:1px solid #405047;border-radius:10px;display:grid;grid-template-columns:7fr 15fr 2fr;overflow:hidden}
+.clockbar div{display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:900}
+.night{background:#5b201e;color:#ffd3d0} .day{background:#102018;color:#c8ddd2} .late{background:#6b2924;color:#ffd3d0}
+.legend{display:flex;gap:10px;flex-wrap:wrap;margin-top:7px;font-size:.76rem;color:var(--muted)}
+.note{padding:12px;border:1px solid #31506a;background:#0b1620;border-radius:10px;color:#c6d9e8}
+.approval{display:grid;gap:8px} .check{display:flex;gap:9px;align-items:flex-start;padding:10px;border:1px solid var(--line);border-radius:9px}
+.dot{flex:0 0 10px;width:10px;height:10px;border-radius:50%;background:var(--lime);margin-top:6px}
+footer{padding:18px 0 32px;border-top:1px solid var(--line);font-size:.76rem;color:var(--muted)}
+@media(max-width:760px){.g2,.g3,.download-actions{grid-template-columns:1fr}.card,.info-box{min-height:0}}
 </style>
 </head>
 <body>
+<header>
+  <div class="wrap">
+    <div class="badge">LOCAL APPROVAL PREVIEW · NOT PUBLISHED</div>
+    <h1>Confirmed Infrasound <span>(Ongoing)</span></h1>
+    <p class="sub">Unit 2709 · AM.R6E8A.00 · HDF pressure/infrasound · Detroit / Eastern Time</p>
+    <div class="status">
+      <strong>HDF DATA THROUGH: AUGUST 15, 2026 · 5:02 PM EST</strong><br>
+      Latest returned HDF sample: <b>5:02:02 PM EST</b>. The next tested edge at 5:04 PM was not yet present in the public archive.
+      <div class="small">*Account for up to 30 minutes of lag. Missing acquisition time is never scored as zero, quiet, normal, compliant, or below benchmark.</div>
+    </div>
+    <div class="download-actions">
+      <a class="download-btn" href="./downloads/R6E8A-24-hour-report.pdf">Download 24 Hour Report</a>
+      <a class="download-btn" href="./downloads/R6E8A-7-day-trailing-report.pdf">Download 7 Day Trailing Report</a>
+    </div>
+  </div>
+</header>
 
-<nav class="or-nav" aria-label="Dashboard sections"><div class="or-nav-inner">
-<a href="#verified-summary">Verified summary</a><a href="#hdf48-activity">Activity</a><a href="#hdf48-events">112 events</a><a href="#hdf48-validation">Validation</a><a href="#existing-record">Prior record</a>
-</div></nav>
-
-<header class="hero"><div class="wrap hero-grid">
-<div><div class="eyebrow">Unit 2709 · AM.R6E8A · HDF pressure / infrasound primary</div><h1>Confirmed Infrasound <span>(Ongoing)</span></h1><p class="sub"><strong>April 12, 2026 — Ongoing</strong> · Detroit, Michigan · Eastern Time</p><p class="sub">Management view centered on prolonged pressure-channel activity, low-frequency concentration, nighttime timing, externally published acoustic benchmarks, and verified data coverage. HDF pressure and EHZ vertical motion remain separate measurements.</p></div>
-<div><div class="actions"><a class="btn" href="./downloads/R6E8A-24-hour-report.pdf" download>Download 24-Hour Report</a><a class="btn" href="./downloads/R6E8A-7-day-trailing-report.pdf" download>Download 7-Day Trailing</a></div><div class="panel status"><div class="row"><span>Latest published HDF source check</span><strong id="hdf-status" class="ok">Reading published check…</strong></div><div class="row"><span>Latest published EHZ source check</span><strong id="ehz-status" class="ok">Reading published check…</strong></div><div class="row"><span>Check recorded</span><strong id="status-generated">—</strong></div><div class="row"><span>Source of record</span><strong>Raspberry Shake public FDSN</strong></div></div></div>
-</div></header>
 <main class="wrap">
+  <section class="section grid g3">
+    <article class="card primary">
+      <div class="label">Total documented 4–8 Hz dominant activity</div>
+      <div class="value">941 Hours</div>
+      <div class="detail">Exact current total: <b>941.20 Hours</b> · 56,472 valid 4–8 Hz-dominant minutes · 36.92% of analyzed HDF time</div>
+    </article>
+    <article class="card alert">
+      <div class="label">Conservative nighttime ordinance subset</div>
+      <div class="value">74<span class="events-word">Events</span></div>
+      <div class="detail">Requires ≥30-minute sustained event and ≥30 actual minutes inside the applicable nighttime window</div>
+    </article>
+    <article class="card blue">
+      <div class="label">Sustained 4–8 Hz ≥30 minutes</div>
+      <div class="value">324<span class="events-word">Events</span></div>
+      <div class="detail">435.17 cumulative Hours in sustained 30+ minute runs</div>
+    </article>
+  </section>
 
-<section class="panel focus"><div class="focus-grid"><div><div class="tag">Primary low-frequency review band</div><h2>4–8 Hz priority band · 7 Hz highlighted</h2><p class="muted">The dashboard gives special visibility to recorded pressure energy in the 4–8 Hz region and to prolonged low-frequency events outside that band. Frequency, calibrated magnitude where available, duration, recurrence, nighttime timing, and coverage are shown together.</p><div class="freqbar" role="img" aria-label="Frequency scale from zero to twenty hertz with four to eight hertz highlighted in red and seven hertz marked"><div class="band"></div><div class="seven"></div><span class="f0">0</span><span class="f4">4</span><span class="f7">7</span><span class="f8">8</span><span class="f20">20 Hz</span></div></div><div class="focus-note"><strong>Management reading rule</strong>Red identifies the problem-focused records: prolonged HDF pressure activity, method-matched exceedances, and measured spectral features in the priority low-frequency region. Frequency alone is not converted into a medical dose.</div></div></section>
-
-
-<section id="verified-summary" class="section or-shell">
-  <div class="or-section-title"><h2>▦ Verified HDF 4–8 Hz sustained-activity dataset</h2><span class="chev">⌄</span></div>
-  <div class="or-body">
-    <div class="evidence-kicker"><span class="evidence-dot"></span>April 12–August 11, 2026 analysis window · available data only</div>
-    <h2 style="margin-top:10px">The recurring pattern is documented. Exposure magnitude and source still require calibrated onsite measurement.</h2>
-    <p class="muted">Every number in this section comes from the preserved HDF analysis and its hour-level event ledger. HDF pressure remains separate from EHZ ground motion.</p>
-    <div class="stat-grid">
-      <article class="stat-card priority"><span class="label">4–8 Hz-dominant time</span><strong id="stat-band-hours">—</strong><span class="detail" id="stat-band-detail">Loading verified data…</span></article>
-      <article class="stat-card"><span class="label">Sustained events ≥15 min</span><strong id="stat-events">—</strong><span class="detail">consecutive complete HDF minutes</span></article>
-      <article class="stat-card"><span class="label">Events ≥30 min</span><strong id="stat-events-30">—</strong><span class="detail" id="stat-events-60">—</span></article>
-      <article class="stat-card"><span class="label">Longest event</span><strong id="stat-longest">—</strong><span class="detail">continuous 4–8 Hz band dominance</span></article>
+  <section class="section panel">
+    <h2>How the 941.20 Hours reconciles</h2>
+    <div class="recon">
+      <div class="rr">
+        <div><b>All documented 4–8 Hz dominant activity</b></div><div><b>941.20 Hours</b></div>
+        <div class="track"><div class="fill" style="width:100%"></div></div>
+      </div>
+      <div class="rr">
+        <div><b>Sustained runs ≥15 minutes</b><div class="small">608 Events</div></div><div><b>532.67 Hours</b></div>
+        <div class="track"><div class="fill blue" style="width:56.59%"></div></div>
+      </div>
+      <div class="rr">
+        <div><b>Sustained runs ≥30 minutes</b><div class="small">324 Events</div></div><div><b>435.17 Hours</b></div>
+        <div class="track"><div class="fill red" style="width:46.24%"></div></div>
+      </div>
+      <div class="rr">
+        <div><b>Sustained runs ≥60 minutes</b><div class="small">159 Events</div></div><div><b>320.17 Hours</b></div>
+        <div class="track"><div class="fill amber" style="width:34.02%"></div></div>
+      </div>
     </div>
-    <div class="proof-grid">
-      <article class="proof-card alert"><div class="tag">Priority hazard review</div><h3>Why this cannot be dismissed as a single spike</h3><p>The qualifying record contains repeated events lasting from 15 minutes to 161 minutes. The recurrence and duration justify independent environmental and occupational-health investigation.</p><div class="analogy"><strong>Analogy:</strong> this is like a smoke detector repeatedly activating for long intervals. The record is enough to require investigation, while the detector alone cannot identify the source or measure a person's dose.</div></article>
-      <article class="proof-card"><div class="tag">What “dominant” means</div><h3>A spectral vote, not a single pure tone</h3><p>For each complete minute, mean spectral power density in 4–8 Hz was compared with 1–4, 8–16 and 16–20 Hz. A minute entered this dataset only when 4–8 Hz won that comparison.</p><div class="analogy"><strong>Analogy:</strong> imagine four shelves holding parts of the same signal. “4–8 Hz dominant” means that shelf held the largest share—not that every item was on it.</div></article>
+    <div class="math"><b>532.67 Hours</b> in sustained ≥15-minute runs + <b>408.53 Hours</b> in shorter 4–8 Hz segments = <b>941.20 Hours total.</b></div>
+  </section>
+
+  <section class="section panel ordinance">
+    <div class="label">Most important legal-facing benchmark</div>
+    <div class="value">74<span class="events-word">Events</span></div>
+    <h2>Potential Sustained Noise-Ordinance Events</h2>
+    <div class="source-pill">SOURCE ATTRIBUTION: UNKNOWN — PENDING INVESTIGATION</div>
+    <p>This figure is intentionally conservative. It does not count every 4–8 Hz minute and it does not count every sustained event. It counts only the subset of sustained 30+ minute events that also contains at least 30 actual minutes inside the applicable nighttime ordinance window. One distinct event is counted once; overlapping criteria do not multiply the total.</p>
+
+    <div class="clock">
+      <div class="label">Nighttime-window visual</div>
+      <div class="clockbar">
+        <div class="night">12 AM–7 AM</div>
+        <div class="day">7 AM–10 PM</div>
+        <div class="late">10 PM–12 AM</div>
+      </div>
+      <div class="legend">
+        <span>General nighttime window: 10 PM–7 AM</span>
+        <span>Friday/Saturday conservative downtown start: 11 PM</span>
+      </div>
     </div>
-    <div class="data-note"><b>✓</b><span><strong>Missing-data rule:</strong> unavailable minutes are excluded rather than entered as quiet, normal, compliant or zero.</span></div>
-  </div>
-</section>
+  </section>
 
-<section id="hdf48-activity" class="section or-shell">
-  <div class="or-section-title"><h2>⌁ Activity · qualifying sustained-event minutes</h2><span class="chev">⌄</span></div>
-  <div class="or-body">
-    <p class="muted">These charts describe the 112 events that met the ≥15-minute rule. They do not convert raw counts into pascals or dB(G).</p>
-    <div class="band-stack">
-      <article><h3>By month</h3><div id="month-chart" class="band-chart" role="img" aria-label="Qualifying sustained event minutes by month"></div></article>
-      <article><h3>By clock hour · Eastern Time</h3><div id="hour-chart" class="hour-chart" role="img" aria-label="Qualifying sustained event minutes by local clock hour"></div><div class="legend-line"><span>Day / evening</span><span class="hot">10 PM–7 AM</span></div></article>
+  <section class="section panel">
+    <h2>Conservative ordinance qualification funnel</h2>
+    <div class="funnel">
+      <div class="rr">
+        <div><b>1 · Total documented 4–8 Hz activity</b><div class="small">56,472 minutes</div></div><div><b>941.20 Hours</b></div>
+        <div class="track"><div class="fill" style="width:100%"></div></div>
+      </div>
+      <div class="rr">
+        <div><b>2 · Sustained ≥15 minutes</b><div class="small">608 Events</div></div><div><b>532.67 Hours</b></div>
+        <div class="track"><div class="fill blue" style="width:56.59%"></div></div>
+      </div>
+      <div class="rr">
+        <div><b>3 · Sustained ≥30 minutes</b><div class="small">324 Events</div></div><div><b>435.17 Hours</b></div>
+        <div class="track"><div class="fill red" style="width:46.24%"></div></div>
+      </div>
+      <div class="rr">
+        <div><b>4 · Nighttime ordinance-window subset</b><div class="small">74 Events · 22.84% of the 30+ minute event pool</div></div><div><b>74 Events</b></div>
+        <div class="track"><div class="fill amber" style="width:22.84%"></div></div>
+      </div>
     </div>
-    <div style="margin-top:18px"><h3>Longest verified events</h3><div id="top-events" class="rank-list"><div class="empty">Loading ranked events…</div></div></div>
-  </div>
-</section>
+    <div class="math"><b>Why 74 is conservative:</b> the calculation first excludes every run under 30 minutes, then applies a second filter requiring at least 30 actual minutes during the nighttime ordinance window. Missing time is excluded, not treated as compliant.</div>
+  </section>
 
-<section id="hdf48-events" class="section or-shell">
-  <div class="or-section-title"><h2>☷ Complete event ledger · hour-by-hour evidence</h2><span class="chev">⌄</span></div>
-  <div class="or-body">
-    <p class="muted">Open any event to see every clock-hour segment, its event minutes, modal narrow-bin peak, 4–8 Hz power share and raw HDF RMS counts.</p>
-    <div class="event-tools"><input id="event-search" type="search" placeholder="Search event ID or date…" aria-label="Search events"><button class="filter-btn active" data-min="15">All ≥15m</button><button class="filter-btn" data-min="30">≥30m</button><button class="filter-btn" data-min="60">≥60m</button></div>
-    <div id="event-ledger"><div class="empty">Loading all 112 verified events…</div></div>
-    <div class="download-row"><a class="outline-btn primary" href="./downloads/R6E8A_HDF_4-8Hz_Sustained_Event_Report_2026-08-11.pdf.b64" data-pdf-b64 data-filename="R6E8A_HDF_4-8Hz_Sustained_Event_Report_2026-08-11.pdf">Download complete 24-page report</a><a class="outline-btn" href="./downloads/R6E8A_HDF_4-8Hz_Hourly_Event_Data_2026-08-11.csv" download>Download hour-level CSV</a></div>
-  </div>
-</section>
+  <section class="section grid g3">
+    <article class="info-box">
+      <div class="label">Why 941 Hours matters</div>
+      <p><b>941.20 Hours</b> is cumulative documented environmental time in which 4–8 Hz was the dominant HDF band. It includes <b>608 Events</b> lasting at least 15 minutes, <b>324 Events</b> lasting at least 30 minutes, and a longest continuous run of <b>11 Hours 4 Minutes</b>. This makes duration and recurrence central facts for a reviewer, rather than treating the record as a few isolated peaks.</p>
+      <div class="src">R6E8A HDF archive calculation; current through Aug. 15, 2026, 5:02 PM EST.</div>
+    </article>
 
-<section id="hdf48-validation" class="section or-shell">
-  <div class="or-section-title"><h2>⌘ Independent validation blueprint</h2><span class="chev">⌄</span></div>
-  <div class="or-body">
-    <div class="proof-grid"><article class="proof-card"><div class="tag">Verified by this dataset</div><h3>Recurring sustained HDF band dominance</h3><p>112 events, 182 hour-level rows, full event timestamps, 56 selected source files and cryptographic integrity identifiers are preserved in the report.</p></article><article class="proof-card"><div class="tag">Required next measurement</div><h3>Calibrated pressure + vibration</h3><p>Commission an acoustical engineer or industrial hygienist to colocate a calibrated low-frequency microphone or pressure sensor with a calibrated tri-axis vibration sensor for at least 72 hours.</p></article></div>
-    <div class="callout" style="margin-top:12px"><strong>Interpretation boundary:</strong> this dataset establishes the recurring timing and spectral classification. Raw counts do not by themselves establish calibrated sound-pressure exposure, source, intent or medical causation. The report explains how to close that measurement gap.</div>
-    <div class="integrity-grid" style="margin-top:12px"><article class="hash-card">Analysis JSON<code id="hash-analysis">—</code></article><article class="hash-card">Hourly CSV<code id="hash-csv">—</code></article><article class="hash-card">Report PDF<code id="hash-pdf">—</code></article></div>
-    <div class="download-row"><a class="outline-btn" href="https://data.raspberryshake.org/fdsnws/">Verify through Raspberry Shake FDSN</a><a class="outline-btn" href="https://dataview.raspberryshake.org/#/embed/AM/R6E8A/00/HDF">Open official HDF DataView</a></div>
-  </div>
-</section>
+    <article class="info-box">
+      <div class="label">Night-noise human-health context</div>
+      <p>The World Health Organization states that its expert group reviewed scientific evidence on the <q>health effects of night noise</q> and developed health-based guideline values intended <q>to protect the public</q>. For legal review, this supports treating repeated nighttime environmental noise as a health-relevant exposure context, not merely an annoyance.</p>
+      <div class="src">Source: WHO Regional Office for Europe, <i>Night Noise Guidelines for Europe</i> (2009).</div>
+    </article>
 
-<div id="existing-record" class="section evidence-kicker" style="padding:8px 2px"><span class="evidence-dot"></span>Previously approved dashboard record continues below</div>
+    <article class="info-box">
+      <div class="label">Low-frequency vibration exposure context</div>
+      <p>A NASA technical review of ISO 2631 describes adverse whole-body vibration effects ranging from <q>back troubles and other pathological problems</q> to impaired performance and discomfort. This is related human-exposure context for why sustained low-frequency activity warrants professional assessment; it does not by itself establish that the HDF pressure signal caused a specific medical effect.</p>
+      <div class="src">Source: NASA technical report, <i>Ride Quality and International Standard ISO 2631</i>.</div>
+    </article>
+  </section>
 
-<section class="section headline panel"><div class="tag">Hard sustained record</div><h2>Five documented HDF intervals over 30 minutes</h2><div class="three"><article><span class="counter red">4</span><p><strong>preserved ≥45-minute episodes</strong><br><span class="muted">July 27–28 ledger</span></p></article><article><strong class="big">10 hr 45 min</strong><p class="muted">combined duration of the four preserved ≥45-minute intervals</p></article><article><strong class="big">49 min</strong><p class="muted">additional July 3 archive-detector interval; shown separately because it used an earlier event rule</p></article></div></section>
+  <section class="section context-note">
+    <b>Evidence boundary for legal review:</b> the station documents environmental pressure/infrasound timing, frequency-band dominance, recurrence and duration. The 941.20-hour environmental record is not automatically a personal medical dose. Source attribution and individual medical causation require independent investigation/onsite validation.
+  </section>
 
-<section class="section panel" style="padding:0;overflow:hidden"><table class="event-table"><thead><tr><th>Record</th><th>Start–End · ET</th><th>Duration</th><th>Dominant frequency / band</th><th>Nighttime relevance</th><th>Management flag</th></tr></thead><tbody>
-<tr class="priority"><td class="rank">1</td><td>Jul 27 · 8:05 PM<br>Jul 27 · 11:40 PM</td><td class="duration">3 hr 35 min</td><td><strong>0.95 Hz</strong><br><span class="muted">infrasound pressure</span></td><td>Extends into quiet hours after 10 PM</td><td><span class="chip red"><span class="arrow">↑</span> PROLONGED</span></td></tr>
-<tr class="priority"><td class="rank">2</td><td>Jul 28 · 2:00 AM<br>Jul 28 · 4:15 AM</td><td class="duration">2 hr 15 min</td><td><strong>0.068 Hz</strong><br><span class="muted">very-low-frequency pressure</span></td><td>Entire interval overnight</td><td><span class="chip red"><span class="arrow">↑</span> PROLONGED NIGHT</span></td></tr>
-<tr class="priority"><td class="rank">3</td><td>Jul 28 · 5:25 AM<br>Jul 28 · 6:15 AM</td><td class="duration">50 min</td><td><strong>9.39 Hz</strong><br><span class="muted">upper infrasound / low-frequency transition</span></td><td>Entire interval early morning</td><td><span class="chip red"><span class="arrow">↑</span> PROLONGED EARLY AM</span></td></tr>
-<tr class="priority"><td class="rank">4</td><td>Jul 28 · 8:00 AM<br>Jul 28 · 12:05 PM</td><td class="duration">4 hr 5 min</td><td><strong>0.106 Hz</strong><br><span class="muted">very-low-frequency pressure</span></td><td>Daytime</td><td><span class="chip red"><span class="arrow">↑</span> LONGEST</span></td></tr>
-<tr class="priority"><td class="rank">5</td><td>Jul 3 · 6:31 PM<br>Jul 3 · 7:20 PM</td><td class="duration">49 min</td><td><strong>Broad HDF event</strong><br><span class="muted">archive robust-z detector; peak robust z 41.90</span></td><td>Evening</td><td><span class="chip red"><span class="arrow">↑</span> ARCHIVED 30+ MIN</span></td></tr>
-</tbody></table><div class="fine" style="padding:12px 14px">The July 3 interval is not added into the July 27–28 10 hr 45 min total because the two ledgers used different event definitions. It is displayed so a >30-minute event is not hidden.</div></section>
 
-<section class="section"><div class="tag">Measured 4–8 Hz-region evidence</div><h2>Priority-band features already present in the calibrated pressure record</h2><div class="three"><article class="panel metric"><div class="tag">5.0171 Hz</div><strong class="big red">+23.729 dB</strong><p class="scope">spectral prominence above its local spectral baseline in the calibrated median HDF pressure spectrum.</p></article><article class="panel metric"><div class="tag">5.5298 Hz</div><strong class="big red">+12.831 dB</strong><p class="scope">second measured spectral feature inside the 4–8 Hz priority region.</p></article><article class="panel metric"><div class="tag">Adjacent 8–10 Hz</div><strong class="big red">+7.584 dB</strong><p class="scope">median-spectrum elevation above the adjacent 12–16 Hz reference; 8–10 Hz peak minute 66.758 dB and Leq 57.191 dB.</p></article></div></section>
+  <section class="section panel">
+    <div class="label">Existing approved benchmark framework retained</div>
+    <h2>External benchmark stack — ordinance section remains the primary legal-facing benchmark</h2>
+    <div class="grid g2">
+      <article class="info-box">
+        <h3>ASHRAE · Hotel / building-services context</h3>
+        <p>The existing dashboard benchmark uses the ASHRAE low-frequency octave check and hotel guest-room acoustic-design context. The previously verified 16 Hz check used a <b>65 dB octave-band reference</b>; R6E8A's calibrated audit recorded a <b>68.003 dB</b> peak one-minute RMS and five one-minute exceedances. NC/RC, dBA, dBC and narrow-band HDF values remain separate metrics and are not converted into false percentages.</p>
+        <div class="src">Retained from the previously approved R6E8A external-benchmark section.</div>
+      </article>
+      <article class="info-box">
+        <h3>ANSI/ASA S12.2 · Hotel room-noise context</h3>
+        <p>ANSI/ASA S12.2 remains part of the hotel/guest-room benchmark stack for room-noise criteria, low-frequency fluctuation, and NC/RNC-style engineering review. A method-matched calibrated onsite measurement is required before treating an HDF narrow-band value as an ANSI room-noise pass/fail result.</p>
+        <div class="src">Existing approved external-standard layer; HDF/EHZ separation retained.</div>
+      </article>
+      <article class="info-box">
+        <h3>WHO · Night-noise and sleep-health context</h3>
+        <p>WHO nighttime guidance remains the health-context benchmark. Its A-weighted night-noise values are not numerically interchangeable with unweighted 4–8 Hz HDF levels; the dashboard therefore uses WHO to explain nighttime health relevance while keeping the ordinance and acoustic measurements methodologically separate.</p>
+        <div class="src">WHO Night Noise Guidelines / community-noise context.</div>
+      </article>
+      <article class="info-box">
+        <h3>ISO 7196 · Infrasound screening context</h3>
+        <p>ISO 7196 G-weighted assessment remains the dedicated infrasound-screening framework for approximately 1–20 Hz pressure data. Unweighted HDF band values are not relabeled as dB(G). This keeps the infrasound benchmark visible without overstating comparability.</p>
+        <div class="src">Existing approved low-frequency/infrasound benchmark layer.</div>
+      </article>
+      <article class="info-box">
+        <h3>STC / IBC · Building-envelope context</h3>
+        <p>STC and relevant IBC hotel/building provisions remain building-design and transmission context, not direct 4–8 Hz sensor thresholds. They help a reviewer understand the expected role of partitions, assemblies and building systems while avoiding a false one-to-one conversion from HDF pressure data.</p>
+        <div class="src">Existing approved building-code / hotel-envelope context.</div>
+      </article>
+      <article class="info-box">
+        <h3>Benchmark rule</h3>
+        <p><b>No self-baseline is used as a public compliance benchmark.</b> External standards remain method-matched, HDF and EHZ stay separate, missing data stays N/A, and the <b>74-Event ordinance subset</b> is displayed separately because it is the most important legal-facing filter in this revision.</p>
+        <div class="src">Locked R6E8A publication rule.</div>
+      </article>
+    </div>
+  </section>
 
-<section class="section"><div class="tag">Most comparable external noise-control test</div><h2>ASHRAE low-frequency octave check vs R6E8A</h2><div class="panel" style="padding:0;overflow:hidden"><table class="bench-table"><thead><tr><th>External benchmark</th><th>R6E8A measured result</th><th>Difference</th><th>Percentage comparison</th><th>Flag</th></tr></thead><tbody>
-<tr><td><strong>ASHRAE · 16 Hz low-frequency vibration check</strong><br><span class="muted">65 dB octave-band reference</span></td><td><strong>68.003 dB</strong> peak 1-minute RMS<br><strong>5</strong> one-minute exceedances in the 42-day calibrated audit</td><td><strong class="red">+3.003 dB</strong></td><td><strong class="red">41.3% greater pressure amplitude than the 65 dB reference</strong></td><td><span class="chip red"><span class="arrow">↑</span> ABOVE REFERENCE</span></td></tr>
-<tr><td><strong>ASHRAE hotel guest-room design context</strong><br><span class="muted">NC/RC 30 · approximately 35 dBA / 60 dBC</span></td><td>R6E8A calibrated low-frequency octave and narrow-band pressure results are shown above.</td><td colspan="2">NC/RC, dBA and dBC are different acoustic metrics; the dashboard does not turn unlike metrics into a false percentage.</td><td><span class="chip red">HOTEL NOISE-CONTROL CONTEXT</span></td></tr>
-<tr><td><strong>ISO 7196 / Danish indoor infrasound screen</strong><br><span class="muted">85 dB(G), 10-minute G-weighted level</span></td><td>Used as the dedicated infrasound screening method for 1–20 Hz pressure data.</td><td colspan="2">Shown as the correct external infrasound comparator. Unweighted octave values are not mislabeled as dB(G).</td><td><span class="chip red">INFRASOUND SCREEN</span></td></tr>
-</tbody></table></div></section>
+  <section class="section note">
+    <b>Current-edge check:</b> the last post-5 PM HDF segment analyzed was 4:56–5:02 PM EST and was 4–8 Hz dominant for 6 minutes. Because it remained below the 15-minute sustained threshold, it added to the 941.20-hour total but did <b>not</b> increase the sustained-event or ordinance-event counts.
+  </section>
 
-<section class="section two"><article class="panel impact"><div class="tag">WHO nighttime health context</div><h2>Why prolonged nighttime noise matters</h2><p>WHO environmental-noise guidance recommends <strong>less than 30 dB(A) in bedrooms at night</strong> for good-quality sleep and identifies environmental noise as a contributor to <strong>sleep disturbance</strong> and longer-term health burdens including <strong>cardiovascular effects</strong>. The R6E8A dashboard therefore gives sustained nighttime and early-morning events priority rather than allowing short normal periods to dominate the presentation.</p><ul><li><strong>Sleep:</strong> repeated or sustained nighttime noise can disturb sleep.</li><li><strong>Physiological burden:</strong> WHO identifies cardiovascular effects among recognized environmental-noise health concerns.</li><li><strong>Duration matters:</strong> management review should distinguish multi-hour activity from isolated peaks.</li></ul><p class="fine">WHO's bedroom figure is A-weighted and is not numerically interchangeable with an unweighted 4–8 Hz or 16 Hz HDF band value. The health context is therefore shown without a fabricated percentage.</p></article><article class="panel callout"><div class="tag">Management conclusion</div><h2>The record is not summarized by a few quiet minutes</h2><p>The dashboard centers the actual prolonged HDF pressure intervals, the calibrated low-frequency ASHRAE exceedance, the measured 4–8 Hz-region spectral features, and nighttime timing. Normal or favorable-side statistics are not promoted into headline cards because this view is designed to identify the problem periods requiring building-management review.</p></article></section>
+  <section class="section note">
+    <b>Independent verification:</b> source of record is Raspberry Shake public FDSN for <b>AM.R6E8A.00.HDF</b>. The displayed current cutoff is the latest successfully retrieved post-5 PM archive edge used for this approved publication snapshot.
+  </section>
 
-<section class="section"><div class="tag">Coverage integrity · non-dilution rule</div><h2>Missing acquisition time never improves the score</h2><div class="coverage-grid"><article class="panel"><div class="tag">42-day HDF availability</div><strong class="big">99.9396%</strong></article><article class="panel"><div class="tag">Scorable acoustic minutes</div><strong class="big">60,121 / 60,479</strong><span class="muted">99.4081%</span></article><article class="panel"><div class="tag">Apr 12–Jun 2 valid HDF</div><strong class="big">47 d 3 h 5 m</strong><span class="muted">4,071,951.790 s</span></article><article class="panel"><div class="tag">Missing HDF</div><strong class="big red">92 h 54 m</strong><span class="muted">excluded from all denominators</span></article></div><div class="note" style="margin-top:12px"><strong>Locked rule:</strong> qualifying measured time ÷ valid recorded/scorable time. Missing time is never treated as zero, quiet, normal, compliant, or below benchmark.</div></section>
-
-<section class="section panel"><div class="tag">Exact confirmed acquisition gaps</div><h2>Unavailable intervals disclosed separately</h2><table class="gap-table"><thead><tr><th>Date · Eastern Time</th><th>Missing interval</th><th>Duration / note</th></tr></thead><tbody>
-<tr><td>Apr 23</td><td>9:37:13–9:39:11 AM</td><td>1 min 58 s</td></tr>
-<tr><td>Apr 23</td><td>9:49:10–10:05:59 AM</td><td>16 min 49 s</td></tr>
-<tr><td>Apr 27</td><td>6:31:56–6:48:38 PM</td><td>16 min 42 s</td></tr>
-<tr><td>May 26</td><td>6:43:19–6:53:02 PM</td><td>9 min 43 s</td></tr>
-<tr><td>May 26</td><td>6:58:02–7:07:42 PM</td><td>9 min 40 s</td></tr>
-<tr><td>May 26</td><td>7:08:49–7:19:29 PM</td><td>10 min 40 s</td></tr>
-<tr><td>May 29–Jun 1</td><td>May 29 · 3:03:29.968 AM → Jun 1 · 8:00 PM</td><td>3 d 16 h 56 m 30 s terminal audit-window gap</td></tr>
-</tbody></table><p class="fine">Shorter record-edge and sub-minute discontinuities are retained in the underlying coverage ledger. The table highlights the substantive confirmed gaps used in the availability audit.</p></section>
-
-<section class="section panel"><div class="tag">Former-number reconciliation</div><h2>Earlier figures preserved only where they reproduce</h2><table class="recon-table"><thead><tr><th>Earlier figure</th><th>Verified result</th><th>Dashboard treatment</th></tr></thead><tbody>
-<tr><td>73.38 dB at Jul 27 · 1:01 AM</td><td><strong>68.316 dB</strong> at the same minute under the validated response-corrected pipeline</td><td>Timestamp retained; non-reproducing magnitude replaced.</td></tr>
-<tr><td>82 minutes above 65 dB</td><td><strong>5–6 minutes</strong> in tested trailing 7-day windows; <strong>8–10 minutes</strong> in the complete 10-day July bracket depending on stated octave convention</td><td>82-minute figure removed from published benchmark claims.</td></tr>
-<tr><td>345% / 145% / 122% / 174% above matched quiet-hour baseline</td><td>These were self-baseline event ratios, not external standards.</td><td>Removed from the external-benchmark column. Sustained durations and frequencies remain.</td></tr>
-</tbody></table></section>
-
-<section class="section two"><article class="panel method"><div class="tag">Channel discipline</div><h2>HDF pressure is primary</h2><ul><li>HDF is response-corrected to physical pressure units where calibrated results are reported.</li><li>EHZ remains separate vertical-motion context and is never amplitude-combined with HDF.</li><li>Event duration, frequency, coverage, and external benchmark are displayed as separate fields.</li><li>Source identity and intent are not inferred from a single station.</li></ul><a class="source-link" href="https://dataview.raspberryshake.org/#/embed/AM/R6E8A/00/HDF">Open official HDF DataView</a></article><article class="panel"><div class="tag">Independent verification</div><h2>Public source of record</h2><p>Historical waveform data and station metadata are independently retrievable through Raspberry Shake public FDSN services for station <strong>AM.R6E8A.00</strong>.</p><a class="source-link" href="https://data.raspberryshake.org/fdsnws/">Raspberry Shake FDSN</a><br><a class="source-link" href="https://dataview.raspberryshake.org/#/embed/AM/R6E8A/00/EHZ">Open official EHZ DataView</a></article></section>
-
-<section class="section panel"><div class="tag">10-pass publication QA</div><h2>Locked checks</h2><div class="two"><ul><li>Duration arithmetic reconciled.</li><li>All displayed >30-minute event intervals source-checked.</li><li>HDF/EHZ units kept separate.</li><li>External benchmark vs self-baseline distinction enforced.</li><li>ASHRAE 65 dB comparison uses calibrated 16 Hz octave data.</li></ul><ul><li>WHO dBA guidance not falsely converted from unweighted HDF bands.</li><li>4–8 Hz features transcribed from calibrated spectral analysis.</li><li>Missing time excluded from denominators.</li><li>Former July 73.38 dB / 82-minute claims reconciled.</li><li>FDSN source-check timestamps displayed as recorded.</li></ul></div></section>
-
+  <section class="section panel">
+    <h2>Publication integrity</h2>
+    <div class="approval">
+      <div class="check"><span class="dot"></span><div><b>Current cutoff is explicit.</b><div class="small">The preview prominently states HDF data through Aug. 15 at 5:02 PM EST.</div></div></div>
+      <div class="check"><span class="dot"></span><div><b>Current cumulative values are updated.</b><div class="small">941.20 Hours · 608 Events ≥15 · 324 Events ≥30 · 159 Events ≥60 · 74 conservative ordinance Events.</div></div></div>
+      <div class="check"><span class="dot"></span><div><b>Every event count says Events.</b><div class="small">Hours remain labeled Hours; event counts remain unmistakably event counts.</div></div></div>
+      <div class="check"><span class="dot"></span><div><b>Ordinance derivation is visible.</b><div class="small">The qualification funnel and nighttime-window graphic explain exactly how the conservative subset is derived.</div></div></div>
+      <div class="check"><span class="dot"></span><div><b>Publication target.</b><div class="small">This approved content is the version designated for the public dashboard/main branch.</div></div></div>
+    </div>
+  </section>
 </main>
-<footer><div class="wrap"><strong>R6E8A · April 12, 2026 — Ongoing</strong><br>*Data can be up to 20 minutes delayed. Missing acquisition intervals are excluded from all calculations. For personal verification, use Raspberry Shake public FDSN and DataView.</div></footer>
-<script>
-(async()=>{
-  const hdf=document.getElementById('hdf-status');
-  const ehz=document.getElementById('ehz-status');
-  const generated=document.getElementById('status-generated');
-  try{
-    const r=await fetch('./data/current-status.json',{cache:'no-store'});
-    if(!r.ok) throw new Error('status');
-    const s=await r.json();
-    const h=s.channels&&s.channels.HDF; const e=s.channels&&s.channels.EHZ;
-    hdf.textContent=h&&h.latest_sample_et?h.latest_sample_et:'Published check unavailable';
-    ehz.textContent=e&&e.latest_sample_et?e.latest_sample_et:'Published check unavailable';
-    generated.textContent=s.generated_et||'—';
-  }catch(_){
-    hdf.textContent='Published check unavailable';
-    ehz.textContent='Published check unavailable';
-    generated.textContent='—';
-  }
-})();
-</script>
 
-<div class="bottom-rail" aria-label="Quick downloads"><a href="#hdf48-events">View events</a><a href="./downloads/R6E8A_HDF_4-8Hz_Sustained_Event_Report_2026-08-11.pdf.b64" data-pdf-b64 data-filename="R6E8A_HDF_4-8Hz_Sustained_Event_Report_2026-08-11.pdf">Download report</a></div>
-
-
-<script>
-(()=>{
-  const DATA_URL='./data/R6E8A-HDF-4-8Hz-sustained-events.json';
-  const esc=value=>String(value).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
-  const duration=minutes=>minutes>=60?`${Math.floor(minutes/60)}h ${minutes%60}m`:`${minutes}m`;
-  const clock=hour=>hour===0?'12a':hour<12?`${hour}a`:hour===12?'12p':`${hour-12}p`;
-  let events=[]; let minFilter=15;
-  function bars(target,items,label,value,night=false){
-    const max=Math.max(...items.map(value),1); target.innerHTML=items.map(item=>{const v=value(item),h=Math.max(2,Math.round(v/max*100));const isNight=night&&(item.hour>=22||item.hour<7);return `<div class="chart-column ${isNight?'night hot':''}" style="--bar-height:${h}%"><span class="chart-value">${Math.round(v/60)}h</span><div class="chart-bar" style="height:${h}%"></div><span class="chart-label">${esc(label(item))}</span></div>`}).join('');
-  }
-  function renderTop(top){document.getElementById('top-events').innerHTML=top.map((e,i)=>`<div class="rank-row"><span class="rank-number">${i+1}.</span><div><div class="rank-title">${esc(e.id)} · ${esc(e.start_et)}</div><div class="rank-meta">Mean 4–8 Hz share ${e.mean_4_8_share_percent.toFixed(1)}% · ${e.hour_rows.length} hour row${e.hour_rows.length===1?'':'s'}</div></div><div class="rank-duration">${duration(e.duration_minutes)}</div></div>`).join('')}
-  function eventHtml(e){const rows=e.hour_rows.map(r=>`<tr><td>${esc(r.segment_start_et)}–${esc(r.segment_end_et.split(', ').pop())}</td><td>${r.minutes}</td><td>${r.modal_peak_hz.toFixed(2)} Hz</td><td>${r.modal_peak_minutes}</td><td>${r.mean_4_8_share_percent.toFixed(1)}%</td><td>${Math.round(r.mean_rms_counts).toLocaleString()}</td><td>${Math.round(r.max_rms_counts).toLocaleString()}</td></tr>`).join('');return `<details class="event-details"><summary><span class="event-id">${esc(e.id)}</span><span><span class="event-time">${esc(e.start_et)}</span><br><span class="event-share">to ${esc(e.end_et)} · mean 4–8 share ${e.mean_4_8_share_percent.toFixed(1)}%</span></span><span class="event-minutes">${duration(e.duration_minutes)}</span></summary><div class="hour-wrap"><table class="hour-table"><thead><tr><th>Segment ET</th><th>Min</th><th>Modal peak</th><th>Modal min</th><th>4–8 share</th><th>Mean RMS*</th><th>Max RMS*</th></tr></thead><tbody>${rows}</tbody></table><p class="fine">*Raw HDF counts; not pascals or dB(G). Narrow-bin modal peak and four-band dominance answer different questions.</p></div></details>`}
-  function renderLedger(){const q=document.getElementById('event-search').value.trim().toLowerCase();const filtered=events.filter(e=>e.duration_minutes>=minFilter&&(!q||`${e.id} ${e.start_et} ${e.end_et}`.toLowerCase().includes(q)));document.getElementById('event-ledger').innerHTML=filtered.length?filtered.map(eventHtml).join(''):`<div class="empty">No events match this filter.</div>`}
-  document.querySelectorAll('.filter-btn').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');minFilter=Number(btn.dataset.min);renderLedger()}));
-  document.getElementById('event-search').addEventListener('input',renderLedger);
-  document.querySelectorAll('[data-pdf-b64]').forEach(link=>link.addEventListener('click',async event=>{
-    event.preventDefault();
-    const response=await fetch(link.getAttribute('href'));
-    if(!response.ok) return;
-    const encoded=(await response.text()).trim();
-    const binary=atob(encoded);const bytes=new Uint8Array(binary.length);
-    for(let i=0;i<binary.length;i++)bytes[i]=binary.charCodeAt(i);
-    const objectUrl=URL.createObjectURL(new Blob([bytes],{type:'application/pdf'}));
-    const save=document.createElement('a');save.href=objectUrl;save.download=link.dataset.filename;save.click();
-    setTimeout(()=>URL.revokeObjectURL(objectUrl),1000);
-  }));
-  fetch(DATA_URL,{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('data');return r.json()}).then(d=>{
-    events=d.events;const s=d.summary;
-    document.getElementById('stat-band-hours').textContent=`${s.dominant_4_8_hours.toFixed(1)} hours`;
-    document.getElementById('stat-band-detail').textContent=`${s.dominant_4_8_minutes.toLocaleString()} minutes · ${s.dominant_4_8_percent.toFixed(2)}% of analyzed minutes`;
-    document.getElementById('stat-events').textContent=s.sustained_event_count_15.toLocaleString();
-    document.getElementById('stat-events-30').textContent=s.sustained_event_count_30.toLocaleString();
-    document.getElementById('stat-events-60').textContent=`${s.sustained_event_count_60} lasted at least 60 minutes`;
-    document.getElementById('stat-longest').textContent=duration(s.longest_event_minutes);
-    bars(document.getElementById('month-chart'),d.qualifying_event_minutes_by_month,x=>x.month,x=>x.minutes);
-    bars(document.getElementById('hour-chart'),d.qualifying_event_minutes_by_hour_et,x=>clock(x.hour),x=>x.minutes,true);
-    renderTop(d.top_events);renderLedger();
-    document.getElementById('hash-analysis').textContent=d.integrity.analysis_sha256;
-    document.getElementById('hash-csv').textContent=d.integrity.hourly_csv_sha256;
-    document.getElementById('hash-pdf').textContent=d.integrity.report_pdf_sha256;
-  }).catch(()=>{document.getElementById('event-ledger').innerHTML='<div class="empty">Verified data file is temporarily unavailable. Use the report download or FDSN source.</div>'});
-})();
-</script>
-
+<footer>
+  <div class="wrap">R6E8A public dashboard · data through Aug. 15, 2026 5:02 PM EST · generated 05:40 PM EST.</div>
+</footer>
 </body>
 </html>
-
