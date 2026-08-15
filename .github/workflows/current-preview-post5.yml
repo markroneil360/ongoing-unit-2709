@@ -1,0 +1,100 @@
+name: R6E8A post-5PM preview edge
+
+on:
+  push:
+    branches:
+      - r6e8a-local-preview-current-20260815
+    paths:
+      - '.github/workflows/current-preview-post5.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  edge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install obspy numpy scipy
+      - name: Analyze newest FDSN edge through now minus 20 minutes
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import io,json,urllib.request
+          from datetime import datetime,timezone,timedelta
+          from zoneinfo import ZoneInfo
+          import numpy as np
+          from scipy.signal import welch
+          from obspy import read,Stream
+          TZ=ZoneInfo('America/Detroit')
+          BOUNDARY_DT=datetime.fromisoformat('2026-08-15T20:54:00+00:00')
+          BOUNDARY=int(BOUNDARY_DT.timestamp())
+          now=datetime.now(timezone.utc)
+          requested_end=(now-timedelta(minutes=20)).replace(second=0,microsecond=0)
+          start=BOUNDARY_DT-timedelta(minutes=45)
+          def fmt(d): return d.strftime('%Y-%m-%dT%H:%M:%S')
+          url=(f'https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF'
+               f'&start={fmt(start)}&end={fmt(requested_end)}&format=miniseed&nodata=404')
+          req=urllib.request.Request(url,headers={'User-Agent':'R6E8A-post5-preview/1.0'})
+          raw=urllib.request.urlopen(req,timeout=180).read()
+          st=read(io.BytesIO(raw)); st.merge(method=0); st=st.split()
+          mp={}; bands=[('1-4',1,4),('4-8',4,8),('8-16',8,16),('16-20',16,20)]
+          latest_sample=None
+          for tr in st:
+              latest_sample=max(latest_sample,float(tr.stats.endtime.timestamp)) if latest_sample is not None else float(tr.stats.endtime.timestamp)
+              sr=float(tr.stats.sampling_rate); n=int(round(sr*60)); ts0=float(tr.stats.starttime.timestamp); xall=np.asarray(tr.data,float)
+              first=int(np.ceil(max(start.timestamp(),ts0)/60))*60
+              last=int(np.floor(min(requested_end.timestamp()-60,float(tr.stats.endtime.timestamp)-59.99)/60))*60
+              for ep in range(first,last+1,60):
+                  i0=int(round((ep-ts0)*sr))
+                  if i0<0 or i0+n>len(xall): continue
+                  if abs((ts0+i0/sr)-ep)>.51/sr: continue
+                  x=xall[i0:i0+n]
+                  if len(x)!=n or not np.isfinite(x).all(): continue
+                  x=x-x.mean(); f,p=welch(x,fs=sr,window='hann',nperseg=int(round(sr*8)),noverlap=int(round(sr*4)),detrend=False,scaling='density')
+                  means={}
+                  for name,lo,hi in bands:
+                      m=(f>=lo)&(f<hi if hi<20 else f<=hi); means[name]=float(np.mean(p[m]))
+                  mp[ep]=max(means,key=means.get)
+          rows=[{'epoch':k,'dominant':mp[k]} for k in sorted(mp)]
+          runs=[];run=[]
+          for r in rows:
+              if r['dominant']=='4-8':
+                  if run and r['epoch']!=run[-1]['epoch']+60:runs.append(run);run=[]
+                  run.append(r)
+              else:
+                  if run:runs.append(run);run=[]
+          if run:runs.append(run)
+          summaries=[]
+          for r in runs:
+              s=r[0]['epoch'];e=r[-1]['epoch']+60
+              summaries.append({'start_utc':datetime.fromtimestamp(s,timezone.utc).isoformat(),
+                                'end_utc':datetime.fromtimestamp(e,timezone.utc).isoformat(),
+                                'minutes':len(r),'crosses_boundary':s<BOUNDARY<e,
+                                'minutes_after_boundary':sum(1 for x in r if x['epoch']>=BOUNDARY)})
+          tail=[r for r in rows if r['epoch']>=BOUNDARY]
+          tail48=[r for r in tail if r['dominant']=='4-8']
+          out={
+            'generated_utc':now.isoformat(),
+            'requested_end_utc':requested_end.isoformat(),
+            'requested_end_et':requested_end.astimezone(TZ).strftime('%Y-%m-%d %I:%M %p %Z'),
+            'latest_sample_utc':datetime.fromtimestamp(latest_sample,timezone.utc).isoformat() if latest_sample else None,
+            'latest_sample_et':datetime.fromtimestamp(latest_sample,TZ).strftime('%Y-%m-%d %I:%M:%S %p %Z') if latest_sample else None,
+            'source_url':url,
+            'tail_analyzed_minutes':len(tail),
+            'tail_dom48_minutes':len(tail48),
+            'tail_dom48_hours':round(len(tail48)/60,2),
+            'overlap_runs_4_8':summaries
+          }
+          open('data/current-preview-post5.json','w').write(json.dumps(out,indent=2)); print(json.dumps(out,indent=2))
+          PY
+      - name: Commit result
+        run: |
+          git config user.name 'r6e8a-preview-bot'
+          git config user.email 'r6e8a-preview-bot@users.noreply.github.com'
+          git add data/current-preview-post5.json
+          git commit -m 'Analyze post-5PM R6E8A preview edge' || true
+          git push
