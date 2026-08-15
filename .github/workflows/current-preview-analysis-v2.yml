@@ -1,0 +1,191 @@
+name: R6E8A current preview analysis v2
+
+on:
+  push:
+    branches:
+      - r6e8a-local-preview-current-20260815
+    paths:
+      - '.github/workflows/current-preview-analysis-v2.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: pip install obspy numpy scipy
+      - name: Analyze HDF through current public-FDSN lag window
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import io, json, math, urllib.request
+          from datetime import datetime, timezone, timedelta
+          from zoneinfo import ZoneInfo
+          import numpy as np
+          from scipy.signal import welch
+          from obspy import read, UTCDateTime, Stream
+
+          TZ=ZoneInfo('America/Detroit')
+          BASE='https://data.raspberryshake.org/fdsnws/dataselect/1/query'
+          start=datetime.fromisoformat('2026-08-12T19:13:00+00:00')
+          # Current conversation time is ~17:19 EDT; use data through 16:59 EDT,
+          # consistent with the established public-FDSN lag window.
+          end=datetime.fromisoformat('2026-08-15T20:59:00+00:00')
+          bands=[('1-4',1.0,4.0),('4-8',4.0,8.0),('8-16',8.0,16.0),('16-20',16.0,20.0)]
+
+          def fdsn_time(dt):
+              return dt.astimezone(timezone.utc).strftime('%Y-%m-%dT%H:%M:%S')
+
+          def fetch(a,b):
+              url=(f'{BASE}?net=AM&sta=R6E8A&loc=00&cha=HDF&start={fdsn_time(a)}&end={fdsn_time(b)}'
+                   '&format=miniseed&nodata=404')
+              req=urllib.request.Request(url,headers={'User-Agent':'R6E8A-current-preview/2.0'})
+              try:
+                  with urllib.request.urlopen(req,timeout=180) as r:
+                      return r.read(),url
+              except Exception as e:
+                  if getattr(e,'code',None)==404:
+                      return None,url
+                  raise
+
+          traces=[]; urls=[]
+          cur=start
+          while cur < end:
+              b=min(cur+timedelta(hours=6),end)
+              raw,url=fetch(cur,b); urls.append(url)
+              if raw:
+                  traces.extend(read(io.BytesIO(raw)))
+              cur=b
+
+          st=Stream(traces=traces)
+          st.merge(method=0)
+          st=st.split()
+
+          minute_rows=[]
+          for ep in range(int(start.timestamp()//60)*60, int(end.timestamp()//60)*60, 60):
+              a=UTCDateTime(ep); b=UTCDateTime(ep+60)
+              pieces=[]
+              for tr in st:
+                  if tr.stats.endtime < a or tr.stats.starttime >= b:
+                      continue
+                  sl=tr.slice(a,b-1/tr.stats.sampling_rate,nearest_sample=False)
+                  if len(sl.data): pieces.append(sl)
+              if not pieces:
+                  continue
+              ss=Stream(pieces); ss.merge(method=0); ss=ss.split()
+              if len(ss)!=1:
+                  continue
+              tr=ss[0]
+              sr=float(tr.stats.sampling_rate)
+              expected=int(round(sr*60))
+              x=np.asarray(tr.data,dtype=float)
+              if len(x) < expected:
+                  continue
+              x=x[:expected]
+              if not np.isfinite(x).all():
+                  continue
+              x=x-x.mean()
+              nper=int(round(sr*8)); nover=int(round(sr*4))
+              f,p=welch(x,fs=sr,window='hann',nperseg=nper,noverlap=nover,detrend=False,scaling='density')
+              means={}
+              for name,lo,hi in bands:
+                  mask=(f>=lo)&(f<hi if hi<20 else f<=hi)
+                  means[name]=float(np.mean(p[mask]))
+              dom=max(means,key=means.get)
+              minute_rows.append({'epoch':ep,'dominant':dom})
+
+          rows=sorted(minute_rows,key=lambda r:r['epoch'])
+          dom48=[r for r in rows if r['dominant']=='4-8']
+
+          runs=[]; run=[]
+          for r in rows:
+              if r['dominant']=='4-8':
+                  if run and r['epoch'] != run[-1]['epoch']+60:
+                      runs.append(run); run=[]
+                  run.append(r)
+              else:
+                  if run:
+                      runs.append(run); run=[]
+          if run: runs.append(run)
+
+          sustained=[r for r in runs if len(r)>=15]
+          r30=[r for r in sustained if len(r)>=30]
+          r60=[r for r in sustained if len(r)>=60]
+
+          def night_overlap(run):
+              s=datetime.fromtimestamp(run[0]['epoch'],TZ)
+              e=datetime.fromtimestamp(run[-1]['epoch']+60,TZ)
+              total=0.0
+              day=(s-timedelta(days=1)).date()
+              while day<=e.date():
+                  start_hour=23 if day.weekday() in (4,5) else 22
+                  ns=datetime.combine(day,datetime.min.time(),TZ).replace(hour=start_hour)
+                  ne=datetime.combine(day+timedelta(days=1),datetime.min.time(),TZ).replace(hour=7)
+                  total += max(0.0,(min(e,ne)-max(s,ns)).total_seconds()/60.0)
+                  day += timedelta(days=1)
+              return total
+
+          night30=[r for r in r30 if night_overlap(r)>=30]
+
+          baseline={
+            'analyzed_minutes':148544,
+            'dom48_minutes':55159,
+            'events15':604,
+            'events30':323,
+            'events60':159,
+            'sustained_minutes':31858,
+            'night30':73,
+            'longest_minutes':664
+          }
+          inc={
+            'analyzed_minutes':len(rows),
+            'dom48_minutes':len(dom48),
+            'dom48_hours':round(len(dom48)/60,2),
+            'events15':len(sustained),
+            'events30':len(r30),
+            'events60':len(r60),
+            'sustained_minutes':sum(len(r) for r in sustained),
+            'night30':len(night30),
+            'longest_minutes':max([len(r) for r in sustained],default=0)
+          }
+          cum={
+            'analyzed_minutes':baseline['analyzed_minutes']+inc['analyzed_minutes'],
+            'dom48_minutes':baseline['dom48_minutes']+inc['dom48_minutes'],
+            'events15':baseline['events15']+inc['events15'],
+            'events30':baseline['events30']+inc['events30'],
+            'events60':baseline['events60']+inc['events60'],
+            'sustained_minutes':baseline['sustained_minutes']+inc['sustained_minutes'],
+            'night30':baseline['night30']+inc['night30'],
+            'longest_minutes':max(baseline['longest_minutes'],inc['longest_minutes'])
+          }
+          cum['dom48_hours']=round(cum['dom48_minutes']/60,2)
+          cum['sustained_hours']=round(cum['sustained_minutes']/60,2)
+          cum['percent_dom48_of_analyzed']=round(100*cum['dom48_minutes']/cum['analyzed_minutes'],2)
+
+          out={
+            'generated_utc':datetime.now(timezone.utc).isoformat(),
+            'analysis_start_utc':start.isoformat(),
+            'analysis_end_utc':end.isoformat(),
+            'analysis_end_et':end.astimezone(TZ).strftime('%Y-%m-%d %I:%M %p %Z'),
+            'increment':inc,
+            'cumulative':cum,
+            'method_note':'60 s complete clock-aligned windows; Welch PSD 8 s Hann, 50% overlap; dominant band is highest mean PSD among 1-4, 4-8, 8-16, 16-20 Hz; gaps terminate events.',
+            'source_urls':urls
+          }
+          with open('data/current-preview-analysis.json','w') as f:
+              json.dump(out,f,indent=2)
+          print(json.dumps(out,indent=2))
+          PY
+      - name: Commit isolated preview analysis
+        run: |
+          git config user.name 'r6e8a-preview-bot'
+          git config user.email 'r6e8a-preview-bot@users.noreply.github.com'
+          git add data/current-preview-analysis.json
+          git commit -m 'Compute current preview through Aug 15 16:59 ET' || true
+          git push
