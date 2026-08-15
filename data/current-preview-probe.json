@@ -1,0 +1,62 @@
+{
+  "generated_utc": "2026-08-15T21:32:47.370877+00:00",
+  "successful_candidate_ends_utc": [
+    "2026-08-15T21:00:00",
+    "2026-08-15T21:02:00"
+  ],
+  "failed_candidates": [
+    {
+      "end": "2026-08-15T21:04:00",
+      "error": "HTTP Error 404: Not Found"
+    },
+    {
+      "end": "2026-08-15T21:06:00",
+      "error": "HTTP Error 404: Not Found"
+    },
+    {
+      "end": "2026-08-15T21:08:00",
+      "error": "HTTP Error 404: Not Found"
+    },
+    {
+      "end": "2026-08-15T21:10:00",
+      "error": "HTTP Error 404: Not Found"
+    }
+  ],
+  "latest_retrievable_requested_end_utc": "2026-08-15T21:02:00+00:00",
+  "latest_retrievable_requested_end_et": "2026-08-15 05:02 PM EDT",
+  "latest_sample_et": "2026-08-15 05:02:02 PM EDT",
+  "tail_analyzed_minutes": 8,
+  "tail_dom48_minutes": 6,
+  "tail_dom48_hours": 0.1,
+  "overlap_runs_4_8": [
+    {
+      "start_utc": "2026-08-15T20:10:00+00:00",
+      "end_utc": "2026-08-15T20:18:00+00:00",
+      "minutes": 8,
+      "crosses_boundary": false,
+      "minutes_after_boundary": 0
+    },
+    {
+      "start_utc": "2026-08-15T20:34:00+00:00",
+      "end_utc": "2026-08-15T20:36:00+00:00",
+      "minutes": 2,
+      "crosses_boundary": false,
+      "minutes_after_boundary": 0
+    },
+    {
+      "start_utc": "2026-08-15T20:37:00+00:00",
+      "end_utc": "2026-08-15T20:41:00+00:00",
+      "minutes": 4,
+      "crosses_boundary": false,
+      "minutes_after_boundary": 0
+    },
+    {
+      "start_utc": "2026-08-15T20:56:00+00:00",
+      "end_utc": "2026-08-15T21:02:00+00:00",
+      "minutes": 6,
+      "crosses_boundary": false,
+      "minutes_after_boundary": 6
+    }
+  ],
+  "source_url": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-08-15T20:09:00&end=2026-08-15T21:02:00&format=miniseed&nodata=404"
+}
