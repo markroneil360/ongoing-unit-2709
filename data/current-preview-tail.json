@@ -1,0 +1,52 @@
+{
+  "generated_utc": "2026-08-15T21:28:28.673872+00:00",
+  "source_url": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-08-15T18:00:00&end=2026-08-15T20:20:00&format=miniseed&nodata=404",
+  "verified_end_et": "2026-08-15 04:20 PM EDT",
+  "tail_analyzed_minutes": 67,
+  "tail_dom48_minutes": 22,
+  "tail_dom48_hours": 0.37,
+  "overlap_runs_4_8": [
+    {
+      "start_utc": "2026-08-15T18:12:00+00:00",
+      "end_utc": "2026-08-15T18:20:00+00:00",
+      "minutes": 8,
+      "crosses_boundary": false,
+      "minutes_after_boundary": 0
+    },
+    {
+      "start_utc": "2026-08-15T18:34:00+00:00",
+      "end_utc": "2026-08-15T18:42:00+00:00",
+      "minutes": 8,
+      "crosses_boundary": false,
+      "minutes_after_boundary": 0
+    },
+    {
+      "start_utc": "2026-08-15T18:58:00+00:00",
+      "end_utc": "2026-08-15T19:05:00+00:00",
+      "minutes": 7,
+      "crosses_boundary": false,
+      "minutes_after_boundary": 0
+    },
+    {
+      "start_utc": "2026-08-15T19:24:00+00:00",
+      "end_utc": "2026-08-15T19:31:00+00:00",
+      "minutes": 7,
+      "crosses_boundary": false,
+      "minutes_after_boundary": 7
+    },
+    {
+      "start_utc": "2026-08-15T19:46:00+00:00",
+      "end_utc": "2026-08-15T19:53:00+00:00",
+      "minutes": 7,
+      "crosses_boundary": false,
+      "minutes_after_boundary": 7
+    },
+    {
+      "start_utc": "2026-08-15T20:10:00+00:00",
+      "end_utc": "2026-08-15T20:18:00+00:00",
+      "minutes": 8,
+      "crosses_boundary": false,
+      "minutes_after_boundary": 8
+    }
+  ]
+}
