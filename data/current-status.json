@@ -1,27 +1,27 @@
 {
   "station": "AM.R6E8A.00",
-  "generated_utc": "2026-08-16T21:52:06.321313+00:00",
-  "generated_et": "2026-08-16 05:52:06 PM EDT",
-  "window_start_utc": "2026-08-16T20:57:06.321313+00:00",
-  "window_end_utc": "2026-08-16T21:17:06.321313+00:00",
+  "generated_utc": "2026-08-16T22:53:10.578883+00:00",
+  "generated_et": "2026-08-16 06:53:10 PM EDT",
+  "window_start_utc": "2026-08-16T21:58:10.578883+00:00",
+  "window_end_utc": "2026-08-16T22:18:10.578883+00:00",
   "channels": {
     "HDF": {
       "channel": "HDF",
       "ok": true,
       "coverage_pct": 100.0,
       "segments": 1,
-      "latest_sample_utc": "2026-08-16T21:17:07.391000+00:00",
-      "latest_sample_et": "2026-08-16 05:17:07 PM EDT",
-      "url": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-08-16T20:57:06.321313&end=2026-08-16T21:17:06.321313&format=miniseed&nodata=404"
+      "latest_sample_utc": "2026-08-16T22:18:10.961000+00:00",
+      "latest_sample_et": "2026-08-16 06:18:10 PM EDT",
+      "url": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-08-16T21:58:10.578883&end=2026-08-16T22:18:10.578883&format=miniseed&nodata=404"
     },
     "EHZ": {
       "channel": "EHZ",
       "ok": true,
       "coverage_pct": 100.0,
       "segments": 1,
-      "latest_sample_utc": "2026-08-16T21:17:06.531000+00:00",
-      "latest_sample_et": "2026-08-16 05:17:06 PM EDT",
-      "url": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=EHZ&start=2026-08-16T20:57:06.321313&end=2026-08-16T21:17:06.321313&format=miniseed&nodata=404"
+      "latest_sample_utc": "2026-08-16T22:18:11.571000+00:00",
+      "latest_sample_et": "2026-08-16 06:18:11 PM EDT",
+      "url": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=EHZ&start=2026-08-16T21:58:10.578883&end=2026-08-16T22:18:10.578883&format=miniseed&nodata=404"
     }
   },
   "source": "Raspberry Shake public FDSN DataSelect",
