@@ -21,7 +21,7 @@ replace('HDF DATA THROUGH: AUGUST 16, 2026 · 8:29 PM EST',
 replace('Latest returned HDF sample: <b>8:29:00 PM EST</b>. Cumulative 4–8 Hz dominance uses complete clock-aligned HDF minutes through 8:28 PM EST.',
         'Latest returned HDF sample: <b>8:38:01 AM EST</b>. Cumulative 4–8 Hz dominance uses complete clock-aligned HDF minutes through 8:37 AM EST.')
 
-# Cumulative 4–8 Hz values.
+# Cumulative 4–8 Hz values shown on the public page.
 replace('950 Hours', '954 Hours')
 replace('950.07 Hours', '953.50 Hours')
 replace('57,004', '57,210')
@@ -29,11 +29,12 @@ replace('36.87%', '36.83%')
 replace('56.33%', '56.13%')
 replace('45.98%', '45.82%')
 replace('33.88%', '33.76%')
-replace('414.88 Hours', '418.32 Hours')
 replace('24,893 minutes', '25,099 minutes')
 
-# Legal-facing count and sustained counts remain verified and unchanged:
-# 612 events >=15 min; 325 events >=30 min; 160 events >=60 min; 75 nighttime ordinance subset.
+# Verified values that remain unchanged:
+# 612 events >=15 min / 535.18 h; 325 events >=30 min / 436.88 h;
+# 160 events >=60 min / 321.88 h; 75 nighttime ordinance subset.
+# Candidate shorter-segment subtotal is 25,099 min = 418.32 h; the page displays the minute subtotal.
 
 replace('R6E8A HDF archive calculation; current through Aug. 16, 2026, 8:29 PM EST.',
         'R6E8A HDF archive calculation; current through Aug. 17, 2026, 8:38 AM EST.')
@@ -48,7 +49,7 @@ replace('R6E8A public dashboard · data through Aug. 16, 2026 8:29 PM EST.',
 # Explicit stale-value gates before write.
 for forbidden in (
     '950.07 Hours', '950.07-hour', '57,004', '36.87%',
-    '56.33%', '45.98%', '33.88%', '414.88 Hours', '24,893 minutes',
+    '56.33%', '45.98%', '33.88%', '24,893 minutes',
     'AUGUST 16, 2026 · 8:29 PM EST', 'Aug. 16, 2026, 8:29 PM EST',
     'Aug. 16 at 8:29 PM EST', 'Aug. 16, 2026 8:29 PM EST'
 ):
@@ -61,7 +62,7 @@ required = (
     '612 Events', '535.18 Hours', '56.13%',
     '325 Events', '436.88 Hours', '45.82%',
     '160 Events', '321.88 Hours', '33.76%',
-    '25,099 minutes', '418.32 Hours',
+    '25,099 minutes',
     '75 conservative ordinance Events',
     'HDF DATA THROUGH: AUGUST 17, 2026 · 8:38 AM EST',
     'Latest returned HDF sample: <b>8:38:01 AM EST</b>',
