@@ -1,0 +1,40 @@
+name: Sync R6E8A dashboard current edge
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - data/current-status.json
+      - tools/sync_dashboard_current_edge.py
+      - .github/workflows/sync-dashboard-current-edge.yml
+      - .sync-current-edge-trigger
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: r6e8a-dashboard-current-edge
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Apply live-edge update with five validation gates
+        run: python3 tools/sync_dashboard_current_edge.py
+      - name: Commit dashboard current edge
+        run: |
+          git config user.name 'r6e8a-status-bot'
+          git config user.email 'r6e8a-status-bot@users.noreply.github.com'
+          git add index.html
+          if git diff --cached --quiet; then
+            echo 'Dashboard current edge already synchronized.'
+          else
+            git commit -m "Sync R6E8A live HDF/EHZ edge ($(TZ=America/Detroit date '+%Y-%m-%d %H:%M ET'))"
+            git pull --rebase origin main
+            git push origin main
+          fi
