@@ -1,0 +1,35 @@
+name: Publish verified R6E8A 4-8 Hz update
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - tools/publish_4_8_verified.py
+      - .github/workflows/publish-4-8-verified.yml
+      - .publish-4-8-trigger
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: r6e8a-publish-verified-4-8
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Apply verified values with stale-value gates
+        run: python3 tools/publish_4_8_verified.py
+      - name: Commit verified dashboard update
+        run: |
+          git config user.name 'r6e8a-refresh-bot'
+          git config user.email 'r6e8a-refresh-bot@users.noreply.github.com'
+          git add index.html
+          git commit -m 'Update R6E8A measured 4-8 Hz total through Aug 16 8:29 PM ET'
+          git pull --rebase origin main
+          git push origin main
