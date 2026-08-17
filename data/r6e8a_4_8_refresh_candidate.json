@@ -1,0 +1,196 @@
+{
+  "schema_version": 1,
+  "station": "AM.R6E8A.00",
+  "channel": "HDF",
+  "generated_utc": "2026-08-17T00:54:18.101195+00:00",
+  "method": {
+    "window": "clock-aligned complete 60-second windows; gaps excluded",
+    "welch": "Hann; 8 s segments; 50% overlap; scipy.signal.welch",
+    "dominance": "highest mean PSD among 1-4, 4-8, 8-16, 16-20 Hz",
+    "sustained_event": "consecutive complete 4-8-dominant minutes",
+    "missing": "excluded; never zero-filled or interpolated"
+  },
+  "source": "Raspberry Shake public FDSN DataSelect",
+  "requested_through_utc": "2026-08-17T00:51:00+00:00",
+  "latest_returned_sample_utc": "2026-08-16T19:13:01.821000+00:00",
+  "latest_complete_analyzed_minute_utc": "2026-08-16T19:12:00+00:00",
+  "baseline": {
+    "end_exclusive_utc": "2026-08-12T19:13:00+00:00",
+    "analyzed_minutes": 148544,
+    "dom48_minutes": 55159,
+    "count15": 604,
+    "mins15": 31858,
+    "count30": 323,
+    "mins30": 26079,
+    "count60": 159,
+    "mins60": 19210
+  },
+  "preview_checkpoint": {
+    "end_exclusive_utc": "2026-08-15T21:02:00+00:00",
+    "recomputed": {
+      "analyzed_minutes": 152973,
+      "dom48_minutes": 56472,
+      "count15": 608,
+      "mins15": 31960,
+      "count30": 324,
+      "mins30": 26110,
+      "count60": 159,
+      "mins60": 19210,
+      "post_band_counts": {
+        "1-4": 2416,
+        "4-8": 1313,
+        "8-16": 698,
+        "16-20": 2
+      },
+      "post_ordinance_events": 1,
+      "dom48_hours": 941.2,
+      "dom48_percent_of_analyzed": 36.92,
+      "hours15": 532.67,
+      "hours30": 435.17,
+      "hours60": 320.17,
+      "shorter48_minutes": 24512,
+      "shorter48_hours": 408.53
+    },
+    "expected": {
+      "dom48_minutes": 56472,
+      "count15": 608,
+      "mins15": 31960,
+      "count30": 324,
+      "mins30": 26110,
+      "count60": 159,
+      "mins60": 19210,
+      "ordinance_events": 74
+    },
+    "ordinance_segment_count": 1
+  },
+  "current": {
+    "analyzed_minutes": 154304,
+    "dom48_minutes": 56897,
+    "count15": 610,
+    "mins15": 32079,
+    "count30": 325,
+    "mins30": 26213,
+    "count60": 160,
+    "mins60": 19313,
+    "post_band_counts": {
+      "1-4": 3164,
+      "4-8": 1738,
+      "8-16": 853,
+      "16-20": 5
+    },
+    "post_ordinance_events": 2,
+    "dom48_hours": 948.28,
+    "dom48_percent_of_analyzed": 36.87,
+    "hours15": 534.65,
+    "hours30": 436.88,
+    "hours60": 321.88,
+    "shorter48_minutes": 24818,
+    "shorter48_hours": 413.63,
+    "ordinance_events": 75,
+    "new_ordinance_events_since_preview": 1
+  },
+  "checks": [
+    {
+      "name": "1_checkpoint_total_reproduction",
+      "pass": true,
+      "observed": 56472,
+      "expected": 56472
+    },
+    {
+      "name": "2_checkpoint_sustained_reproduction",
+      "pass": true,
+      "observed": {
+        "count15": 608,
+        "mins15": 31960,
+        "count30": 324,
+        "mins30": 26110,
+        "count60": 159,
+        "mins60": 19210
+      },
+      "expected": {
+        "count15": 608,
+        "mins15": 31960,
+        "count30": 324,
+        "mins30": 26110,
+        "count60": 159,
+        "mins60": 19210
+      }
+    },
+    {
+      "name": "3_checkpoint_edge_six_minutes",
+      "pass": true,
+      "observed": [
+        {
+          "utc": "2026-08-15T20:56:00+00:00",
+          "band": "4-8"
+        },
+        {
+          "utc": "2026-08-15T20:57:00+00:00",
+          "band": "4-8"
+        },
+        {
+          "utc": "2026-08-15T20:58:00+00:00",
+          "band": "4-8"
+        },
+        {
+          "utc": "2026-08-15T20:59:00+00:00",
+          "band": "4-8"
+        },
+        {
+          "utc": "2026-08-15T21:00:00+00:00",
+          "band": "4-8"
+        },
+        {
+          "utc": "2026-08-15T21:01:00+00:00",
+          "band": "4-8"
+        }
+      ],
+      "expected": "six consecutive 4-8-dominant minutes ending at the 5:02 PM ET data edge"
+    },
+    {
+      "name": "4_minute_integrity",
+      "pass": true,
+      "observed": {
+        "classified_minutes": 5760,
+        "unique_minutes": 5760,
+        "bands": [
+          "1-4",
+          "16-20",
+          "4-8",
+          "8-16"
+        ]
+      },
+      "expected": "unique clock-aligned complete minutes; only defined bands"
+    },
+    {
+      "name": "5_arithmetic_reconciliation",
+      "pass": true,
+      "observed": {
+        "sustained15_minutes": 32079,
+        "shorter_minutes": 24818,
+        "total_dom48_minutes": 56897
+      },
+      "expected": "sustained15 + shorter = all 4-8-dominant minutes"
+    }
+  ],
+  "all_five_checks_pass": true,
+  "fdsn_urls": [
+    "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-08-12T19:13:00Z&end=2026-08-13T01:13:00Z&format=miniseed&nodata=404",
+    "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-08-13T01:13:00Z&end=2026-08-13T07:13:00Z&format=miniseed&nodata=404",
+    "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-08-13T07:13:00Z&end=2026-08-13T13:13:00Z&format=miniseed&nodata=404",
+    "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-08-13T13:13:00Z&end=2026-08-13T19:13:00Z&format=miniseed&nodata=404",
+    "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-08-13T19:13:00Z&end=2026-08-14T01:13:00Z&format=miniseed&nodata=404",
+    "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-08-14T01:13:00Z&end=2026-08-14T07:13:00Z&format=miniseed&nodata=404",
+    "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-08-14T07:13:00Z&end=2026-08-14T13:13:00Z&format=miniseed&nodata=404",
+    "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-08-14T13:13:00Z&end=2026-08-14T19:13:00Z&format=miniseed&nodata=404",
+    "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-08-14T19:13:00Z&end=2026-08-15T01:13:00Z&format=miniseed&nodata=404",
+    "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-08-15T01:13:00Z&end=2026-08-15T07:13:00Z&format=miniseed&nodata=404",
+    "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-08-15T07:13:00Z&end=2026-08-15T13:13:00Z&format=miniseed&nodata=404",
+    "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-08-15T13:13:00Z&end=2026-08-15T19:13:00Z&format=miniseed&nodata=404",
+    "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-08-15T19:13:00Z&end=2026-08-16T01:13:00Z&format=miniseed&nodata=404",
+    "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-08-16T01:13:00Z&end=2026-08-16T07:13:00Z&format=miniseed&nodata=404",
+    "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-08-16T07:13:00Z&end=2026-08-16T13:13:00Z&format=miniseed&nodata=404",
+    "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-08-16T13:13:00Z&end=2026-08-16T19:13:00Z&format=miniseed&nodata=404",
+    "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-08-16T19:13:00Z&end=2026-08-17T00:51:00Z&format=miniseed&nodata=404"
+  ]
+}
