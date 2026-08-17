@@ -45,7 +45,8 @@ replace('74 conservative ordinance Events', '75 conservative ordinance Events')
 
 replace('R6E8A HDF archive calculation; current through Aug. 15, 2026, 5:02 PM EST.',
         'R6E8A HDF archive calculation; current through Aug. 16, 2026, 8:29 PM EST.')
-replace('<section class="section note"><b>Current-edge check:</b> the last post-5 PM HDF segment analyzed was 4:56–5:02 PM EST and was 4–8 Hz dominant for 6 minutes. Because it remained below the 15-minute sustained threshold, it added to the 950.07-hour total but did <b>not</b> increase the sustained-event or ordinance-event counts.</section>',
+replace('The 941.20-hour environmental record', 'The 950.07-hour environmental record')
+replace('<section class="section note"><b>Current-edge check:</b> the last post-5 PM HDF segment analyzed was 4:56–5:02 PM EST and was 4–8 Hz dominant for 6 minutes. Because it remained below the 15-minute sustained threshold, it added to the 941.20-hour total but did <b>not</b> increase the sustained-event or ordinance-event counts.</section>',
         '<section class="section note"><b>Current-edge check:</b> the latest returned HDF sample was 8:29:00 PM EST. The cumulative 4–8 Hz calculation includes only complete clock-aligned minutes through 8:28 PM EST; incomplete or missing acquisition time is excluded rather than treated as zero, quiet, normal, compliant, or below benchmark.</section>')
 replace('The dashboard prominently states HDF data through Aug. 15 at 5:02 PM EST.',
         'The dashboard prominently states HDF data through Aug. 16 at 8:29 PM EST.')
@@ -54,7 +55,7 @@ replace('R6E8A public dashboard · data through Aug. 15, 2026 5:02 PM EST.',
 
 # Explicit integrity gates before write.
 for forbidden in (
-    '941.20 Hours', '56,472', '36.92%', '608 Events', '532.67 Hours',
+    '941.20 Hours', '941.20-hour', '56,472', '36.92%', '608 Events', '532.67 Hours',
     '324 Events', '435.17 Hours', '159 Events', '320.17 Hours',
     '74 conservative ordinance Events', '74-Event ordinance subset',
     'Aug. 15, 2026, 5:02 PM EST', 'Aug. 15 at 5:02 PM EST'
@@ -63,7 +64,8 @@ for forbidden in (
         raise SystemExit(f'Stale dashboard value remains: {forbidden}')
 
 required = (
-    '950.07 Hours', '57,004 valid 4–8 Hz-dominant minutes', '36.87% of analyzed HDF time',
+    '950.07 Hours', '950.07-hour environmental record',
+    '57,004 valid 4–8 Hz-dominant minutes', '36.87% of analyzed HDF time',
     '612 Events', '535.18 Hours', '325 Events', '436.88 Hours',
     '160 Events', '321.88 Hours', '75 conservative ordinance Events',
     'HDF DATA THROUGH: AUGUST 16, 2026 · 8:29 PM EST',
