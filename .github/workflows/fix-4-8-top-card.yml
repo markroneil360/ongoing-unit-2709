@@ -1,0 +1,30 @@
+name: Fix R6E8A 4-8 Hz top-card consistency
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - tools/fix_4_8_top_card.py
+      - .github/workflows/fix-4-8-top-card.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Apply top-card consistency correction
+        run: python3 tools/fix_4_8_top_card.py
+      - name: Commit correction
+        run: |
+          git config user.name 'r6e8a-refresh-bot'
+          git config user.email 'r6e8a-refresh-bot@users.noreply.github.com'
+          git add index.html
+          git commit -m 'Fix R6E8A sustained 30-minute top-card values'
+          git pull --rebase origin main
+          git push origin main
