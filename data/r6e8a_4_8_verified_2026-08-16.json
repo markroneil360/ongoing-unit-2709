@@ -1,0 +1,37 @@
+{
+  "station": "AM.R6E8A.00",
+  "channel": "HDF",
+  "source": "Raspberry Shake public FDSN DataSelect",
+  "verification_run_id": 31983573493,
+  "generated_utc": "2026-08-17T01:02:30Z",
+  "latest_returned_sample_utc": "2026-08-17T00:29:00.741Z",
+  "display_data_through_et": "2026-08-16 20:29 EST",
+  "method": {
+    "window": "clock-aligned complete 60-second windows; gaps excluded",
+    "welch": "Hann; 8-second segments; 50% overlap",
+    "dominance": "highest mean PSD among 1-4, 4-8, 8-16, 16-20 Hz",
+    "missing": "excluded; never zero-filled or interpolated"
+  },
+  "current": {
+    "analyzed_minutes": 154620,
+    "dom48_minutes": 57004,
+    "dom48_hours": 950.07,
+    "dom48_percent_of_analyzed": 36.87,
+    "sustained_15": {"events": 612, "minutes": 32111, "hours": 535.18},
+    "sustained_30": {"events": 325, "minutes": 26213, "hours": 436.88},
+    "sustained_60": {"events": 160, "minutes": 19313, "hours": 321.88},
+    "shorter_4_8_minutes": 24893,
+    "shorter_4_8_hours": 414.88,
+    "conservative_nighttime_ordinance_events": 75,
+    "new_ordinance_events_since_aug15_preview": 1
+  },
+  "checks": [
+    {"name": "checkpoint total reproduction", "pass": true, "observed": 56472, "expected": 56472},
+    {"name": "checkpoint sustained reproduction", "pass": true},
+    {"name": "checkpoint six-minute edge reproduction", "pass": true},
+    {"name": "minute integrity", "pass": true, "classified_minutes": 6076, "unique_minutes": 6076},
+    {"name": "arithmetic reconciliation", "pass": true, "sustained15_minutes": 32111, "shorter_minutes": 24893, "total_dom48_minutes": 57004}
+  ],
+  "all_five_checks_pass": true,
+  "publication_note": "No extrapolated hours. Values are derived only from successfully retrieved complete HDF minutes."
+}
