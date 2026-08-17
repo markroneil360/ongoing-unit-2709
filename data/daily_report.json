@@ -1,15 +1,15 @@
 {
- "generated_utc": "2026-08-16T11:48:13.359515+00:00",
+ "generated_utc": "2026-08-17T11:52:47.751796+00:00",
  "report_window_et": {
-  "start": "2026-08-15 07:00 EDT",
-  "end": "2026-08-16 07:00 EDT"
+  "start": "2026-08-16 07:00 EDT",
+  "end": "2026-08-17 07:00 EDT"
  },
  "cutoff_rule": "Fixed 07:00 AM America/Detroit to 07:00 AM the next day.",
- "data_through_et": "2026-08-16 06:58",
- "retrieved_utc": "2026-08-16T11:48:13.359590+00:00",
+ "data_through_et": "2026-08-17 06:58",
+ "retrieved_utc": "2026-08-17T11:52:47.751867+00:00",
  "provenance_urls": {
-  "HDF": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-08-15T11:00:00&end=2026-08-16T11:00:00&format=miniseed&nodata=404",
-  "EHZ": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=EHZ&start=2026-08-15T11:00:00&end=2026-08-16T11:00:00&format=miniseed&nodata=404"
+  "HDF": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-08-16T11:00:00&end=2026-08-17T11:00:00&format=miniseed&nodata=404",
+  "EHZ": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=EHZ&start=2026-08-16T11:00:00&end=2026-08-17T11:00:00&format=miniseed&nodata=404"
  },
  "small_print": "This archived 24-hour report uses a fixed 7:00 AM ET cutoff and is generated after the Raspberry Shake archive delay; it is not a real-time feed. The official DataView panel below provides the closest available live view.",
  "attribution": "Data powered by Raspberry Shake, S.A., a citizen-science project. Please visit raspberryshake.org and join the Citizen Science Community today! DOI: https://doi.org/10.7914/SN/AM"
