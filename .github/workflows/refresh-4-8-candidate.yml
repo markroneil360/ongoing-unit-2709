@@ -1,0 +1,44 @@
+name: R6E8A 4-8 Hz refresh candidate
+
+on:
+  push:
+    branches:
+      - agent/r6e8a-4-8-refresh-20260816
+    paths:
+      - tools/refresh_4_8_candidate.py
+      - .github/workflows/refresh-4-8-candidate.yml
+      - .refresh-4-8-trigger
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: r6e8a-4-8-refresh-candidate
+  cancel-in-progress: false
+
+jobs:
+  calculate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/r6e8a-4-8-refresh-20260816
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install calculation dependencies
+        run: pip install 'obspy>=1.4' numpy scipy
+      - name: Calculate candidate and run five validation gates
+        run: python3 tools/refresh_4_8_candidate.py
+      - name: Commit candidate only
+        run: |
+          git config user.name 'r6e8a-refresh-bot'
+          git config user.email 'r6e8a-refresh-bot@users.noreply.github.com'
+          git add data/r6e8a_4_8_refresh_candidate.json
+          if git diff --cached --quiet; then
+            echo 'Candidate unchanged.'
+          else
+            git commit -m 'R6E8A 4-8 Hz refresh candidate (five checks passed)'
+            git push origin HEAD:agent/r6e8a-4-8-refresh-20260816
+          fi
