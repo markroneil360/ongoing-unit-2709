@@ -26,10 +26,23 @@ jobs:
           python-version: '3.11'
       - name: Install calculation dependencies
         run: pip install 'obspy>=1.4' numpy scipy
+      - name: Align request edge to available FDSN archive
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('tools/refresh_4_8_candidate.py')
+          s = p.read_text()
+          old = 'requested_end = started.replace(second=0, microsecond=0)'
+          new = 'requested_end = (started - timedelta(minutes=30)).replace(second=0, microsecond=0)'
+          if old not in s:
+              raise SystemExit('Expected request-edge line not found')
+          p.write_text(s.replace(old, new, 1))
+          PY
       - name: Calculate candidate and run five validation gates
         run: python3 tools/refresh_4_8_candidate.py
       - name: Commit candidate only
         run: |
+          git checkout -- tools/refresh_4_8_candidate.py
           git config user.name 'r6e8a-refresh-bot'
           git config user.email 'r6e8a-refresh-bot@users.noreply.github.com'
           git add data/r6e8a_4_8_refresh_candidate.json
