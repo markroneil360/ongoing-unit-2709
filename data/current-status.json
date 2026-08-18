@@ -1,21 +1,27 @@
 {
   "station": "AM.R6E8A.00",
-  "generated_utc": "2026-08-18T19:09:41.852094+00:00",
-  "generated_et": "2026-08-18 03:09:41 PM EDT",
-  "window_start_utc": "2026-08-18T18:14:41.852094+00:00",
-  "window_end_utc": "2026-08-18T18:34:41.852094+00:00",
+  "generated_utc": "2026-08-18T19:53:23.916890+00:00",
+  "generated_et": "2026-08-18 03:53:23 PM EDT",
+  "window_start_utc": "2026-08-18T18:58:23.916890+00:00",
+  "window_end_utc": "2026-08-18T19:18:23.916890+00:00",
   "channels": {
     "HDF": {
       "channel": "HDF",
-      "ok": false,
-      "error": "HTTP Error 502: Bad Gateway",
-      "url": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-08-18T18:14:41.852094&end=2026-08-18T18:34:41.852094&format=miniseed&nodata=404"
+      "ok": true,
+      "coverage_pct": 100.0,
+      "segments": 1,
+      "latest_sample_utc": "2026-08-18T19:18:25.408000+00:00",
+      "latest_sample_et": "2026-08-18 03:18:25 PM EDT",
+      "url": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-08-18T18:58:23.916890&end=2026-08-18T19:18:23.916890&format=miniseed&nodata=404"
     },
     "EHZ": {
       "channel": "EHZ",
-      "ok": false,
-      "error": "HTTP Error 502: Bad Gateway",
-      "url": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=EHZ&start=2026-08-18T18:14:41.852094&end=2026-08-18T18:34:41.852094&format=miniseed&nodata=404"
+      "ok": true,
+      "coverage_pct": 100.0,
+      "segments": 1,
+      "latest_sample_utc": "2026-08-18T19:18:24.478000+00:00",
+      "latest_sample_et": "2026-08-18 03:18:24 PM EDT",
+      "url": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=EHZ&start=2026-08-18T18:58:23.916890&end=2026-08-18T19:18:23.916890&format=miniseed&nodata=404"
     }
   },
   "source": "Raspberry Shake public FDSN DataSelect",
