@@ -1,0 +1,42 @@
+name: Analyze Aug 17 R6E8A hourly HDF EHZ
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - tools/analyze_aug17_hourly.py
+      - .github/workflows/analyze-aug17-hourly.yml
+      - .analyze-aug17-hourly-trigger
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: r6e8a-aug17-hourly-analysis
+  cancel-in-progress: false
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: pip install 'obspy>=1.4' numpy scipy
+      - name: Analyze HDF and EHZ from midnight through 11:30 PM Detroit time
+        run: python3 tools/analyze_aug17_hourly.py
+      - name: Commit verified read-only analysis result
+        run: |
+          git config user.name 'r6e8a-analysis-bot'
+          git config user.email 'r6e8a-analysis-bot@users.noreply.github.com'
+          git add data/r6e8a_2026-08-17_hourly.json
+          if git diff --cached --quiet; then
+            echo 'Hourly analysis unchanged.'
+          else
+            git commit -m 'R6E8A Aug 17 hourly HDF EHZ analysis (five checks passed)'
+            git pull --rebase origin main
+            git push origin main
+          fi
