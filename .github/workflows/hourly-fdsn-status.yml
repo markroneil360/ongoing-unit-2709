@@ -1,6 +1,11 @@
 name: Hourly R6E8A FDSN status
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/hourly-fdsn-status.yml
+      - .hourly-fdsn-status-trigger
   schedule:
     - cron: "40 * * * *"
   workflow_dispatch:
