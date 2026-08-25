@@ -9,7 +9,9 @@ on:
     branches: [main]
   workflow_dispatch:
   workflow_run:
-    workflows: ["Daily R6E8A data refresh (07:00 ET)"]
+    workflows:
+      - "Daily R6E8A data refresh (07:00 ET)"
+      - "Hourly R6E8A FDSN status"
     types: [completed]
 
 permissions:
