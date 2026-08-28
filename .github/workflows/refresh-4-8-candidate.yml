@@ -50,5 +50,6 @@ jobs:
             echo 'Candidate unchanged.'
           else
             git commit -m 'R6E8A 4-8 Hz refresh candidate (five checks passed)'
+            git pull --rebase origin main
             git push
           fi
