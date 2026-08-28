@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "station": "AM.R6E8A.00",
+  "channel": "HDF",
+  "scope_start_et": "2026-04-12T00:00:00-04:00",
+  "scope_start_utc": "2026-04-12T04:00:00+00:00",
+  "end_exclusive_utc": "2026-08-12T19:13:00+00:00",
+  "source_archive": {
+    "name": "R6E8A-HDF-minute-4-8Hz(1).csv",
+    "sha256": "4c2e8c43d436f08ea57ae02840fcd89bc94d5e852e420e1bd52981ca9665054b",
+    "rows_total_source_file": 148544,
+    "rows_in_apr12_et_scope": 148455,
+    "pre_scope_rows_excluded": 89,
+    "pre_scope_4_8_dominant_minutes": 0,
+    "note": "89 complete source rows precede 12:00 AM Detroit time on Apr 12 (20 commissioning minutes on Mar 5 and 69 Apr 11 ET minutes). They are excluded from the requested Apr 12 scope. None is 4-8 dominant, so the 4-8 numerator is unchanged while the analyzed-time denominator is corrected."
+  },
+  "method": {
+    "window": "60 s, clock-aligned, complete windows only",
+    "welch": "Hann; 8 s segments; 50% overlap",
+    "dominance": "highest mean PSD among 1-4, 4-8, 8-16, 16-20 Hz",
+    "sustained_event": "maximal consecutive complete 4-8-dominant minutes; primary threshold >=10 minutes",
+    "missing": "excluded; never zero-filled or interpolated",
+    "channel_boundary": "HDF only; EHZ remains separate"
+  },
+  "base": {
+    "analyzed_minutes": 148455,
+    "band_counts": {"1-4": 80908, "4-8": 55159, "8-16": 12302, "16-20": 86},
+    "dom48_minutes": 55159,
+    "dom48_hours": 919.32,
+    "count10": 1144,
+    "mins10": 38064,
+    "hours10": 634.40,
+    "count15": 604,
+    "mins15": 31863,
+    "hours15": 531.05,
+    "count30": 323,
+    "mins30": 26082,
+    "hours30": 434.70,
+    "count60": 159,
+    "mins60": 19212,
+    "hours60": 320.20,
+    "shorter10_minutes": 17095,
+    "shorter10_hours": 284.92,
+    "ordinance_events": 73,
+    "longest_minutes": 664
+  },
+  "reconciliation": {
+    "dom48": "38064 sustained >=10 min + 17095 shorter = 55159 total 4-8-dominant minutes",
+    "legacy_boundary_correction": "The prior >=15 event export had the same 604/323/159 event counts but omitted the first complete 4-8 minute from five runs immediately after retrieval/gap boundaries. Rebuilding from the corrected minute sequence adds 5 minutes to >=15, 3 to >=30, and 2 to >=60 duration subtotals; counts do not change."
+  },
+  "threshold_note": "The >=10-minute threshold is a dashboard reporting/event-definition choice, not a medical, health, or legal exposure limit."
+}
