@@ -1,0 +1,71 @@
+{
+  "station": "AM.R6E8A.00",
+  "primary_channel": "HDF",
+  "seismic_channel": "EHZ",
+  "source": "Raspberry Shake public FDSN DataSelect",
+  "generated_utc": "2026-08-28T10:44:17.411827+00:00",
+  "window_start_et": "2026-08-28T01:00:00-04:00",
+  "requested_end_utc": "2026-08-28T10:13:00+00:00",
+  "analyzed_edge_et": "2026-08-28T06:12:00-04:00",
+  "latest_samples": {
+    "HDF_et": "2026-08-28T06:13:02.028000-04:00",
+    "EHZ_et": "2026-08-28T06:13:01.098000-04:00"
+  },
+  "HDF": {
+    "complete_minutes_analyzed": 312,
+    "band_counts": {
+      "1-4": 183,
+      "8-16": 49,
+      "4-8": 80
+    },
+    "dominant_4_8_minutes": 80,
+    "dominant_4_8_hours": 1.33,
+    "dominant_4_8_percent": 25.64,
+    "runs_4_8_total": 16,
+    "longest_4_8_run_minutes": 11,
+    "events_ge_15m": 0,
+    "events_ge_30m": 0,
+    "events_ge_60m": 0,
+    "coverage_complete_minutes": 312,
+    "coverage_expected_minutes": 312,
+    "coverage_pct": 100.0,
+    "url": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-08-28T05:00:00Z&end=2026-08-28T10:13:00Z&format=miniseed&nodata=404"
+  },
+  "EHZ": {
+    "coverage_complete_minutes": 312,
+    "coverage_expected_minutes": 312,
+    "coverage_pct": 100.0,
+    "url": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=EHZ&start=2026-08-28T05:00:00Z&end=2026-08-28T10:13:00Z&format=miniseed&nodata=404"
+  },
+  "method": {
+    "window": "clock-aligned complete 60-second HDF windows; gaps excluded",
+    "welch": "Hann; 8 s segments; 50% overlap",
+    "dominance": "highest mean PSD among 1-4, 4-8, 8-16, 16-20 Hz",
+    "missing": "excluded; never zero-filled or interpolated"
+  },
+  "checks": [
+    {
+      "name": "1_identity_time_gate",
+      "pass": true
+    },
+    {
+      "name": "2_HDF_minute_integrity",
+      "pass": true
+    },
+    {
+      "name": "3_HDF_coverage_gate",
+      "pass": true,
+      "observed_pct": 100.0
+    },
+    {
+      "name": "4_4_8_arithmetic_gate",
+      "pass": true
+    },
+    {
+      "name": "5_EHZ_separate_continuity_gate",
+      "pass": true,
+      "observed_pct": 100.0
+    }
+  ],
+  "all_five_checks_pass": true
+}
