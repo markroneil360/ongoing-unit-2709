@@ -1,0 +1,41 @@
+name: R6E8A since 1AM analysis
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - tools/analyze_since_1am.py
+      - .github/workflows/analyze-since-1am.yml
+      - .analyze-since-1am-trigger
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: r6e8a-since-1am
+  cancel-in-progress: true
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install waveform dependencies
+        run: pip install 'obspy>=1.4' numpy scipy
+      - name: Analyze HDF since 1 AM ET and validate five gates
+        run: python3 tools/analyze_since_1am.py
+      - name: Commit verified result only
+        run: |
+          git config user.name 'r6e8a-analysis-bot'
+          git config user.email 'r6e8a-analysis-bot@users.noreply.github.com'
+          git add data/r6e8a_since_1am.json
+          if git diff --cached --quiet; then
+            echo 'Since-1am result unchanged.'
+          else
+            git commit -m 'R6E8A since 1AM analysis (five checks passed)'
+            git push
+          fi
