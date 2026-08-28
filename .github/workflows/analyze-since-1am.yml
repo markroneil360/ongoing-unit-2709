@@ -37,5 +37,6 @@ jobs:
             echo 'Since-1am result unchanged.'
           else
             git commit -m 'R6E8A since 1AM analysis (five checks passed)'
+            git pull --rebase origin main
             git push
           fi
