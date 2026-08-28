@@ -1,0 +1,42 @@
+name: Publish verified R6E8A 10-minute dashboard
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - data/r6e8a_4_8_10min_full.json
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: r6e8a-publish-10min-dashboard
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install status dependency
+        run: pip install 'obspy>=1.4'
+      - name: Refresh separate HDF and EHZ current-edge status
+        run: python3 tools/hourly_fdsn_status.py
+      - name: Patch dashboard and run five publication-integrity checks
+        run: python3 tools/publish_4_8_10min.py
+      - name: Commit only after all publication checks pass
+        run: |
+          git config user.name 'r6e8a-publish-bot'
+          git config user.email 'r6e8a-publish-bot@users.noreply.github.com'
+          git add index.html data/current-status.json
+          if git diff --cached --quiet; then
+            echo 'Dashboard already matches verified candidate.'
+          else
+            git commit -m 'Publish R6E8A >=10 minute sustained dashboard (five checks passed)'
+            git pull --rebase origin main
+            git push
+          fi
