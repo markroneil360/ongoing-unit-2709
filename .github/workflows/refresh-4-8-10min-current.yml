@@ -1,0 +1,44 @@
+name: R6E8A 10-minute current-tail refresh
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - tools/refresh_4_8_10min_current.py
+      - data/r6e8a_4_8_base_10min_2026-08-12.json
+      - .github/workflows/refresh-4-8-10min-current.yml
+      - .refresh-4-8-10min-trigger
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: r6e8a-10min-current-tail
+  cancel-in-progress: false
+
+jobs:
+  calculate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install calculation dependencies
+        run: pip install 'obspy>=1.4' numpy scipy
+      - name: Calculate Apr12-scoped candidate and run five gates
+        run: python3 tools/refresh_4_8_10min_current.py
+      - name: Commit verified candidate only
+        run: |
+          git config user.name 'r6e8a-refresh-bot'
+          git config user.email 'r6e8a-refresh-bot@users.noreply.github.com'
+          git add data/r6e8a_4_8_10min_full.json
+          if git diff --cached --quiet; then
+            echo 'Candidate unchanged.'
+          else
+            git commit -m 'R6E8A Apr12 current >=10-minute candidate (five checks passed)'
+            git pull --rebase origin main
+            git push
+          fi
