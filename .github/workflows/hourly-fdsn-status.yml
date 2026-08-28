@@ -38,5 +38,6 @@ jobs:
             echo "No status change."
           else
             git commit -m "Hourly R6E8A FDSN status ($(TZ=America/Detroit date '+%Y-%m-%d %H:%M ET'))"
+            git pull --rebase origin main
             git push
           fi
