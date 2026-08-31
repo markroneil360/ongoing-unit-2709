@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - data/r6e8a_4_8_10min_full.json
+      - .github/workflows/publish-4-8-10min.yml
   workflow_dispatch:
 
 permissions:
