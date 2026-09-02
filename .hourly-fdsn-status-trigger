@@ -1,1 +1,1 @@
-Manual current-edge refresh requested 2026-08-31 01:13 ET for R6E8A dashboard update and five-pass verification after transient FDSN 502 response.
+Manual current-edge refresh requested 2026-09-02 08:35 ET for R6E8A dashboard update. Preserve locked dashboard design; refresh HDF/EHZ public FDSN status, then synchronize dashboard current edge with five validation gates.
