@@ -41,3 +41,4 @@ jobs:
             git pull --rebase origin main
             git push
           fi
+# manual audited publication trigger: 2026-09-01 20:34 ET
