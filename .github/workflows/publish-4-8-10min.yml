@@ -46,3 +46,4 @@ jobs:
 # manual audited publication trigger: 2026-09-04 01:54 ET — user-requested 6x sanity-check update
 # manual audited publication trigger: 2026-09-04 22:06 ET — user-requested current verified aggregate + live edge
 # manual audited publication trigger: 2026-09-04 22:15 ET — user-requested update after five independent sanity checks
+# manual audited publication trigger: 2026-09-05 19:19 ET — user-requested update after five calculation checks; require five publication-integrity checks
