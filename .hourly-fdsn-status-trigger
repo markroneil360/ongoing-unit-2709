@@ -1,1 +1,1 @@
-Manual current-edge refresh requested 2026-09-04 21:56 ET for R6E8A dashboard update. Preserve locked dashboard design; refresh HDF/EHZ public FDSN status, then synchronize dashboard current edge with five validation gates.
+Manual current-edge refresh requested 2026-09-05 18:58 ET for R6E8A dashboard update. Preserve locked dashboard design; refresh HDF/EHZ public FDSN status. Aggregate publication remains gated by five calculation and five publication-integrity checks.
