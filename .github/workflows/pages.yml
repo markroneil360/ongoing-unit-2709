@@ -4,6 +4,7 @@ name: Deploy static site to GitHub Pages
 # No build step: the repo is served as-is. Runs on pushes to the default branch
 # and after the daily data refresh, and can be triggered manually.
 # manual verified deploy trigger: 2026-09-04 22:08 ET
+# manual verified deploy trigger: 2026-09-05 19:20 ET — deploy five-check-verified R6E8A dashboard state
 
 on:
   push:
