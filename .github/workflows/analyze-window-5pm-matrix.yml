@@ -1,0 +1,25 @@
+name: R6E8A exact 5PM verification matrix
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - tools/analyze_window_5pm_matrix.py
+      - .github/workflows/analyze-window-5pm-matrix.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install waveform dependencies
+        run: pip install 'obspy>=1.4' numpy scipy
+      - name: Build exact 5PM R6E8A matrix and run five gates
+        run: python3 tools/analyze_window_5pm_matrix.py
