@@ -1,2 +1,3 @@
-manual refresh requested 2026-09-05 18:58 ET
+manual refresh requested 2026-09-08 22:17 ET
 reason: user-requested R6E8A dashboard update to most recent available public FDSN data; require five calculation checks and five publication-integrity checks before publication
+request: sanity-check data 5x before dashboard publication; preserve approved dashboard design and channel separation
