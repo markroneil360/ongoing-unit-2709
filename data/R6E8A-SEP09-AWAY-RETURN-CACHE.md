@@ -1,6 +1,6 @@
 # R6E8A — Sep. 9, 2026 comparison analysis checkpoint
 
-**Checkpoint updated:** 2026-09-09 19:38 ET
+**Checkpoint updated:** 2026-09-09 19:41 ET
 **Purpose:** Preserve validated calculations and source anchors so analysis resumes from this state after any connection loss, without publishing personal location or presence information.
 
 ## Final dashboard state
@@ -57,14 +57,35 @@ A dedicated waveform pull was used because differences between cumulative snapsh
 - EHZ showed materially larger hour-to-hour swings than HDF: largest hourly increase +36.70%; largest hourly drop -22.19%.
 - EHZ median by day declined from 4,220.74 counts on the Sep. 5 partial day to 2,241.72 counts through Sep. 9 07:12 ET, while HDF 4–8 Hz dominance became more complete. This supports keeping HDF spectral behavior distinct from EHZ ground-motion amplitude.
 
+## Neutral Sep. 9 transition window — 18:30 to 19:05 ET
+A separate current-data probe retrieved both channels through approximately 19:06 ET and passed all five sanity checks. This section stores environmental values only; no personal timing or location label is attached.
+
+### HDF
+- 18:30–18:43 ET: predominantly stable 4–8 Hz, roughly 2,837–3,184 raw RMS counts/minute.
+- 18:44 ET: 18,747.79 RMS counts, dominant band 1–4 Hz — major isolated spike.
+- 18:45 ET: 40,915.11 RMS counts, dominant band 1–4 Hz — largest spike in this transition window, approximately 13.9× the 96-hour HDF median.
+- 18:46–18:47 ET: returned to ~3,025–3,112 counts and 4–8 Hz.
+- 18:48–18:49 ET: 3,809.99 and 4,123.04 counts, both 1–4 Hz.
+- 18:50–19:04 ET: predominantly 4–8 Hz; 19:00 = 3,552.53; 19:01 = 2,998.96; 19:02 = 2,911.63; 19:03 = 2,931.69; 19:04 = 2,814.82 counts.
+- 19:05 ET: 3,971.31 counts with a shift to 1–4 Hz; elevated relative to immediately preceding minutes but far below the 18:44–18:45 spikes.
+
+### EHZ
+- 19:00 = 3,976.67; 19:01 = 3,788.20; 19:02 = 4,094.76; 19:03 = 3,331.18; 19:04 = 4,165.84; 19:05 = 3,348.88 raw RMS counts.
+- EHZ remained variable but within the range already observed in the preceding half hour; there was no unique extreme at 19:03.
+
+### Transition-window interpretation boundary
+- The dominant environmental anomalies in this short window are the 18:44–18:45 HDF 1–4 Hz spikes, followed by smaller 1–4 Hz activity at 18:48–18:49 and 19:05.
+- HDF at 19:03 and 19:04 remained 4–8 Hz and close to the local background, not an abrupt amplitude spike.
+- Environmental measurements alone do not identify a source or intent. Any private comparison to user-provided timing is done outside the public dashboard/cache narrative.
+
 ## Interpretation boundary
-- The directly measured interval shows persistent, unusually continuous HDF 4–8 Hz dominance across the available multi-day record rather than a broad shutdown or disappearance.
+- The directly measured multi-day interval shows persistent, unusually continuous HDF 4–8 Hz dominance across the available record rather than a broad shutdown or disappearance.
 - The HDF background amplitude drifted modestly downward across the available days while 4–8 Hz dominance increased; EHZ ground-motion amplitude changed more substantially and was more variable.
-- The strongest HDF amplitude anomaly in the interval was the Sep. 5 19:49 ET 1–4 Hz spike; it was not a 4–8 Hz event.
 - Environmental measurements alone do not establish source identity, intent, or personal causation.
 - Any private presence/absence comparison must use only timestamps actually covered by validated acquisition. Personal timing/location must not be published.
 
 ## Resume point after connection loss
 1. Treat the published 1,223.00-hour dashboard state as the current validated aggregate checkpoint.
-2. Treat this direct trailing-96-hour probe as the authoritative interval-specific comparison; disregard the earlier cumulative-snapshot subtraction estimate.
-3. For any later private presence/absence question, compare against newly validated post-reference-time samples only; never infer a change from pre-reference data.
+2. Treat the direct trailing-96-hour probe as the authoritative multi-day interval-specific comparison; disregard the earlier cumulative-snapshot subtraction estimate.
+3. Treat the neutral 18:30–19:05 ET Sep. 9 probe as the current transition-window checkpoint.
+4. For any later private presence/absence question, compare user-provided timing against these environmental timestamps in chat only; never publish that timing/location.
