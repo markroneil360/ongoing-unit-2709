@@ -5,11 +5,11 @@
   "analysis_start_et": "2026-04-12T00:00:00-04:00",
   "analysis_start_utc": "2026-04-12T04:00:00+00:00",
   "base_end_exclusive_utc": "2026-08-12T19:13:00+00:00",
-  "generated_utc": "2026-09-09T02:39:31.795721+00:00",
+  "generated_utc": "2026-09-09T23:26:12.822525+00:00",
   "lag_allowance_minutes": 30,
-  "requested_through_utc": "2026-09-09T01:48:00+00:00",
-  "latest_returned_sample_utc": "2026-09-09T01:48:01.783000+00:00",
-  "latest_complete_analyzed_minute_utc": "2026-09-09T01:47:00+00:00",
+  "requested_through_utc": "2026-09-09T22:35:00+00:00",
+  "latest_returned_sample_utc": "2026-09-09T22:34:59.993000+00:00",
+  "latest_complete_analyzed_minute_utc": "2026-09-09T22:34:00+00:00",
   "source": "Raspberry Shake public FDSN DataSelect + audited corrected per-minute archive through Aug 12",
   "base_provenance": {
     "name": "R6E8A-HDF-minute-4-8Hz(1).csv",
@@ -97,31 +97,31 @@
     }
   },
   "current": {
-    "analyzed_minutes": 187535,
-    "dom48_minutes": 72124,
+    "analyzed_minutes": 188851,
+    "dom48_minutes": 73380,
     "band_counts": {
-      "1-4": 99314,
-      "4-8": 72124,
-      "8-16": 16000,
+      "1-4": 99347,
+      "4-8": 73380,
+      "8-16": 16027,
       "16-20": 97
     },
-    "count10": 1448,
-    "mins10": 47977,
-    "hours10": 799.62,
-    "count15": 727,
-    "mins15": 39731,
-    "hours15": 662.18,
-    "count30": 380,
-    "mins30": 32681,
-    "hours30": 544.68,
-    "count60": 186,
-    "mins60": 24524,
-    "hours60": 408.73,
-    "dom48_hours": 1202.07,
-    "dom48_percent_of_analyzed": 38.46,
-    "shorter10_minutes": 24147,
-    "shorter10_hours": 402.45,
-    "ordinance_events": 82,
+    "count10": 1456,
+    "mins10": 49210,
+    "hours10": 820.17,
+    "count15": 735,
+    "mins15": 40964,
+    "hours15": 682.73,
+    "count30": 386,
+    "mins30": 33862,
+    "hours30": 564.37,
+    "count60": 189,
+    "mins60": 25578,
+    "hours60": 426.3,
+    "dom48_hours": 1223.0,
+    "dom48_percent_of_analyzed": 38.86,
+    "shorter10_minutes": 24170,
+    "shorter10_hours": 402.83,
+    "ordinance_events": 84,
     "longest_minutes": 976,
     "longest_runs": [
       {
@@ -130,24 +130,24 @@
       }
     ],
     "post": {
-      "analyzed_minutes": 39080,
-      "dom48_minutes": 16965,
+      "analyzed_minutes": 40396,
+      "dom48_minutes": 18221,
       "band_counts": {
-        "1-4": 18406,
-        "4-8": 16965,
-        "8-16": 3698,
+        "1-4": 18439,
+        "4-8": 18221,
+        "8-16": 3725,
         "16-20": 11
       },
-      "runs_total": 1494,
-      "count10": 304,
-      "mins10": 9913,
-      "count15": 123,
-      "mins15": 7868,
-      "count30": 57,
-      "mins30": 6599,
-      "count60": 27,
-      "mins60": 5312,
-      "ordinance_events": 9
+      "runs_total": 1505,
+      "count10": 312,
+      "mins10": 11146,
+      "count15": 131,
+      "mins15": 9101,
+      "count30": 63,
+      "mins30": 7780,
+      "count60": 30,
+      "mins60": 6366,
+      "ordinance_events": 11
     }
   },
   "checks": [
@@ -218,8 +218,8 @@
       "name": "4_tail_minute_integrity",
       "pass": true,
       "observed": {
-        "classified_minutes": 39080,
-        "unique_minutes": 39080,
+        "classified_minutes": 40396,
+        "unique_minutes": 40396,
         "bands": [
           "1-4",
           "16-20",
@@ -233,14 +233,14 @@
       "name": "5_10min_reconciliation_and_ordinance_anchor",
       "pass": true,
       "observed": {
-        "mins10": 47977,
-        "shorter10_minutes": 24147,
-        "dom48_minutes": 72124,
+        "mins10": 49210,
+        "shorter10_minutes": 24170,
+        "dom48_minutes": 73380,
         "counts": [
-          1448,
-          727,
-          380,
-          186
+          1456,
+          735,
+          386,
+          189
         ],
         "preview_ordinance_events": 74
       },
@@ -358,7 +358,11 @@
     "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-09-08T07:13:00Z&end=2026-09-08T13:13:00Z&format=miniseed&nodata=404",
     "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-09-08T13:13:00Z&end=2026-09-08T19:13:00Z&format=miniseed&nodata=404",
     "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-09-08T19:13:00Z&end=2026-09-09T01:13:00Z&format=miniseed&nodata=404",
-    "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-09-09T01:13:00Z&end=2026-09-09T01:48:00Z&format=miniseed&nodata=404"
+    "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-09-09T01:13:00Z&end=2026-09-09T07:13:00Z&format=miniseed&nodata=404",
+    "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-09-09T07:13:00Z&end=2026-09-09T13:13:00Z&format=miniseed&nodata=404",
+    "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-09-09T13:13:00Z&end=2026-09-09T19:13:00Z&format=miniseed&nodata=404",
+    "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-09-09T19:13:00Z&end=2026-09-09T22:35:00Z&format=miniseed&nodata=404"
   ],
-  "publication_note": "No extrapolated hours. Apr 12 scope excludes 89 pre-scope non-4-8 minutes. The >=10-minute threshold is a reporting/event-definition choice, not a medical or legal exposure limit."
+  "publication_note": "No extrapolated hours. Apr 12 scope excludes 89 pre-scope non-4-8 minutes. The >=10-minute threshold is a reporting/event-definition choice, not a medical or legal exposure limit.",
+  "recovery_provenance": "Exact validated output recovered from GitHub Actions run 34415269321 attempt 1 job 102678647787; all five calculation gates completed successfully before the transient remote commit_refs push rejection."
 }
