@@ -1,15 +1,14 @@
-# R6E8A — Sep. 9, 2026 away/return analysis checkpoint
+# R6E8A — Sep. 9, 2026 comparison analysis checkpoint
 
 **Checkpoint written:** 2026-09-09 19:23 ET
-**User-reported return to property:** approximately 2026-09-09 19:03 ET
-**Purpose:** Preserve calculations and source anchors so analysis resumes from this state after any connection loss.
+**Purpose:** Preserve calculations and source anchors so analysis resumes from this state after any connection loss, without publishing personal location or presence information.
 
 ## Dashboard/update state
 - Manual full HDF 4–8 Hz current-tail refresh triggered at 2026-09-09 19:03 ET.
 - Approved pipeline requires five calculation validation gates before aggregate publication.
 - Separate HDF/EHZ current-edge refresh also triggered.
 - Latest completed live-edge status at this checkpoint: HDF 2026-09-09 18:30:24 ET; EHZ 2026-09-09 18:30:24 ET; both 100.0% acquisition coverage in sampled status window.
-- Because this live edge is before the reported 19:03 ET return, it is valid as pre-return environment evidence but does not yet test the post-return response.
+- Personal location/presence context is intentionally excluded from all public dashboard content and this public cache.
 
 ## Five-check-passed comparison anchors
 ### Anchor A — Sep. 5, 2026
@@ -61,15 +60,15 @@ Calculated strictly by subtraction of the two five-check-passed cumulative snaps
 - longest run increased by 312 min = **5.20 h**, from 11.07 h to 16.27 h
 
 ## Interpretation boundary
-- This interval does **not** show an absence-related reduction in the validated HDF 4–8 Hz dominance metric. Instead, nearly all analyzed complete HDF minutes in the interval were 4–8 Hz dominant, with a strong shift toward long sustained runs.
+- The interval shows markedly increased continuity of HDF 4–8 Hz dominance compared with the earlier validated endpoint.
 - This is an environmental signal comparison only. It does not establish source attribution, intent, or causation by a person.
 - HDF pressure/infrasound and EHZ seismic motion remain separate; amplitudes are not combined.
 - Missing acquisition time is excluded, never scored as zero/quiet/compliant.
-- The immediate post-return comparison must wait only for data timestamps at/after the reported 19:03 ET return to exist in the pulled FDSN edge; no pre-return data will be mislabeled as post-return.
+- Personal location/presence context is reserved for private analytical feedback only and is not published to the dashboard or public cache.
 
 ## Resume point
 1. Check the active 2026-09-09 full current-tail workflow until the five calculation gates complete.
 2. Confirm the resulting commit and read the new `data/r6e8a_4_8_10min_full.json` totals/checks.
 3. Confirm downstream publication workflow completed five publication-integrity checks and committed `index.html`.
 4. Compare Sep. 5 anchor → new current validated endpoint.
-5. Separately examine post-19:03 ET data once the current FDSN edge contains those timestamps, looking for abrupt changes, spikes/drops, frequency-band shifts, and HDF/EHZ concurrence without inferring causation.
+5. Privately compare any user-provided presence/absence timing to the environmental signal record, without publishing that timing or location.
