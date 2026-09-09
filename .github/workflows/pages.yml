@@ -5,6 +5,7 @@ name: Deploy static site to GitHub Pages
 # and after the daily data refresh, and can be triggered manually.
 # manual verified deploy trigger: 2026-09-04 22:08 ET
 # manual verified deploy trigger: 2026-09-05 19:20 ET — deploy five-check-verified R6E8A dashboard state
+# manual verified deploy trigger: 2026-09-08 22:42 ET — deploy dashboard only after five calculation + five publication checks passed
 
 on:
   push:
