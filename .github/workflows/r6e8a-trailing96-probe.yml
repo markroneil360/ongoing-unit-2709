@@ -1,0 +1,184 @@
+name: R6E8A trailing 96-hour environmental probe
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/r6e8a-trailing96-probe.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install analysis dependencies
+        run: pip install 'obspy>=1.5' numpy scipy
+      - name: Analyze trailing 96 hours without publishing location or presence context
+        run: |
+          python3 - <<'PY'
+          import io, json, math, urllib.request, time
+          from collections import Counter
+          from datetime import datetime, timedelta, timezone
+          from zoneinfo import ZoneInfo
+          import numpy as np
+          from obspy import read, UTCDateTime
+          from scipy.signal import welch
+
+          FDSN='https://data.raspberryshake.org/fdsnws/dataselect/1/query'
+          TZ=ZoneInfo('America/Detroit')
+          BANDS=(("1-4",1.,4.),("4-8",4.,8.),("8-16",8.,16.),("16-20",16.,20.))
+          end=(datetime.now(timezone.utc)-timedelta(minutes=20)).replace(second=0,microsecond=0)
+          start=end-timedelta(hours=96)
+
+          def iz(d): return d.strftime('%Y-%m-%dT%H:%M:%SZ')
+          def get(chan,a,b):
+            url=f'{FDSN}?net=AM&sta=R6E8A&loc=00&cha={chan}&start={iz(a)}&end={iz(b)}&format=miniseed&nodata=404'
+            req=urllib.request.Request(url,headers={'User-Agent':'r6e8a-trailing96-probe/1.0'})
+            for n in range(4):
+              try:
+                with urllib.request.urlopen(req,timeout=180) as r:return r.read(),url
+              except Exception as e:
+                if getattr(e,'code',None) in (204,404):return None,url
+                if n==3: raise
+                time.sleep(2*(n+1))
+          def fetch_channel(chan):
+            traces=[]; urls=[]; cur=start; latest=None
+            while cur<end:
+              e=min(cur+timedelta(hours=12),end)
+              raw,url=get(chan,cur,e); urls.append(url)
+              if raw:
+                st=read(io.BytesIO(raw)); st.merge(method=0,fill_value=None)
+                traces.extend(st)
+                for tr in st:
+                  z=tr.stats.endtime.datetime.replace(tzinfo=timezone.utc)
+                  latest=z if latest is None or z>latest else latest
+              cur=e
+            from obspy import Stream
+            st=Stream(traces=traces); st.merge(method=0,fill_value=None)
+            return st,latest,urls
+          def complete(st,m):
+            t0=UTCDateTime(m)
+            for tr in st:
+              sr=float(tr.stats.sampling_rate)
+              if not 95<=sr<=105: continue
+              n=int(round(sr*60)); dt=1/sr
+              if tr.stats.starttime>t0+dt/2 or tr.stats.endtime<t0+60-dt*1.5: continue
+              i=int(round((t0-tr.stats.starttime)*sr))
+              if i<0 or i+n>len(tr.data): continue
+              x=tr.data[i:i+n]
+              if len(x)!=n or (np.ma.isMaskedArray(x) and np.any(np.ma.getmaskarray(x))): continue
+              x=np.asarray(x,dtype=np.float64)
+              if np.all(np.isfinite(x)): return x,sr
+            return None
+          def band(x,sr):
+            nper=min(int(round(sr*8)),len(x)); nover=min(nper//2,nper-1)
+            f,p=welch(x,fs=sr,window='hann',nperseg=nper,noverlap=nover,detrend='constant',scaling='density')
+            vals=[]
+            for j,(name,lo,hi) in enumerate(BANDS):
+              mask=(f>=lo)&((f<=hi) if j==len(BANDS)-1 else (f<hi))
+              vals.append(float(np.mean(p[mask])) if np.any(mask) else -math.inf)
+            return BANDS[int(np.argmax(vals))][0]
+          def minute_series(st,with_band=False):
+            out={}; m=start.replace(second=0,microsecond=0)
+            while m<end:
+              g=complete(st,m)
+              if g:
+                x,sr=g; x=x-np.mean(x); rms=float(np.sqrt(np.mean(x*x)))
+                out[int(m.timestamp())]={'rms':rms,'band':band(x,sr) if with_band else None}
+              m+=timedelta(minutes=1)
+            return out
+          def runs48(series):
+            rr=[]; cur=[]; prev=None
+            for t in sorted(series):
+              b=series[t]['band']
+              if b=='4-8':
+                if cur and prev is not None and t==prev+60: cur.append(t)
+                else:
+                  if cur: rr.append(cur)
+                  cur=[t]
+              else:
+                if cur: rr.append(cur); cur=[]
+              prev=t
+            if cur: rr.append(cur)
+            return rr
+          def robust_summary(vals):
+            a=np.asarray(vals,float); med=float(np.median(a)); mad=float(np.median(np.abs(a-med)))
+            return {'median':med,'mean':float(np.mean(a)),'p95':float(np.percentile(a,95)),'p99':float(np.percentile(a,99)),'max':float(np.max(a)),'mad':mad}
+          def hourly(series):
+            groups={}
+            for t,v in series.items():
+              d=datetime.fromtimestamp(t,timezone.utc).astimezone(TZ).replace(minute=0,second=0,microsecond=0)
+              groups.setdefault(d,[]).append(v['rms'])
+            rows=[]
+            for d in sorted(groups):
+              a=np.asarray(groups[d]); rows.append({'hour_et':d.isoformat(),'minutes':len(a),'mean_rms':float(np.mean(a)),'median_rms':float(np.median(a)),'max_rms':float(np.max(a))})
+            changes=[]
+            for a,b in zip(rows,rows[1:]):
+              if a['mean_rms']>0:
+                changes.append({'from':a['hour_et'],'to':b['hour_et'],'pct':100*(b['mean_rms']/a['mean_rms']-1),'from_mean':a['mean_rms'],'to_mean':b['mean_rms']})
+            return rows,changes
+          def daily(series,with_band=False):
+            groups={}
+            for t,v in series.items():
+              d=datetime.fromtimestamp(t,timezone.utc).astimezone(TZ).date().isoformat()
+              groups.setdefault(d,[]).append(v)
+            out=[]
+            for d,vs in sorted(groups.items()):
+              rms=[x['rms'] for x in vs]
+              row={'date_et':d,'minutes':len(vs),'median_rms':float(np.median(rms)),'mean_rms':float(np.mean(rms)),'p95_rms':float(np.percentile(rms,95)),'max_rms':float(np.max(rms))}
+              if with_band:
+                c=Counter(x['band'] for x in vs); row['band_counts']=dict(c); row['pct_4_8']=round(100*c['4-8']/len(vs),2)
+              out.append(row)
+            return out
+
+          hst,hlatest,hurls=fetch_channel('HDF')
+          est,elatest,eurls=fetch_channel('EHZ')
+          h=minute_series(hst,True); e=minute_series(est,False)
+          rr=runs48(h); hc=Counter(v['band'] for v in h.values())
+          hrms=robust_summary([v['rms'] for v in h.values()]); erms=robust_summary([v['rms'] for v in e.values()])
+          hh,hchg=hourly(h); eh,echg=hourly(e)
+          top_h=sorted(hchg,key=lambda x:x['pct'],reverse=True)[:5]
+          drop_h=sorted(hchg,key=lambda x:x['pct'])[:5]
+          top_e=sorted(echg,key=lambda x:x['pct'],reverse=True)[:5]
+          drop_e=sorted(echg,key=lambda x:x['pct'])[:5]
+          hs=sorted(h.items(),key=lambda kv:kv[1]['rms'],reverse=True)[:10]
+          es=sorted(e.items(),key=lambda kv:kv[1]['rms'],reverse=True)[:10]
+          def fmt_spikes(items):
+            return [{'time_et':datetime.fromtimestamp(t,timezone.utc).astimezone(TZ).isoformat(),'rms_counts':v['rms'],'band':v.get('band')} for t,v in items]
+          result={
+            'window_start_et':start.astimezone(TZ).isoformat(),
+            'requested_end_et':end.astimezone(TZ).isoformat(),
+            'hdf_latest_sample_et':hlatest.astimezone(TZ).isoformat() if hlatest else None,
+            'ehz_latest_sample_et':elatest.astimezone(TZ).isoformat() if elatest else None,
+            'expected_minutes':5760,
+            'hdf_complete_minutes':len(h),'ehz_complete_minutes':len(e),
+            'hdf_band_counts':dict(hc),'hdf_pct_4_8':round(100*hc['4-8']/len(h),3) if h else None,
+            'hdf_runs':{q:{'count':sum(1 for r in rr if len(r)>=q),'minutes':sum(len(r) for r in rr if len(r)>=q)} for q in (10,30,60)},
+            'hdf_longest_4_8_minutes':max((len(r) for r in rr),default=0),
+            'hdf_rms_counts':hrms,'ehz_rms_counts':erms,
+            'hdf_top_spike_minutes':fmt_spikes(hs),'ehz_top_spike_minutes':fmt_spikes(es),
+            'hdf_largest_hourly_increases':top_h,'hdf_largest_hourly_drops':drop_h,
+            'ehz_largest_hourly_increases':top_e,'ehz_largest_hourly_drops':drop_e,
+            'hdf_daily':daily(h,True),'ehz_daily':daily(e,False),
+            'note':'Trailing 96-hour environmental-only probe. HDF and EHZ remain separate. Raw-count RMS is relative within each channel and is not a calibrated cross-channel amplitude comparison.'
+          }
+          # Five sanity gates for this interval-specific probe.
+          checks=[
+            len(h)==len(set(h)) and len(e)==len(set(e)),
+            sum(hc.values())==len(h),
+            all(v['band'] in {b[0] for b in BANDS} for v in h.values()),
+            result['hdf_runs'][10]['count']>=result['hdf_runs'][30]['count']>=result['hdf_runs'][60]['count'],
+            result['hdf_runs'][10]['minutes']>=result['hdf_runs'][30]['minutes']>=result['hdf_runs'][60]['minutes']
+          ]
+          result['sanity_checks']=checks; result['all_five_sanity_checks_pass']=all(checks)
+          print('R6E8A_TRAILING96_RESULT='+json.dumps(result,separators=(',',':')))
+          if not all(checks): raise SystemExit('Trailing-96 probe sanity check failed')
+          PY
