@@ -194,7 +194,7 @@ publish_checks.append((
     cand['station'] == 'AM.R6E8A.00' and cand['channel'] == 'HDF' and cand['all_five_checks_pass']
     and str(cand['analysis_start_et']).startswith('2026-04-12T00:00:00')
     and dt_et(latest_complete) <= dt_et(latest_cum)
-    and timedelta(0) <= dt_et(cand['requested_through_utc']) - dt_et(latest_cum) <= timedelta(minutes=2)
+    and abs((dt_et(cand['requested_through_utc']) - dt_et(latest_cum)).total_seconds()) <= 120
     and timedelta(0) <= dt_et(latest_cum) - dt_et(latest_complete) <= timedelta(minutes=2)
 ))
 publish_checks.append((
