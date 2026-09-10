@@ -1,0 +1,207 @@
+name: R6E8A base-tail seam audit
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/audit-r6e8a-base-seam.yml
+
+permissions:
+  contents: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install audit dependencies
+        run: pip install 'obspy>=1.4' numpy scipy
+      - name: Reclassify both sides of the audited base seam
+        run: |
+          python3 - <<'PY'
+          from __future__ import annotations
+          import io
+          import json
+          import math
+          import urllib.request
+          from datetime import datetime, timedelta, timezone
+          from pathlib import Path
+
+          import numpy as np
+          from obspy import UTCDateTime, read
+          from scipy.signal import welch
+
+          URL = (
+              "https://data.raspberryshake.org/fdsnws/dataselect/1/query"
+              "?net=AM&sta=R6E8A&loc=00&cha=HDF"
+              "&start=2026-08-12T19:00:00Z&end=2026-08-12T19:30:00Z"
+              "&format=miniseed&nodata=404"
+          )
+          START = datetime(2026, 8, 12, 19, 0, tzinfo=timezone.utc)
+          END = datetime(2026, 8, 12, 19, 30, tzinfo=timezone.utc)
+          SEAM = datetime(2026, 8, 12, 19, 13, tzinfo=timezone.utc)
+          BANDS = (("1-4", 1.0, 4.0), ("4-8", 4.0, 8.0),
+                   ("8-16", 8.0, 16.0), ("16-20", 16.0, 20.0))
+
+          req = urllib.request.Request(URL, headers={"User-Agent": "r6e8a-seam-audit/1.0"})
+          with urllib.request.urlopen(req, timeout=180) as response:
+              raw = response.read()
+          stream = read(io.BytesIO(raw))
+          identities = sorted({
+              f"{trace.stats.network}.{trace.stats.station}.{trace.stats.location}.{trace.stats.channel}"
+              for trace in stream
+          })
+          sample_rates = sorted({float(trace.stats.sampling_rate) for trace in stream})
+          raw_bounds = {
+              "earliest_utc": min(trace.stats.starttime for trace in stream).datetime.replace(
+                  tzinfo=timezone.utc
+              ).isoformat(),
+              "latest_utc": max(trace.stats.endtime for trace in stream).datetime.replace(
+                  tzinfo=timezone.utc
+              ).isoformat(),
+          }
+          stream.merge(method=0, fill_value=None)
+
+          def complete_minute(minute):
+              t0 = UTCDateTime(minute)
+              for trace in stream:
+                  rate = float(trace.stats.sampling_rate)
+                  if not 95 <= rate <= 105:
+                      continue
+                  count = int(round(rate * 60))
+                  delta = 1 / rate
+                  if trace.stats.starttime > t0 + delta / 2:
+                      continue
+                  if trace.stats.endtime < t0 + 60 - delta * 1.5:
+                      continue
+                  index = int(round((t0 - trace.stats.starttime) * rate))
+                  if index < 0 or index + count > len(trace.data):
+                      continue
+                  values = trace.data[index:index + count]
+                  if len(values) != count:
+                      continue
+                  if np.ma.isMaskedArray(values) and np.any(np.ma.getmaskarray(values)):
+                      continue
+                  values = np.asarray(values, dtype=np.float64)
+                  if np.all(np.isfinite(values)):
+                      return values, rate
+              return None
+
+          def classify(values, rate):
+              nperseg = min(int(round(rate * 8)), len(values))
+              noverlap = min(nperseg // 2, nperseg - 1)
+              frequencies, power = welch(
+                  values,
+                  fs=rate,
+                  window="hann",
+                  nperseg=nperseg,
+                  noverlap=noverlap,
+                  detrend="constant",
+                  scaling="density",
+              )
+              means = []
+              for index, (_, low, high) in enumerate(BANDS):
+                  mask = (frequencies >= low) & (
+                      (frequencies <= high) if index == len(BANDS) - 1
+                      else (frequencies < high)
+                  )
+                  means.append(float(np.mean(power[mask])) if np.any(mask) else -math.inf)
+              return BANDS[int(np.argmax(means))][0], means
+
+          minutes = {}
+          cursor = START
+          while cursor < END:
+              extracted = complete_minute(cursor)
+              if extracted is not None:
+                  band, means = classify(*extracted)
+                  minutes[cursor.isoformat()] = {
+                      "band": band,
+                      "band_mean_psd": {
+                          BANDS[i][0]: means[i] for i in range(len(BANDS))
+                      },
+                  }
+              cursor += timedelta(minutes=1)
+
+          left_key = (SEAM - timedelta(minutes=1)).isoformat()
+          right_key = SEAM.isoformat()
+          left = minutes.get(left_key)
+          right = minutes.get(right_key)
+          if left is None or right is None:
+              raise SystemExit("Cannot audit seam: one or both boundary minutes are incomplete.")
+
+          checks = [
+              {
+                  "name": "1_station_channel_identity",
+                  "pass": identities == ["AM.R6E8A.00.HDF"],
+                  "observed": identities,
+              },
+              {
+                  "name": "2_hdf_sample_rate",
+                  "pass": all(95 <= rate <= 105 for rate in sample_rates),
+                  "observed_hz": sample_rates,
+              },
+              {
+                  "name": "3_bounded_utc_request",
+                  "pass": (END - START) <= timedelta(hours=24),
+                  "observed_minutes": int((END - START).total_seconds() / 60),
+              },
+              {
+                  "name": "4_complete_boundary_minutes",
+                  "pass": left is not None and right is not None,
+                  "observed": {"left": left_key, "right": right_key},
+              },
+              {
+                  "name": "5_base_tail_seam_decision",
+                  "pass": not (left["band"] == "4-8" and right["band"] == "4-8"),
+                  "observed": {
+                      "left_band": left["band"],
+                      "right_band": right["band"],
+                      "stitch_required": left["band"] == "4-8" and right["band"] == "4-8",
+                  },
+              },
+          ]
+          result = {
+              "schema_version": 1,
+              "generated_utc": datetime.now(timezone.utc).isoformat(),
+              "station": "AM.R6E8A.00",
+              "channel": "HDF",
+              "audited_seam_utc": SEAM.isoformat(),
+              "source_url": URL,
+              "source_bytes": len(raw),
+              "returned_identities": identities,
+              "sample_rates_hz": sample_rates,
+              "raw_record_bounds": raw_bounds,
+              "classified_complete_minutes": len(minutes),
+              "boundary_minutes": {"left": {left_key: left}, "right": {right_key: right}},
+              "context": {
+                  key: value for key, value in minutes.items()
+                  if datetime.fromisoformat(key) >= SEAM - timedelta(minutes=5)
+                  and datetime.fromisoformat(key) < SEAM + timedelta(minutes=5)
+              },
+              "checks": checks,
+              "stitch_required": checks[-1]["observed"]["stitch_required"],
+              "all_five_checks_pass": all(check["pass"] for check in checks),
+              "method": {
+                  "window": "60 s, clock-aligned, complete windows only",
+                  "welch": "Hann; 8 s segments; 50% overlap",
+                  "dominance": "highest mean PSD among 1-4, 4-8, 8-16, 16-20 Hz",
+                  "missing": "excluded; never zero-filled or interpolated",
+              },
+          }
+          Path("data/r6e8a_base_seam_audit.json").write_text(
+              json.dumps(result, indent=2) + "\n"
+          )
+          print(json.dumps(result, indent=2))
+          PY
+      - name: Commit seam audit
+        run: |
+          git config user.name 'r6e8a-audit-bot'
+          git config user.email 'r6e8a-audit-bot@users.noreply.github.com'
+          git add data/r6e8a_base_seam_audit.json
+          git commit -m 'Audit R6E8A base-tail seam'
+          git pull --rebase origin main
+          git push
