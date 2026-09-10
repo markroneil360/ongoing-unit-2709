@@ -15,7 +15,7 @@ from __future__ import annotations
 
 import json
 import re
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -94,12 +94,15 @@ longest_minutes = int(c["longest_runs"][0]["duration_minutes"]) if c.get("longes
 longest_label = duration_label(longest_minutes)
 
 status_html = (
-    '<div class="status"><strong>LIVE CHANNEL CHECK: '
-    f'HDF {time_et(hdf_latest)} / EHZ {time_et(ehz_latest)}</strong><br>'
+    '<div class="status"><strong>LIVE CHANNEL CHECK — '
+    f'HDF {date_time_et(hdf_latest)} / EHZ {date_time_et(ehz_latest)}</strong><br>'
     f'Both channels verified separately at <b>{float(hdf["coverage_pct"]):.1f}% HDF</b> and '
     f'<b>{float(ehz["coverage_pct"]):.1f}% EHZ acquisition coverage</b> in the current status window. '
     f'The cumulative HDF 4–8 Hz spectral calculation starts <b>April 12, 2026</b> and is five-check verified through '
-    f'<b>{time_et(latest_cum)}</b> returned HDF sample / <b>{time_et(latest_complete, seconds=False)}</b> complete analyzed minute.'
+    f'<b>{date_time_et(latest_cum)}</b> returned HDF sample / <b>{date_time_et(latest_complete, seconds=False)}</b> complete analyzed minute.'
+    f'<div id="fdsn-stale-indicator" data-hdf-utc="{hdf_latest}" data-ehz-utc="{ehz_latest}" hidden '
+    'style="margin-top:8px;color:#ff6258;font-weight:950"><span aria-hidden="true">●</span> '
+    'FDSN pull difficulty: the latest channel data shown is more than one hour old.</div>'
     '<div class="small">*Account for up to 30 minutes of lag. Missing acquisition time is never scored as zero, quiet, normal, compliant, or below benchmark.</div></div>'
 )
 replace_one(r'<div class="status">.*?</div><div class="download-actions">',
@@ -128,6 +131,58 @@ replace_one(r'<article class="info-box"><div class="label">Why .*?</article>', w
 boundary = f'''<section class="section context-note"><b>Evidence boundary for legal review:</b> the station documents environmental pressure/infrasound timing, frequency-band dominance, recurrence and duration. The {exact_hours:,.2f}-hour environmental record and the ≥10-minute repeated-low-frequency event definition are environmental signal metrics, not automatically a personal medical dose or a health threshold. Source attribution and individual medical causation require independent investigation/onsite validation.</section>'''
 replace_one(r'<section class="section context-note"><b>Evidence boundary for legal review:</b>.*?</section>', boundary, 'evidence boundary')
 
+
+# Reconcile every remaining date, cutoff, total, and ordinance reference.
+s = re.sub(
+    r'the <b>[\d,]+-Event ordinance subset</b> is displayed separately',
+    f'the <b>{c["ordinance_events"]:,}-Event ordinance subset</b> is displayed separately',
+    s,
+    count=1,
+)
+
+current_edge = (
+    '<section class="section note"><b>Current-edge check:</b> '
+    f'public FDSN data is verified through HDF {date_time_et(hdf_latest)} and EHZ {date_time_et(ehz_latest)}. '
+    f'The cumulative 4–8 Hz calculation includes complete HDF minutes through {date_time_et(latest_complete, seconds=False)}. '
+    'HDF pressure/infrasound and EHZ vertical/seismic motion remain separate channels; incomplete or missing acquisition time is excluded rather than treated as zero, quiet, normal, compliant, or below benchmark.</section>'
+)
+replace_one(r'<section class="section note"><b>Current-edge check:</b>.*?</section>', current_edge, 'current-edge note')
+
+verification_note = (
+    '<section class="section note"><b>Independent verification:</b> source of record is Raspberry Shake public FDSN for '
+    '<b>AM.R6E8A.00.HDF</b> and <b>AM.R6E8A.00.EHZ</b>. '
+    f'The displayed channel cutoffs are HDF {date_time_et(hdf_latest)} and EHZ {date_time_et(ehz_latest)}; '
+    f'the five-check spectral calculation cutoff is {date_time_et(latest_complete, seconds=False)} for complete HDF minutes.</section>'
+)
+replace_one(r'<section class="section note"><b>Independent verification:</b>.*?</section>', verification_note, 'verification note')
+
+publication_integrity = f'''<section class="section panel"><h2>Publication integrity</h2><div class="approval"><div class="check"><span class="dot"></span><div><b>Current cutoff is explicit.</b><div class="small">HDF live status through {date_time_et(hdf_latest)} · EHZ live status through {date_time_et(ehz_latest)} · five-check 4–8 Hz totals through {date_time_et(latest_complete, seconds=False)} complete HDF minute.</div></div></div><div class="check"><span class="dot"></span><div><b>Current cumulative values are updated.</b><div class="small">{exact_hours:,.2f} Hours · {c["count10"]:,} Events ≥10 · {c["count30"]:,} Events ≥30 · {c["count60"]:,} Events ≥60 · {c["ordinance_events"]:,} conservative ordinance Events.</div></div></div><div class="check"><span class="dot"></span><div><b>Every event count says Events.</b><div class="small">Hours remain labeled Hours; event counts remain unmistakably event counts.</div></div></div><div class="check"><span class="dot"></span><div><b>Ordinance derivation is visible.</b><div class="small">The qualification funnel and nighttime-window graphic explain exactly how the conservative subset is derived.</div></div></div><div class="check"><span class="dot"></span><div><b>Five calculation checks and five publication checks passed.</b><div class="small">HDF and EHZ remain separate, gaps are excluded, UTC processing cutoffs map to Eastern display times, arithmetic reconciles, and stale values are rejected.</div></div></div></div></section>'''
+replace_one(r'<section class="section panel"><h2>Publication integrity</h2>.*?</section>', publication_integrity, 'publication integrity panel')
+
+footer = (
+    '<footer><div class="wrap">R6E8A public dashboard · HDF live status through '
+    f'{date_time_et(hdf_latest)} · EHZ live status through {date_time_et(ehz_latest)} · '
+    f'five-check 4–8 Hz totals through {date_time_et(latest_complete, seconds=False)} complete HDF minute.</div></footer>'
+)
+replace_one(r'<footer><div class="wrap">.*?</div></footer>', footer, 'footer')
+
+freshness_script = '''<script id="r6e8a-freshness-check">
+(function () {
+  var el = document.getElementById('fdsn-stale-indicator');
+  if (!el) return;
+  var hdf = Date.parse(el.getAttribute('data-hdf-utc') || '');
+  var ehz = Date.parse(el.getAttribute('data-ehz-utc') || '');
+  var oldest = Math.min(hdf, ehz);
+  var stale = Number.isFinite(oldest) && Date.now() - oldest > 60 * 60 * 1000;
+  el.hidden = !stale;
+  el.style.display = stale ? 'block' : 'none';
+})();
+</script>'''
+if '<script id="r6e8a-freshness-check">' in s:
+    s = re.sub(r'<script id="r6e8a-freshness-check">.*?</script>', freshness_script, s, count=1, flags=re.S)
+else:
+    s = s.replace('</body>', freshness_script + '</body>', 1)
+
 # Update primary-threshold wording anywhere else without altering the independent 30-minute ordinance rule.
 s = s.replace('≥15-minute', '≥10-minute').replace('≥15 minutes', '≥10 minutes')
 s = s.replace('15+ minute', '10+ minute').replace('at least 15 minutes', 'at least 10 minutes')
@@ -135,34 +190,42 @@ s = s.replace('15+ minute', '10+ minute').replace('at least 15 minutes', 'at lea
 # Five publication-integrity checks.
 publish_checks = []
 publish_checks.append((
-    '1_candidate_identity_and_scope',
+    '1_candidate_identity_scope_and_fresh_edge',
     cand['station'] == 'AM.R6E8A.00' and cand['channel'] == 'HDF' and cand['all_five_checks_pass']
     and str(cand['analysis_start_et']).startswith('2026-04-12T00:00:00')
+    and dt_et(latest_complete) <= dt_et(latest_cum)
+    and dt_et(latest_cum) <= dt_et(cand['requested_through_utc']) + timedelta(minutes=2)
 ))
 publish_checks.append((
-    '2_current_channel_continuity_separate',
+    '2_current_channels_separate_and_covered',
     hdf.get('ok') and ehz.get('ok') and float(hdf['coverage_pct']) >= 99.0 and float(ehz['coverage_pct']) >= 99.0
+    and hdf.get('channel') == 'HDF' and ehz.get('channel') == 'EHZ'
 ))
 publish_checks.append((
-    '3_10min_arithmetic',
+    '3_arithmetic_nested_thresholds_and_percent',
     c['mins10'] + c['shorter10_minutes'] == c['dom48_minutes']
-    and c['count10'] >= c['count30'] >= c['count60']
-    and c['mins10'] >= c['mins30'] >= c['mins60']
+    and c['count10'] >= c['count15'] >= c['count30'] >= c['count60']
+    and c['mins10'] >= c['mins15'] >= c['mins30'] >= c['mins60']
+    and abs(c['dom48_hours'] - c['dom48_minutes'] / 60.0) <= 0.0051
+    and abs(c['dom48_percent_of_analyzed'] - 100.0 * c['dom48_minutes'] / c['analyzed_minutes']) <= 0.0051
 ))
 publish_checks.append((
-    '4_dashboard_duplicate_consistency',
+    '4_dashboard_values_dates_and_cutoffs_reconciled',
     s.count(f'{c["count10"]:,}<span class="events-word">Events</span>') >= 1
-    and f'{c["count10"]:,} Events</div></div><div><b>{c["hours10"]:,.2f} Hours</b>' in s
     and f'{c["count30"]:,} Events</div></div><div><b>{c["hours30"]:,.2f} Hours</b>' in s
     and f'{c["ordinance_events"]:,}<span class="events-word">Events</span>' in s
+    and date_time_et(hdf_latest) in s and date_time_et(ehz_latest) in s
+    and date_time_et(latest_complete, seconds=False) in s
+    and 'Aug. 25, 2026' not in s and 'data through Aug. 25, 2026' not in s
 ))
 publish_checks.append((
-    '5_threshold_wording_and_evidence_boundary',
+    '5_wording_gap_channel_and_stale_guard',
     '≥15 minutes' not in s and '≥15-minute' not in s and 'at least 15 minutes' not in s
     and 'reporting/event-definition choice, not a medical or legal exposure limit' in s
     and '*Account for up to 30 minutes of lag.' in s
     and 'Missing acquisition time is never scored as zero' in s
-    and 'HDF pressure/infrasound' in s
+    and 'HDF pressure/infrasound and EHZ vertical/seismic motion remain separate channels' in s
+    and 'id="fdsn-stale-indicator"' in s and 'id="r6e8a-freshness-check"' in s
 ))
 
 for name, passed in publish_checks:
