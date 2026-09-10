@@ -194,12 +194,15 @@ publish_checks.append((
     cand['station'] == 'AM.R6E8A.00' and cand['channel'] == 'HDF' and cand['all_five_checks_pass']
     and str(cand['analysis_start_et']).startswith('2026-04-12T00:00:00')
     and dt_et(latest_complete) <= dt_et(latest_cum)
-    and dt_et(latest_cum) <= dt_et(cand['requested_through_utc']) + timedelta(minutes=2)
+    and timedelta(0) <= dt_et(cand['requested_through_utc']) - dt_et(latest_cum) <= timedelta(minutes=2)
+    and timedelta(0) <= dt_et(latest_cum) - dt_et(latest_complete) <= timedelta(minutes=2)
 ))
 publish_checks.append((
     '2_current_channels_separate_and_covered',
     hdf.get('ok') and ehz.get('ok') and float(hdf['coverage_pct']) >= 99.0 and float(ehz['coverage_pct']) >= 99.0
     and hdf.get('channel') == 'HDF' and ehz.get('channel') == 'EHZ'
+    and timedelta(0) <= dt_et(status['generated_utc']) - dt_et(hdf_latest) <= timedelta(minutes=50)
+    and timedelta(0) <= dt_et(status['generated_utc']) - dt_et(ehz_latest) <= timedelta(minutes=50)
 ))
 publish_checks.append((
     '3_arithmetic_nested_thresholds_and_percent',
