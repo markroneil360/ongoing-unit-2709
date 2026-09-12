@@ -48,4 +48,62 @@ jobs:
           path: .
       - id: deployment
         uses: actions/deploy-pages@v4
+      - name: Verify public dashboard and data match the deployed files
+        env:
+          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+          VERIFY_RUN: ${{ github.run_id }}
+        run: |
+          python3 - <<'PY'
+          import hashlib, json, os, subprocess, time, urllib.request
+          from datetime import datetime, timezone
+          from pathlib import Path
+          from zoneinfo import ZoneInfo
+          base = os.environ['PAGE_URL'].rstrip('/') + '/'
+          if base != 'https://markroneil360.github.io/ongoing-unit-2709/':
+              raise SystemExit('Unexpected public deployment URL; verification stopped.')
+          paths = ('index.html', 'data/r6e8a_4_8_10min_full.json', 'data/current-status.json')
+          report = {'deployment_run': os.environ['VERIFY_RUN'], 'checked_out_commit': subprocess.check_output(['git','rev-parse','HEAD'], text=True).strip(), 'public_url': base, 'files': []}
+          for path in paths:
+              expected = Path(path).read_bytes()
+              result = {'path': path, 'expected_sha256': hashlib.sha256(expected).hexdigest(), 'pass': False}
+              for attempt in range(6):
+                  try:
+                      url = base + path + '?verify=' + os.environ['VERIFY_RUN'] + '-' + str(attempt)
+                      request = urllib.request.Request(url, headers={'Cache-Control':'no-cache', 'User-Agent':'R6E8A-public-delivery-verification/1.0'})
+                      with urllib.request.urlopen(request, timeout=20) as response:
+                          actual = response.read()
+                          result['http_status'] = response.status
+                      result['served_sha256'] = hashlib.sha256(actual).hexdigest()
+                      result['pass'] = actual == expected
+                      if result['pass']:
+                          result.pop('error', None)
+                          break
+                  except Exception as exc:
+                      result['error'] = str(exc)
+                  if attempt < 5:
+                      time.sleep(10)
+              report['files'].append(result)
+          candidate = json.loads(Path(paths[1]).read_text())
+          status = json.loads(Path(paths[2]).read_text())
+          report['candidate_all_five_checks_pass'] = candidate.get('all_five_checks_pass') is True and len(candidate.get('checks', [])) == 5 and all(c.get('pass') is True for c in candidate.get('checks', []))
+          report['candidate_generated_utc'] = candidate['generated_utc']
+          report['latest_complete_analyzed_minute_utc'] = candidate['latest_complete_analyzed_minute_utc']
+          report['channel_cutoffs_utc'] = {k:v.get('latest_sample_utc') for k,v in status['channels'].items()}
+          report['current'] = candidate['current']
+          report['verified_at_et'] = datetime.now(timezone.utc).astimezone(ZoneInfo('America/Detroit')).isoformat()
+          report['all_public_files_match'] = all(f['pass'] for f in report['files'])
+          Path('public-delivery-verification.json').write_text(json.dumps(report, indent=2) + '\n')
+          print(json.dumps(report, indent=2))
+          if not report['all_public_files_match'] or not report['candidate_all_five_checks_pass']:
+              raise SystemExit('Public delivery verification failed; do not report task complete.')
+          PY
+      - name: Preserve public delivery verification receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: r6e8a-public-delivery-verification
+          path: public-delivery-verification.json
+          if-no-files-found: warn
+          retention-days: 30
 # Sep 12 handoff repair: deploy after successful checked publication, never after a failed upstream run.
+# Completion requires a direct HTTPS byte match for the public dashboard, spectral candidate, and separate-channel status.
