@@ -15,6 +15,7 @@ on:
     workflows:
       - "Daily R6E8A data refresh (07:00 ET)"
       - "Hourly R6E8A FDSN status"
+      - "Publish verified R6E8A 10-minute dashboard"
     types: [completed]
 
 permissions:
@@ -28,15 +29,23 @@ concurrency:
 
 jobs:
   deploy:
+    if: >-
+      github.event_name != 'workflow_run' ||
+      (github.event.workflow_run.conclusion == 'success' &&
+       github.event.workflow_run.head_branch == 'main' &&
+       github.event.workflow_run.head_repository.full_name == github.repository)
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
           path: .
       - id: deployment
         uses: actions/deploy-pages@v4
+# Sep 12 handoff repair: deploy after successful checked publication, never after a failed upstream run.
