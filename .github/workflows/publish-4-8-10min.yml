@@ -7,6 +7,10 @@ on:
       - data/r6e8a_4_8_10min_full.json
       - .github/workflows/publish-4-8-10min.yml
   workflow_dispatch:
+  workflow_run:
+    workflows:
+      - "R6E8A 10-minute current-tail refresh"
+    types: [completed]
 
 permissions:
   contents: write
@@ -17,9 +21,16 @@ concurrency:
 
 jobs:
   publish:
+    if: >-
+      github.event_name != 'workflow_run' ||
+      (github.event.workflow_run.conclusion == 'success' &&
+       github.event.workflow_run.head_branch == 'main' &&
+       github.event.workflow_run.head_repository.full_name == github.repository)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
@@ -50,3 +61,5 @@ jobs:
 # manual audited publication trigger: 2026-09-08 22:40 ET — user-requested R6E8A update after five calculation checks; require five publication-integrity checks before dashboard commit
 # manual audited publication trigger: 2026-09-09 19:30 ET — recovered exact five-check candidate after transient commit_refs failure; require five publication-integrity checks before dashboard commit
 # manual audited publication trigger: 2026-09-10 13:10 ET — user-requested update; candidate 62022d14; five calculation checks plus five independent reconciliation checks passed
+# Sep 12 approved update: candidate e541e8f5 passed five calculation gates and five independent aggregate-consistency checks.
+# Repair the successful-calculation handoff without restarting the calculation or changing its method.
