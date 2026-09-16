@@ -1,1 +1,1 @@
-R6E8A dashboard current-edge sync — 2026-09-04 21:58 ET — user-requested data update; preserve locked design; five validation gates required
+Manual dashboard current-edge synchronization requested 2026-09-15 11:44 PM ET after verified R6E8A HDF/EHZ FDSN status refresh. Preserve the approved dashboard design. Apply only the separately validated live HDF and EHZ edge values; do not restart or overwrite the full spectral calculation. Require all five current-edge validation gates before commit. Do not publish personal location, presence, absence, travel, or return timing.
