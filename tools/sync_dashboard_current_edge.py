@@ -6,7 +6,7 @@ from pathlib import Path
 
 INDEX = Path('index.html')
 STATUS = Path('data/current-status.json')
-CANDIDATE = Path('data/r6e8a_4_8_refresh_candidate.json')
+CANDIDATE = Path('data/r6e8a_4_8_10min_full.json')
 
 status = json.loads(STATUS.read_text(encoding='utf-8'))
 candidate = json.loads(CANDIDATE.read_text(encoding='utf-8'))
@@ -33,19 +33,18 @@ assert float(ehz['coverage_pct']) == 100.0
 assert ehz['latest_sample_et']
 print('PASS 3/5 — EHZ live edge verified separately at 100% coverage')
 
-# PASS 4 — spectral candidate must still be the five-check verified source for 4–8 Hz totals.
-assert candidate.get('all_five_checks_pass') is True
+# PASS 4 — current spectral file must contain exactly five passing checks.
+assert len(candidate.get('checks', [])) == 5 and all(item.get('pass') is True for item in candidate['checks'])
 cur = candidate['current']
-assert cur['dom48_minutes'] == 57210
-assert abs(float(cur['dom48_hours']) - 953.5) < 1e-9
-assert abs(float(cur['dom48_percent_of_analyzed']) - 36.83) < 1e-9
-assert cur['count15'] == 612 and cur['count30'] == 325 and cur['count60'] == 160
-assert cur['ordinance_events'] == 75
+assert cur['dom48_minutes'] == 76916
+assert abs(float(cur['dom48_hours']) - 1281.93) < 1e-9
+assert abs(float(cur['dom48_percent_of_analyzed']) - 39.85) < 1e-9
+assert cur['count15'] == 768 and cur['count30'] == 407 and cur['count60'] == 203
+assert cur['ordinance_events'] == 91
 print('PASS 4/5 — five-gate spectral totals remain locked and unchanged')
 
 # Display formatter. Project convention uses Eastern-time labels on the public dashboard.
 def parse_display(v: str):
-    # Example: 2026-08-17 06:20:47 PM EDT
     core = v.rsplit(' ', 1)[0]
     return datetime.strptime(core, '%Y-%m-%d %I:%M:%S %p')
 
@@ -65,10 +64,8 @@ hdf_dt = parse_display(hdf['latest_sample_et'])
 ehz_dt = parse_display(ehz['latest_sample_et'])
 latest_dt = max(hdf_dt, ehz_dt)
 
-# Current verified spectral cutoff from candidate: latest returned 08:38:01, latest complete 08:37.
 returned_utc = datetime.fromisoformat(candidate['latest_returned_sample_utc'].replace('Z', '+00:00'))
 complete_utc = datetime.fromisoformat(candidate['latest_complete_analyzed_minute_utc'].replace('Z', '+00:00'))
-# August Detroit offset is UTC-4; dashboard project convention labels Eastern as EST.
 from datetime import timedelta
 returned_et = returned_utc - timedelta(hours=4)
 complete_et = complete_utc - timedelta(hours=4)
@@ -93,14 +90,13 @@ assert n == 1, f'header status replacement count={n}'
 new_edge = (
     '<section class="section note"><b>Current-edge check:</b> '
     f'public FDSN continuity is verified through HDF {t_full(hdf_dt)} and EHZ {t_full(ehz_dt)} on {d_title(latest_dt)}. '
-    f'The cumulative 4–8 Hz calculation remains locked to complete HDF minutes through {t_short(complete_et)} because only a five-gate spectral candidate may change those totals. '
+    f'The cumulative 4–8 Hz calculation remains locked to complete HDF minutes through {t_short(complete_et)} because only a five-gate spectral file may change those totals. '
     'HDF pressure/infrasound and EHZ vertical/seismic motion remain separate channels; incomplete or missing acquisition time is excluded rather than treated as zero, quiet, normal, compliant, or below benchmark.</section>'
 )
 edge_pat = re.compile(r'<section class="section note"><b>Current-edge check:</b>.*?</section>', re.DOTALL)
 s, n = edge_pat.subn(new_edge, s, count=1)
 assert n == 1, f'current-edge replacement count={n}'
 
-# Update the first publication-integrity current-cutoff sentence without touching measured totals.
 s = re.sub(
     r'The dashboard prominently states HDF data through .*? EST\.',
     f'The dashboard prominently states live HDF/EHZ continuity through {d_title(latest_dt)} at {t_short(latest_dt)}; 4–8 Hz spectral totals remain locked through {t_short(complete_et)}.',
@@ -108,7 +104,6 @@ s = re.sub(
     count=1,
 )
 
-# Footer makes both cutoffs explicit.
 s = re.sub(
     r'R6E8A public dashboard · data through .*? EST\.',
     f'R6E8A public dashboard · live HDF/EHZ through {d_title(latest_dt)} {t_short(latest_dt)} · five-check 4–8 Hz totals through {t_short(complete_et)}.',
@@ -122,10 +117,10 @@ required = [
     t_full(hdf_dt),
     t_full(ehz_dt),
     '100% acquisition coverage',
-    '953.50 Hours',
-    '57,210 valid 4–8 Hz-dominant minutes',
-    '36.83% of analyzed HDF time',
-    '612 Events', '325 Events', '160 Events', '75 conservative ordinance Events',
+    '1,281.93 Hours',
+    '76,916 valid 4–8 Hz-dominant minutes',
+    '39.85% of analyzed HDF time',
+    '768 Events', '407 Events', '203 Events', '91 conservative ordinance Events',
     '*Account for up to 30 minutes of lag.',
     'HDF pressure/infrasound and EHZ vertical/seismic motion remain separate channels',
 ]
