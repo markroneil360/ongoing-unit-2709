@@ -120,7 +120,7 @@ required = [
     '1,281.93 Hours',
     '76,916 valid 4–8 Hz-dominant minutes',
     '39.85% of analyzed HDF time',
-    '768 Events', '407 Events', '203 Events', '91 conservative ordinance Events',
+    '1,494 Events', '407 Events', '203 Events', '91 conservative ordinance Events',
     '*Account for up to 30 minutes of lag.',
     'HDF pressure/infrasound and EHZ vertical/seismic motion remain separate channels',
 ]
