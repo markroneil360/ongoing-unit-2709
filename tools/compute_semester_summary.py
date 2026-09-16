@@ -332,31 +332,32 @@ def main():
             "expected": "HDF data only, beginning Apr 12 00:00 America/Detroit, with a 30-minute lag allowance",
         },
         {
-            "name": "2_replay_of_stored_verified_prefix",
-            "pass": all(reference_stats[k] == reference["current"][k] for k in reference_keys),
-            "observed": {k: reference_stats[k] for k in reference_keys},
-            "expected": {k: reference["current"][k] for k in reference_keys},
-        },
-        {
-            "name": "3_unique_complete_minutes_and_band_domain",
+            "name": "2_reference_replay_and_minute_band_integrity",
             "pass": (
-                len(data) == len(set(data))
+                all(reference_stats[k] == reference["current"][k] for k in reference_keys)
+                and len(data) == len(set(data))
                 and all(t % 60 == 0 for t in data)
                 and set(data.values()).issubset({b[0] for b in BANDS})
             ),
             "observed": {
+                "reference_replay": {k: reference_stats[k] for k in reference_keys},
                 "classified_minutes": len(data),
                 "unique_minutes": len(set(data)),
                 "bands": sorted(set(data.values())),
             },
-            "expected": "unique clock-aligned complete minutes using only 1-4, 4-8, 8-16, and 16-20 Hz",
+            "expected": "stored verified prefix replays exactly; unique clock-aligned complete minutes use only the four defined bands",
         },
         {
-            "name": "4_4_8_reconciliation_and_nested_thresholds",
+            "name": "3_arithmetic_and_semester_partition_reconciliation",
             "pass": (
                 current["mins10"] + current["shorter10_minutes"] == current["dom48_minutes"]
                 and current["count10"] >= current["count15"] >= current["count30"] >= current["count60"]
                 and current["mins10"] >= current["mins15"] >= current["mins30"] >= current["mins60"]
+                and len(rows) > 0
+                and rows[0]["key"] == "2026-04-S2"
+                and sum(row["stats"]["analyzed_minutes"] for row in rows) == current["analyzed_minutes"]
+                and sum(row["stats"]["dom48_minutes"] for row in rows) == current["dom48_minutes"]
+                and all(not (row["key"] == "2026-04-S1") for row in rows)
             ),
             "observed": {
                 "dom48_minutes": current["dom48_minutes"],
@@ -364,27 +365,12 @@ def main():
                 "shorter10_minutes": current["shorter10_minutes"],
                 "counts": [current["count10"], current["count15"], current["count30"], current["count60"]],
                 "minutes": [current["mins10"], current["mins15"], current["mins30"], current["mins60"]],
-            },
-            "expected": ">=10-minute sustained + shorter segments = all 4-8 minutes; threshold counts and minutes are nested",
-        },
-        {
-            "name": "5_semester_partition_reconciliation",
-            "pass": (
-                len(rows) > 0
-                and rows[0]["key"] == "2026-04-S2"
-                and sum(row["stats"]["analyzed_minutes"] for row in rows) == current["analyzed_minutes"]
-                and sum(row["stats"]["dom48_minutes"] for row in rows) == current["dom48_minutes"]
-                and all(not (row["key"] == "2026-04-S1") for row in rows)
-            ),
-            "observed": {
                 "semester_rows": len(rows),
                 "first_key": rows[0]["key"] if rows else None,
                 "analyzed_minutes_sum": sum(row["stats"]["analyzed_minutes"] for row in rows),
                 "dom48_minutes_sum": sum(row["stats"]["dom48_minutes"] for row in rows),
-                "full_analyzed_minutes": current["analyzed_minutes"],
-                "full_dom48_minutes": current["dom48_minutes"],
             },
-            "expected": "April begins at Semester 2; semester sums reconcile exactly to the full HDF classification",
+            "expected": "4-8 arithmetic, nested thresholds, and semester sums reconcile; April begins at Semester 2",
         },
     ]
 
@@ -414,20 +400,22 @@ def main():
             "replayed_observed": reference_stats,
         },
         "checks": checks,
-        "all_five_checks_pass": all(check["pass"] for check in checks),
+        "sanity_check_count": 3,
+        "all_three_checks_pass": all(check["pass"] for check in checks),
         "fdsn_urls": urls,
         "missing_data_rule": "Missing acquisition time is excluded and never scored as zero, quiet, normal, compliant, or below benchmark.",
         "note": "This is an analysis-only semester rollup. It does not update the dashboard.",
     }
     OUT.write_text(json.dumps(payload, indent=2), encoding="utf-8")
     print(json.dumps({
-        "all_five_checks_pass": payload["all_five_checks_pass"],
+        "sanity_check_count": 3,
+        "all_three_checks_pass": payload["all_three_checks_pass"],
         "current": current,
         "semester_rollups": rows,
         "checks": checks,
     }, indent=2))
-    if not payload["all_five_checks_pass"]:
-        raise SystemExit("Five-pass semester validation failed; do not use this analysis.")
+    if not payload["all_three_checks_pass"]:
+        raise SystemExit("Three-pass semester validation failed; do not use this analysis.")
 
 
 if __name__ == "__main__":
