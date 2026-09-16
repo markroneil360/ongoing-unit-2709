@@ -1,39 +1,39 @@
 {
   "station": "AM.R6E8A.00",
-  "generated_utc": "2026-09-16T17:43:23.780758+00:00",
-  "generated_et": "2026-09-16 01:43:23 PM EDT",
-  "window_start_utc": "2026-09-16T16:53:23.780758+00:00",
-  "window_end_utc": "2026-09-16T17:13:23.780758+00:00",
+  "generated_utc": "2026-09-16T21:40:19.945471+00:00",
+  "generated_et": "2026-09-16 05:40:19 PM EDT",
+  "window_start_utc": "2026-09-16T20:50:19.945471+00:00",
+  "window_end_utc": "2026-09-16T21:10:19.945471+00:00",
   "channels": {
     "HDF": {
       "channel": "HDF",
       "ok": true,
-      "coverage_pct": 100.0,
+      "coverage_pct": 99.999,
       "segments": 1,
       "sample_rates_hz": [
         100.0
       ],
-      "latest_sample_utc": "2026-09-16T17:13:23.773000+00:00",
-      "latest_sample_et": "2026-09-16 01:13:23 PM EDT",
-      "edge_gap_seconds": 0.007758,
+      "latest_sample_utc": "2026-09-16T21:10:19.943000+00:00",
+      "latest_sample_et": "2026-09-16 05:10:19 PM EDT",
+      "edge_gap_seconds": 0.002471,
       "identity_verified": true,
       "window_clipped_before_coverage": true,
-      "url": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-09-16T16:53:23.780758&end=2026-09-16T17:13:23.780758&format=miniseed&nodata=404"
+      "url": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-09-16T20:50:19.945471&end=2026-09-16T21:10:19.945471&format=miniseed&nodata=404"
     },
     "EHZ": {
       "channel": "EHZ",
       "ok": true,
-      "coverage_pct": 100.0,
+      "coverage_pct": 99.999,
       "segments": 1,
       "sample_rates_hz": [
         100.0
       ],
-      "latest_sample_utc": "2026-09-16T17:13:23.773000+00:00",
-      "latest_sample_et": "2026-09-16 01:13:23 PM EDT",
-      "edge_gap_seconds": 0.007758,
+      "latest_sample_utc": "2026-09-16T21:10:19.943000+00:00",
+      "latest_sample_et": "2026-09-16 05:10:19 PM EDT",
+      "edge_gap_seconds": 0.002471,
       "identity_verified": true,
       "window_clipped_before_coverage": true,
-      "url": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=EHZ&start=2026-09-16T16:53:23.780758&end=2026-09-16T17:13:23.780758&format=miniseed&nodata=404"
+      "url": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=EHZ&start=2026-09-16T20:50:19.945471&end=2026-09-16T21:10:19.945471&format=miniseed&nodata=404"
     }
   },
   "source": "Raspberry Shake public FDSN DataSelect",
