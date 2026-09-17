@@ -104,5 +104,57 @@
     91
   ],
   "public_convention": "For threshold panels, 100% equals the named external guide. The ISO percentage is the share of recorded HDF energy inside its method scope.",
-  "channel_rule": "HDF pressure leads. EHZ vertical motion remains separate."
+  "channel_rule": "HDF pressure leads. EHZ vertical motion remains separate.",
+  "attached_reference_register": {
+    "source_image": "IMG_5933.jpeg",
+    "supplied_date": "2026-09-17",
+    "note": "Transcribed from the supplied image. Right-hand level/authority columns are partially cropped or obscured; verify issuing documents, editions, measurement qualifiers, and jurisdiction before agency reliance.",
+    "normative_benchmarks": [
+      {
+        "reference": "Urban background (typical)",
+        "level": "60–70 dB(G)"
+      },
+      {
+        "reference": "Danish EPA / Queensland ECOACCESS indoor",
+        "level": "85 dB(G)"
+      },
+      {
+        "reference": "Japan MOE handbook",
+        "level": "92 dB(G)"
+      },
+      {
+        "reference": "Mean hearing threshold (G96)",
+        "level": "96 dB(G)"
+      },
+      {
+        "reference": "WHO 2018 Environmental Noise Guidelines",
+        "level": "No infrasound-specific value shown in supplied image"
+      },
+      {
+        "reference": "WHO 1999 bedrooms at night",
+        "level": "LAeq 30 dB"
+      }
+    ],
+    "michigan_reporting_pathways": [
+      {
+        "finding": "Guest/room infrasound or low-frequency noise impact",
+        "authority": "Local/county health department",
+        "verification": "Authority wording partly obscured in supplied image."
+      },
+      {
+        "finding": "Employee exposure (housekeeping/engineering staff)",
+        "authority": "MIOSHA"
+      },
+      {
+        "finding": "Ground-borne events co-detected at neighboring station",
+        "authority": "Michigan geological authority",
+        "verification": "Exact office name is cropped/obscured in supplied image."
+      },
+      {
+        "finding": "Suspected RF/electromagnetic",
+        "authority": "FCC",
+        "verification": "For appropriate radio-spectrum matters only."
+      }
+    ]
+  }
 }
