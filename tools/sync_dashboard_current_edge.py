@@ -94,7 +94,7 @@ new_status = (
 )
 
 status_pat = re.compile(
-    r'<div class="status"><strong>.*?</strong><br>.*?<div class="small">\*Account for up to 30 minutes of lag\. Missing acquisition time is never scored as zero, quiet, normal, compliant, or below benchmark\.</div></div>',
+    r'<div class="status"><strong>.*?</strong><br>.*?<div class="small">\*Account for up to 30 minutes of lag\. Missing acquisition time is never scored as zero, quiet, normal, compliant, or below benchmark\.</div>(?:<div class="freshness-alert".*?</div>)?</div>',
     re.DOTALL,
 )
 s, n = status_pat.subn(new_status, s, count=1)
