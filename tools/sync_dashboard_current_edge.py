@@ -9,6 +9,12 @@ INDEX = Path('index.html')
 STATUS = Path('data/current-status.json')
 CANDIDATE = Path('data/r6e8a_4_8_10min_full.json')
 
+def coverage_label(value):
+    pct = float(value)
+    if abs(pct - round(pct)) < 1e-9:
+        return f'{int(round(pct))}%'
+    return f'{pct:.3f}%'
+
 status = json.loads(STATUS.read_text(encoding='utf-8'))
 candidate = json.loads(CANDIDATE.read_text(encoding='utf-8'))
 s = INDEX.read_text(encoding='utf-8')
@@ -50,12 +56,6 @@ DETROIT = ZoneInfo('America/Detroit')
 def parse_display(v: str):
     core = v.rsplit(' ', 1)[0]
     return datetime.strptime(core, '%Y-%m-%d %I:%M:%S %p').replace(tzinfo=DETROIT)
-
-def coverage_label(value):
-    pct = float(value)
-    if abs(pct - round(pct)) < 1e-9:
-        return f'{int(round(pct))}%'
-    return f'{pct:.3f}%'
 
 def t_short(dt):
     return dt.astimezone(DETROIT).strftime('%-I:%M %p %Z')
