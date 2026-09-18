@@ -79,10 +79,6 @@ returned_et = returned_utc.astimezone(DETROIT)
 complete_et = complete_utc.astimezone(DETROIT)
 
 lag_text = '*Account for up to 30 minutes of lag. Missing acquisition time is never scored as zero, quiet, normal, compliant, or below benchmark.'
-freshness_age_minutes = (datetime.now(timezone.utc) - max(datetime.fromisoformat(hdf['latest_sample_utc']), datetime.fromisoformat(ehz['latest_sample_utc']))).total_seconds() / 60
-freshness_html = ''
-if freshness_age_minutes > 60:
-    freshness_html = '<div class="freshness-alert" role="status"><span class="freshness-dot" aria-hidden="true"></span><b>FDSN EDGE OLDER THAN ONE HOUR</b> — upstream data availability should be checked before treating this edge as current.</div>'
 new_status = (
     '<div class="status"><strong>LIVE HDF / EHZ DATA THROUGH: '
     f'{d_long(latest_dt)} · {t_short(latest_dt)}</strong><br>'
@@ -90,11 +86,11 @@ new_status = (
     f'HDF <b>{coverage_label(hdf["coverage_pct"])}</b> and EHZ <b>{coverage_label(ehz["coverage_pct"])}</b> acquisition coverage in the current status window. '
     f'The cumulative 4–8 Hz spectral totals below remain five-check verified through {t_full(returned_et)} returned sample / {t_short(complete_et)} complete analyzed minute.'
     f'<div class="small">{lag_text}</div>'
-    f'{freshness_html}</div>'
+    '</div>'
 )
 
 status_pat = re.compile(
-    r'<div class="status"><strong>.*?</strong><br>.*?<div class="small">\*Account for up to 30 minutes of lag\. Missing acquisition time is never scored as zero, quiet, normal, compliant, or below benchmark\.</div>(?:<div class="freshness-alert".*?</div>)?</div>',
+    r'<div class="status"><strong>.*?</strong><br>.*?<div class="small">\*Account for up to 30 minutes of lag\. Missing acquisition time is never scored as zero, quiet, normal, compliant, or below benchmark\.</div></div>',
     re.DOTALL,
 )
 s, n = status_pat.subn(new_status, s, count=1)
@@ -142,10 +138,6 @@ for item in required:
 assert 'Latest returned HDF sample: <b>8:38:01 AM EST</b>' not in s
 assert 'supplemental-benchmarks' in s
 assert 'IMG_5933.jpeg' in s
-if freshness_age_minutes > 60:
-    assert 'FDSN EDGE OLDER THAN ONE HOUR' in s
-else:
-    assert 'FDSN EDGE OLDER THAN ONE HOUR' not in s
 print('PASS 5/5 — publication text, channel separation, lag note, and locked totals verified')
 
 INDEX.write_text(s, encoding='utf-8')

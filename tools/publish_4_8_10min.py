@@ -100,9 +100,6 @@ status_html = (
     f'<b>{float(ehz["coverage_pct"]):.1f}% EHZ acquisition coverage</b> in the current status window. '
     f'The cumulative HDF 4–8 Hz spectral calculation starts <b>April 12, 2026</b> and is five-check verified through '
     f'<b>{date_time_et(latest_cum)}</b> returned HDF sample / <b>{date_time_et(latest_complete, seconds=False)}</b> complete analyzed minute.'
-    f'<div id="fdsn-stale-indicator" data-hdf-utc="{hdf_latest}" data-ehz-utc="{ehz_latest}" hidden '
-    'style="margin-top:8px;color:#ff6258;font-weight:950"><span aria-hidden="true">●</span> '
-    'FDSN pull difficulty: the latest channel data shown is more than one hour old.</div>'
     '<div class="small">*Account for up to 30 minutes of lag. Missing acquisition time is never scored as zero, quiet, normal, compliant, or below benchmark.</div></div>'
 )
 replace_one(r'<div class="status">.*?</div><div class="download-actions">',
@@ -166,23 +163,6 @@ footer = (
 )
 replace_one(r'<footer><div class="wrap">.*?</div></footer>', footer, 'footer')
 
-freshness_script = '''<script id="r6e8a-freshness-check">
-(function () {
-  var el = document.getElementById('fdsn-stale-indicator');
-  if (!el) return;
-  var hdf = Date.parse(el.getAttribute('data-hdf-utc') || '');
-  var ehz = Date.parse(el.getAttribute('data-ehz-utc') || '');
-  var oldest = Math.min(hdf, ehz);
-  var stale = Number.isFinite(oldest) && Date.now() - oldest > 60 * 60 * 1000;
-  el.hidden = !stale;
-  el.style.display = stale ? 'block' : 'none';
-})();
-</script>'''
-if '<script id="r6e8a-freshness-check">' in s:
-    s = re.sub(r'<script id="r6e8a-freshness-check">.*?</script>', freshness_script, s, count=1, flags=re.S)
-else:
-    s = s.replace('</body>', freshness_script + '</body>', 1)
-
 # Update primary-threshold wording anywhere else without altering the independent 30-minute ordinance rule.
 s = s.replace('≥15-minute', '≥10-minute').replace('≥15 minutes', '≥10 minutes')
 s = s.replace('15+ minute', '10+ minute').replace('at least 15 minutes', 'at least 10 minutes')
@@ -223,13 +203,12 @@ publish_checks.append((
     and 'Aug. 25, 2026' not in s and 'data through Aug. 25, 2026' not in s
 ))
 publish_checks.append((
-    '5_wording_gap_channel_and_stale_guard',
+    '5_wording_gap_and_channel_guard',
     '≥15 minutes' not in s and '≥15-minute' not in s and 'at least 15 minutes' not in s
     and 'reporting/event-definition choice, not a medical or legal exposure limit' in s
     and '*Account for up to 30 minutes of lag.' in s
     and 'Missing acquisition time is never scored as zero' in s
     and 'HDF pressure/infrasound and EHZ vertical/seismic motion remain separate channels' in s
-    and 'id="fdsn-stale-indicator"' in s and 'id="r6e8a-freshness-check"' in s
 ))
 
 for name, passed in publish_checks:
