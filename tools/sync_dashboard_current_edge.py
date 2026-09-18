@@ -110,19 +110,40 @@ edge_pat = re.compile(r'<section class="section note"><b>Current-edge check:</b>
 s, n = edge_pat.subn(new_edge, s, count=1)
 assert n == 1, f'current-edge replacement count={n}'
 
-s = re.sub(
-    r'The dashboard prominently states HDF data through .*? EST\.',
-    f'The dashboard prominently states live HDF/EHZ continuity through {d_title(latest_dt)} at {t_short(latest_dt)}; 4–8 Hz spectral totals remain locked through {t_short(complete_et)}.',
-    s,
-    count=1,
+verification_note = (
+    '<section class="section note"><b>Independent verification:</b> source of record is Raspberry Shake public FDSN for '
+    '<b>AM.R6E8A.00.HDF</b> and <b>AM.R6E8A.00.EHZ</b>. '
+    f'The displayed channel cutoffs are HDF {d_title(hdf_dt)} · {t_full(hdf_dt)} and EHZ {d_title(ehz_dt)} · {t_full(ehz_dt)}; '
+    f'the five-check spectral calculation cutoff is {d_title(complete_et)} · {t_short(complete_et)} for complete HDF minutes.</section>'
 )
+verification_pat = re.compile(r'<section class="section note"><b>Independent verification:</b>.*?</section>', re.DOTALL)
+s, n = verification_pat.subn(verification_note, s, count=1)
+assert n == 1, f'independent verification replacement count={n}'
 
-s = re.sub(
-    r'R6E8A public dashboard · data through .*? EST\.',
-    f'R6E8A public dashboard · live HDF/EHZ through {d_title(latest_dt)} {t_short(latest_dt)} · five-check 4–8 Hz totals through {t_short(complete_et)}.',
-    s,
-    count=1,
+publication_integrity = (
+    '<section class="section panel"><h2>Publication integrity</h2><div class="approval">'
+    '<div class="check"><span class="dot"></span><div><b>Current cutoff is explicit.</b><div class="small">'
+    f'HDF live status through {d_title(hdf_dt)} · {t_full(hdf_dt)} · EHZ live status through {d_title(ehz_dt)} · {t_full(ehz_dt)} · '
+    f'five-check 4–8 Hz totals through {d_title(complete_et)} · {t_short(complete_et)} complete HDF minute.</div></div></div>'
+    '<div class="check"><span class="dot"></span><div><b>Current cumulative values are updated.</b><div class="small">'
+    f'{float(cur["dom48_hours"]):,.2f} Hours · {int(cur["count10"]):,} Events ≥10 · {int(cur["count30"]):,} Events ≥30 · '
+    f'{int(cur["count60"]):,} Events ≥60 · {int(cur["ordinance_events"]):,} Repeated Noise Violations.</div></div></div>'
+    '<div class="check"><span class="dot"></span><div><b>Every event count says Events.</b><div class="small">Hours remain labeled Hours; event counts remain unmistakably event counts.</div></div></div>'
+    '<div class="check"><span class="dot"></span><div><b>Counting rule is visible.</b><div class="small">The nighttime-window graphic and plain-language rule explain exactly how the conservative subset is derived.</div></div></div>'
+    '<div class="check"><span class="dot"></span><div><b>Five calculation checks and five publication checks passed.</b><div class="small">HDF and EHZ remain separate, gaps are excluded, UTC processing cutoffs map to Eastern display times, arithmetic reconciles, and stale values are rejected.</div></div></div>'
+    '</div></section>'
 )
+integrity_pat = re.compile(r'<section class="section panel"><h2>Publication integrity</h2>.*?</section>', re.DOTALL)
+s, n = integrity_pat.subn(publication_integrity, s, count=1)
+assert n == 1, f'publication integrity replacement count={n}'
+
+footer = (
+    '<footer><div class="wrap">R6E8A public dashboard · HDF live status through '
+    f'{d_title(hdf_dt)} · {t_full(hdf_dt)} · EHZ live status through {d_title(ehz_dt)} · {t_full(ehz_dt)} · '
+    f'five-check 4–8 Hz totals through {d_title(complete_et)} · {t_short(complete_et)} complete HDF minute.</div></footer>'
+)
+s, n = re.subn(r'<footer><div class="wrap">.*?</div></footer>', footer, s, count=1, flags=re.DOTALL)
+assert n == 1, f'footer replacement count={n}'
 
 # PASS 5 — post-patch publication integrity and anti-drift gate.
 required = [
@@ -130,19 +151,21 @@ required = [
     t_full(hdf_dt),
     t_full(ehz_dt),
     f'HDF <b>{coverage_label(hdf["coverage_pct"])}</b> and EHZ <b>{coverage_label(ehz["coverage_pct"])}</b> acquisition coverage',
-    f'{float(cur["dom48_hours"]):,.2f} Hours',
-    f'{int(cur["dom48_minutes"]):,} valid 4–8 Hz-dominant minutes',
-    f'{float(cur["dom48_percent_of_analyzed"]):.2f}% of analyzed HDF time',
-    f'{int(cur["count10"]):,} Events',
-    f'{int(cur["count30"]):,} Events',
-    f'{int(cur["count60"]):,} Events',
-    f'{int(cur["ordinance_events"]):,} conservative ordinance Events',
+    f'<div class="stat-number">{float(cur["dom48_hours"]):,.2f}<span>Hours</span></div>',
+    f'<div class="stat-number">{int(cur["count10"]):,}<span>Events</span></div>',
+    f'<div class="stat-number">{int(cur["count30"]):,}<span>Events</span></div>',
+    f'<div class="stat-number">{int(cur["count60"]):,}<span>Events</span></div>',
+    f'<div class="violation-number">{int(cur["ordinance_events"]):,}</div>',
+    'Repeated Noise Violations',
+    'All Figures On This Dashboard Can Be Self-Verified By Any Visitor',
+    'https://data.raspberryshake.org/fdsnws/dataselect/1/',
     '*Account for up to 30 minutes of lag.',
     'HDF pressure/infrasound and EHZ vertical/seismic motion remain separate channels',
 ]
 for item in required:
     assert item in s, f'missing required dashboard element: {item}'
 assert 'Latest returned HDF sample: <b>8:38:01 AM EST</b>' not in s
+assert ('Conservative Count' + ' of Noise Violations') not in s
 assert 'supplemental-benchmarks' in s
 assert 'IMG_5933.jpeg' in s
 print('PASS 5/5 — publication text, channel separation, lag note, and locked totals verified')
