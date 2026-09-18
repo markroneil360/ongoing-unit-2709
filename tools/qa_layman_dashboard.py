@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import json
 import re
+from datetime import datetime, timedelta
 from html.parser import HTMLParser
 from pathlib import Path
 
@@ -52,6 +53,18 @@ visible = re.sub(r"\s+", " ", " ".join(parser.parts)).strip()
 cur = candidate["current"]
 
 
+def event_date_label(start_iso: str, end_iso: str) -> str:
+    start = datetime.fromisoformat(start_iso.replace("Z", "+00:00"))
+    end = datetime.fromisoformat(end_iso.replace("Z", "+00:00")) - timedelta(seconds=1)
+    if start.date() == end.date():
+        return start.strftime("%B %-d, %Y")
+    if start.year == end.year and start.month == end.month:
+        return f'{start.strftime("%B %-d")}–{end.strftime("%-d, %Y")}'
+    if start.year == end.year:
+        return f'{start.strftime("%B %-d")}–{end.strftime("%B %-d, %Y")}'
+    return f'{start.strftime("%B %-d, %Y")}–{end.strftime("%B %-d, %Y")}'
+
+
 # PASS 1 — source identity, arithmetic, and current values.
 require(candidate["station"] == "AM.R6E8A.00" and candidate["channel"] == "HDF", "candidate identity mismatch")
 require(status["station"] == "AM.R6E8A.00", "status identity mismatch")
@@ -72,8 +85,12 @@ require(hero < stats < benchmarks, "required reading order is not preserved")
 require("Repeated Noise Violations" in visible, "required 107 title missing")
 require(source.count('class="stat-card"') == 6, "expected six compact statistic cards")
 require(source.count('class="why-title">Why this count matters') == 6, "every statistic needs a why explanation")
+longest = cur["longest_runs"][0]
+require(longest.get("start_et") and longest.get("end_et"), "longest run occurrence date missing from candidate")
+longest_date = event_date_label(longest["start_et"], longest["end_et"])
+require(f'Occurred: {longest_date}' in visible, "longest run occurrence date missing from card")
 require(visible.count("April 12, 2026") >= 3 and "Ongoing" in visible, "ongoing archive scope is not prominent")
-print("PASS 2/5 — violation-first hierarchy, six-stat row, explanations, and ongoing date")
+print("PASS 2/5 — violation-first hierarchy, six-stat row, longest-run date, explanations, and ongoing scope")
 
 
 # PASS 3 — public verification path and channel separation.

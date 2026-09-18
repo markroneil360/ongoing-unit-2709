@@ -73,6 +73,17 @@ def duration_label(minutes: int) -> str:
         return f"{h} Hours"
     return f"{m} Minutes"
 
+def event_date_label(start_iso: str, end_iso: str) -> str:
+    start = dt_et(start_iso)
+    end = dt_et(end_iso) - timedelta(seconds=1)
+    if start.date() == end.date():
+        return start.strftime("%B %-d, %Y")
+    if start.year == end.year and start.month == end.month:
+        return f'{start.strftime("%B %-d")}–{end.strftime("%-d, %Y")}'
+    if start.year == end.year:
+        return f'{start.strftime("%B %-d")}–{end.strftime("%B %-d, %Y")}'
+    return f'{start.strftime("%B %-d, %Y")}–{end.strftime("%B %-d, %Y")}'
+
 def pct(part, whole):
     return round(100.0 * part / whole, 2) if whole else 0.0
 
@@ -90,8 +101,12 @@ ehz_latest = ehz["latest_sample_utc"]
 latest_day = dt_et(latest_cum).strftime("%B %-d, %Y").upper()
 exact_hours = float(c["dom48_hours"])
 rounded_hours = int(round(exact_hours))
-longest_minutes = int(c["longest_runs"][0]["duration_minutes"]) if c.get("longest_runs") else 0
+longest_run = c["longest_runs"][0] if c.get("longest_runs") else {}
+if not (longest_run.get("start_et") and longest_run.get("end_et")):
+    raise SystemExit("Longest continuous run has no verified occurrence date; refusing publication.")
+longest_minutes = int(longest_run["duration_minutes"])
 longest_label = duration_label(longest_minutes)
+longest_date_label = event_date_label(longest_run["start_et"], longest_run["end_et"])
 
 status_html = (
     '<div class="status"><strong>LIVE CHANNEL CHECK — '
@@ -107,7 +122,7 @@ replace_one(r'<div class="status">.*?</div><div class="download-actions">',
 
 evidence_summary = f'''<!-- EVIDENCE SUMMARY START -->
 <section class="section panel violation-hero" id="repeated-noise-violations"><div class="date-scope">April 12, 2026 — Ongoing</div><h2>Repeated Noise Violations</h2><div class="violation-number">{c["ordinance_events"]:,}</div><div class="events-caption">Documented Events</div><p class="hero-copy">Event timing was verified from the public Raspberry Shake FDSN record for station <b>AM.R6E8A.00</b>. The count uses a conservative nighttime screening rule: each distinct event lasted at least 30 minutes and contained at least 30 actual minutes inside the applicable nighttime window. The local ordinance screen and Michigan regulatory references are kept separate, and this reproducible dashboard count is not an agency adjudication or a source-identification finding.</p><p class="verify-callout"><strong>All Figures On This Dashboard Can Be Self-Verified By Any Visitor Through The <a href="https://data.raspberryshake.org/fdsnws/dataselect/1/">Raspberry Shake FDSN DataSelect Service</a> For Station AM.R6E8A.00 Using HDF And EHZ.</strong></p></section>
-<section class="section panel stats-panel"><div class="date-scope">Evidence summary · April 12, 2026 — Ongoing</div><h2>What the documented counts show</h2><div class="stats-grid"><article class="stat-card"><div class="stat-title">Repeated Noise Violations</div><div class="stat-number">{c["ordinance_events"]:,}<span>Events</span></div><div class="why-title">Why this count matters</div><p class="why-copy">Only sustained events with at least 30 actual nighttime minutes are included; each distinct event is counted once.</p></article><article class="stat-card"><div class="stat-title">Documented 4–8 Hz Activity</div><div class="stat-number">{exact_hours:,.2f}<span>Hours</span></div><div class="why-title">Why this count matters</div><p class="why-copy">This is the cumulative time in which 4–8 Hz was the dominant HDF band, not a total elapsed-time estimate.</p></article><article class="stat-card"><div class="stat-title">Repeated ≥10-Minute Events</div><div class="stat-number">{c["count10"]:,}<span>Events</span></div><div class="why-title">Why this count matters</div><p class="why-copy">Repeated runs show recurrence rather than isolated peaks; the threshold is a reporting definition, not a legal or medical limit.</p></article><article class="stat-card"><div class="stat-title">Sustained ≥30-Minute Events</div><div class="stat-number">{c["count30"]:,}<span>Events</span></div><div class="why-title">Why this count matters</div><p class="why-copy">These longer events form the pool from which the conservative nighttime count is derived.</p></article><article class="stat-card"><div class="stat-title">Sustained ≥60-Minute Events</div><div class="stat-number">{c["count60"]:,}<span>Events</span></div><div class="why-title">Why this count matters</div><p class="why-copy">An hour or more of uninterrupted 4–8 Hz dominance documents persistence beyond short disturbances.</p></article><article class="stat-card"><div class="stat-title">Longest Continuous Run</div><div class="stat-number">{longest_label}<span>4–8 Hz Dominant</span></div><div class="why-title">Why this count matters</div><p class="why-copy">The longest verified run provides a direct duration example within the record that began April 12, 2026.</p></article></div></section>
+<section class="section panel stats-panel"><div class="date-scope">Evidence summary · April 12, 2026 — Ongoing</div><h2>What the documented counts show</h2><div class="stats-grid"><article class="stat-card"><div class="stat-title">Repeated Noise Violations</div><div class="stat-number">{c["ordinance_events"]:,}<span>Events</span></div><div class="why-title">Why this count matters</div><p class="why-copy">Only sustained events with at least 30 actual nighttime minutes are included; each distinct event is counted once.</p></article><article class="stat-card"><div class="stat-title">Documented 4–8 Hz Activity</div><div class="stat-number">{exact_hours:,.2f}<span>Hours</span></div><div class="why-title">Why this count matters</div><p class="why-copy">This is the cumulative time in which 4–8 Hz was the dominant HDF band, not a total elapsed-time estimate.</p></article><article class="stat-card"><div class="stat-title">Repeated ≥10-Minute Events</div><div class="stat-number">{c["count10"]:,}<span>Events</span></div><div class="why-title">Why this count matters</div><p class="why-copy">Repeated runs show recurrence rather than isolated peaks; the threshold is a reporting definition, not a legal or medical limit.</p></article><article class="stat-card"><div class="stat-title">Sustained ≥30-Minute Events</div><div class="stat-number">{c["count30"]:,}<span>Events</span></div><div class="why-title">Why this count matters</div><p class="why-copy">These longer events form the pool from which the conservative nighttime count is derived.</p></article><article class="stat-card"><div class="stat-title">Sustained ≥60-Minute Events</div><div class="stat-number">{c["count60"]:,}<span>Events</span></div><div class="why-title">Why this count matters</div><p class="why-copy">An hour or more of uninterrupted 4–8 Hz dominance documents persistence beyond short disturbances.</p></article><article class="stat-card"><div class="stat-title">Longest Continuous Run</div><div class="stat-number">{longest_label}<span>4–8 Hz Dominant</span></div><div class="stat-date">Occurred: {longest_date_label}</div><div class="why-title">Why this count matters</div><p class="why-copy">The date identifies when this record-setting continuous run occurred. It updates automatically only when a longer verified run replaces it.</p></article></div></section>
 <section class="section panel count-method"><h2>How the {c["ordinance_events"]:,} events were counted</h2><p class="method-rule"><b>Required for every counted event:</b> a sustained 30+ minute 4–8 Hz-dominant run, with at least 30 actual minutes inside the applicable nighttime window. Missing acquisition time is excluded. Overlapping criteria never multiply one event.</p><div class="clock"><div class="label">Nighttime-window screen</div><div class="clockbar"><div class="night">12 AM–7 AM</div><div class="day">7 AM–10 PM</div><div class="late">10 PM–12 AM</div></div><div class="legend"><span>General nighttime window: 10 PM–7 AM</span><span>Friday/Saturday conservative downtown start: 11 PM</span></div></div><p class="small">The 10-minute event threshold elsewhere on this page is a reporting/event-definition choice, not a medical or legal exposure limit. It does not lower this separate 30-minute nighttime rule.</p></section>
 <!-- EVIDENCE SUMMARY END -->'''
 replace_one(r'<!-- EVIDENCE SUMMARY START -->.*?<!-- EVIDENCE SUMMARY END -->', evidence_summary, 'layman evidence summary')
@@ -194,6 +209,7 @@ publish_checks.append((
     '≥15 minutes' not in s and '≥15-minute' not in s and 'at least 15 minutes' not in s
     and 'reporting/event-definition choice, not a medical or legal exposure limit' in s
     and 'All Figures On This Dashboard Can Be Self-Verified By Any Visitor' in s
+    and f'<div class="stat-date">Occurred: {longest_date_label}</div>' in s
     and '*Account for up to 30 minutes of lag.' in s
     and 'Missing acquisition time is never scored as zero' in s
     and 'HDF pressure/infrasound and EHZ vertical/seismic motion remain separate channels' in s

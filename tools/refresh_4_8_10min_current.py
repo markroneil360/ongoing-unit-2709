@@ -104,6 +104,10 @@ def night(t):
     d=datetime.fromtimestamp(t,timezone.utc).astimezone(TZ)
     return d.hour<7 or d.hour >= (23 if d.weekday() in (4,5) else 22)
 def ordcount(runs):return sum(1 for r in runs if len(r)>=30 and sum(night(t) for t in r)>=30)
+def run_record(run):
+    if not run:return None
+    start=datetime.fromtimestamp(run[0],timezone.utc);end=datetime.fromtimestamp(run[-1]+60,timezone.utc)
+    return {'start_utc':start.isoformat(),'start_et':start.astimezone(TZ).isoformat(),'end_utc':end.isoformat(),'end_et':end.astimezone(TZ).isoformat(),'duration_minutes':len(run),'duration_hours':round(len(run)/60,2)}
 def poststats(data):
     c=Counter(data.values()); rr=runs48(data); x={'analyzed_minutes':len(data),'dom48_minutes':c['4-8'],'band_counts':dict(c),'runs_total':len(rr)}
     for q in (10,15,30,60):
@@ -119,8 +123,13 @@ def combine(base,post):
     x['dom48_hours']=round(x['dom48_minutes']/60,2);x['dom48_percent_of_analyzed']=round(100*x['dom48_minutes']/x['analyzed_minutes'],2)
     x['shorter10_minutes']=x['dom48_minutes']-x['mins10'];x['shorter10_hours']=round(x['shorter10_minutes']/60,2)
     x['ordinance_events']=base['ordinance_events']+ps['ordinance_events']
-    postlong=max((len(r) for r in rr),default=0); x['longest_minutes']=max(base['longest_minutes'],postlong)
-    x['longest_runs']=[{'duration_minutes':x['longest_minutes'],'duration_hours':round(x['longest_minutes']/60,2)}]
+    postwinner=max(rr,key=lambda r:(len(r),-r[0]),default=None);postrecord=run_record(postwinner)
+    baserecord=(base.get('longest_runs') or [None])[0]
+    if postrecord and int(postrecord['duration_minutes'])>int(base['longest_minutes']):winner=postrecord
+    elif baserecord and baserecord.get('start_et') and baserecord.get('end_et'):winner=baserecord
+    elif postrecord and int(postrecord['duration_minutes'])==int(base['longest_minutes']):winner=postrecord
+    else:winner={'duration_minutes':int(base['longest_minutes']),'duration_hours':round(int(base['longest_minutes'])/60,2)}
+    x['longest_minutes']=int(winner['duration_minutes']);x['longest_runs']=[winner]
     x['post']={**ps,'ordinance_events':ps['ordinance_events']}
     return x,rr
 
@@ -138,7 +147,8 @@ def main():
     edge=[int((PREVIEW_END-timedelta(minutes=i)).timestamp()) for i in range(1,7)]
     checks.append({'name':'3_checkpoint_six_minute_edge','pass':all(post.get(t)=='4-8' for t in edge),'observed':[{'utc':datetime.fromtimestamp(t,timezone.utc).isoformat(),'band':post.get(t)} for t in sorted(edge)],'expected':'six consecutive 4-8-dominant minutes ending at Aug 15 5:02 PM ET edge'})
     checks.append({'name':'4_tail_minute_integrity','pass':len(post)==len(set(post)) and all(t%60==0 for t in post) and set(post.values()).issubset({b[0] for b in BANDS}),'observed':{'classified_minutes':len(post),'unique_minutes':len(set(post)),'bands':sorted(set(post.values()))},'expected':'unique complete clock minutes and defined bands only'})
-    checks.append({'name':'5_10min_reconciliation_and_ordinance_anchor','pass':cur['mins10']+cur['shorter10_minutes']==cur['dom48_minutes'] and cur['count10']>=cur['count15']>=cur['count30']>=cur['count60'] and prev['ordinance_events']==PREVIEW_EXPECTED['ordinance_events'],'observed':{'mins10':cur['mins10'],'shorter10_minutes':cur['shorter10_minutes'],'dom48_minutes':cur['dom48_minutes'],'counts':[cur['count10'],cur['count15'],cur['count30'],cur['count60']],'preview_ordinance_events':prev['ordinance_events']},'expected':'10+shorter=all 4-8; nested thresholds; preview ordinance=74'})
+    longest=cur['longest_runs'][0]
+    checks.append({'name':'5_10min_reconciliation_ordinance_and_longest_date','pass':cur['mins10']+cur['shorter10_minutes']==cur['dom48_minutes'] and cur['count10']>=cur['count15']>=cur['count30']>=cur['count60'] and prev['ordinance_events']==PREVIEW_EXPECTED['ordinance_events'] and bool(longest.get('start_et')) and bool(longest.get('end_et')) and int(longest['duration_minutes'])==int(cur['longest_minutes']),'observed':{'mins10':cur['mins10'],'shorter10_minutes':cur['shorter10_minutes'],'dom48_minutes':cur['dom48_minutes'],'counts':[cur['count10'],cur['count15'],cur['count30'],cur['count60']],'preview_ordinance_events':prev['ordinance_events'],'longest_run':longest},'expected':'10+shorter=all 4-8; nested thresholds; preview ordinance=74; longest run includes verified start/end dates'})
     latestcomplete=max(post) if post else None
     payload={'schema_version':3,'station':'AM.R6E8A.00','channel':'HDF','analysis_start_et':bdoc['scope_start_et'],'analysis_start_utc':bdoc['scope_start_utc'],'base_end_exclusive_utc':bdoc['end_exclusive_utc'],'generated_utc':datetime.now(timezone.utc).isoformat(),'lag_allowance_minutes':30,'requested_through_utc':end.isoformat(),'latest_returned_sample_utc':latest.isoformat() if latest else None,'latest_complete_analyzed_minute_utc':datetime.fromtimestamp(latestcomplete,timezone.utc).isoformat() if latestcomplete else None,'source':'Raspberry Shake public FDSN DataSelect + audited corrected per-minute archive through Aug 12','base_provenance':bdoc['source_archive'],'method':bdoc['method'],'preview_checkpoint':{'end_exclusive_utc':PREVIEW_END.isoformat(),'recomputed':prev,'expected':PREVIEW_EXPECTED},'current':cur,'checks':checks,'all_five_checks_pass':all(c['pass'] for c in checks),'fdsn_urls':urls,'publication_note':'No extrapolated hours. Apr 12 scope excludes 89 pre-scope non-4-8 minutes. The >=10-minute threshold is a reporting/event-definition choice, not a medical or legal exposure limit.'}
     OUT.write_text(json.dumps(payload,indent=2));print(json.dumps({'all_five_checks_pass':payload['all_five_checks_pass'],'current':cur,'checks':checks,'latest_returned_sample_utc':payload['latest_returned_sample_utc']},indent=2))
