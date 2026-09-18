@@ -108,7 +108,7 @@ status_html = (
 replace_one(r'<div class="status">.*?</div><div class="download-actions">',
             status_html + '<div class="download-actions">', 'live status')
 
-main_cards = f'''<section class="section grid g3"><article class="card primary"><div class="label">Total documented 4–8 Hz dominant activity</div><div class="value">{rounded_hours:,} Hours</div><div class="detail">Exact current total: <b>{exact_hours:,.2f} Hours</b> · {c["dom48_minutes"]:,} valid 4–8 Hz-dominant minutes · {c["dom48_percent_of_analyzed"]:.2f}% of analyzed HDF time</div></article><article class="card alert"><div class="label">Conservative nighttime ordinance subset</div><div class="value">{c["ordinance_events"]:,}<span class="events-word">Events</span></div><div class="detail">Requires ≥30-minute sustained event and ≥30 actual minutes inside the applicable nighttime window</div></article><article class="card blue"><div class="label">Repeated low-frequency activity · sustained 4–8 Hz ≥10 minutes</div><div class="value">{c["count10"]:,}<span class="events-word">Events</span></div><div class="detail">{c["hours10"]:,.2f} cumulative Hours in consecutive 10+ minute 4–8 Hz-dominant runs</div></article></section>'''
+main_cards = f'''<section class="section grid g3"><article class="card primary"><div class="label">Total documented 4–8 Hz dominant activity</div><div class="value">{rounded_hours:,} Hours</div><div class="detail">Exact current total: <b>{exact_hours:,.2f} Hours</b> · {c["dom48_minutes"]:,} valid 4–8 Hz-dominant minutes · {c["dom48_percent_of_analyzed"]:.2f}% of analyzed HDF time</div></article><article class="card alert"><div class="label">Conservative Count of Noise Violations</div><div class="value">{c["ordinance_events"]:,}<span class="events-word">Events</span></div><div class="detail">Requires ≥30-minute sustained event and ≥30 actual minutes inside the applicable nighttime window</div></article><article class="card blue"><div class="label">Repeated low-frequency activity · sustained 4–8 Hz ≥10 minutes</div><div class="value">{c["count10"]:,}<span class="events-word">Events</span></div><div class="detail">{c["hours10"]:,.2f} cumulative Hours in consecutive 10+ minute 4–8 Hz-dominant runs</div></article></section>'''
 replace_one(r'<section class="section grid g3"><article class="card primary">.*?</section>', main_cards, 'headline cards')
 
 w10 = pct(c["hours10"], exact_hours)
@@ -217,6 +217,7 @@ publish_checks.append((
     s.count(f'{c["count10"]:,}<span class="events-word">Events</span>') >= 1
     and f'{c["count30"]:,} Events</div></div><div><b>{c["hours30"]:,.2f} Hours</b>' in s
     and f'{c["ordinance_events"]:,}<span class="events-word">Events</span>' in s
+    and 'Conservative Count of Noise Violations' in s
     and date_time_et(hdf_latest) in s and date_time_et(ehz_latest) in s
     and date_time_et(latest_complete, seconds=False) in s
     and 'Aug. 25, 2026' not in s and 'data through Aug. 25, 2026' not in s
