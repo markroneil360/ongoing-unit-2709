@@ -40,15 +40,19 @@ assert 99.999 <= float(ehz['coverage_pct']) <= 100.0
 assert ehz['latest_sample_et']
 print(f"PASS 3/5 — EHZ live edge verified separately at {coverage_label(ehz['coverage_pct'])} coverage")
 
-# PASS 4 — current spectral file must contain exactly five passing checks.
+# PASS 4 — current spectral file must contain exactly five passing checks
+# and reconcile internally. Values are dynamic because each approved refresh
+# advances the verified cumulative record.
 assert len(candidate.get('checks', [])) == 5 and all(item.get('pass') is True for item in candidate['checks'])
 cur = candidate['current']
-assert cur['dom48_minutes'] == 76916
-assert abs(float(cur['dom48_hours']) - 1281.93) < 1e-9
-assert abs(float(cur['dom48_percent_of_analyzed']) - 39.85) < 1e-9
-assert cur['count15'] == 768 and cur['count30'] == 407 and cur['count60'] == 203
-assert cur['ordinance_events'] == 91
-print('PASS 4/5 — five-gate spectral totals remain locked and unchanged')
+assert int(cur['analyzed_minutes']) > 0 and int(cur['dom48_minutes']) > 0
+assert int(cur['mins10']) + int(cur['shorter10_minutes']) == int(cur['dom48_minutes'])
+assert int(cur['count10']) >= int(cur['count15']) >= int(cur['count30']) >= int(cur['count60'])
+assert int(cur['mins10']) >= int(cur['mins15']) >= int(cur['mins30']) >= int(cur['mins60'])
+assert abs(float(cur['dom48_hours']) - int(cur['dom48_minutes']) / 60.0) <= 0.0051
+assert abs(float(cur['dom48_percent_of_analyzed']) - 100.0 * int(cur['dom48_minutes']) / int(cur['analyzed_minutes'])) <= 0.0051
+assert 0 <= int(cur['ordinance_events']) <= int(cur['count30'])
+print('PASS 4/5 — five-gate spectral totals reconcile internally')
 
 # Display formatter. Project convention uses America/Detroit labels.
 DETROIT = ZoneInfo('America/Detroit')
@@ -126,10 +130,13 @@ required = [
     t_full(hdf_dt),
     t_full(ehz_dt),
     f'HDF <b>{coverage_label(hdf["coverage_pct"])}</b> and EHZ <b>{coverage_label(ehz["coverage_pct"])}</b> acquisition coverage',
-    '1,281.93 Hours',
-    '76,916 valid 4–8 Hz-dominant minutes',
-    '39.85% of analyzed HDF time',
-    '1,494 Events', '407 Events', '203 Events', '91 conservative ordinance Events',
+    f'{float(cur["dom48_hours"]):,.2f} Hours',
+    f'{int(cur["dom48_minutes"]):,} valid 4–8 Hz-dominant minutes',
+    f'{float(cur["dom48_percent_of_analyzed"]):.2f}% of analyzed HDF time',
+    f'{int(cur["count10"]):,} Events',
+    f'{int(cur["count30"]):,} Events',
+    f'{int(cur["count60"]):,} Events',
+    f'{int(cur["ordinance_events"]):,} conservative ordinance Events',
     '*Account for up to 30 minutes of lag.',
     'HDF pressure/infrasound and EHZ vertical/seismic motion remain separate channels',
 ]
