@@ -1,2 +1,1 @@
-R6E8A dashboard deployment trigger — 2026-09-10 13:14 ET
-Purpose: deploy index c0677d66 after five calculation checks, five independent data checks, and five publication-integrity checks passed.
+Manual verified deployment requested 2026-09-20 08:42:43 PM EDT after successful R6E8A current-edge synchronization commit ccdde4917bd4de6f7ddafdc49c23ecf6d55339d4. Deploy main only. Completion requires the existing direct HTTPS byte-match verification for index.html, data/r6e8a_4_8_10min_full.json, and data/current-status.json, with the five spectral checks passing and HDF/EHZ remaining separate.
