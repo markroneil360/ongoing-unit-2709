@@ -1,0 +1,45 @@
+name: Diagnose R6E8A preview checkpoint
+on:
+  push:
+    branches: [main]
+    paths:
+      - tools/diagnose_preview_checkpoint.py
+      - .github/workflows/diagnose-preview-checkpoint.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: r6e8a-preview-diagnosis
+  cancel-in-progress: false
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install matching numerical dependencies
+        run: pip install obspy==1.5.1 numpy==2.4.6 scipy==1.17.1
+      - name: Diagnose the fixed checkpoint without changing cumulative data
+        run: python tools/diagnose_preview_checkpoint.py
+      - name: Preserve source responses for diagnosis
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: r6e8a-preview-diagnostic-source
+          path: diagnostic-raw/
+          retention-days: 30
+          if-no-files-found: warn
+      - name: Commit diagnostic evidence only
+        if: always()
+        run: |
+          git config user.name 'r6e8a-diagnostic-bot'
+          git config user.email 'r6e8a-diagnostic-bot@users.noreply.github.com'
+          git add data/r6e8a-checkpoint-diagnostic.json data/r6e8a-checkpoint-minutes.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Preserve targeted R6E8A historical-checkpoint diagnosis'
+            git pull --rebase origin main
+            git push
+          fi
