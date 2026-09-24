@@ -1,58 +1,586 @@
 {
-  "checkpoint": "R6E8A-SEP24-STATUS-ONLY-RECOVERY",
-  "scope": "Current-channel status updated. New cumulative calculation blocked by historical-checkpoint mismatch.",
+  "schema_version": 2,
+  "checkpoint": "R6E8A-SEP24-RECOVERY",
   "station": "AM.R6E8A.00",
-  "cumulative_refresh": {
-    "run_id": 35963751922,
-    "job_id": 107517688373,
-    "trigger_commit": "7fad5de6377246f05c272e319589a4d23100162b",
-    "result": "failed",
-    "failure_at_et": "2026-09-24T02:49:52-04:00",
-    "passing_checks": 4,
-    "total_checks": 5,
-    "candidate_committed": false,
-    "failed_check": {
-      "name": "1_apr12_scope_and_preview_totals",
-      "expected": {
-        "analyzed_minutes": 152884,
-        "dom48_minutes": 56472
+  "request_started_utc": "2026-09-24T07:15:47Z",
+  "previous_attempt": {
+    "checkpoint": "R6E8A-SEP24-STATUS-ONLY-RECOVERY",
+    "scope": "Current-channel status updated. New cumulative calculation blocked by historical-checkpoint mismatch.",
+    "station": "AM.R6E8A.00",
+    "cumulative_refresh": {
+      "run_id": 35963751922,
+      "job_id": 107517688373,
+      "trigger_commit": "7fad5de6377246f05c272e319589a4d23100162b",
+      "result": "failed",
+      "failure_at_et": "2026-09-24T02:49:52-04:00",
+      "passing_checks": 4,
+      "total_checks": 5,
+      "candidate_committed": false,
+      "failed_check": {
+        "name": "1_apr12_scope_and_preview_totals",
+        "expected": {
+          "analyzed_minutes": 152884,
+          "dom48_minutes": 56472
+        },
+        "observed": {
+          "analyzed_minutes": 152792,
+          "dom48_minutes": 56440
+        }
       },
-      "observed": {
-        "analyzed_minutes": 152792,
-        "dom48_minutes": 56440
+      "rejected_candidate_publication_allowed": false
+    },
+    "retained_candidate": {
+      "blob_sha": "566f2b0cd592d210e17d5ff45eb55522488114c9",
+      "commit_sha": "5e783026a2ab10322ef79376e9012788b1dacdea",
+      "generated_et": "2026-09-22T20:31:47.540860-04:00",
+      "complete_minute_et": "2026-09-22T19:28:00-04:00",
+      "all_five_calculation_checks_pass": true
+    },
+    "current_status": {
+      "blob_sha": "4ce6309d96dc063f6bb452f141ea78c97033c42f",
+      "HDF": {
+        "latest_sample_et": "2026-09-24T02:24:39.623-04:00",
+        "coverage_pct": 99.999
+      },
+      "EHZ": {
+        "latest_sample_et": "2026-09-24T02:24:39.623-04:00",
+        "coverage_pct": 99.999
+      },
+      "channels_verified_separately": true
+    },
+    "status_publication": {
+      "commit_sha": "36f2d784b3ee8ae249730a8b6abef3647fa3ae97",
+      "all_five_publication_checks_pass": true,
+      "independent_review_pass": true,
+      "expected_index_sha256": "c81c1ac9bf6e03af0fcb173283a6962fdb0cd4057e5da85b99efbe1ca4476dd8"
+    },
+    "resume_note": "Do not treat the failed refresh or any status-only deployment as a successful new cumulative analysis. Recover the historical checkpoint discrepancy before changing cumulative totals. The prior aggregate does not retain a per-minute suffix or final-run state; a fresh overlap alone cannot prove equality with its originally counted boundary. The failed run's stdout is retained in GitHub job logs. Do not repeat the completed channel-status update unnecessarily.",
+    "source_urls": [
+      "https://github.com/markroneil360/ongoing-unit-2709/actions/runs/35963751922",
+      "https://data.raspberryshake.org/fdsnws/"
+    ],
+    "pdf_reports_regenerated": false
+  },
+  "historical_checkpoint_recovery": {
+    "diagnostic_run": 35969004941,
+    "commit": "2325a871c6acc422952160b12d30e8a9e723a39c",
+    "classified_minutes": 4429,
+    "missing_minutes": 0,
+    "all_preview_fields_match": true,
+    "minute_file_sha256": "7fa5f579c47c2efccf7df1af17a31333eeeed24df407fe7236154bef54e7f0f7",
+    "cause_of_prior_source_discrepancy": "Not established; fresh retrieval reproduced the original checkpoint exactly."
+  },
+  "resumable_refresh": {
+    "code_commit": "d2c5834189c581ef9b7a3f96551cde5416327717",
+    "run_id": 35970204354,
+    "job_id": 107537877429,
+    "complete_minute_and_classification_methods_unchanged": true,
+    "original_five_calculation_gates_unchanged": true,
+    "offline_recovery_tests_passed": 10,
+    "result": "success; two later historical omissions were then repaired by targeted requests"
+  },
+  "pdf_reports_regenerated": true,
+  "scope": "Completed: dashboard, separate HDF/EHZ status and both PDF download reports updated from repaired verified cached data.",
+  "status": "completed",
+  "targeted_gap_repair": {
+    "code_commit": "721b46135765d4dad91603582ffc3ed20f5227cc",
+    "run_id": 35972569317,
+    "job_id": 107545449249,
+    "output_commit": "ad26f34389de0a431248868163a6c28dc46b0f9f",
+    "recovered_minutes": 527,
+    "gaps_minutes": [
+      201,
+      326
+    ],
+    "previous_60552_accepted_minutes_preserved": true,
+    "retained_september22_prefix_every_field_matches": true,
+    "additional_recent_edge_minutes": 10,
+    "archive_restarted": false
+  },
+  "final_candidate": {
+    "commit": "ad26f34389de0a431248868163a6c28dc46b0f9f",
+    "blob_sha": "5f48aee846fb5671682a4be4288314c205796e3a",
+    "generated_utc": "2026-09-24T07:59:55.444787+00:00",
+    "latest_complete_analyzed_minute_utc": "2026-09-24T07:28:00+00:00",
+    "requested_through_utc": "2026-09-24T07:29:00+00:00",
+    "current": {
+      "analyzed_minutes": 209544,
+      "dom48_minutes": 91409,
+      "band_counts": {
+        "1-4": 101852,
+        "4-8": 91409,
+        "8-16": 16186,
+        "16-20": 97
+      },
+      "count10": 1648,
+      "mins10": 66505,
+      "hours10": 1108.42,
+      "count15": 893,
+      "mins15": 57868,
+      "hours15": 964.47,
+      "count30": 490,
+      "mins30": 49649,
+      "hours30": 827.48,
+      "count60": 260,
+      "mins60": 40009,
+      "hours60": 666.82,
+      "dom48_hours": 1523.48,
+      "dom48_percent_of_analyzed": 43.62,
+      "shorter10_minutes": 24904,
+      "shorter10_hours": 415.07,
+      "ordinance_events": 118,
+      "longest_minutes": 976,
+      "longest_runs": [
+        {
+          "start_utc": "2026-09-08T01:08:00+00:00",
+          "start_et": "2026-09-07T21:08:00-04:00",
+          "end_utc": "2026-09-08T17:24:00+00:00",
+          "end_et": "2026-09-08T13:24:00-04:00",
+          "duration_minutes": 976,
+          "duration_hours": 16.27
+        }
+      ],
+      "post": {
+        "analyzed_minutes": 61089,
+        "dom48_minutes": 36250,
+        "band_counts": {
+          "1-4": 20944,
+          "4-8": 36250,
+          "8-16": 3884,
+          "16-20": 11
+        },
+        "runs_total": 1897,
+        "count10": 504,
+        "mins10": 28441,
+        "count15": 289,
+        "mins15": 26005,
+        "count30": 167,
+        "mins30": 23567,
+        "count60": 101,
+        "mins60": 20797,
+        "ordinance_events": 45
       }
     },
-    "rejected_candidate_publication_allowed": false
+    "cache_provenance": {
+      "requested_through_utc": "2026-09-24T07:29:00+00:00",
+      "cache_payload_sha256": "d7f327c7b3ce379c2309a879825a8f1c89b1ba97a99c1dd46e8ff50202a2e097",
+      "cache_minute_count": 61089,
+      "source_request_count": 176,
+      "cached_omissions_recorded": 0,
+      "method_fingerprint": "5e8d1df8fc450cb6ea39e470e3eacebe18411423727fc0ffb63d7941061078e8"
+    }
   },
-  "retained_candidate": {
-    "blob_sha": "566f2b0cd592d210e17d5ff45eb55522488114c9",
-    "commit_sha": "5e783026a2ab10322ef79376e9012788b1dacdea",
-    "generated_et": "2026-09-22T20:31:47.540860-04:00",
-    "complete_minute_et": "2026-09-22T19:28:00-04:00",
-    "all_five_calculation_checks_pass": true
+  "validation": {
+    "all_five_calculation_checks_pass": true,
+    "all_five_publication_checks_pass": true,
+    "independent_cumulative_checks_passed": 25,
+    "independent_preservation_checks_passed": 10,
+    "all_pdf_window_statistic_and_fingerprint_checks_pass": true,
+    "all_four_final_served_pdf_pages_visually_verified": true,
+    "pdf_creation_times_match_manifest": true
+  },
+  "pdf_repair": {
+    "implementation_commit": "be3dc616470ff3a2149adecbdf22a681411d7c46",
+    "source_mode": "Verified cached minute classifications only; distinct trailing24h and168h windows",
+    "removed_static_august4_results": true,
+    "download_links_versioned_by_pdf_sha256": true,
+    "hourly_status_and_reports_published_atomically": true,
+    "manifest": {
+      "schema_version": 1,
+      "station": "AM.R6E8A.00",
+      "candidate_sha256": "0d9734a7de761d190129a0c05abeb0ff5d05437c48dae96227c56d5d6752bcf2",
+      "cache_payload_sha256": "d7f327c7b3ce379c2309a879825a8f1c89b1ba97a99c1dd46e8ff50202a2e097",
+      "cache_file_sha256": "6b7844f359805f772d0593ca1c8b3a995e6f441b9c8c542292ac5a38db81a23b",
+      "status_sha256": "8732199dfda4bac334736c85dab602e0295952f8d1c6f7ae8dddf49c416c4fad",
+      "requested_through_utc": "2026-09-24T07:29:00+00:00",
+      "generated_utc": "2026-09-24T08:06:10.027936+00:00",
+      "all_five_checks_pass": true,
+      "source_mode": "verified cached minute classifications only",
+      "reports": [
+        {
+          "path": "downloads/R6E8A-24-hour-report.pdf",
+          "start_utc": "2026-09-23T07:29:00+00:00",
+          "end_exclusive_utc": "2026-09-24T07:29:00+00:00",
+          "stats": {
+            "analyzed_minutes": 1440,
+            "dom48_minutes": 1122,
+            "band_counts": {
+              "1-4": 312,
+              "4-8": 1122,
+              "8-16": 6,
+              "16-20": 0
+            },
+            "runs_total": 55,
+            "count10": 17,
+            "mins10": 1001,
+            "count15": 14,
+            "mins15": 966,
+            "count30": 7,
+            "mins30": 821,
+            "count60": 6,
+            "mins60": 777,
+            "expected_clock_minutes": 1440,
+            "excluded_minutes": 0,
+            "coverage_pct": 100,
+            "dom48_percent_of_analyzed": 77.9167,
+            "band_percent_of_analyzed": {
+              "1-4": 21.6667,
+              "4-8": 77.9167,
+              "8-16": 0.4167,
+              "16-20": 0
+            },
+            "shorter10_minutes": 121,
+            "latest_complete_minute_utc": "2026-09-24T07:28:00+00:00",
+            "longest_segment": {
+              "duration_minutes": 275,
+              "start_utc": "2026-09-24T02:34:00+00:00",
+              "end_exclusive_utc": "2026-09-24T07:09:00+00:00",
+              "start_et": "2026-09-23T22:34:00-04:00",
+              "end_exclusive_et": "2026-09-24T03:09:00-04:00",
+              "continues_before_window": false,
+              "reaches_report_cutoff": false
+            },
+            "run_scope": "Maximal consecutive complete 4-8-dominant segments clipped to this report window",
+            "time_bins": [
+              {
+                "start_utc": "2026-09-23T07:29:00+00:00",
+                "end_exclusive_utc": "2026-09-23T11:29:00+00:00",
+                "analyzed_minutes": 240,
+                "expected_clock_minutes": 240,
+                "excluded_minutes": 0,
+                "dom48_minutes": 239,
+                "dom48_percent_of_analyzed": 99.5833
+              },
+              {
+                "start_utc": "2026-09-23T11:29:00+00:00",
+                "end_exclusive_utc": "2026-09-23T15:29:00+00:00",
+                "analyzed_minutes": 240,
+                "expected_clock_minutes": 240,
+                "excluded_minutes": 0,
+                "dom48_minutes": 233,
+                "dom48_percent_of_analyzed": 97.0833
+              },
+              {
+                "start_utc": "2026-09-23T15:29:00+00:00",
+                "end_exclusive_utc": "2026-09-23T19:29:00+00:00",
+                "analyzed_minutes": 240,
+                "expected_clock_minutes": 240,
+                "excluded_minutes": 0,
+                "dom48_minutes": 222,
+                "dom48_percent_of_analyzed": 92.5
+              },
+              {
+                "start_utc": "2026-09-23T19:29:00+00:00",
+                "end_exclusive_utc": "2026-09-23T23:29:00+00:00",
+                "analyzed_minutes": 240,
+                "expected_clock_minutes": 240,
+                "excluded_minutes": 0,
+                "dom48_minutes": 40,
+                "dom48_percent_of_analyzed": 16.6667
+              },
+              {
+                "start_utc": "2026-09-23T23:29:00+00:00",
+                "end_exclusive_utc": "2026-09-24T03:29:00+00:00",
+                "analyzed_minutes": 240,
+                "expected_clock_minutes": 240,
+                "excluded_minutes": 0,
+                "dom48_minutes": 149,
+                "dom48_percent_of_analyzed": 62.0833
+              },
+              {
+                "start_utc": "2026-09-24T03:29:00+00:00",
+                "end_exclusive_utc": "2026-09-24T07:29:00+00:00",
+                "analyzed_minutes": 240,
+                "expected_clock_minutes": 240,
+                "excluded_minutes": 0,
+                "dom48_minutes": 239,
+                "dom48_percent_of_analyzed": 99.5833
+              }
+            ]
+          },
+          "pdf_sha256": "a84358c78eeb690c27e058ba53f322843febb3d90f9c0fab331f870330e59ff6",
+          "pages": 2,
+          "download_url": "./downloads/R6E8A-24-hour-report.pdf?v=a84358c78eeb690c"
+        },
+        {
+          "path": "downloads/R6E8A-7-day-trailing-report.pdf",
+          "start_utc": "2026-09-17T07:29:00+00:00",
+          "end_exclusive_utc": "2026-09-24T07:29:00+00:00",
+          "stats": {
+            "analyzed_minutes": 10078,
+            "dom48_minutes": 8252,
+            "band_counts": {
+              "1-4": 1785,
+              "4-8": 8252,
+              "8-16": 41,
+              "16-20": 0
+            },
+            "runs_total": 204,
+            "count10": 84,
+            "mins10": 7832,
+            "count15": 71,
+            "mins15": 7684,
+            "count30": 43,
+            "mins30": 7104,
+            "count60": 28,
+            "mins60": 6476,
+            "expected_clock_minutes": 10080,
+            "excluded_minutes": 2,
+            "coverage_pct": 99.9802,
+            "dom48_percent_of_analyzed": 81.8813,
+            "band_percent_of_analyzed": {
+              "1-4": 17.7118,
+              "4-8": 81.8813,
+              "8-16": 0.4068,
+              "16-20": 0
+            },
+            "shorter10_minutes": 420,
+            "latest_complete_minute_utc": "2026-09-24T07:28:00+00:00",
+            "longest_segment": {
+              "duration_minutes": 803,
+              "start_utc": "2026-09-21T02:39:00+00:00",
+              "end_exclusive_utc": "2026-09-21T16:02:00+00:00",
+              "start_et": "2026-09-20T22:39:00-04:00",
+              "end_exclusive_et": "2026-09-21T12:02:00-04:00",
+              "continues_before_window": false,
+              "reaches_report_cutoff": false
+            },
+            "run_scope": "Maximal consecutive complete 4-8-dominant segments clipped to this report window",
+            "time_bins": [
+              {
+                "start_utc": "2026-09-17T07:29:00+00:00",
+                "end_exclusive_utc": "2026-09-18T07:29:00+00:00",
+                "analyzed_minutes": 1440,
+                "expected_clock_minutes": 1440,
+                "excluded_minutes": 0,
+                "dom48_minutes": 883,
+                "dom48_percent_of_analyzed": 61.3194
+              },
+              {
+                "start_utc": "2026-09-18T07:29:00+00:00",
+                "end_exclusive_utc": "2026-09-19T07:29:00+00:00",
+                "analyzed_minutes": 1440,
+                "expected_clock_minutes": 1440,
+                "excluded_minutes": 0,
+                "dom48_minutes": 1427,
+                "dom48_percent_of_analyzed": 99.0972
+              },
+              {
+                "start_utc": "2026-09-19T07:29:00+00:00",
+                "end_exclusive_utc": "2026-09-20T07:29:00+00:00",
+                "analyzed_minutes": 1440,
+                "expected_clock_minutes": 1440,
+                "excluded_minutes": 0,
+                "dom48_minutes": 1423,
+                "dom48_percent_of_analyzed": 98.8194
+              },
+              {
+                "start_utc": "2026-09-20T07:29:00+00:00",
+                "end_exclusive_utc": "2026-09-21T07:29:00+00:00",
+                "analyzed_minutes": 1438,
+                "expected_clock_minutes": 1440,
+                "excluded_minutes": 2,
+                "dom48_minutes": 1391,
+                "dom48_percent_of_analyzed": 96.7316
+              },
+              {
+                "start_utc": "2026-09-21T07:29:00+00:00",
+                "end_exclusive_utc": "2026-09-22T07:29:00+00:00",
+                "analyzed_minutes": 1440,
+                "expected_clock_minutes": 1440,
+                "excluded_minutes": 0,
+                "dom48_minutes": 1048,
+                "dom48_percent_of_analyzed": 72.7778
+              },
+              {
+                "start_utc": "2026-09-22T07:29:00+00:00",
+                "end_exclusive_utc": "2026-09-23T07:29:00+00:00",
+                "analyzed_minutes": 1440,
+                "expected_clock_minutes": 1440,
+                "excluded_minutes": 0,
+                "dom48_minutes": 958,
+                "dom48_percent_of_analyzed": 66.5278
+              },
+              {
+                "start_utc": "2026-09-23T07:29:00+00:00",
+                "end_exclusive_utc": "2026-09-24T07:29:00+00:00",
+                "analyzed_minutes": 1440,
+                "expected_clock_minutes": 1440,
+                "excluded_minutes": 0,
+                "dom48_minutes": 1122,
+                "dom48_percent_of_analyzed": 77.9167
+              }
+            ]
+          },
+          "pdf_sha256": "05bbfca0ebb611e699a16f1ee9f3328627d23f367e05552a93a11729b2a263ba",
+          "pages": 2,
+          "download_url": "./downloads/R6E8A-7-day-trailing-report.pdf?v=05bbfca0ebb611e6"
+        }
+      ]
+    }
   },
   "current_status": {
-    "blob_sha": "4ce6309d96dc063f6bb452f141ea78c97033c42f",
-    "HDF": {
-      "latest_sample_et": "2026-09-24T02:24:39.623-04:00",
-      "coverage_pct": 99.999
+    "station": "AM.R6E8A.00",
+    "generated_utc": "2026-09-24T08:06:04.698211+00:00",
+    "generated_et": "2026-09-24 04:06:04 AM EDT",
+    "window_start_utc": "2026-09-24T07:16:04.698211+00:00",
+    "window_end_utc": "2026-09-24T07:36:04.698211+00:00",
+    "channels": {
+      "HDF": {
+        "channel": "HDF",
+        "ok": true,
+        "coverage_pct": 100,
+        "segments": 1,
+        "sample_rates_hz": [
+          100
+        ],
+        "latest_sample_utc": "2026-09-24T07:36:04.693000+00:00",
+        "latest_sample_et": "2026-09-24 03:36:04 AM EDT",
+        "edge_gap_seconds": 0.005211,
+        "identity_verified": true,
+        "window_clipped_before_coverage": true,
+        "url": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-09-24T07:16:04.698211&end=2026-09-24T07:36:04.698211&format=miniseed&nodata=404"
+      },
+      "EHZ": {
+        "channel": "EHZ",
+        "ok": true,
+        "coverage_pct": 100,
+        "segments": 1,
+        "sample_rates_hz": [
+          100
+        ],
+        "latest_sample_utc": "2026-09-24T07:36:04.693000+00:00",
+        "latest_sample_et": "2026-09-24 03:36:04 AM EDT",
+        "edge_gap_seconds": 0.005211,
+        "identity_verified": true,
+        "window_clipped_before_coverage": true,
+        "url": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=EHZ&start=2026-09-24T07:16:04.698211&end=2026-09-24T07:36:04.698211&format=miniseed&nodata=404"
+      }
     },
-    "EHZ": {
-      "latest_sample_et": "2026-09-24T02:24:39.623-04:00",
-      "coverage_pct": 99.999
-    },
-    "channels_verified_separately": true
+    "source": "Raspberry Shake public FDSN DataSelect",
+    "display_note": "*Account for up to 30 minutes of lag. Missing acquisition time is not scored as zero, quiet, normal, compliant, or below benchmark."
   },
-  "status_publication": {
-    "commit_sha": "36f2d784b3ee8ae249730a8b6abef3647fa3ae97",
-    "all_five_publication_checks_pass": true,
-    "independent_review_pass": true,
-    "expected_index_sha256": "c81c1ac9bf6e03af0fcb173283a6962fdb0cd4057e5da85b99efbe1ca4476dd8"
+  "final_publication": {
+    "workflow_run": 35973214958,
+    "job_id": 107547511320,
+    "commit": "b3fb9b0afc4fdb92d8602cbdb850e0cc468ffbea",
+    "public_delivery": {
+      "deployment_run": "35973292054",
+      "checked_out_commit": "b3fb9b0afc4fdb92d8602cbdb850e0cc468ffbea",
+      "public_url": "https://markroneil360.github.io/ongoing-unit-2709/",
+      "files": [
+        {
+          "path": "index.html",
+          "expected_sha256": "9e7ee884472d48dccd145dde45fbb321a90e72777a87b720a0160d5a8d1b22c9",
+          "pass": true,
+          "http_status": 200,
+          "served_sha256": "9e7ee884472d48dccd145dde45fbb321a90e72777a87b720a0160d5a8d1b22c9"
+        },
+        {
+          "path": "data/r6e8a_4_8_10min_full.json",
+          "expected_sha256": "0d9734a7de761d190129a0c05abeb0ff5d05437c48dae96227c56d5d6752bcf2",
+          "pass": true,
+          "http_status": 200,
+          "served_sha256": "0d9734a7de761d190129a0c05abeb0ff5d05437c48dae96227c56d5d6752bcf2"
+        },
+        {
+          "path": "data/current-status.json",
+          "expected_sha256": "8732199dfda4bac334736c85dab602e0295952f8d1c6f7ae8dddf49c416c4fad",
+          "pass": true,
+          "http_status": 200,
+          "served_sha256": "8732199dfda4bac334736c85dab602e0295952f8d1c6f7ae8dddf49c416c4fad"
+        },
+        {
+          "path": "downloads/R6E8A-24-hour-report.pdf",
+          "expected_sha256": "a84358c78eeb690c27e058ba53f322843febb3d90f9c0fab331f870330e59ff6",
+          "pass": true,
+          "http_status": 200,
+          "served_sha256": "a84358c78eeb690c27e058ba53f322843febb3d90f9c0fab331f870330e59ff6"
+        },
+        {
+          "path": "downloads/R6E8A-7-day-trailing-report.pdf",
+          "expected_sha256": "05bbfca0ebb611e699a16f1ee9f3328627d23f367e05552a93a11729b2a263ba",
+          "pass": true,
+          "http_status": 200,
+          "served_sha256": "05bbfca0ebb611e699a16f1ee9f3328627d23f367e05552a93a11729b2a263ba"
+        },
+        {
+          "path": "data/r6e8a-report-manifest.json",
+          "expected_sha256": "31f1a9ce830b667c4704d194c7bd3cbeaa1fa54c1c5441d58814d1de52dd774c",
+          "pass": true,
+          "http_status": 200,
+          "served_sha256": "31f1a9ce830b667c4704d194c7bd3cbeaa1fa54c1c5441d58814d1de52dd774c"
+        }
+      ],
+      "candidate_all_five_checks_pass": true,
+      "candidate_generated_utc": "2026-09-24T07:59:55.444787+00:00",
+      "latest_complete_analyzed_minute_utc": "2026-09-24T07:28:00+00:00",
+      "channel_cutoffs_utc": {
+        "HDF": "2026-09-24T07:36:04.693000+00:00",
+        "EHZ": "2026-09-24T07:36:04.693000+00:00"
+      },
+      "current": {
+        "analyzed_minutes": 209544,
+        "dom48_minutes": 91409,
+        "band_counts": {
+          "1-4": 101852,
+          "4-8": 91409,
+          "8-16": 16186,
+          "16-20": 97
+        },
+        "count10": 1648,
+        "mins10": 66505,
+        "hours10": 1108.42,
+        "count15": 893,
+        "mins15": 57868,
+        "hours15": 964.47,
+        "count30": 490,
+        "mins30": 49649,
+        "hours30": 827.48,
+        "count60": 260,
+        "mins60": 40009,
+        "hours60": 666.82,
+        "dom48_hours": 1523.48,
+        "dom48_percent_of_analyzed": 43.62,
+        "shorter10_minutes": 24904,
+        "shorter10_hours": 415.07,
+        "ordinance_events": 118,
+        "longest_minutes": 976,
+        "longest_runs": [
+          {
+            "start_utc": "2026-09-08T01:08:00+00:00",
+            "start_et": "2026-09-07T21:08:00-04:00",
+            "end_utc": "2026-09-08T17:24:00+00:00",
+            "end_et": "2026-09-08T13:24:00-04:00",
+            "duration_minutes": 976,
+            "duration_hours": 16.27
+          }
+        ],
+        "post": {
+          "analyzed_minutes": 61089,
+          "dom48_minutes": 36250,
+          "band_counts": {
+            "1-4": 20944,
+            "4-8": 36250,
+            "8-16": 3884,
+            "16-20": 11
+          },
+          "runs_total": 1897,
+          "count10": 504,
+          "mins10": 28441,
+          "count15": 289,
+          "mins15": 26005,
+          "count30": 167,
+          "mins30": 23567,
+          "count60": 101,
+          "mins60": 20797,
+          "ordinance_events": 45
+        }
+      },
+      "verified_at_et": "2026-09-24T04:07:39.566650-04:00",
+      "all_public_files_match": true,
+      "pdf_manifest_matches_inputs": true
+    }
   },
-  "resume_note": "Do not treat the failed refresh or any status-only deployment as a successful new cumulative analysis. Recover the historical checkpoint discrepancy before changing cumulative totals. The prior aggregate does not retain a per-minute suffix or final-run state; a fresh overlap alone cannot prove equality with its originally counted boundary. The failed run's stdout is retained in GitHub job logs. Do not repeat the completed channel-status update unnecessarily.",
-  "source_urls": [
-    "https://github.com/markroneil360/ongoing-unit-2709/actions/runs/35963751922",
-    "https://data.raspberryshake.org/fdsnws/"
-  ],
-  "pdf_reports_regenerated": false
+  "resume_note": "Task completed. Reuse data/r6e8a_4_8_tail_minutes.json and its hash-bound passing candidate for later refreshes. The ordinary helper rechecks only the most recent grid slice and new edge; do not restart the historical archive. PDF reports are generated from the verified cache and are regenerated alongside separate channel status. Historical source conflicts stop publication. The earlier failed/status-only attempt is retained only as history."
 }
