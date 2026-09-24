@@ -5,6 +5,8 @@ on:
     branches: [main]
     paths:
       - tools/refresh_4_8_10min_current.py
+      - tools/fdsn_tail_cache.py
+      - tests/test_fdsn_tail_cache.py
       - data/r6e8a_4_8_base_10min_2026-08-12.json
       - .github/workflows/refresh-4-8-10min-current.yml
       - .refresh-4-8-10min-trigger
@@ -26,20 +28,48 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Install calculation dependencies
-        run: pip install 'obspy>=1.4' numpy scipy
-      - name: Calculate Apr12-scoped candidate and run five gates
+      - name: Install matched calculation dependencies
+        run: pip install obspy==1.5.1 numpy==2.4.6 scipy==1.17.1
+      - name: Verify cache boundaries and failure handling
+        run: python -m unittest discover -s tests -p 'test_fdsn_tail_cache.py' -v
+      - name: Resume Apr12-scoped candidate and run five unchanged gates
         run: python3 tools/refresh_4_8_10min_current.py
       - name: Commit verified candidate only
         run: |
           git config user.name 'r6e8a-refresh-bot'
           git config user.email 'r6e8a-refresh-bot@users.noreply.github.com'
-          git add data/r6e8a_4_8_10min_full.json
+          git add data/r6e8a_4_8_10min_full.json data/r6e8a_4_8_tail_minutes.json
           if git diff --cached --quiet; then
             echo 'Candidate unchanged.'
           else
-            git commit -m 'R6E8A Apr12 current >=10-minute candidate (five checks passed)'
+            git commit -m 'R6E8A current candidate and resumable minute evidence (five checks passed)'
             git pull --rebase origin main
             git push
           fi
-# manual audited refresh trigger: 2026-09-01 20:34 ET
+      - name: Preserve completed minute work even if publication was blocked
+        if: always()
+        run: |
+          mkdir -p recovery-artifacts
+          cp data/r6e8a_4_8_10min_full.json recovery-artifacts/candidate-from-run.json
+          git reset -- data/r6e8a_4_8_10min_full.json
+          git restore --worktree data/r6e8a_4_8_10min_full.json
+          if [ -f data/r6e8a_4_8_tail_minutes.json ]; then
+            git config user.name 'r6e8a-refresh-bot'
+            git config user.email 'r6e8a-refresh-bot@users.noreply.github.com'
+            git add data/r6e8a_4_8_tail_minutes.json
+            if ! git diff --cached --quiet; then
+              git commit -m 'Preserve R6E8A acquisition checkpoint; no candidate publication'
+              git pull --rebase origin main
+              git push
+            fi
+          fi
+      - name: Preserve calculation and cache receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: r6e8a-calculation-checkpoint
+          path: |
+            data/r6e8a_4_8_tail_minutes.json
+            recovery-artifacts/candidate-from-run.json
+          retention-days: 30
+          if-no-files-found: warn

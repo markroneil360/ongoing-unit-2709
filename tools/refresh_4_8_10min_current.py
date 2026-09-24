@@ -6,7 +6,7 @@ through 2026-08-12T19:13:00Z. This script fetches/classifies only the public FDS
 tail after that point, using the exact same complete-minute Welch method.
 """
 from __future__ import annotations
-import io, json, math, time, urllib.request
+import hashlib, io, json, math, time, urllib.request
 from collections import Counter
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -14,6 +14,7 @@ from zoneinfo import ZoneInfo
 import numpy as np
 from obspy import UTCDateTime, read
 from scipy.signal import welch
+from fdsn_tail_cache import fetch as cached_fetch
 
 ROOT=Path(__file__).resolve().parents[1]
 BASE_FILE=ROOT/'data'/'r6e8a_4_8_base_10min_2026-08-12.json'
@@ -139,7 +140,20 @@ def sub(data,end):
 def main():
     bdoc=json.loads(BASE_FILE.read_text()); base=bdoc['base']; start=datetime.fromisoformat(bdoc['end_exclusive_utc'])
     end=(datetime.now(timezone.utc)-timedelta(minutes=30)).replace(second=0,microsecond=0)
-    post,latest,urls=fetch(start,end)
+    retained=json.loads(OUT.read_text())
+    assert retained.get('all_five_checks_pass') is True and len(retained.get('checks',[]))==5 and all(c.get('pass') is True for c in retained['checks'])
+    def verify_seed(minutes):
+        observed,_=combine(base,minutes)
+        expected=retained['preview_checkpoint']['recomputed']
+        fields=('analyzed_minutes','dom48_minutes','band_counts','count10','mins10','count15','mins15','count30','mins30','count60','mins60','ordinance_events')
+        return all(observed[k]==expected[k] for k in fields) and observed['post']==expected['post'] and all(observed[k]==v for k,v in PREVIEW_EXPECTED.items())
+    cache_metadata={}
+    post,latest,urls=cached_fetch(start,end,complete=complete,classify=classify,http=http,read=read,
+        method=bdoc['method'],bands=BANDS,base_sha256=hashlib.sha256(BASE_FILE.read_bytes()).hexdigest(),
+        seed_report=ROOT/'data/r6e8a-checkpoint-diagnostic.json',seed_minutes=ROOT/'data/r6e8a-checkpoint-minutes.json',
+        seed_verify=verify_seed,metadata=cache_metadata,
+        catch_up_end=lambda:(datetime.now(timezone.utc)-timedelta(minutes=30)).replace(second=0,microsecond=0))
+    end=datetime.fromisoformat(cache_metadata['requested_through_utc'])
     prev,_=combine(base,sub(post,PREVIEW_END)); cur,currr=combine(base,post)
     checks=[]
     checks.append({'name':'1_apr12_scope_and_preview_totals','pass':prev['analyzed_minutes']==PREVIEW_EXPECTED['analyzed_minutes'] and prev['dom48_minutes']==PREVIEW_EXPECTED['dom48_minutes'],'observed':{'analyzed_minutes':prev['analyzed_minutes'],'dom48_minutes':prev['dom48_minutes']},'expected':{k:PREVIEW_EXPECTED[k] for k in ('analyzed_minutes','dom48_minutes')}})
@@ -151,6 +165,7 @@ def main():
     checks.append({'name':'5_10min_reconciliation_ordinance_and_longest_date','pass':cur['mins10']+cur['shorter10_minutes']==cur['dom48_minutes'] and cur['count10']>=cur['count15']>=cur['count30']>=cur['count60'] and prev['ordinance_events']==PREVIEW_EXPECTED['ordinance_events'] and bool(longest.get('start_et')) and bool(longest.get('end_et')) and int(longest['duration_minutes'])==int(cur['longest_minutes']),'observed':{'mins10':cur['mins10'],'shorter10_minutes':cur['shorter10_minutes'],'dom48_minutes':cur['dom48_minutes'],'counts':[cur['count10'],cur['count15'],cur['count30'],cur['count60']],'preview_ordinance_events':prev['ordinance_events'],'longest_run':longest},'expected':'10+shorter=all 4-8; nested thresholds; preview ordinance=74; longest run includes verified start/end dates'})
     latestcomplete=max(post) if post else None
     payload={'schema_version':3,'station':'AM.R6E8A.00','channel':'HDF','analysis_start_et':bdoc['scope_start_et'],'analysis_start_utc':bdoc['scope_start_utc'],'base_end_exclusive_utc':bdoc['end_exclusive_utc'],'generated_utc':datetime.now(timezone.utc).isoformat(),'lag_allowance_minutes':30,'requested_through_utc':end.isoformat(),'latest_returned_sample_utc':latest.isoformat() if latest else None,'latest_complete_analyzed_minute_utc':datetime.fromtimestamp(latestcomplete,timezone.utc).isoformat() if latestcomplete else None,'source':'Raspberry Shake public FDSN DataSelect + audited corrected per-minute archive through Aug 12','base_provenance':bdoc['source_archive'],'method':bdoc['method'],'preview_checkpoint':{'end_exclusive_utc':PREVIEW_END.isoformat(),'recomputed':prev,'expected':PREVIEW_EXPECTED},'current':cur,'checks':checks,'all_five_checks_pass':all(c['pass'] for c in checks),'fdsn_urls':urls,'publication_note':'No extrapolated hours. Apr 12 scope excludes 89 pre-scope non-4-8 minutes. The >=10-minute threshold is a reporting/event-definition choice, not a medical or legal exposure limit.'}
-    OUT.write_text(json.dumps(payload,indent=2));print(json.dumps({'all_five_checks_pass':payload['all_five_checks_pass'],'current':cur,'checks':checks,'latest_returned_sample_utc':payload['latest_returned_sample_utc']},indent=2))
+    payload['cache_provenance']=cache_metadata
+    OUT.write_text(json.dumps(payload,indent=2));print(json.dumps({'all_five_checks_pass':payload['all_five_checks_pass'],'current':cur,'checks':checks,'latest_returned_sample_utc':payload['latest_returned_sample_utc'],'cache_provenance':cache_metadata},indent=2))
     if not payload['all_five_checks_pass']:raise SystemExit('Five-pass validation failed; dashboard must not be updated.')
 if __name__=='__main__':main()
