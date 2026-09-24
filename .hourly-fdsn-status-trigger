@@ -1,4 +1,1 @@
-2026-09-24 R6E8A recovery: refresh separate current-channel FDSN status.
-Cumulative refresh run 35963751922 finished with historical checkpoint gate1 failed (92 analyzed minutes and 32 4–8 dominant minutes below retained checkpoint); new cumulative candidate was not committed.
-Retain the existing fully verified spectral candidate and its September 22, 2026 cutoff. No failed candidate totals may enter the public dashboard.
-Validate AM.R6E8A.00.HDF and .EHZ identities, clipped-window coverage, missing intervals and sample timestamps separately for the authorized current-status dashboard update.
+2026-09-24 03:15:47 AM Eastern repeat update request: check current AM.R6E8A.00.HDF and EHZ while the targeted historical-checkpoint diagnosis runs. Preserve current cumulative publication gate and existing verified cumulative candidate. Validate channel identities, coverage, missing time and latest sample timestamps separately.
