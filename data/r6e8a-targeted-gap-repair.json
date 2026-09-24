@@ -1,0 +1,177 @@
+{
+  "purpose": "Targeted recovery of two confirmed cached-data omissions",
+  "publication_allowed": false,
+  "input_payload_sha256": "056850623a17341a2bc2dfdbf9282d11684ce7e4e5b9486bc1d68d8da95daa8b",
+  "gaps_utc": [
+    [
+      "2026-09-09T21:52:00+00:00",
+      "2026-09-10T01:13:00+00:00"
+    ],
+    [
+      "2026-09-10T01:47:00+00:00",
+      "2026-09-10T07:13:00+00:00"
+    ]
+  ],
+  "expected_recovered_minutes": 527,
+  "original_processed_through_utc": "2026-09-24T07:19:00+00:00",
+  "requests": [
+    {
+      "start_utc": "2026-09-09T21:51:00+00:00",
+      "end_exclusive_utc": "2026-09-10T01:14:00+00:00",
+      "owned_gap_start_utc": "2026-09-09T21:52:00+00:00",
+      "owned_gap_end_utc": "2026-09-10T01:13:00+00:00",
+      "url": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-09-09T21:51:00Z&end=2026-09-10T01:14:00Z&format=miniseed&nodata=404",
+      "raw_sha256": "9f2867a07098a34f9666b0ee5336c8a3b6ec7d850f70955979b052ce04c0d85e",
+      "raw_bytes": 2990080,
+      "retrieved_utc": "2026-09-24T07:59:49.553882+00:00",
+      "targeted_gap_repair": true,
+      "status": "processed",
+      "identities": [
+        "AM.R6E8A.00.HDF"
+      ],
+      "accepted_minutes": 203,
+      "added_minutes": 201,
+      "omitted_cached_minutes": [],
+      "excluded_minutes": []
+    },
+    {
+      "start_utc": "2026-09-10T01:46:00+00:00",
+      "end_exclusive_utc": "2026-09-10T07:14:00+00:00",
+      "owned_gap_start_utc": "2026-09-10T01:47:00+00:00",
+      "owned_gap_end_utc": "2026-09-10T07:13:00+00:00",
+      "url": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-09-10T01:46:00Z&end=2026-09-10T07:14:00Z&format=miniseed&nodata=404",
+      "raw_sha256": "b87e5f243b6e1c8315b95607eeceb1fc008fbdf14c0fcdfaf72b996b69271811",
+      "raw_bytes": 4828160,
+      "retrieved_utc": "2026-09-24T07:59:53.138551+00:00",
+      "targeted_gap_repair": true,
+      "status": "processed",
+      "identities": [
+        "AM.R6E8A.00.HDF"
+      ],
+      "accepted_minutes": 328,
+      "added_minutes": 326,
+      "omitted_cached_minutes": [],
+      "excluded_minutes": []
+    }
+  ],
+  "all_checks_pass": true,
+  "current_payload_sha256": "960b5175d0baa6e2eefb5ace7cb8fde123aa2c7907fb8c6fbf0b67efd3c807fe",
+  "recovered_target_minutes": 527,
+  "prefix_expected": {
+    "analyzed_minutes": 207624,
+    "dom48_minutes": 89815,
+    "band_counts": {
+      "1-4": 101532,
+      "4-8": 89815,
+      "8-16": 16180,
+      "16-20": 97
+    },
+    "count10": 1629,
+    "mins10": 65050,
+    "hours10": 1084.17,
+    "count15": 878,
+    "mins15": 56459,
+    "hours15": 940.98,
+    "count30": 482,
+    "mins30": 48385,
+    "hours30": 806.42,
+    "count60": 253,
+    "mins60": 38789,
+    "hours60": 646.48,
+    "dom48_hours": 1496.92,
+    "dom48_percent_of_analyzed": 43.26,
+    "shorter10_minutes": 24765,
+    "shorter10_hours": 412.75,
+    "ordinance_events": 115,
+    "longest_minutes": 976,
+    "longest_runs": [
+      {
+        "start_utc": "2026-09-08T01:08:00+00:00",
+        "start_et": "2026-09-07T21:08:00-04:00",
+        "end_utc": "2026-09-08T17:24:00+00:00",
+        "end_et": "2026-09-08T13:24:00-04:00",
+        "duration_minutes": 976,
+        "duration_hours": 16.27
+      }
+    ],
+    "post": {
+      "analyzed_minutes": 59169,
+      "dom48_minutes": 34656,
+      "band_counts": {
+        "1-4": 20624,
+        "4-8": 34656,
+        "8-16": 3878,
+        "16-20": 11
+      },
+      "runs_total": 1837,
+      "count10": 485,
+      "mins10": 26986,
+      "count15": 274,
+      "mins15": 24596,
+      "count30": 159,
+      "mins30": 22303,
+      "count60": 94,
+      "mins60": 19577,
+      "ordinance_events": 42
+    }
+  },
+  "prefix_recomputed": {
+    "analyzed_minutes": 207624,
+    "dom48_minutes": 89815,
+    "band_counts": {
+      "1-4": 101532,
+      "4-8": 89815,
+      "8-16": 16180,
+      "16-20": 97
+    },
+    "count10": 1629,
+    "mins10": 65050,
+    "hours10": 1084.17,
+    "count15": 878,
+    "mins15": 56459,
+    "hours15": 940.98,
+    "count30": 482,
+    "mins30": 48385,
+    "hours30": 806.42,
+    "count60": 253,
+    "mins60": 38789,
+    "hours60": 646.48,
+    "dom48_hours": 1496.92,
+    "dom48_percent_of_analyzed": 43.26,
+    "shorter10_minutes": 24765,
+    "shorter10_hours": 412.75,
+    "ordinance_events": 115,
+    "longest_minutes": 976,
+    "longest_runs": [
+      {
+        "start_utc": "2026-09-08T01:08:00+00:00",
+        "start_et": "2026-09-07T21:08:00-04:00",
+        "end_utc": "2026-09-08T17:24:00+00:00",
+        "end_et": "2026-09-08T13:24:00-04:00",
+        "duration_minutes": 976,
+        "duration_hours": 16.27
+      }
+    ],
+    "post": {
+      "analyzed_minutes": 59169,
+      "dom48_minutes": 34656,
+      "band_counts": {
+        "1-4": 20624,
+        "4-8": 34656,
+        "8-16": 3878,
+        "16-20": 11
+      },
+      "runs_total": 1837,
+      "count10": 485,
+      "mins10": 26986,
+      "count15": 274,
+      "mins15": 24596,
+      "count30": 159,
+      "mins30": 22303,
+      "count60": 94,
+      "mins60": 19577,
+      "ordinance_events": 42
+    }
+  },
+  "prefix_exact_match": true
+}
