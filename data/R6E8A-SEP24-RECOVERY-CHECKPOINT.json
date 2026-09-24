@@ -1,0 +1,58 @@
+{
+  "checkpoint": "R6E8A-SEP24-STATUS-ONLY-RECOVERY",
+  "scope": "Current-channel status updated. New cumulative calculation blocked by historical-checkpoint mismatch.",
+  "station": "AM.R6E8A.00",
+  "cumulative_refresh": {
+    "run_id": 35963751922,
+    "job_id": 107517688373,
+    "trigger_commit": "7fad5de6377246f05c272e319589a4d23100162b",
+    "result": "failed",
+    "failure_at_et": "2026-09-24T02:49:52-04:00",
+    "passing_checks": 4,
+    "total_checks": 5,
+    "candidate_committed": false,
+    "failed_check": {
+      "name": "1_apr12_scope_and_preview_totals",
+      "expected": {
+        "analyzed_minutes": 152884,
+        "dom48_minutes": 56472
+      },
+      "observed": {
+        "analyzed_minutes": 152792,
+        "dom48_minutes": 56440
+      }
+    },
+    "rejected_candidate_publication_allowed": false
+  },
+  "retained_candidate": {
+    "blob_sha": "566f2b0cd592d210e17d5ff45eb55522488114c9",
+    "commit_sha": "5e783026a2ab10322ef79376e9012788b1dacdea",
+    "generated_et": "2026-09-22T20:31:47.540860-04:00",
+    "complete_minute_et": "2026-09-22T19:28:00-04:00",
+    "all_five_calculation_checks_pass": true
+  },
+  "current_status": {
+    "blob_sha": "4ce6309d96dc063f6bb452f141ea78c97033c42f",
+    "HDF": {
+      "latest_sample_et": "2026-09-24T02:24:39.623-04:00",
+      "coverage_pct": 99.999
+    },
+    "EHZ": {
+      "latest_sample_et": "2026-09-24T02:24:39.623-04:00",
+      "coverage_pct": 99.999
+    },
+    "channels_verified_separately": true
+  },
+  "status_publication": {
+    "commit_sha": "36f2d784b3ee8ae249730a8b6abef3647fa3ae97",
+    "all_five_publication_checks_pass": true,
+    "independent_review_pass": true,
+    "expected_index_sha256": "c81c1ac9bf6e03af0fcb173283a6962fdb0cd4057e5da85b99efbe1ca4476dd8"
+  },
+  "resume_note": "Do not treat the failed refresh or any status-only deployment as a successful new cumulative analysis. Recover the historical checkpoint discrepancy before changing cumulative totals. The prior aggregate does not retain a per-minute suffix or final-run state; a fresh overlap alone cannot prove equality with its originally counted boundary. The failed run's stdout is retained in GitHub job logs. Do not repeat the completed channel-status update unnecessarily.",
+  "source_urls": [
+    "https://github.com/markroneil360/ongoing-unit-2709/actions/runs/35963751922",
+    "https://data.raspberryshake.org/fdsnws/"
+  ],
+  "pdf_reports_regenerated": false
+}
