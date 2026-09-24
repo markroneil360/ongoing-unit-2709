@@ -1,3 +1,4 @@
-Current-channel check for Mark's authorized September 24, 2026 R6E8A dashboard update.
-Separate public FDSN checks for AM.R6E8A.00.HDF and AM.R6E8A.00.EHZ: returned station/channel identity, sample coverage, gap handling, requested-window clipping and latest sample timestamp.
-The cumulative refresh is already running as workflow 35963751922 from commit 7fad5de6377246f05c272e319589a4d23100162b; continue that run without restarting it.
+2026-09-24 R6E8A recovery: refresh separate current-channel FDSN status.
+Cumulative refresh run 35963751922 finished with historical checkpoint gate1 failed (92 analyzed minutes and 32 4–8 dominant minutes below retained checkpoint); new cumulative candidate was not committed.
+Retain the existing fully verified spectral candidate and its September 22, 2026 cutoff. No failed candidate totals may enter the public dashboard.
+Validate AM.R6E8A.00.HDF and .EHZ identities, clipped-window coverage, missing intervals and sample timestamps separately for the authorized current-status dashboard update.
