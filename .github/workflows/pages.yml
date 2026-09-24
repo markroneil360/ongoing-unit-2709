@@ -42,6 +42,13 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Validate the complete dashboard and report snapshot before deployment
+        run: |
+          python3 -m pip install reportlab
+          python3 scripts/generate_reports.py --verify-only
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
@@ -61,7 +68,7 @@ jobs:
           base = os.environ['PAGE_URL'].rstrip('/') + '/'
           if base != 'https://markroneil360.github.io/ongoing-unit-2709/':
               raise SystemExit('Unexpected public deployment URL; verification stopped.')
-          paths = ('index.html', 'data/r6e8a_4_8_10min_full.json', 'data/current-status.json')
+          paths = ('index.html', 'data/r6e8a_4_8_10min_full.json', 'data/current-status.json', 'downloads/R6E8A-24-hour-report.pdf', 'downloads/R6E8A-7-day-trailing-report.pdf', 'data/r6e8a-report-manifest.json')
           report = {'deployment_run': os.environ['VERIFY_RUN'], 'checked_out_commit': subprocess.check_output(['git','rev-parse','HEAD'], text=True).strip(), 'public_url': base, 'files': []}
           for path in paths:
               expected = Path(path).read_bytes()
@@ -92,9 +99,25 @@ jobs:
           report['current'] = candidate['current']
           report['verified_at_et'] = datetime.now(timezone.utc).astimezone(ZoneInfo('America/Detroit')).isoformat()
           report['all_public_files_match'] = all(f['pass'] for f in report['files'])
+          manifest = json.loads(Path(paths[5]).read_text())
+          cache = json.loads(Path('data/r6e8a_4_8_tail_minutes.json').read_text())
+          canonical = json.dumps({k:v for k,v in cache.items() if k != 'payload_sha256'}, sort_keys=True, separators=(',', ':'), ensure_ascii=True, allow_nan=False).encode('utf-8')
+          cache_hash = hashlib.sha256(canonical).hexdigest()
+          report['pdf_manifest_matches_inputs'] = (
+              manifest.get('candidate_sha256') == hashlib.sha256(Path(paths[1]).read_bytes()).hexdigest()
+              and manifest.get('status_sha256') == hashlib.sha256(Path(paths[2]).read_bytes()).hexdigest()
+              and manifest.get('cache_payload_sha256') == cache.get('payload_sha256') == cache_hash
+              and candidate.get('cache_provenance', {}).get('cache_payload_sha256') == cache_hash
+              and manifest.get('requested_through_utc') == candidate.get('requested_through_utc')
+              and len(manifest.get('reports', [])) == 2
+              and {item.get('path') for item in manifest.get('reports', [])} == set(paths[3:5])
+              and all(item.get('pdf_sha256') == hashlib.sha256(Path(item['path']).read_bytes()).hexdigest() for item in manifest.get('reports', []))
+              and all(Path(path).read_bytes().startswith(b'%PDF-') for path in paths[3:5])
+              and all(item.get('download_url') == './' + item['path'] + '?v=' + item['pdf_sha256'][:16] and ('href="' + item['download_url'] + '"') in Path(paths[0]).read_text() for item in manifest.get('reports', []))
+          )
           Path('public-delivery-verification.json').write_text(json.dumps(report, indent=2) + '\n')
           print(json.dumps(report, indent=2))
-          if not report['all_public_files_match'] or not report['candidate_all_five_checks_pass']:
+          if not report['all_public_files_match'] or not report['candidate_all_five_checks_pass'] or not report['pdf_manifest_matches_inputs']:
               raise SystemExit('Public delivery verification failed; do not report task complete.')
           PY
       - name: Preserve public delivery verification receipt

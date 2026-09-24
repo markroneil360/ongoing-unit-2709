@@ -4,7 +4,6 @@ on:
   push:
     branches: [main]
     paths:
-      - .github/workflows/hourly-fdsn-status.yml
       - .hourly-fdsn-status-trigger
   schedule:
     - cron: "40 * * * *"
@@ -14,8 +13,8 @@ permissions:
   contents: write
 
 concurrency:
-  group: hourly-fdsn-status
-  cancel-in-progress: true
+  group: r6e8a-publish-10min-dashboard
+  cancel-in-progress: false
 
 jobs:
   status:
@@ -26,18 +25,24 @@ jobs:
         with:
           python-version: "3.11"
       - name: Install waveform dependency
-        run: pip install "obspy>=1.5"
+        run: pip install "obspy>=1.5" reportlab
       - name: Pull current public FDSN status
         run: python3 tools/hourly_fdsn_status.py
-      - name: Commit status if changed
+      - name: Update dashboard channel status with five publication checks
+        run: python3 tools/publish_4_8_10min.py
+      - name: Regenerate dated PDF reports from the verified minute cache
+        run: python3 scripts/generate_reports.py
+      - name: Commit coherent status, dashboard, and reports if changed
         run: |
           git config user.name "r6e8a-bot"
           git config user.email "r6e8a-bot@users.noreply.github.com"
-          git add data/current-status.json
+          git add index.html data/current-status.json data/r6e8a-report-manifest.json downloads/R6E8A-24-hour-report.pdf downloads/R6E8A-7-day-trailing-report.pdf
           if git diff --cached --quiet; then
             echo "No status change."
           else
             git commit -m "Hourly R6E8A FDSN status ($(TZ=America/Detroit date '+%Y-%m-%d %H:%M ET'))"
             git pull --rebase origin main
+            python3 scripts/generate_reports.py --verify-only
             git push
           fi
+

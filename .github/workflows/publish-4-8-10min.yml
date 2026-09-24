@@ -6,6 +6,7 @@ on:
     paths:
       - data/r6e8a_4_8_10min_full.json
       - .github/workflows/publish-4-8-10min.yml
+      - scripts/generate_reports.py
   workflow_dispatch:
   workflow_run:
     workflows:
@@ -35,21 +36,24 @@ jobs:
         with:
           python-version: '3.11'
       - name: Install status dependency
-        run: pip install 'obspy>=1.4'
+        run: pip install 'obspy>=1.4' reportlab
       - name: Refresh separate HDF and EHZ current-edge status
         run: python3 tools/hourly_fdsn_status.py
       - name: Patch dashboard and run five publication-integrity checks
         run: python3 tools/publish_4_8_10min.py
-      - name: Commit only after all publication checks pass
+      - name: Build checked 24-hour and 7-day PDF reports from the minute cache
+        run: python3 scripts/generate_reports.py
+      - name: Commit only after all publication and report checks pass
         run: |
           git config user.name 'r6e8a-publish-bot'
           git config user.email 'r6e8a-publish-bot@users.noreply.github.com'
-          git add index.html data/current-status.json
+          git add index.html data/current-status.json data/r6e8a-report-manifest.json downloads/R6E8A-24-hour-report.pdf downloads/R6E8A-7-day-trailing-report.pdf
           if git diff --cached --quiet; then
             echo 'Dashboard already matches verified candidate.'
           else
-            git commit -m 'Publish R6E8A >=10 minute sustained dashboard (five checks passed)'
+            git commit -m 'Publish verified R6E8A dashboard, separate channels, and cached PDF reports'
             git pull --rebase origin main
+            python3 scripts/generate_reports.py --verify-only
             git push
           fi
 # manual audited publication trigger: 2026-09-01 20:34 ET
@@ -63,3 +67,4 @@ jobs:
 # manual audited publication trigger: 2026-09-10 13:10 ET — user-requested update; candidate 62022d14; five calculation checks plus five independent reconciliation checks passed
 # Sep 12 approved update: candidate e541e8f5 passed five calculation gates and five independent aggregate-consistency checks.
 # Repair the successful-calculation handoff without restarting the calculation or changing its method.
+
