@@ -1,0 +1,69 @@
+name: Repair R6E8A cached gaps
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - tools/repair_cached_gaps.py
+      - .github/workflows/repair-cached-gaps.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: r6e8a-10min-current-tail
+  cancel-in-progress: false
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install matched calculation dependencies
+        run: pip install obspy==1.5.1 numpy==2.4.6 scipy==1.17.1
+      - name: Recover only confirmed gaps and validate the retained prefix
+        run: python tools/repair_cached_gaps.py
+      - name: Commit only the repaired five-check candidate and its evidence
+        run: |
+          git config user.name 'r6e8a-refresh-bot'
+          git config user.email 'r6e8a-refresh-bot@users.noreply.github.com'
+          git add data/r6e8a_4_8_10min_full.json data/r6e8a_4_8_tail_minutes.json data/r6e8a-targeted-gap-repair.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Repair 527 confirmed cached minutes; retained prefix and five checks passed'
+            git pull --rebase origin main
+            git push
+          fi
+      - name: Preserve acquired gap evidence even if publication was blocked
+        if: always()
+        run: |
+          mkdir -p recovery-artifacts
+          cp data/r6e8a_4_8_10min_full.json recovery-artifacts/candidate-from-run.json
+          git reset -- data/r6e8a_4_8_10min_full.json
+          git restore --worktree data/r6e8a_4_8_10min_full.json
+          git config user.name 'r6e8a-refresh-bot'
+          git config user.email 'r6e8a-refresh-bot@users.noreply.github.com'
+          git add data/r6e8a_4_8_tail_minutes.json
+          if [ -f data/r6e8a-targeted-gap-repair.json ]; then
+            git add data/r6e8a-targeted-gap-repair.json
+          fi
+          if ! git diff --cached --quiet; then
+            git commit -m 'Preserve targeted gap evidence; no failed candidate publication'
+            git pull --rebase origin main
+            git push
+          fi
+      - name: Preserve targeted repair and candidate receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: r6e8a-targeted-gap-repair
+          path: |
+            data/r6e8a_4_8_tail_minutes.json
+            data/r6e8a-targeted-gap-repair.json
+            recovery-artifacts/candidate-from-run.json
+          retention-days: 30
+          if-no-files-found: warn
