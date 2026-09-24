@@ -1,0 +1,467 @@
+{
+  "purpose": "diagnosis only; not publishable cumulative data",
+  "publication_allowed": false,
+  "station": "AM.R6E8A.00.HDF",
+  "start_utc": "2026-08-12T19:13:00+00:00",
+  "end_exclusive_utc": "2026-08-15T21:02:00+00:00",
+  "generated_et": "2026-09-24T03:19:58.725937-04:00",
+  "versions": {
+    "python": "3.11.16",
+    "obspy": "1.5.1",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1"
+  },
+  "expected_preview": {
+    "analyzed_minutes": 152884,
+    "dom48_minutes": 56472,
+    "band_counts": {
+      "1-4": 83324,
+      "4-8": 56472,
+      "8-16": 13000,
+      "16-20": 88
+    },
+    "count10": 1167,
+    "mins10": 38368,
+    "hours10": 639.47,
+    "count15": 608,
+    "mins15": 31965,
+    "hours15": 532.75,
+    "count30": 324,
+    "mins30": 26113,
+    "hours30": 435.22,
+    "count60": 159,
+    "mins60": 19212,
+    "hours60": 320.2,
+    "dom48_hours": 941.2,
+    "dom48_percent_of_analyzed": 36.94,
+    "shorter10_minutes": 18104,
+    "shorter10_hours": 301.73,
+    "ordinance_events": 74,
+    "longest_minutes": 664,
+    "longest_runs": [
+      {
+        "duration_minutes": 664,
+        "duration_hours": 11.07
+      }
+    ],
+    "post": {
+      "analyzed_minutes": 4429,
+      "dom48_minutes": 1313,
+      "band_counts": {
+        "1-4": 2416,
+        "4-8": 1313,
+        "8-16": 698,
+        "16-20": 2
+      },
+      "runs_total": 186,
+      "count10": 23,
+      "mins10": 304,
+      "count15": 4,
+      "mins15": 102,
+      "count30": 1,
+      "mins30": 31,
+      "count60": 0,
+      "mins60": 0,
+      "ordinance_events": 1
+    }
+  },
+  "chunks": [
+    {
+      "start_utc": "2026-08-12T19:13:00+00:00",
+      "end_utc": "2026-08-13T01:13:00+00:00",
+      "url": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-08-12T19:13:00Z&end=2026-08-13T01:13:00Z&format=miniseed&nodata=404",
+      "bytes": 5218816,
+      "classified_minutes": 360,
+      "sha256": "842f8d0e0bbf78705f60c9b52113cb50c9b21a8cb75dbd54fe49fa81d3f92da6",
+      "identities": [
+        "AM.R6E8A.00.HDF"
+      ],
+      "traces": [
+        {
+          "id": "AM.R6E8A.00.HDF",
+          "start_utc": "2026-08-12T19:12:58.901000Z",
+          "end_utc": "2026-08-13T01:13:01.771000Z",
+          "sample_rate": 100.0,
+          "npts": 2160288
+        }
+      ],
+      "raw_gaps": []
+    },
+    {
+      "start_utc": "2026-08-13T01:13:00+00:00",
+      "end_utc": "2026-08-13T07:13:00+00:00",
+      "url": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-08-13T01:13:00Z&end=2026-08-13T07:13:00Z&format=miniseed&nodata=404",
+      "bytes": 5244928,
+      "classified_minutes": 360,
+      "sha256": "3d5bc20e0333012eef3f345253863c7af1becddb7715c4dcbd76e61ace5d3c9d",
+      "identities": [
+        "AM.R6E8A.00.HDF"
+      ],
+      "traces": [
+        {
+          "id": "AM.R6E8A.00.HDF",
+          "start_utc": "2026-08-13T01:12:59.671000Z",
+          "end_utc": "2026-08-13T07:13:01.701000Z",
+          "sample_rate": 100.0,
+          "npts": 2160204
+        }
+      ],
+      "raw_gaps": []
+    },
+    {
+      "start_utc": "2026-08-13T07:13:00+00:00",
+      "end_utc": "2026-08-13T13:13:00+00:00",
+      "url": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-08-13T07:13:00Z&end=2026-08-13T13:13:00Z&format=miniseed&nodata=404",
+      "bytes": 5244928,
+      "classified_minutes": 360,
+      "sha256": "2dd8eb69de42ab0766fb2af52e89ed7ecad0fe70b5271f5f68b1b9702f172a2a",
+      "identities": [
+        "AM.R6E8A.00.HDF"
+      ],
+      "traces": [
+        {
+          "id": "AM.R6E8A.00.HDF",
+          "start_utc": "2026-08-13T07:12:59.621000Z",
+          "end_utc": "2026-08-13T13:13:01.221000Z",
+          "sample_rate": 100.0,
+          "npts": 2160161
+        }
+      ],
+      "raw_gaps": []
+    },
+    {
+      "start_utc": "2026-08-13T13:13:00+00:00",
+      "end_utc": "2026-08-13T19:13:00+00:00",
+      "url": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-08-13T13:13:00Z&end=2026-08-13T19:13:00Z&format=miniseed&nodata=404",
+      "bytes": 5231104,
+      "classified_minutes": 360,
+      "sha256": "4a278516c364a3bfcfcb8ffc15af7becb7979e4f5467c46c8a071d62fd29521c",
+      "identities": [
+        "AM.R6E8A.00.HDF"
+      ],
+      "traces": [
+        {
+          "id": "AM.R6E8A.00.HDF",
+          "start_utc": "2026-08-13T13:12:59.081000Z",
+          "end_utc": "2026-08-13T19:13:01.781000Z",
+          "sample_rate": 100.0,
+          "npts": 2160271
+        }
+      ],
+      "raw_gaps": []
+    },
+    {
+      "start_utc": "2026-08-13T19:13:00+00:00",
+      "end_utc": "2026-08-14T01:13:00+00:00",
+      "url": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-08-13T19:13:00Z&end=2026-08-14T01:13:00Z&format=miniseed&nodata=404",
+      "bytes": 5241344,
+      "classified_minutes": 360,
+      "sha256": "61f7d0dd094e1c2b6e22f2e298a568768edfe62ca200390352fa574319bcaa62",
+      "identities": [
+        "AM.R6E8A.00.HDF"
+      ],
+      "traces": [
+        {
+          "id": "AM.R6E8A.00.HDF",
+          "start_utc": "2026-08-13T19:12:59.661000Z",
+          "end_utc": "2026-08-14T01:13:00.481000Z",
+          "sample_rate": 100.0,
+          "npts": 2160083
+        }
+      ],
+      "raw_gaps": []
+    },
+    {
+      "start_utc": "2026-08-14T01:13:00+00:00",
+      "end_utc": "2026-08-14T07:13:00+00:00",
+      "url": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-08-14T01:13:00Z&end=2026-08-14T07:13:00Z&format=miniseed&nodata=404",
+      "bytes": 5257216,
+      "classified_minutes": 360,
+      "sha256": "0c0e2f973cbeb033c97255aee02ee4e4f258ca272e614a179452b27de58a0aee",
+      "identities": [
+        "AM.R6E8A.00.HDF"
+      ],
+      "traces": [
+        {
+          "id": "AM.R6E8A.00.HDF",
+          "start_utc": "2026-08-14T01:12:58.401000Z",
+          "end_utc": "2026-08-14T07:13:01.131000Z",
+          "sample_rate": 100.0,
+          "npts": 2160274
+        }
+      ],
+      "raw_gaps": []
+    },
+    {
+      "start_utc": "2026-08-14T07:13:00+00:00",
+      "end_utc": "2026-08-14T13:13:00+00:00",
+      "url": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-08-14T07:13:00Z&end=2026-08-14T13:13:00Z&format=miniseed&nodata=404",
+      "bytes": 5228544,
+      "classified_minutes": 360,
+      "sha256": "b7371dca89982efa835369284ffc43efda45d2345466079d59025ac136744b7b",
+      "identities": [
+        "AM.R6E8A.00.HDF"
+      ],
+      "traces": [
+        {
+          "id": "AM.R6E8A.00.HDF",
+          "start_utc": "2026-08-14T07:12:59.021000Z",
+          "end_utc": "2026-08-14T13:13:00.321000Z",
+          "sample_rate": 100.0,
+          "npts": 2160131
+        }
+      ],
+      "raw_gaps": []
+    },
+    {
+      "start_utc": "2026-08-14T13:13:00+00:00",
+      "end_utc": "2026-08-14T19:13:00+00:00",
+      "url": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-08-14T13:13:00Z&end=2026-08-14T19:13:00Z&format=miniseed&nodata=404",
+      "bytes": 5178880,
+      "classified_minutes": 360,
+      "sha256": "87508dd5eaabab57a31565207edf19ff357ffe8a8c93cef03cb5d6a9ce086b68",
+      "identities": [
+        "AM.R6E8A.00.HDF"
+      ],
+      "traces": [
+        {
+          "id": "AM.R6E8A.00.HDF",
+          "start_utc": "2026-08-14T13:12:58.191000Z",
+          "end_utc": "2026-08-14T19:13:00.851000Z",
+          "sample_rate": 100.0,
+          "npts": 2160267
+        }
+      ],
+      "raw_gaps": []
+    },
+    {
+      "start_utc": "2026-08-14T19:13:00+00:00",
+      "end_utc": "2026-08-15T01:13:00+00:00",
+      "url": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-08-14T19:13:00Z&end=2026-08-15T01:13:00Z&format=miniseed&nodata=404",
+      "bytes": 5214208,
+      "classified_minutes": 360,
+      "sha256": "d32444b796bf59004dce78551aedd27206f21aaa3f860ec2553286658b61c089",
+      "identities": [
+        "AM.R6E8A.00.HDF"
+      ],
+      "traces": [
+        {
+          "id": "AM.R6E8A.00.HDF",
+          "start_utc": "2026-08-14T19:12:58.741000Z",
+          "end_utc": "2026-08-15T01:13:02.101000Z",
+          "sample_rate": 100.0,
+          "npts": 2160337
+        }
+      ],
+      "raw_gaps": []
+    },
+    {
+      "start_utc": "2026-08-15T01:13:00+00:00",
+      "end_utc": "2026-08-15T07:13:00+00:00",
+      "url": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-08-15T01:13:00Z&end=2026-08-15T07:13:00Z&format=miniseed&nodata=404",
+      "bytes": 5258752,
+      "classified_minutes": 360,
+      "sha256": "5b42b24ebaa383c43d5d864764721b6b6bac4a7b16a4787ef29211a1cac13eb5",
+      "identities": [
+        "AM.R6E8A.00.HDF"
+      ],
+      "traces": [
+        {
+          "id": "AM.R6E8A.00.HDF",
+          "start_utc": "2026-08-15T01:12:59.991000Z",
+          "end_utc": "2026-08-15T07:13:00.011000Z",
+          "sample_rate": 100.0,
+          "npts": 2160003
+        }
+      ],
+      "raw_gaps": []
+    },
+    {
+      "start_utc": "2026-08-15T07:13:00+00:00",
+      "end_utc": "2026-08-15T13:13:00+00:00",
+      "url": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-08-15T07:13:00Z&end=2026-08-15T13:13:00Z&format=miniseed&nodata=404",
+      "bytes": 5244928,
+      "classified_minutes": 360,
+      "sha256": "afc5a2e04db849bddeaf1b726789b2df97f84e154d68b045edd0e16316bba33f",
+      "identities": [
+        "AM.R6E8A.00.HDF"
+      ],
+      "traces": [
+        {
+          "id": "AM.R6E8A.00.HDF",
+          "start_utc": "2026-08-15T07:12:57.901000Z",
+          "end_utc": "2026-08-15T13:13:00.841000Z",
+          "sample_rate": 100.0,
+          "npts": 2160295
+        }
+      ],
+      "raw_gaps": []
+    },
+    {
+      "start_utc": "2026-08-15T13:13:00+00:00",
+      "end_utc": "2026-08-15T19:13:00+00:00",
+      "url": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-08-15T13:13:00Z&end=2026-08-15T19:13:00Z&format=miniseed&nodata=404",
+      "bytes": 5224448,
+      "classified_minutes": 360,
+      "sha256": "f12e6554c37b7f5f8275c53f0f4b9e258c19048c87a938b375553259cbe8edf3",
+      "identities": [
+        "AM.R6E8A.00.HDF"
+      ],
+      "traces": [
+        {
+          "id": "AM.R6E8A.00.HDF",
+          "start_utc": "2026-08-15T13:12:58.791000Z",
+          "end_utc": "2026-08-15T19:13:01.581000Z",
+          "sample_rate": 100.0,
+          "npts": 2160280
+        }
+      ],
+      "raw_gaps": []
+    },
+    {
+      "start_utc": "2026-08-15T19:13:00+00:00",
+      "end_utc": "2026-08-15T21:02:00+00:00",
+      "url": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-08-15T19:13:00Z&end=2026-08-15T21:02:00Z&format=miniseed&nodata=404",
+      "bytes": 1582080,
+      "classified_minutes": 109,
+      "sha256": "5eccd913e9a73f6d300df9fc72a2436d9c192184be23415086a34941e14fd87c",
+      "identities": [
+        "AM.R6E8A.00.HDF"
+      ],
+      "traces": [
+        {
+          "id": "AM.R6E8A.00.HDF",
+          "start_utc": "2026-08-15T19:12:59.501000Z",
+          "end_utc": "2026-08-15T21:02:02.031000Z",
+          "sample_rate": 100.0,
+          "npts": 654254
+        }
+      ],
+      "raw_gaps": []
+    }
+  ],
+  "missing_minute_utc": [],
+  "diagnostic_complete": true,
+  "classified_minutes": 4429,
+  "minute_file_sha256": "7fa5f579c47c2efccf7df1af17a31333eeeed24df407fe7236154bef54e7f0f7",
+  "observed_preview": {
+    "analyzed_minutes": 152884,
+    "dom48_minutes": 56472,
+    "band_counts": {
+      "1-4": 83324,
+      "4-8": 56472,
+      "8-16": 13000,
+      "16-20": 88
+    },
+    "count10": 1167,
+    "mins10": 38368,
+    "hours10": 639.47,
+    "count15": 608,
+    "mins15": 31965,
+    "hours15": 532.75,
+    "count30": 324,
+    "mins30": 26113,
+    "hours30": 435.22,
+    "count60": 159,
+    "mins60": 19212,
+    "hours60": 320.2,
+    "dom48_hours": 941.2,
+    "dom48_percent_of_analyzed": 36.94,
+    "shorter10_minutes": 18104,
+    "shorter10_hours": 301.73,
+    "ordinance_events": 74,
+    "longest_minutes": 664,
+    "longest_runs": [
+      {
+        "duration_minutes": 664,
+        "duration_hours": 11.07
+      }
+    ],
+    "post": {
+      "analyzed_minutes": 4429,
+      "dom48_minutes": 1313,
+      "band_counts": {
+        "1-4": 2416,
+        "4-8": 1313,
+        "8-16": 698,
+        "16-20": 2
+      },
+      "runs_total": 186,
+      "count10": 23,
+      "mins10": 304,
+      "count15": 4,
+      "mins15": 102,
+      "count30": 1,
+      "mins30": 31,
+      "count60": 0,
+      "mins60": 0,
+      "ordinance_events": 1
+    }
+  },
+  "comparison": {
+    "analyzed_minutes": {
+      "expected": 152884,
+      "observed": 152884,
+      "difference": 0
+    },
+    "dom48_minutes": {
+      "expected": 56472,
+      "observed": 56472,
+      "difference": 0
+    },
+    "count10": {
+      "expected": 1167,
+      "observed": 1167,
+      "difference": 0
+    },
+    "mins10": {
+      "expected": 38368,
+      "observed": 38368,
+      "difference": 0
+    },
+    "count15": {
+      "expected": 608,
+      "observed": 608,
+      "difference": 0
+    },
+    "mins15": {
+      "expected": 31965,
+      "observed": 31965,
+      "difference": 0
+    },
+    "count30": {
+      "expected": 324,
+      "observed": 324,
+      "difference": 0
+    },
+    "mins30": {
+      "expected": 26113,
+      "observed": 26113,
+      "difference": 0
+    },
+    "count60": {
+      "expected": 159,
+      "observed": 159,
+      "difference": 0
+    },
+    "mins60": {
+      "expected": 19212,
+      "observed": 19212,
+      "difference": 0
+    },
+    "ordinance_events": {
+      "expected": 74,
+      "observed": 74,
+      "difference": 0
+    }
+  },
+  "all_preview_fields_match": true,
+  "last_4_8_run": {
+    "start_utc": "2026-08-15T20:56:00+00:00",
+    "start_et": "2026-08-15T16:56:00-04:00",
+    "end_utc": "2026-08-15T21:02:00+00:00",
+    "end_et": "2026-08-15T17:02:00-04:00",
+    "duration_minutes": 6,
+    "duration_hours": 0.1
+  }
+}
