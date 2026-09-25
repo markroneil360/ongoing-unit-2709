@@ -4,9 +4,9 @@
   "candidate_sha256": "94b2d203851b6e86099f2ea47f88d634aa3fea22fe424e6fac6c4f784758f5a5",
   "cache_payload_sha256": "2d9b0911bf4abf36599f3aa1b51ee9b6434489f9f302cd2952157ec95ba3d900",
   "cache_file_sha256": "4c8225ea9775f0eda3f9af97e2da00d4a1607e5ef6e03c6daa170da417d685ec",
-  "status_sha256": "4a7a73b8db912711004d4f624942d88291665f90d92b4694e5385e81fc59f67d",
+  "status_sha256": "b5200b2fb42f8a788251a07b028bec49dd79ea965d363bd1c78b14448847db79",
   "requested_through_utc": "2026-09-25T15:06:00+00:00",
-  "generated_utc": "2026-09-25T17:30:46.351850+00:00",
+  "generated_utc": "2026-09-25T20:43:57.477068+00:00",
   "all_five_checks_pass": true,
   "source_mode": "verified cached minute classifications only",
   "reports": [
@@ -111,9 +111,9 @@
           }
         ]
       },
-      "pdf_sha256": "c36f0cc875ea25d5681d23cb6921f0b7372f42bc833f920fae5841e8760a26b6",
+      "pdf_sha256": "6d13734b5832063b758e51eb6b26c1904c5ade941664c6ff6d96657c63e6c447",
       "pages": 2,
-      "download_url": "./downloads/R6E8A-24-hour-report.pdf?v=c36f0cc875ea25d5"
+      "download_url": "./downloads/R6E8A-24-hour-report.pdf?v=6d13734b5832063b"
     },
     {
       "path": "downloads/R6E8A-7-day-trailing-report.pdf",
@@ -225,9 +225,9 @@
           }
         ]
       },
-      "pdf_sha256": "258d66cb312c9626ad4570bd0350aa25189a4dccec0f92efbb77cad1cb645342",
+      "pdf_sha256": "9ed2297258dda4a14c89ffa3881a52f07564534703000a3888a37c1559bd1ea8",
       "pages": 2,
-      "download_url": "./downloads/R6E8A-7-day-trailing-report.pdf?v=258d66cb312c9626"
+      "download_url": "./downloads/R6E8A-7-day-trailing-report.pdf?v=9ed2297258dda4a1"
     }
   ]
 }
