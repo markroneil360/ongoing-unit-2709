@@ -1,6 +1,6 @@
-manual incremental refresh requested September 25, 2026; follow-up instruction logged at 11:34:43 AM Eastern Time (EDT)
-request: Update Alpha R6E8A; use only up-to-date FDSN data after the saved checkpoint, not a fresh historical waveform recalculation.
+manual incremental refresh requested September 26, 2026; command received at 12:19:26 AM Eastern Time (EDT)
+request: Alpha R6E8A; resume only from the September 25 verified checkpoint and retrieve newer FDSN data plus the established continuity overlap. Do not restart or reclassify the accepted historical record.
 station: AM.R6E8A.00; HDF pressure and EHZ vertical motion remain separate.
-resume: preserve the repaired, hash-bound minute cache and the verified April 12 analysis scope; reuse all accepted historical classifications; retrieve only the recent continuity overlap and new FDSN edge.
-publication: require all five established calculation checks and all five publication-integrity checks; regenerate both PDF reports from the verified cache and preserve the green download links; verify public files against deployed hashes.
-approved layout, historical benchmark references, and calculation method: unchanged.
+resume: preserve the hash-bound minute cache, the verified April 12 analysis scope, and all accepted historical classifications; retrieve only the recent continuity overlap and new FDSN edge.
+publication: require all five established calculation checks and all five publication-integrity checks; regenerate both PDF reports from the verified cache, preserve the two green download buttons, and verify deployed public files against repository hashes.
+approved layout, benchmark references, longest-run dating, missing-time exclusions, and calculation method: unchanged.
