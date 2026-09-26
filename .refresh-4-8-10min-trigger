@@ -1,6 +1,7 @@
-manual incremental refresh requested September 26, 2026; command received at 12:19:26 AM Eastern Time (EDT)
-request: Alpha R6E8A; resume only from the September 25 verified checkpoint and retrieve newer FDSN data plus the established continuity overlap. Do not restart or reclassify the accepted historical record.
+manual incremental refresh requested September 26, 2026; request first observed at 03:27:32 AM Eastern Time (EDT)
+request: Mark asked: R6E8A update and 5x sanity check
+continuity: resumes the immediately preceding Alpha R6E8A request; the trigger file still contained the 12:19:26 AM request when checked. Submit one incremental refresh, not a second historical calculation.
 station: AM.R6E8A.00; HDF pressure and EHZ vertical motion remain separate.
-resume: preserve the hash-bound minute cache, the verified April 12 analysis scope, and all accepted historical classifications; retrieve only the recent continuity overlap and new FDSN edge.
-publication: require all five established calculation checks and all five publication-integrity checks; regenerate both PDF reports from the verified cache, preserve the two green download buttons, and verify deployed public files against repository hashes.
-approved layout, benchmark references, longest-run dating, missing-time exclusions, and calculation method: unchanged.
+resume: use the latest verified cache at repository checkpoint 3168184078e933bc4dbd56a6aefce62715f04a88; cumulative end exclusive September 25, 2026 at 11:53 PM Eastern. Preserve accepted historical classifications and the April 12 analysis scope. Retrieve only the established recent continuity overlap and newer public FDSN data; do not restart historical waveform classification.
+publication: require all five established calculation gates and all five publication-integrity checks before publishing values; regenerate both PDF reports from the same verified cache, preserve the two green download buttons, and verify the public files against deployed hashes.
+approved design, benchmark reference sections, calculation method, longest-run dates and missing-time exclusions: unchanged.
