@@ -1,0 +1,31 @@
+{
+  "station": "AM.R6E8A.00.HDF",
+  "scope_start_utc": "2026-09-26T05:09:00+00:00",
+  "scope_end_exclusive_utc": "2026-09-26T07:13:00+00:00",
+  "input_payload_sha256": "d5261dd5b90034e301ccc2d826daa7fe1f4f7d7b8edd581f87a8b87d043f70f3",
+  "output_payload_sha256": "d6d0bf28744cdc167e71ce425cea89104d99cf59d26fa7c7c3fe2be533bf4381",
+  "original_accepted_minutes": 63833,
+  "original_classifications_preserved": true,
+  "same_classification_method": true,
+  "target_missing_minutes": 124,
+  "recovered_minutes": 124,
+  "remaining_excluded_minutes": [],
+  "receipt": {
+    "start_utc": "2026-09-26T05:08:00+00:00",
+    "end_exclusive_utc": "2026-09-26T07:14:00+00:00",
+    "url": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-09-26T05:08:00Z&end=2026-09-26T07:14:00Z&format=miniseed&nodata=404",
+    "raw_sha256": "d198243a787e30b9a83ab39495cae3b16d48e5594f6c3abbe4fe432b1bf12ba4",
+    "raw_bytes": 1854464,
+    "retrieved_utc": "2026-09-26T07:52:37.386861+00:00",
+    "targeted_acquisition_recheck": true,
+    "identities": [
+      "AM.R6E8A.00.HDF"
+    ],
+    "status": "processed",
+    "accepted_minutes": 126,
+    "added_minutes": 124,
+    "excluded_minutes": [],
+    "omitted_cached_minutes": []
+  },
+  "note": "Only the new September 26 acquisition gap was rechecked. Missing time is not zero-filled. Existing five calculation gates remain required before publication."
+}
