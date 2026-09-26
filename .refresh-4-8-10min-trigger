@@ -1,7 +1,4 @@
-manual incremental refresh requested September 26, 2026; request first observed at 03:27:32 AM Eastern Time (EDT)
-request: Mark asked: R6E8A update and 5x sanity check
-continuity: resumes the immediately preceding Alpha R6E8A request; the trigger file still contained the 12:19:26 AM request when checked. Submit one incremental refresh, not a second historical calculation.
-station: AM.R6E8A.00; HDF pressure and EHZ vertical motion remain separate.
-resume: use the latest verified cache at repository checkpoint 3168184078e933bc4dbd56a6aefce62715f04a88; cumulative end exclusive September 25, 2026 at 11:53 PM Eastern. Preserve accepted historical classifications and the April 12 analysis scope. Retrieve only the established recent continuity overlap and newer public FDSN data; do not restart historical waveform classification.
-publication: require all five established calculation gates and all five publication-integrity checks before publishing values; regenerate both PDF reports from the same verified cache, preserve the two green download buttons, and verify the public files against deployed hashes.
-approved design, benchmark reference sections, calculation method, longest-run dates and missing-time exclusions: unchanged.
+Alpha R6E8A incremental update requested September 26, 2026 at 06:24:36 AM EDT.
+Station AM.R6E8A.00. Resume the latest accepted per-minute cache through September 26, 2026 03:22 AM EDT, with the established recent overlap and newer public Raspberry Shake FDSN data.
+Preserve all accepted classifications and April 12 scope. HDF pressure/infrasound and EHZ seismic acquisition remain separate. Exclude missing or incomplete minutes without zero filling.
+Publish only after the five established calculation gates and five publication-integrity checks pass. Regenerate both 24-hour and trailing 7-day PDFs from the same verified cache. Preserve the approved design and download buttons, and verify public deployment hashes.
