@@ -1,99 +1,72 @@
 {
   "schema_version": 1,
   "station": "AM.R6E8A.00",
-  "candidate_sha256": "94b2d203851b6e86099f2ea47f88d634aa3fea22fe424e6fac6c4f784758f5a5",
-  "cache_payload_sha256": "2d9b0911bf4abf36599f3aa1b51ee9b6434489f9f302cd2952157ec95ba3d900",
-  "cache_file_sha256": "4c8225ea9775f0eda3f9af97e2da00d4a1607e5ef6e03c6daa170da417d685ec",
-  "status_sha256": "8b35b5342b710daba938d223225d6df00ecd3d23346db3df6a4a569a5e2b309d",
-  "requested_through_utc": "2026-09-25T15:06:00+00:00",
-  "generated_utc": "2026-09-26T00:08:05.214043+00:00",
+  "candidate_sha256": "3d973471a5535fdda7db84a27598d3f629bbbeb75f28c1110786c5ddcd5c9a2a",
+  "cache_payload_sha256": "13ef5af9b17013bd9f3a0d1aff005fd22a24ac80fd43d267f8abbd6423275687",
+  "cache_file_sha256": "f23f2ce8c4ac9d8f5954c9856f6e19dfdd71a4eafc2b82e821d9d34b3ee424fa",
+  "status_sha256": "1d52c3cac5876ca847e46e1f10184b1b13beaaf60383746ef95d24e43fa6917c",
+  "requested_through_utc": "2026-09-26T03:53:00+00:00",
+  "generated_utc": "2026-09-26T04:24:10.006605+00:00",
   "all_five_checks_pass": true,
   "source_mode": "verified cached minute classifications only",
   "reports": [
     {
       "path": "downloads/R6E8A-24-hour-report.pdf",
-      "start_utc": "2026-09-24T15:06:00+00:00",
-      "end_exclusive_utc": "2026-09-25T15:06:00+00:00",
+      "start_utc": "2026-09-25T03:53:00+00:00",
+      "end_exclusive_utc": "2026-09-26T03:53:00+00:00",
       "stats": {
         "analyzed_minutes": 1440,
-        "dom48_minutes": 1342,
+        "dom48_minutes": 1362,
         "band_counts": {
-          "1-4": 79,
-          "4-8": 1342,
-          "8-16": 19,
+          "1-4": 73,
+          "4-8": 1362,
+          "8-16": 5,
           "16-20": 0
         },
-        "runs_total": 67,
+        "runs_total": 60,
         "count10": 25,
-        "mins10": 1176,
-        "count15": 17,
-        "mins15": 1085,
-        "count30": 11,
-        "mins30": 956,
+        "mins10": 1239,
+        "count15": 20,
+        "mins15": 1185,
+        "count30": 14,
+        "mins30": 1059,
         "count60": 7,
-        "mins60": 805,
+        "mins60": 769,
         "expected_clock_minutes": 1440,
         "excluded_minutes": 0,
         "coverage_pct": 100.0,
-        "dom48_percent_of_analyzed": 93.1944,
+        "dom48_percent_of_analyzed": 94.5833,
         "band_percent_of_analyzed": {
-          "1-4": 5.4861,
-          "4-8": 93.1944,
-          "8-16": 1.3194,
+          "1-4": 5.0694,
+          "4-8": 94.5833,
+          "8-16": 0.3472,
           "16-20": 0.0
         },
-        "shorter10_minutes": 166,
-        "latest_complete_minute_utc": "2026-09-25T15:05:00+00:00",
+        "shorter10_minutes": 123,
+        "latest_complete_minute_utc": "2026-09-26T03:52:00+00:00",
         "longest_segment": {
-          "duration_minutes": 143,
-          "start_utc": "2026-09-24T21:35:00+00:00",
-          "end_exclusive_utc": "2026-09-24T23:58:00+00:00",
-          "start_et": "2026-09-24T17:35:00-04:00",
-          "end_exclusive_et": "2026-09-24T19:58:00-04:00",
+          "duration_minutes": 163,
+          "start_utc": "2026-09-25T18:23:00+00:00",
+          "end_exclusive_utc": "2026-09-25T21:06:00+00:00",
+          "start_et": "2026-09-25T14:23:00-04:00",
+          "end_exclusive_et": "2026-09-25T17:06:00-04:00",
           "continues_before_window": false,
           "reaches_report_cutoff": false
         },
         "run_scope": "Maximal consecutive complete 4-8-dominant segments clipped to this report window",
         "time_bins": [
           {
-            "start_utc": "2026-09-24T15:06:00+00:00",
-            "end_exclusive_utc": "2026-09-24T19:06:00+00:00",
+            "start_utc": "2026-09-25T03:53:00+00:00",
+            "end_exclusive_utc": "2026-09-25T07:53:00+00:00",
             "analyzed_minutes": 240,
             "expected_clock_minutes": 240,
             "excluded_minutes": 0,
-            "dom48_minutes": 217,
-            "dom48_percent_of_analyzed": 90.4167
+            "dom48_minutes": 225,
+            "dom48_percent_of_analyzed": 93.75
           },
           {
-            "start_utc": "2026-09-24T19:06:00+00:00",
-            "end_exclusive_utc": "2026-09-24T23:06:00+00:00",
-            "analyzed_minutes": 240,
-            "expected_clock_minutes": 240,
-            "excluded_minutes": 0,
-            "dom48_minutes": 232,
-            "dom48_percent_of_analyzed": 96.6667
-          },
-          {
-            "start_utc": "2026-09-24T23:06:00+00:00",
-            "end_exclusive_utc": "2026-09-25T03:06:00+00:00",
-            "analyzed_minutes": 240,
-            "expected_clock_minutes": 240,
-            "excluded_minutes": 0,
-            "dom48_minutes": 230,
-            "dom48_percent_of_analyzed": 95.8333
-          },
-          {
-            "start_utc": "2026-09-25T03:06:00+00:00",
-            "end_exclusive_utc": "2026-09-25T07:06:00+00:00",
-            "analyzed_minutes": 240,
-            "expected_clock_minutes": 240,
-            "excluded_minutes": 0,
-            "dom48_minutes": 211,
-            "dom48_percent_of_analyzed": 87.9167
-          },
-          {
-            "start_utc": "2026-09-25T07:06:00+00:00",
-            "end_exclusive_utc": "2026-09-25T11:06:00+00:00",
+            "start_utc": "2026-09-25T07:53:00+00:00",
+            "end_exclusive_utc": "2026-09-25T11:53:00+00:00",
             "analyzed_minutes": 240,
             "expected_clock_minutes": 240,
             "excluded_minutes": 0,
@@ -101,54 +74,81 @@
             "dom48_percent_of_analyzed": 98.3333
           },
           {
-            "start_utc": "2026-09-25T11:06:00+00:00",
-            "end_exclusive_utc": "2026-09-25T15:06:00+00:00",
+            "start_utc": "2026-09-25T11:53:00+00:00",
+            "end_exclusive_utc": "2026-09-25T15:53:00+00:00",
             "analyzed_minutes": 240,
             "expected_clock_minutes": 240,
             "excluded_minutes": 0,
-            "dom48_minutes": 216,
-            "dom48_percent_of_analyzed": 90.0
+            "dom48_minutes": 212,
+            "dom48_percent_of_analyzed": 88.3333
+          },
+          {
+            "start_utc": "2026-09-25T15:53:00+00:00",
+            "end_exclusive_utc": "2026-09-25T19:53:00+00:00",
+            "analyzed_minutes": 240,
+            "expected_clock_minutes": 240,
+            "excluded_minutes": 0,
+            "dom48_minutes": 226,
+            "dom48_percent_of_analyzed": 94.1667
+          },
+          {
+            "start_utc": "2026-09-25T19:53:00+00:00",
+            "end_exclusive_utc": "2026-09-25T23:53:00+00:00",
+            "analyzed_minutes": 240,
+            "expected_clock_minutes": 240,
+            "excluded_minutes": 0,
+            "dom48_minutes": 233,
+            "dom48_percent_of_analyzed": 97.0833
+          },
+          {
+            "start_utc": "2026-09-25T23:53:00+00:00",
+            "end_exclusive_utc": "2026-09-26T03:53:00+00:00",
+            "analyzed_minutes": 240,
+            "expected_clock_minutes": 240,
+            "excluded_minutes": 0,
+            "dom48_minutes": 230,
+            "dom48_percent_of_analyzed": 95.8333
           }
         ]
       },
-      "pdf_sha256": "3af7237b482c9a4264fa9e507dc3e13cbcf54796b56e0241b12fab076be18606",
+      "pdf_sha256": "723ef652a99a8583b7f57f944aaadeb045ae3159d0c9ca0ac98b4a21f8f03900",
       "pages": 2,
-      "download_url": "./downloads/R6E8A-24-hour-report.pdf?v=3af7237b482c9a42"
+      "download_url": "./downloads/R6E8A-24-hour-report.pdf?v=723ef652a99a8583"
     },
     {
       "path": "downloads/R6E8A-7-day-trailing-report.pdf",
-      "start_utc": "2026-09-18T15:06:00+00:00",
-      "end_exclusive_utc": "2026-09-25T15:06:00+00:00",
+      "start_utc": "2026-09-19T03:53:00+00:00",
+      "end_exclusive_utc": "2026-09-26T03:53:00+00:00",
       "stats": {
         "analyzed_minutes": 10078,
-        "dom48_minutes": 8700,
+        "dom48_minutes": 8671,
         "band_counts": {
-          "1-4": 1320,
-          "4-8": 8700,
-          "8-16": 58,
+          "1-4": 1348,
+          "4-8": 8671,
+          "8-16": 59,
           "16-20": 0
         },
-        "runs_total": 263,
-        "count10": 102,
-        "mins10": 8129,
-        "count15": 81,
-        "mins15": 7890,
-        "count30": 51,
-        "mins30": 7271,
-        "count60": 33,
-        "mins60": 6520,
+        "runs_total": 282,
+        "count10": 111,
+        "mins10": 8058,
+        "count15": 89,
+        "mins15": 7809,
+        "count30": 56,
+        "mins30": 7130,
+        "count60": 35,
+        "mins60": 6239,
         "expected_clock_minutes": 10080,
         "excluded_minutes": 2,
         "coverage_pct": 99.9802,
-        "dom48_percent_of_analyzed": 86.3267,
+        "dom48_percent_of_analyzed": 86.0389,
         "band_percent_of_analyzed": {
-          "1-4": 13.0978,
-          "4-8": 86.3267,
-          "8-16": 0.5755,
+          "1-4": 13.3757,
+          "4-8": 86.0389,
+          "8-16": 0.5854,
           "16-20": 0.0
         },
-        "shorter10_minutes": 571,
-        "latest_complete_minute_utc": "2026-09-25T15:05:00+00:00",
+        "shorter10_minutes": 613,
+        "latest_complete_minute_utc": "2026-09-26T03:52:00+00:00",
         "longest_segment": {
           "duration_minutes": 803,
           "start_utc": "2026-09-21T02:39:00+00:00",
@@ -161,73 +161,73 @@
         "run_scope": "Maximal consecutive complete 4-8-dominant segments clipped to this report window",
         "time_bins": [
           {
-            "start_utc": "2026-09-18T15:06:00+00:00",
-            "end_exclusive_utc": "2026-09-19T15:06:00+00:00",
+            "start_utc": "2026-09-19T03:53:00+00:00",
+            "end_exclusive_utc": "2026-09-20T03:53:00+00:00",
             "analyzed_minutes": 1440,
             "expected_clock_minutes": 1440,
             "excluded_minutes": 0,
-            "dom48_minutes": 1432,
-            "dom48_percent_of_analyzed": 99.4444
+            "dom48_minutes": 1425,
+            "dom48_percent_of_analyzed": 98.9583
           },
           {
-            "start_utc": "2026-09-19T15:06:00+00:00",
-            "end_exclusive_utc": "2026-09-20T15:06:00+00:00",
+            "start_utc": "2026-09-20T03:53:00+00:00",
+            "end_exclusive_utc": "2026-09-21T03:53:00+00:00",
             "analyzed_minutes": 1438,
             "expected_clock_minutes": 1440,
             "excluded_minutes": 2,
-            "dom48_minutes": 1404,
-            "dom48_percent_of_analyzed": 97.6356
+            "dom48_minutes": 1389,
+            "dom48_percent_of_analyzed": 96.5925
           },
           {
-            "start_utc": "2026-09-20T15:06:00+00:00",
-            "end_exclusive_utc": "2026-09-21T15:06:00+00:00",
+            "start_utc": "2026-09-21T03:53:00+00:00",
+            "end_exclusive_utc": "2026-09-22T03:53:00+00:00",
             "analyzed_minutes": 1440,
             "expected_clock_minutes": 1440,
             "excluded_minutes": 0,
-            "dom48_minutes": 1412,
-            "dom48_percent_of_analyzed": 98.0556
+            "dom48_minutes": 1206,
+            "dom48_percent_of_analyzed": 83.75
           },
           {
-            "start_utc": "2026-09-21T15:06:00+00:00",
-            "end_exclusive_utc": "2026-09-22T15:06:00+00:00",
+            "start_utc": "2026-09-22T03:53:00+00:00",
+            "end_exclusive_utc": "2026-09-23T03:53:00+00:00",
             "analyzed_minutes": 1440,
             "expected_clock_minutes": 1440,
             "excluded_minutes": 0,
-            "dom48_minutes": 1015,
-            "dom48_percent_of_analyzed": 70.4861
+            "dom48_minutes": 800,
+            "dom48_percent_of_analyzed": 55.5556
           },
           {
-            "start_utc": "2026-09-22T15:06:00+00:00",
-            "end_exclusive_utc": "2026-09-23T15:06:00+00:00",
+            "start_utc": "2026-09-23T03:53:00+00:00",
+            "end_exclusive_utc": "2026-09-24T03:53:00+00:00",
             "analyzed_minutes": 1440,
             "expected_clock_minutes": 1440,
             "excluded_minutes": 0,
-            "dom48_minutes": 984,
-            "dom48_percent_of_analyzed": 68.3333
+            "dom48_minutes": 1123,
+            "dom48_percent_of_analyzed": 77.9861
           },
           {
-            "start_utc": "2026-09-23T15:06:00+00:00",
-            "end_exclusive_utc": "2026-09-24T15:06:00+00:00",
+            "start_utc": "2026-09-24T03:53:00+00:00",
+            "end_exclusive_utc": "2026-09-25T03:53:00+00:00",
             "analyzed_minutes": 1440,
             "expected_clock_minutes": 1440,
             "excluded_minutes": 0,
-            "dom48_minutes": 1111,
-            "dom48_percent_of_analyzed": 77.1528
+            "dom48_minutes": 1366,
+            "dom48_percent_of_analyzed": 94.8611
           },
           {
-            "start_utc": "2026-09-24T15:06:00+00:00",
-            "end_exclusive_utc": "2026-09-25T15:06:00+00:00",
+            "start_utc": "2026-09-25T03:53:00+00:00",
+            "end_exclusive_utc": "2026-09-26T03:53:00+00:00",
             "analyzed_minutes": 1440,
             "expected_clock_minutes": 1440,
             "excluded_minutes": 0,
-            "dom48_minutes": 1342,
-            "dom48_percent_of_analyzed": 93.1944
+            "dom48_minutes": 1362,
+            "dom48_percent_of_analyzed": 94.5833
           }
         ]
       },
-      "pdf_sha256": "0787460320dae4bf3434450293a3a34ddcbd1a8ff31a50ec966e57498b6b9ba1",
+      "pdf_sha256": "fc4a4b987fdef0650bdf546280ebc4493f9c9fccacd59b359cf9ade26781b00a",
       "pages": 2,
-      "download_url": "./downloads/R6E8A-7-day-trailing-report.pdf?v=0787460320dae4bf"
+      "download_url": "./downloads/R6E8A-7-day-trailing-report.pdf?v=fc4a4b987fdef065"
     }
   ]
 }
