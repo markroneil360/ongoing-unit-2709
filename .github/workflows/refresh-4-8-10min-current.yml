@@ -32,6 +32,8 @@ jobs:
         run: pip install obspy==1.5.1 numpy==2.4.6 scipy==1.17.1
       - name: Verify cache boundaries and failure handling
         run: python -m unittest discover -s tests -p 'test_fdsn_tail_cache.py' -v
+      - name: Recheck only the newly excluded September 26 acquisition interval once
+        run: python3 tools/recheck_sep26_acquisition.py
       - name: Resume Apr12-scoped candidate and run five unchanged gates
         run: python3 tools/refresh_4_8_10min_current.py
       - name: Commit verified candidate only
@@ -39,6 +41,9 @@ jobs:
           git config user.name 'r6e8a-refresh-bot'
           git config user.email 'r6e8a-refresh-bot@users.noreply.github.com'
           git add data/r6e8a_4_8_10min_full.json data/r6e8a_4_8_tail_minutes.json
+          if [ -f data/r6e8a-sep26-acquisition-recheck.json ]; then
+            git add data/r6e8a-sep26-acquisition-recheck.json
+          fi
           if git diff --cached --quiet; then
             echo 'Candidate unchanged.'
           else
@@ -57,6 +62,9 @@ jobs:
             git config user.name 'r6e8a-refresh-bot'
             git config user.email 'r6e8a-refresh-bot@users.noreply.github.com'
             git add data/r6e8a_4_8_tail_minutes.json
+            if [ -f data/r6e8a-sep26-acquisition-recheck.json ]; then
+              git add data/r6e8a-sep26-acquisition-recheck.json
+            fi
             if ! git diff --cached --quiet; then
               git commit -m 'Preserve R6E8A acquisition checkpoint; no candidate publication'
               git pull --rebase origin main
@@ -70,6 +78,7 @@ jobs:
           name: r6e8a-calculation-checkpoint
           path: |
             data/r6e8a_4_8_tail_minutes.json
+            data/r6e8a-sep26-acquisition-recheck.json
             recovery-artifacts/candidate-from-run.json
           retention-days: 30
           if-no-files-found: warn
