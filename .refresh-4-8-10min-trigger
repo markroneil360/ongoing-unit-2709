@@ -1,4 +1,4 @@
-Alpha R6E8A incremental update requested September 26, 2026 at 06:24:36 AM EDT.
-Station AM.R6E8A.00. Resume the latest accepted per-minute cache through September 26, 2026 03:22 AM EDT, with the established recent overlap and newer public Raspberry Shake FDSN data.
+Alpha R6E8A incremental update requested September 26, 2026 at 06:55:22 PM EDT.
+Station AM.R6E8A.00. Resume the accepted per-minute cache through September 26, 2026 05:56 AM EDT (end exclusive), with the established overlap and newer public Raspberry Shake FDSN data.
 Preserve all accepted classifications and April 12 scope. HDF pressure/infrasound and EHZ seismic acquisition remain separate. Exclude missing or incomplete minutes without zero filling.
 Publish only after the five established calculation gates and five publication-integrity checks pass. Regenerate both 24-hour and trailing 7-day PDFs from the same verified cache. Preserve the approved design and download buttons, and verify public deployment hashes.
