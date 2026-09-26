@@ -5,11 +5,11 @@
   "analysis_start_et": "2026-04-12T00:00:00-04:00",
   "analysis_start_utc": "2026-04-12T04:00:00+00:00",
   "base_end_exclusive_utc": "2026-08-12T19:13:00+00:00",
-  "generated_utc": "2026-09-26T10:26:24.062698+00:00",
+  "generated_utc": "2026-09-26T23:10:50.685851+00:00",
   "lag_allowance_minutes": 30,
-  "requested_through_utc": "2026-09-26T09:56:00+00:00",
-  "latest_returned_sample_utc": "2026-09-26T09:56:00.043000+00:00",
-  "latest_complete_analyzed_minute_utc": "2026-09-26T09:55:00+00:00",
+  "requested_through_utc": "2026-09-26T22:40:00+00:00",
+  "latest_returned_sample_utc": "2026-09-26T21:45:19.013000+00:00",
+  "latest_complete_analyzed_minute_utc": "2026-09-26T21:44:00+00:00",
   "source": "Raspberry Shake public FDSN DataSelect + audited corrected per-minute archive through Aug 12",
   "base_provenance": {
     "name": "R6E8A-HDF-minute-4-8Hz(1).csv",
@@ -97,31 +97,31 @@
     }
   },
   "current": {
-    "analyzed_minutes": 212571,
-    "dom48_minutes": 94256,
+    "analyzed_minutes": 213280,
+    "dom48_minutes": 94887,
     "band_counts": {
-      "1-4": 101991,
-      "4-8": 94256,
-      "8-16": 16227,
+      "1-4": 102067,
+      "4-8": 94887,
+      "8-16": 16229,
       "16-20": 97
     },
-    "count10": 1695,
-    "mins10": 69089,
-    "hours10": 1151.48,
-    "count15": 928,
-    "mins15": 60314,
-    "hours15": 1005.23,
-    "count30": 515,
-    "mins30": 51890,
-    "hours30": 864.83,
-    "count60": 275,
-    "mins60": 41826,
-    "hours60": 697.1,
-    "dom48_hours": 1570.93,
-    "dom48_percent_of_analyzed": 44.34,
-    "shorter10_minutes": 25167,
-    "shorter10_hours": 419.45,
-    "ordinance_events": 125,
+    "count10": 1710,
+    "mins10": 69593,
+    "hours10": 1159.88,
+    "count15": 939,
+    "mins15": 60773,
+    "hours15": 1012.88,
+    "count30": 520,
+    "mins30": 52211,
+    "hours30": 870.18,
+    "count60": 276,
+    "mins60": 41984,
+    "hours60": 699.73,
+    "dom48_hours": 1581.45,
+    "dom48_percent_of_analyzed": 44.49,
+    "shorter10_minutes": 25294,
+    "shorter10_hours": 421.57,
+    "ordinance_events": 126,
     "longest_minutes": 976,
     "longest_runs": [
       {
@@ -134,24 +134,24 @@
       }
     ],
     "post": {
-      "analyzed_minutes": 64116,
-      "dom48_minutes": 39097,
+      "analyzed_minutes": 64825,
+      "dom48_minutes": 39728,
       "band_counts": {
-        "1-4": 21083,
-        "4-8": 39097,
-        "8-16": 3925,
+        "1-4": 21159,
+        "4-8": 39728,
+        "8-16": 3927,
         "16-20": 11
       },
-      "runs_total": 2012,
-      "count10": 551,
-      "mins10": 31025,
-      "count15": 324,
-      "mins15": 28451,
-      "count30": 192,
-      "mins30": 25808,
-      "count60": 116,
-      "mins60": 22614,
-      "ordinance_events": 52
+      "runs_total": 2065,
+      "count10": 566,
+      "mins10": 31529,
+      "count15": 335,
+      "mins15": 28910,
+      "count30": 197,
+      "mins30": 26129,
+      "count60": 117,
+      "mins60": 22772,
+      "ordinance_events": 53
     }
   },
   "checks": [
@@ -222,8 +222,8 @@
       "name": "4_tail_minute_integrity",
       "pass": true,
       "observed": {
-        "classified_minutes": 64116,
-        "unique_minutes": 64116,
+        "classified_minutes": 64825,
+        "unique_minutes": 64825,
         "bands": [
           "1-4",
           "16-20",
@@ -237,14 +237,14 @@
       "name": "5_10min_reconciliation_ordinance_and_longest_date",
       "pass": true,
       "observed": {
-        "mins10": 69089,
-        "shorter10_minutes": 25167,
-        "dom48_minutes": 94256,
+        "mins10": 69593,
+        "shorter10_minutes": 25294,
+        "dom48_minutes": 94887,
         "counts": [
-          1695,
-          928,
-          515,
-          275
+          1710,
+          939,
+          520,
+          276
         ],
         "preview_ordinance_events": 74,
         "longest_run": {
@@ -450,14 +450,17 @@
     "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-09-26T07:13:00Z&end=2026-09-26T07:17:00Z&format=miniseed&nodata=404",
     "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-09-26T05:08:00Z&end=2026-09-26T07:14:00Z&format=miniseed&nodata=404",
     "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-09-26T07:13:00Z&end=2026-09-26T07:22:00Z&format=miniseed&nodata=404",
-    "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-09-26T07:13:00Z&end=2026-09-26T09:56:00Z&format=miniseed&nodata=404"
+    "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-09-26T07:13:00Z&end=2026-09-26T09:56:00Z&format=miniseed&nodata=404",
+    "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-09-26T07:13:00Z&end=2026-09-26T13:13:00Z&format=miniseed&nodata=404",
+    "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-09-26T13:13:00Z&end=2026-09-26T19:13:00Z&format=miniseed&nodata=404",
+    "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-09-26T19:13:00Z&end=2026-09-26T22:40:00Z&format=miniseed&nodata=404"
   ],
   "publication_note": "No extrapolated hours. Apr 12 scope excludes 89 pre-scope non-4-8 minutes. The >=10-minute threshold is a reporting/event-definition choice, not a medical or legal exposure limit.",
   "cache_provenance": {
-    "requested_through_utc": "2026-09-26T09:56:00+00:00",
-    "cache_payload_sha256": "0d7d09c8ea31e7105590f8b704c6f9f8d0167001f1911a50fc6966b5b8be282d",
-    "cache_minute_count": 64116,
-    "source_request_count": 190,
+    "requested_through_utc": "2026-09-26T22:40:00+00:00",
+    "cache_payload_sha256": "3fe28293aef20c13c1a788b77227be0b883c34557ce9f532f64553da2359ee8e",
+    "cache_minute_count": 64825,
+    "source_request_count": 193,
     "cached_omissions_recorded": 0,
     "method_fingerprint": "5e8d1df8fc450cb6ea39e470e3eacebe18411423727fc0ffb63d7941061078e8"
   }
