@@ -1,0 +1,55 @@
+name: R6E8A isolated tail availability diagnostic
+on:
+  push:
+    branches:
+      - diagnostic/r6e8a-hourly-20260928
+    paths:
+      - .github/workflows/r6e8a-tail-diagnostic.yml
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install "obspy>=1.5"
+      - name: Query remaining FDSN periods without publishing
+        shell: bash
+        run: |
+          python - <<'PY'
+          import datetime as dt,io,json,time,urllib.request,urllib.error
+          from urllib.parse import urlencode
+          from obspy import read
+          U=dt.timezone.utc
+          def iso(x):return x.isoformat().replace("+00:00","Z")
+          spans=[(dt.datetime(2026,9,27,6,tzinfo=U),dt.datetime(2026,9,28,6,tzinfo=U)),
+                 (dt.datetime(2026,9,28,6,tzinfo=U),dt.datetime.now(U)-dt.timedelta(minutes=35))]
+          for a,b in spans:
+            for c in ("HDF","EHZ"):
+              p=dict(net="AM",sta="R6E8A",loc="00",cha=c,start=iso(a),end=iso(b),format="miniseed",nodata="404")
+              url="https://data.raspberryshake.org/fdsnws/dataselect/1/query?"+urlencode(p)
+              for attempt in range(4):
+                try:
+                  req=urllib.request.Request(url,headers={"User-Agent":"r6e8a-isolated-tail/1.0"})
+                  with urllib.request.urlopen(req,timeout=150) as response:raw=response.read()
+                  st=read(io.BytesIO(raw))
+                  rec=[]
+                  for tr in st:
+                    first=tr.stats.starttime.datetime.replace(tzinfo=U)
+                    last=tr.stats.endtime.datetime.replace(tzinfo=U)
+                    if (tr.stats.network,tr.stats.station,tr.stats.location,tr.stats.channel)!=("AM","R6E8A","00",c):
+                      rec.append(dict(error="unexpected_id",id=str(tr.id)));continue
+                    rec.append(dict(first=iso(first),last=iso(last),rate=float(tr.stats.sampling_rate),npts=int(tr.stats.npts)))
+                  print("RANGE",json.dumps(dict(start=iso(a),end=iso(b),channel=c,status="data",records=rec,bytes=len(raw)),separators=(",",":")),flush=True)
+                  break
+                except urllib.error.HTTPError as e:
+                  if e.code==429 and attempt<3:
+                    delay=min(120,max(45,int(e.headers.get("Retry-After","60"))))
+                    print("RETRY",c,iso(a),attempt,delay,flush=True);time.sleep(delay);continue
+                  print("RANGE",json.dumps(dict(start=iso(a),end=iso(b),channel=c,status="no_data" if e.code==404 else "http_error",code=e.code)),flush=True);break
+                except Exception as e:
+                  print("RANGE",json.dumps(dict(start=iso(a),end=iso(b),channel=c,status="error",detail=str(e)[:200])),flush=True);break
+          PY
