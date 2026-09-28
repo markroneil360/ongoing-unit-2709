@@ -1,0 +1,69 @@
+name: R6E8A isolated hourly availability diagnostic
+on:
+  push:
+    branches:
+      - diagnostic/r6e8a-hourly-20260928
+    paths:
+      - .github/workflows/r6e8a-hourly-diagnostic.yml
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install "obspy>=1.5"
+      - name: Query public FDSN hour by hour without publishing
+        shell: bash
+        run: |
+          python - <<'PY'
+          import datetime as dt, io, json, urllib.request, urllib.error
+          from obspy import read
+          UTC=dt.timezone.utc
+          start=dt.datetime(2026,9,26,21,40,49,tzinfo=UTC)
+          end=dt.datetime.now(UTC)-dt.timedelta(minutes=35)
+          def iso(x): return x.isoformat().replace("+00:00","Z")
+          def get(channel,a,b):
+              from urllib.parse import urlencode
+              params=dict(net="AM",sta="R6E8A",loc="00",cha=channel,
+                          start=iso(a),end=iso(b),format="miniseed",nodata="404")
+              url="https://data.raspberryshake.org/fdsnws/dataselect/1/query?"+urlencode(params)
+              req=urllib.request.Request(url,headers={"User-Agent":"r6e8a-isolated-availability/1.0"})
+              try:
+                  with urllib.request.urlopen(req,timeout=55) as resp: raw=resp.read()
+                  st=read(io.BytesIO(raw))
+                  intervals=[]
+                  unexpected=[]
+                  for tr in st:
+                      if (tr.stats.network,tr.stats.station,tr.stats.location,tr.stats.channel)!=("AM","R6E8A","00",channel):
+                          unexpected.append(str(tr.id)); continue
+                      first=tr.stats.starttime.datetime.replace(tzinfo=UTC)
+                      last=tr.stats.endtime.datetime.replace(tzinfo=UTC)
+                      aa=max(a,first); bb=min(b,last+dt.timedelta(seconds=1/float(tr.stats.sampling_rate)))
+                      if bb>aa: intervals.append([aa,bb])
+                  intervals.sort()
+                  merged=[]
+                  for aa,bb in intervals:
+                      if not merged or aa>merged[-1][1]: merged.append([aa,bb])
+                      else: merged[-1][1]=max(bb,merged[-1][1])
+                  return dict(status="data",first=iso(merged[0][0]) if merged else None,
+                              last_exclusive=iso(merged[-1][1]) if merged else None,
+                              coverage_seconds=round(sum((bb-aa).total_seconds() for aa,bb in merged),3),
+                              segments=len(merged),unexpected=unexpected,bytes=len(raw))
+              except urllib.error.HTTPError as exc:
+                  return dict(status="no_data" if exc.code==404 else "http_error",code=exc.code)
+              except Exception as exc: return dict(status="error",detail=str(exc)[:180])
+          print("DIAGNOSTIC_START",iso(dt.datetime.now(UTC)),"END",iso(end),flush=True)
+          a=start
+          while a<end:
+              next_hour=(a.replace(minute=0,second=0,microsecond=0)+dt.timedelta(hours=1))
+              b=min(next_hour,end)
+              row=dict(start=iso(a),end_exclusive=iso(b))
+              for channel in ("HDF","EHZ"): row[channel]=get(channel,a,b)
+              print("HOUR",json.dumps(row,separators=(",",":")),flush=True)
+              a=b
+          print("DIAGNOSTIC_DONE",iso(dt.datetime.now(UTC)),flush=True)
+          PY
