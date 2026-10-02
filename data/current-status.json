@@ -1,41 +1,41 @@
 {
   "station": "AM.R6E8A.00",
-  "generated_utc": "2026-09-26T22:10:49.126159+00:00",
-  "generated_et": "2026-09-26 06:10:49 PM EDT",
-  "window_start_utc": "2026-09-26T21:20:49.126159+00:00",
-  "window_end_utc": "2026-09-26T21:40:49.126159+00:00",
+  "generated_utc": "2026-10-02T06:44:52.679602+00:00",
+  "generated_et": "2026-10-02 02:44:52 AM EDT",
+  "window_start_utc": "2026-09-27T14:10:00+00:00",
+  "window_end_utc": "2026-09-27T14:21:42.140000+00:00",
   "channels": {
     "HDF": {
       "channel": "HDF",
       "ok": true,
-      "coverage_pct": 99.999,
-      "segments": 1,
+      "coverage_pct": 99.074,
+      "segments": null,
       "sample_rates_hz": [
         100.0
       ],
-      "latest_sample_utc": "2026-09-26T21:40:49.123000+00:00",
-      "latest_sample_et": "2026-09-26 05:40:49 PM EDT",
-      "edge_gap_seconds": 0.003159,
+      "latest_sample_utc": "2026-09-27T14:21:42.137000+00:00",
+      "latest_sample_et": "2026-09-27 10:21:42 AM EDT",
       "identity_verified": true,
       "window_clipped_before_coverage": true,
-      "url": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-09-26T21:20:49.126159&end=2026-09-26T21:40:49.126159&format=miniseed&nodata=404"
+      "missing_samples": 650,
+      "source_file": "AM.R6E8A.00.HDF.D.2026.270"
     },
     "EHZ": {
       "channel": "EHZ",
       "ok": true,
-      "coverage_pct": 99.999,
-      "segments": 1,
+      "coverage_pct": 99.036,
+      "segments": null,
       "sample_rates_hz": [
         100.0
       ],
-      "latest_sample_utc": "2026-09-26T21:40:49.123000+00:00",
-      "latest_sample_et": "2026-09-26 05:40:49 PM EDT",
-      "edge_gap_seconds": 0.003159,
+      "latest_sample_utc": "2026-09-27T14:21:41.857000+00:00",
+      "latest_sample_et": "2026-09-27 10:21:41 AM EDT",
       "identity_verified": true,
       "window_clipped_before_coverage": true,
-      "url": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=EHZ&start=2026-09-26T21:20:49.126159&end=2026-09-26T21:40:49.126159&format=miniseed&nodata=404"
+      "missing_samples": 677,
+      "source_file": "AM.R6E8A.00.EHZ.D.2026.270"
     }
   },
-  "source": "Raspberry Shake public FDSN DataSelect",
-  "display_note": "*Account for up to 30 minutes of lag. Missing acquisition time is not scored as zero, quiet, normal, compliant, or below benchmark."
+  "source": "User-uploaded local miniSEED, independently decoded by libmseed; not a public FDSN continuity check",
+  "display_note": "Uploaded files end September 27. The period after the last sample is unobserved; missing time is excluded."
 }
