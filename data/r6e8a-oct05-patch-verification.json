@@ -1,0 +1,494 @@
+{
+  "station": "AM.R6E8A.00",
+  "received_date_et": "2026-10-05",
+  "reviewed_utc": "2026-10-05T16:56:10.442897+00:00",
+  "publication_time_et": "October 5, 2026 \u00b7 12:59:27 PM EDT",
+  "uploaded_files": [
+    {
+      "file": "AM.R6E8A.00.EHZ.D.2026(2).198",
+      "bytes": 21428736,
+      "sha256": "8caedb3de61a779f6430d82e769db4abc7d61eb5a9e9b51ea6b5fdb3b084ee6f",
+      "identities": [
+        "AM.R6E8A.00.EHZ"
+      ],
+      "sample_rates": [
+        100
+      ],
+      "records": 41853,
+      "sample_count": 8639961,
+      "first_utc": "2026-07-17T00:00:01.369000+00:00",
+      "last_utc": "2026-07-18T00:00:00.969000+00:00",
+      "first_et": "2026-07-16T20:00:01.369000-04:00",
+      "last_et": "2026-07-17T20:00:00.969000-04:00",
+      "gap_count": 0,
+      "gap_seconds_sum": 0,
+      "max_gap_seconds": 0
+    },
+    {
+      "file": "AM.R6E8A.00.HDF.D.2026(1).262",
+      "bytes": 21204480,
+      "sha256": "74f36288b77262ea35e0198822fdedadd17f6769885746ea4b06b69333c267c1",
+      "identities": [
+        "AM.R6E8A.00.HDF"
+      ],
+      "sample_rates": [
+        100
+      ],
+      "records": 41415,
+      "sample_count": 8640015,
+      "first_utc": "2026-09-19T00:00:00.293000+00:00",
+      "last_utc": "2026-09-20T00:00:00.433000+00:00",
+      "first_et": "2026-09-18T20:00:00.293000-04:00",
+      "last_et": "2026-09-19T20:00:00.433000-04:00",
+      "gap_count": 0,
+      "gap_seconds_sum": 0,
+      "max_gap_seconds": 0
+    },
+    {
+      "file": "AM.R6E8A.00.HDF.D.2026(1).263",
+      "bytes": 21205504,
+      "sha256": "3418eacf8ff0201df79924600487b7a2e6cb2b5629fcbce6d5d74408cc1ecef5",
+      "identities": [
+        "AM.R6E8A.00.HDF"
+      ],
+      "sample_rates": [
+        100
+      ],
+      "records": 41417,
+      "sample_count": 8640093,
+      "first_utc": "2026-09-20T00:00:00.443000+00:00",
+      "last_utc": "2026-09-21T00:00:01.363000+00:00",
+      "first_et": "2026-09-19T20:00:00.443000-04:00",
+      "last_et": "2026-09-20T20:00:01.363000-04:00",
+      "gap_count": 0,
+      "gap_seconds_sum": 0,
+      "max_gap_seconds": 0
+    },
+    {
+      "file": "AM.R6E8A.00.HDF.D.2026(1).264",
+      "bytes": 21219840,
+      "sha256": "e253cc9538a3c3d9862dde70fe0e71b6057d5a7784ebadcedac8392dac6aa98f",
+      "identities": [
+        "AM.R6E8A.00.HDF"
+      ],
+      "sample_rates": [
+        100
+      ],
+      "records": 41445,
+      "sample_count": 8639869,
+      "first_utc": "2026-09-21T00:00:01.373000+00:00",
+      "last_utc": "2026-09-22T00:00:00.052999+00:00",
+      "first_et": "2026-09-20T20:00:01.373000-04:00",
+      "last_et": "2026-09-21T20:00:00.052999-04:00",
+      "gap_count": 0,
+      "gap_seconds_sum": 0,
+      "max_gap_seconds": 0
+    },
+    {
+      "file": "AM.R6E8A.00.HDF.D.2026(1).265",
+      "bytes": 21154304,
+      "sha256": "c258ca5507bb803aba4d761a6539c042f621a1ca2c4de632086f8b15f63507ac",
+      "identities": [
+        "AM.R6E8A.00.HDF"
+      ],
+      "sample_rates": [
+        100
+      ],
+      "records": 41317,
+      "sample_count": 8640075,
+      "first_utc": "2026-09-22T00:00:00.062999+00:00",
+      "last_utc": "2026-09-23T00:00:00.802999+00:00",
+      "first_et": "2026-09-21T20:00:00.062999-04:00",
+      "last_et": "2026-09-22T20:00:00.802999-04:00",
+      "gap_count": 0,
+      "gap_seconds_sum": 0,
+      "max_gap_seconds": 0
+    },
+    {
+      "file": "AM.R6E8A.00.HDF.D.2026(1).266",
+      "bytes": 21195776,
+      "sha256": "88af667f5b367f045a7c12733ae273821d975e4f0d222b66d3c5ae0175801ff6",
+      "identities": [
+        "AM.R6E8A.00.HDF"
+      ],
+      "sample_rates": [
+        100
+      ],
+      "records": 41398,
+      "sample_count": 8639970,
+      "first_utc": "2026-09-23T00:00:00.812999+00:00",
+      "last_utc": "2026-09-24T00:00:00.502999+00:00",
+      "first_et": "2026-09-22T20:00:00.812999-04:00",
+      "last_et": "2026-09-23T20:00:00.502999-04:00",
+      "gap_count": 0,
+      "gap_seconds_sum": 0,
+      "max_gap_seconds": 0
+    },
+    {
+      "file": "AM.R6E8A.00.HDF.D.2026(1).267",
+      "bytes": 21180416,
+      "sha256": "82e4982a7af335e3a150367d35a8f174c2d5116de32772c21c404fdfb067b4c0",
+      "identities": [
+        "AM.R6E8A.00.HDF"
+      ],
+      "sample_rates": [
+        100
+      ],
+      "records": 41368,
+      "sample_count": 8639980,
+      "first_utc": "2026-09-24T00:00:00.512999+00:00",
+      "last_utc": "2026-09-25T00:00:00.302999+00:00",
+      "first_et": "2026-09-23T20:00:00.512999-04:00",
+      "last_et": "2026-09-24T20:00:00.302999-04:00",
+      "gap_count": 0,
+      "gap_seconds_sum": 0,
+      "max_gap_seconds": 0
+    },
+    {
+      "file": "AM.R6E8A.00.HDF.D.2026(1).268",
+      "bytes": 21189120,
+      "sha256": "e79cfa4c8d360a8d7f7a7c3586bba38edeeb896258144bad6f02210e107cdf2f",
+      "identities": [
+        "AM.R6E8A.00.HDF"
+      ],
+      "sample_rates": [
+        100
+      ],
+      "records": 41385,
+      "sample_count": 8640067,
+      "first_utc": "2026-09-25T00:00:00.312999+00:00",
+      "last_utc": "2026-09-26T00:00:00.972999+00:00",
+      "first_et": "2026-09-24T20:00:00.312999-04:00",
+      "last_et": "2026-09-25T20:00:00.972999-04:00",
+      "gap_count": 0,
+      "gap_seconds_sum": 0,
+      "max_gap_seconds": 0
+    },
+    {
+      "file": "AM.R6E8A.00.HDF.D.2026(1).269",
+      "bytes": 21191680,
+      "sha256": "3913fed04876f6af4edf6f83d5885a594456fee839b9d4f8340b438bf9316e23",
+      "identities": [
+        "AM.R6E8A.00.HDF"
+      ],
+      "sample_rates": [
+        100
+      ],
+      "records": 41390,
+      "sample_count": 8639902,
+      "first_utc": "2026-09-26T00:00:00.982999+00:00",
+      "last_utc": "2026-09-26T23:59:59.992999+00:00",
+      "first_et": "2026-09-25T20:00:00.982999-04:00",
+      "last_et": "2026-09-26T19:59:59.992999-04:00",
+      "gap_count": 0,
+      "gap_seconds_sum": 0,
+      "max_gap_seconds": 0
+    },
+    {
+      "file": "AM.R6E8A.00.HDF.D.2026(1).270",
+      "bytes": 12224512,
+      "sha256": "8dc03c54fedb806848e749a45d9a57d86aefe81369df326a153d0b62e4839ef2",
+      "identities": [
+        "AM.R6E8A.00.HDF"
+      ],
+      "sample_rates": [
+        100
+      ],
+      "records": 23876,
+      "sample_count": 4981316,
+      "first_utc": "2026-09-27T00:00:00.002999+00:00",
+      "last_utc": "2026-09-27T14:21:42.137000+00:00",
+      "first_et": "2026-09-26T20:00:00.002999-04:00",
+      "last_et": "2026-09-27T10:21:42.137000-04:00",
+      "gap_count": 16,
+      "gap_seconds_sum": 1888.9840000000002,
+      "max_gap_seconds": 1301.246
+    }
+  ],
+  "new_complete_hdf_minutes": 0,
+  "duplicate_hdf_files": 9,
+  "ehz_note": "July 17 UTC historical EHZ; not current-window coverage",
+  "measurement_extension": false,
+  "gap_end_et": "2026-10-05T12:56:10.442897-04:00",
+  "baseline_commit": "59c7a65149092293350ec8310d46e55b2d9be479",
+  "checks": [
+    {
+      "name": "1_station_file_hashes_and_acquisition_dates",
+      "pass": true,
+      "evidence": {
+        "inspected_files": 10,
+        "hdf_last_sample_et": "2026-09-27T10:21:42.137000-04:00",
+        "ehz_supplied_last_sample_et": "2026-07-17T20:00:00.969000-04:00"
+      }
+    },
+    {
+      "name": "2_duplicate_reconciliation_and_no_false_gap_fill",
+      "pass": true,
+      "evidence": {
+        "duplicate_files": 9,
+        "new_complete_minutes": 0,
+        "latest_complete_minute_utc": "2026-09-27T14:20:00+00:00",
+        "cache_payload_sha256": "877e2b29008c1dda93cdb315b5d2a843be2f001dc740f52ec745622696206592"
+      }
+    },
+    {
+      "name": "3_cumulative_and_duration_recount",
+      "pass": true,
+      "evidence": {
+        "scope": "Accepted historical base checkpoint plus independently recounted complete tail minutes; no new waveform classification needed for exact duplicate files",
+        "recount": {
+          "analyzed_minutes": 214237,
+          "dom48_minutes": 95807,
+          "count10": 1722,
+          "mins10": 70440,
+          "count15": 949,
+          "mins15": 61599,
+          "count30": 526,
+          "mins30": 52954,
+          "count60": 282,
+          "mins60": 42727,
+          "ordinance_events": 130
+        },
+        "longest_minutes": 976
+      }
+    },
+    {
+      "name": "4_dashboard_and_both_report_agreement",
+      "pass": true,
+      "evidence": {
+        "reports": [
+          {
+            "path": "downloads/R6E8A-24-hour-report.pdf",
+            "stats": {
+              "analyzed_minutes": 1399,
+              "dom48_minutes": 1311,
+              "band_counts": {
+                "1-4": 72,
+                "4-8": 1311,
+                "8-16": 16,
+                "16-20": 0
+              },
+              "runs_total": 68,
+              "count10": 24,
+              "mins10": 1139,
+              "count15": 19,
+              "mins15": 1085,
+              "count30": 8,
+              "mins30": 835,
+              "count60": 7,
+              "mins60": 801,
+              "expected_clock_minutes": 1440,
+              "excluded_minutes": 41,
+              "coverage_pct": 97.1528,
+              "dom48_percent_of_analyzed": 93.7098,
+              "band_percent_of_analyzed": {
+                "1-4": 5.1465,
+                "4-8": 93.7098,
+                "8-16": 1.1437,
+                "16-20": 0.0
+              },
+              "shorter10_minutes": 172,
+              "latest_complete_minute_utc": "2026-09-27T14:20:00+00:00",
+              "longest_segment": {
+                "duration_minutes": 201,
+                "start_utc": "2026-09-27T08:00:00+00:00",
+                "end_exclusive_utc": "2026-09-27T11:21:00+00:00",
+                "start_et": "2026-09-27T04:00:00-04:00",
+                "end_exclusive_et": "2026-09-27T07:21:00-04:00",
+                "continues_before_window": false,
+                "reaches_report_cutoff": false
+              },
+              "run_scope": "Maximal consecutive complete 4-8-dominant segments clipped to this report window",
+              "time_bins": [
+                {
+                  "start_utc": "2026-09-26T14:21:00+00:00",
+                  "end_exclusive_utc": "2026-09-26T18:21:00+00:00",
+                  "analyzed_minutes": 240,
+                  "expected_clock_minutes": 240,
+                  "excluded_minutes": 0,
+                  "dom48_minutes": 227,
+                  "dom48_percent_of_analyzed": 94.5833
+                },
+                {
+                  "start_utc": "2026-09-26T18:21:00+00:00",
+                  "end_exclusive_utc": "2026-09-26T22:21:00+00:00",
+                  "analyzed_minutes": 240,
+                  "expected_clock_minutes": 240,
+                  "excluded_minutes": 0,
+                  "dom48_minutes": 199,
+                  "dom48_percent_of_analyzed": 82.9167
+                },
+                {
+                  "start_utc": "2026-09-26T22:21:00+00:00",
+                  "end_exclusive_utc": "2026-09-27T02:21:00+00:00",
+                  "analyzed_minutes": 240,
+                  "expected_clock_minutes": 240,
+                  "excluded_minutes": 0,
+                  "dom48_minutes": 234,
+                  "dom48_percent_of_analyzed": 97.5
+                },
+                {
+                  "start_utc": "2026-09-27T02:21:00+00:00",
+                  "end_exclusive_utc": "2026-09-27T06:21:00+00:00",
+                  "analyzed_minutes": 240,
+                  "expected_clock_minutes": 240,
+                  "excluded_minutes": 0,
+                  "dom48_minutes": 234,
+                  "dom48_percent_of_analyzed": 97.5
+                },
+                {
+                  "start_utc": "2026-09-27T06:21:00+00:00",
+                  "end_exclusive_utc": "2026-09-27T10:21:00+00:00",
+                  "analyzed_minutes": 207,
+                  "expected_clock_minutes": 240,
+                  "excluded_minutes": 33,
+                  "dom48_minutes": 194,
+                  "dom48_percent_of_analyzed": 93.7198
+                },
+                {
+                  "start_utc": "2026-09-27T10:21:00+00:00",
+                  "end_exclusive_utc": "2026-09-27T14:21:00+00:00",
+                  "analyzed_minutes": 232,
+                  "expected_clock_minutes": 240,
+                  "excluded_minutes": 8,
+                  "dom48_minutes": 223,
+                  "dom48_percent_of_analyzed": 96.1207
+                }
+              ]
+            },
+            "sha256": "0eabdc8234cfc877d5b02cfa403b950c97a158ed85c656d551dd4fb871c382cf"
+          },
+          {
+            "path": "downloads/R6E8A-7-day-trailing-report.pdf",
+            "stats": {
+              "analyzed_minutes": 10039,
+              "dom48_minutes": 8520,
+              "band_counts": {
+                "1-4": 1449,
+                "4-8": 8520,
+                "8-16": 70,
+                "16-20": 0
+              },
+              "runs_total": 346,
+              "count10": 128,
+              "mins10": 7722,
+              "count15": 99,
+              "mins15": 7391,
+              "count30": 58,
+              "mins30": 6534,
+              "count60": 36,
+              "mins60": 5616,
+              "expected_clock_minutes": 10080,
+              "excluded_minutes": 41,
+              "coverage_pct": 99.5933,
+              "dom48_percent_of_analyzed": 84.869,
+              "band_percent_of_analyzed": {
+                "1-4": 14.4337,
+                "4-8": 84.869,
+                "8-16": 0.6973,
+                "16-20": 0.0
+              },
+              "shorter10_minutes": 798,
+              "latest_complete_minute_utc": "2026-09-27T14:20:00+00:00",
+              "longest_segment": {
+                "duration_minutes": 803,
+                "start_utc": "2026-09-21T02:39:00+00:00",
+                "end_exclusive_utc": "2026-09-21T16:02:00+00:00",
+                "start_et": "2026-09-20T22:39:00-04:00",
+                "end_exclusive_et": "2026-09-21T12:02:00-04:00",
+                "continues_before_window": false,
+                "reaches_report_cutoff": false
+              },
+              "run_scope": "Maximal consecutive complete 4-8-dominant segments clipped to this report window",
+              "time_bins": [
+                {
+                  "start_utc": "2026-09-20T14:21:00+00:00",
+                  "end_exclusive_utc": "2026-09-21T14:21:00+00:00",
+                  "analyzed_minutes": 1440,
+                  "expected_clock_minutes": 1440,
+                  "excluded_minutes": 0,
+                  "dom48_minutes": 1408,
+                  "dom48_percent_of_analyzed": 97.7778
+                },
+                {
+                  "start_utc": "2026-09-21T14:21:00+00:00",
+                  "end_exclusive_utc": "2026-09-22T14:21:00+00:00",
+                  "analyzed_minutes": 1440,
+                  "expected_clock_minutes": 1440,
+                  "excluded_minutes": 0,
+                  "dom48_minutes": 1020,
+                  "dom48_percent_of_analyzed": 70.8333
+                },
+                {
+                  "start_utc": "2026-09-22T14:21:00+00:00",
+                  "end_exclusive_utc": "2026-09-23T14:21:00+00:00",
+                  "analyzed_minutes": 1440,
+                  "expected_clock_minutes": 1440,
+                  "excluded_minutes": 0,
+                  "dom48_minutes": 982,
+                  "dom48_percent_of_analyzed": 68.1944
+                },
+                {
+                  "start_utc": "2026-09-23T14:21:00+00:00",
+                  "end_exclusive_utc": "2026-09-24T14:21:00+00:00",
+                  "analyzed_minutes": 1440,
+                  "expected_clock_minutes": 1440,
+                  "excluded_minutes": 0,
+                  "dom48_minutes": 1114,
+                  "dom48_percent_of_analyzed": 77.3611
+                },
+                {
+                  "start_utc": "2026-09-24T14:21:00+00:00",
+                  "end_exclusive_utc": "2026-09-25T14:21:00+00:00",
+                  "analyzed_minutes": 1440,
+                  "expected_clock_minutes": 1440,
+                  "excluded_minutes": 0,
+                  "dom48_minutes": 1347,
+                  "dom48_percent_of_analyzed": 93.5417
+                },
+                {
+                  "start_utc": "2026-09-25T14:21:00+00:00",
+                  "end_exclusive_utc": "2026-09-26T14:21:00+00:00",
+                  "analyzed_minutes": 1440,
+                  "expected_clock_minutes": 1440,
+                  "excluded_minutes": 0,
+                  "dom48_minutes": 1338,
+                  "dom48_percent_of_analyzed": 92.9167
+                },
+                {
+                  "start_utc": "2026-09-26T14:21:00+00:00",
+                  "end_exclusive_utc": "2026-09-27T14:21:00+00:00",
+                  "analyzed_minutes": 1399,
+                  "expected_clock_minutes": 1440,
+                  "excluded_minutes": 41,
+                  "dom48_minutes": 1311,
+                  "dom48_percent_of_analyzed": 93.7098
+                }
+              ]
+            },
+            "sha256": "3c7db14bb70f9644cf8a19ee48e15bb3c9f2e0b3172fbf47f53357aa6e99e253"
+          }
+        ],
+        "visual_review": "All four rendered PDF pages inspected; no clipping or overlaps"
+      }
+    },
+    {
+      "name": "5_complete_publication_snapshot",
+      "pass": true,
+      "evidence": {
+        "timezone": "America/New_York (EDT on October 5)",
+        "source_wording": "neutral station-record terminology",
+        "gap": "missing time excluded; gap explicitly continues through October 5",
+        "links": "two current PDF hash links validated",
+        "live_delivery": "pending separate post-deployment file hash verification"
+      }
+    }
+  ],
+  "all_five_prepublication_checks_pass": true,
+  "checked_utc": "2026-10-05T16:59:27.830486+00:00",
+  "public_delivery": "pending",
+  "unchanged_input_hashes": {
+    "candidate_sha256": "6281bc7a05ff4ebb25537dbe166a2e63b107f0bf822bd536d31cc924eebcc4e2",
+    "cache_file_sha256": "0b13b63e97deec2ddbbedcd03aad4c2ab1be285b53bd201bdda6fd7365c0ce3e"
+  }
+}

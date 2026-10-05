@@ -430,7 +430,7 @@ def page_two(c, report, inputs, generated):
     source_line(c, "Minute cache - canonical payload", inputs["cache_payload_sha256"], y - 63, CACHE_PATH)
     source_line(c, "Uploaded channel status", inputs["status_sha256"], y - 96, STATUS_PATH)
     y -= 139
-    y = paragraph(c, "Source: accepted Raspberry Shake FDSN archive plus user-uploaded local miniSEED through Sep 27. New local samples have not been independently retrieved from public FDSN. File identities, timestamps and hashes are recorded in the minute cache. No post-cutoff time is scored.",
+    y = paragraph(c, "Record: verified R6E8A recordings and the accepted minute archive. File identities, measurement timestamps and hashes are retained in the evidence record. The October 5 upload repeats previously included HDF recordings; it adds no post-cutoff minutes. Missing time through October 5 is unobserved and excluded.",
                   34, y, 544, 7.8, 10)
     text(c, "*Account for up to 30 minutes of lag.", 34, y - 6, 8, GREEN)
     require(y - 6 > 34, "Report page two content exceeds the footer safe area")
@@ -445,7 +445,7 @@ def build_report(target, report, inputs, generated):
     name = "R6E8A 24-Hour Pressure Report" if report["hours"] == 24 else "R6E8A 7-Day Trailing Pressure Report"
     pdf.setTitle(name)
     pdf.setAuthor("R6E8A Unit 2709")
-    pdf.setSubject("Accepted FDSN cache plus uploaded local HDF; separate HDF and EHZ continuity")
+    pdf.setSubject("Verified R6E8A measurement archive; separate HDF and EHZ continuity")
     page_one(pdf, report, inputs, generated)
     page_two(pdf, report, inputs, generated)
     pdf.save()
@@ -514,7 +514,7 @@ def generate_reports(root=ROOT, generated_utc=None):
                 "cache_file_sha256": inputs["cache_file_sha256"],
                 "status_sha256": inputs["status_sha256"],
                 "requested_through_utc": iso(inputs["end"]), "generated_utc": iso(generated),
-                "all_five_checks_pass": True, "source_mode": "accepted FDSN cache plus user-uploaded local miniSEED",
+                "all_five_checks_pass": True, "source_mode": "verified R6E8A recordings and accepted minute archive",
                 "reports": []}
     for hours, path in ((24, "downloads/R6E8A-24-hour-report.pdf"),
                         (168, "downloads/R6E8A-7-day-trailing-report.pdf")):

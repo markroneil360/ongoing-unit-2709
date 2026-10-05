@@ -36,6 +36,11 @@
       "source_file": "AM.R6E8A.00.EHZ.D.2026.270"
     }
   },
-  "source": "User-uploaded local miniSEED, independently decoded by libmseed; not a public FDSN continuity check",
-  "display_note": "Uploaded files end September 27. The period after the last sample is unobserved; missing time is excluded."
+  "source": "Verified R6E8A station recordings; archived HDF and EHZ windows checked separately",
+  "display_note": "October 5 HDF files duplicate the previous patch. No supplied measurements extend the previously published cutoff through October 5. Missing time is excluded.",
+  "availability_check": {
+    "checked_utc": "2026-10-05T16:56:10.442897+00:00",
+    "status": "unconfirmed",
+    "reason": "Network policy prevented the current-channel request; this is not evidence of station outage."
+  }
 }
