@@ -326,7 +326,7 @@ def page_one(c, report, inputs, generated):
     short = "24-hour report" if hours == 24 else "7-day trailing report"
     page_base(c, short, 1, generated)
     text(c, "R6E8A Pressure Report", 34, 731, 24, INK, "Helvetica-Bold")
-    text(c, "24 hours ending at uploaded cutoff" if hours == 24 else "7 days ending at uploaded cutoff", 34, 710, 12, GREEN)
+    text(c, "24 hours ending at verified cutoff" if hours == 24 else "7 days ending at verified cutoff", 34, 710, 12, GREEN)
     text(c, f"From:  {et(report['start_utc'])}", 34, 687, 9.5)
     text(c, f"To:       {et(report['end_exclusive_utc'])}  (end exclusive)", 34, 672, 9.5)
     latest = stats["latest_complete_minute_utc"]
@@ -403,7 +403,7 @@ def page_two(c, report, inputs, generated):
           [(48, "left"), (299, "right"), (380, "right"), (464, "right"), (564, "right")],
           658, 21, 8.3)
     y = 658 - 21 * (len(rows) + 1) - 24
-    label(c, "Latest uploaded channel-status window", 34, y)
+    label(c, "Latest verified channel-status window", 34, y)
     status = inputs["status"]
     text(c, f"{et(status['window_start_utc'], True)}  to  {et(status['window_end_utc'], True)}",
          34, y - 16, 8.4, MUTED)
@@ -412,7 +412,7 @@ def page_two(c, report, inputs, generated):
         item = status["channels"][channel]
         status_rows.append((title, pct(item["coverage_pct"], 3),
                             et(item["latest_sample_utc"], True)))
-    table(c, ["Channel", "Window coverage", "Latest uploaded sample (Eastern)"], status_rows,
+    table(c, ["Channel", "Window coverage", "Latest verified sample (Eastern)"], status_rows,
           [(48, "left"), (305, "right"), (564, "right")], y - 27, 22, 8.2)
     y -= 111
     y = paragraph(c, f"These continuity checks cover {inputs['status_window_minutes']:g} minutes only. HDF supplies the frequency statistics; EHZ remains a separate vertical-motion record. EHZ trailing 24-hour or seven-day spectral results are not present in this cache.",
@@ -428,9 +428,9 @@ def page_two(c, report, inputs, generated):
     panel(c, 34, y - 122, 544, 109, DARK)
     source_line(c, "Verified calculation candidate", inputs["candidate_sha256"], y - 30, CANDIDATE_PATH)
     source_line(c, "Minute cache - canonical payload", inputs["cache_payload_sha256"], y - 63, CACHE_PATH)
-    source_line(c, "Uploaded channel status", inputs["status_sha256"], y - 96, STATUS_PATH)
+    source_line(c, "Verified channel status", inputs["status_sha256"], y - 96, STATUS_PATH)
     y -= 139
-    y = paragraph(c, "Record: verified R6E8A recordings and the accepted minute archive. File identities, measurement timestamps and hashes are retained in the evidence record. The October 5 upload repeats previously included HDF recordings; it adds no post-cutoff minutes. Missing time through October 5 is unobserved and excluded.",
+    y = paragraph(c, "Record: verified R6E8A recordings and the accepted minute archive. File identities, measurement timestamps and hashes are retained in the evidence record. Available complete minutes extend the record. Offline and incomplete intervals remain unobserved and excluded pending the device-to-USB miniSEED patch. Repeated uploads count once.",
                   34, y, 544, 7.8, 10)
     text(c, "*Account for up to 30 minutes of lag.", 34, y - 6, 8, GREEN)
     require(y - 6 > 34, "Report page two content exceeds the footer safe area")
@@ -548,3 +548,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
