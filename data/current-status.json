@@ -1,46 +1,41 @@
 {
   "station": "AM.R6E8A.00",
-  "generated_utc": "2026-10-02T06:44:52.679602+00:00",
-  "generated_et": "2026-10-02 02:44:52 AM EDT",
-  "window_start_utc": "2026-09-27T14:10:00+00:00",
-  "window_end_utc": "2026-09-27T14:21:42.140000+00:00",
+  "generated_utc": "2026-10-09T20:34:04.153316+00:00",
+  "generated_et": "2026-10-09 04:34:04 PM EDT",
+  "window_start_utc": "2026-10-09T19:44:04.153316+00:00",
+  "window_end_utc": "2026-10-09T20:04:04.153316+00:00",
   "channels": {
     "HDF": {
       "channel": "HDF",
       "ok": true,
-      "coverage_pct": 99.074,
-      "segments": null,
+      "coverage_pct": 99.999,
+      "segments": 1,
       "sample_rates_hz": [
         100.0
       ],
-      "latest_sample_utc": "2026-09-27T14:21:42.137000+00:00",
-      "latest_sample_et": "2026-09-27 10:21:42 AM EDT",
+      "latest_sample_utc": "2026-10-09T20:04:04.150000+00:00",
+      "latest_sample_et": "2026-10-09 04:04:04 PM EDT",
+      "edge_gap_seconds": 0.003316,
       "identity_verified": true,
       "window_clipped_before_coverage": true,
-      "missing_samples": 650,
-      "source_file": "AM.R6E8A.00.HDF.D.2026.270"
+      "url": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-10-09T19:44:04.153316&end=2026-10-09T20:04:04.153316&format=miniseed&nodata=404"
     },
     "EHZ": {
       "channel": "EHZ",
       "ok": true,
-      "coverage_pct": 99.036,
-      "segments": null,
+      "coverage_pct": 99.999,
+      "segments": 1,
       "sample_rates_hz": [
         100.0
       ],
-      "latest_sample_utc": "2026-09-27T14:21:41.857000+00:00",
-      "latest_sample_et": "2026-09-27 10:21:41 AM EDT",
+      "latest_sample_utc": "2026-10-09T20:04:04.150000+00:00",
+      "latest_sample_et": "2026-10-09 04:04:04 PM EDT",
+      "edge_gap_seconds": 0.003316,
       "identity_verified": true,
       "window_clipped_before_coverage": true,
-      "missing_samples": 677,
-      "source_file": "AM.R6E8A.00.EHZ.D.2026.270"
+      "url": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=EHZ&start=2026-10-09T19:44:04.153316&end=2026-10-09T20:04:04.153316&format=miniseed&nodata=404"
     }
   },
-  "source": "Verified R6E8A station recordings; archived HDF and EHZ windows checked separately",
-  "display_note": "October 5 HDF files duplicate the previous patch. No supplied measurements extend the previously published cutoff through October 5. Missing time is excluded.",
-  "availability_check": {
-    "checked_utc": "2026-10-05T16:56:10.442897+00:00",
-    "status": "unconfirmed",
-    "reason": "Network policy prevented the current-channel request; this is not evidence of station outage."
-  }
+  "source": "Raspberry Shake public FDSN DataSelect",
+  "display_note": "*Account for up to 30 minutes of lag. Missing acquisition time is not scored as zero, quiet, normal, compliant, or below benchmark."
 }

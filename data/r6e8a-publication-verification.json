@@ -1,0 +1,33 @@
+{
+  "station": "AM.R6E8A.00",
+  "checked_utc": "2026-10-09T20:34:07.100430+00:00",
+  "checked_et": "2026-10-09T16:34:07.100430-04:00",
+  "candidate_sha256": "a50ad4fd51d2f238e5f57f7ef60b78c98096fe873fb2011303e63c637cd16a4f",
+  "cache_payload_sha256": "985a2766bd186c8f8994db145c72a14f8d58769adcf10f3e5dca9ffcea538c48",
+  "status_sha256": "61a9a55cbe4e03bd7db4ec0cff407fcc9f94356faf55e26ebe1c6b7bbfc5d9c3",
+  "checks": [
+    {
+      "name": "1_station_hashes_and_acquisition",
+      "pass": true
+    },
+    {
+      "name": "2_duplicate_gap_and_provenance",
+      "pass": true
+    },
+    {
+      "name": "3_independent_cumulative_recount",
+      "pass": true
+    },
+    {
+      "name": "4_measurement_dates_and_freshness",
+      "pass": true
+    },
+    {
+      "name": "5_dashboard_snapshot_values_and_gap_disclosure",
+      "pass": true
+    }
+  ],
+  "all_five_checks_pass": true,
+  "public_delivery": "Verified separately by deployment workflow",
+  "offline_patch": "Pending device-to-USB miniSEED; gaps excluded"
+}
