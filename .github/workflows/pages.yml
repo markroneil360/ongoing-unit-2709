@@ -49,6 +49,11 @@ jobs:
         run: |
           python3 -m pip install reportlab
           python3 scripts/generate_reports.py --verify-only
+      - name: Validate independent Northville snapshot
+        if: hashFiles('northville-r19bb/index.html') != ''
+        run: |
+          python3 -m pip install pypdf
+          python3 northville-r19bb/tools/verify_snapshot.py northville-r19bb
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
@@ -120,6 +125,19 @@ jobs:
           if not report['all_public_files_match'] or not report['candidate_all_five_checks_pass'] or not report['pdf_manifest_matches_inputs']:
               raise SystemExit('Public delivery verification failed; do not report task complete.')
           PY
+      - name: Verify independent Northville public delivery
+        if: hashFiles('northville-r19bb/index.html') != ''
+        env:
+          NORTHVILLE_URL: ${{ steps.deployment.outputs.page_url }}northville-r19bb/
+        run: python3 northville-r19bb/tools/verify_snapshot.py northville-r19bb "$NORTHVILLE_URL"
+      - name: Preserve Northville delivery receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: r19bb-public-delivery-verification
+          path: r19bb-delivery-verification.json
+          if-no-files-found: ignore
+          retention-days: 30
       - name: Preserve public delivery verification receipt
         if: always()
         uses: actions/upload-artifact@v4

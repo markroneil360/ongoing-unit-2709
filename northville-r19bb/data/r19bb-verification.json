@@ -1,0 +1,78 @@
+{
+  "station": "AM.R19BB.00",
+  "checked_at": "2026-10-10T20:51:36.094955-04:00",
+  "five_checks": [
+    {
+      "check": "Station identity and chronology",
+      "result": "passed",
+      "channels": [
+        "EHZ",
+        "HDF"
+      ],
+      "source_hashes_rechecked": true
+    },
+    {
+      "check": "Duplicate and overlap reconciliation",
+      "result": "passed",
+      "unique_files": 12,
+      "duplicate_files": 1,
+      "conflicts": 0
+    },
+    {
+      "check": "Independent cumulative recount",
+      "result": "passed",
+      "complete_hdf_minutes": 7371,
+      "dominant_4_8_minutes": 352,
+      "longest_minutes": 7,
+      "event_counts": {
+        "10": 0,
+        "30": 0,
+        "60": 0
+      }
+    },
+    {
+      "check": "Dashboard and reports use matching windows and data",
+      "result": "passed",
+      "reports": {
+        "24-hour": {
+          "complete_minutes": 1440,
+          "dominant_4_8_minutes": 109,
+          "counts": {
+            "10": 0,
+            "30": 0,
+            "60": 0
+          },
+          "longest_minutes": 6
+        },
+        "7-day-trailing": {
+          "complete_minutes": 5759,
+          "dominant_4_8_minutes": 274,
+          "counts": {
+            "10": 0,
+            "30": 0,
+            "60": 0
+          },
+          "longest_minutes": 7
+        }
+      }
+    },
+    {
+      "check": "Station isolation, honest status and download integrity",
+      "result": "passed",
+      "downloads_exist": true,
+      "browser_visual_qa": "Unavailable: managed browser skill absent; responsive layout inspected in source. PDF rendering reviewed separately.",
+      "pdf_visual_qa": "Passed: all four final rendered pages inspected"
+    }
+  ],
+  "archive_sha256": "cbfdba4392b52ed10507c5ef0acf5b1fdb24b34a6f796981912569f2e2ba241e",
+  "raw_counts_not_calibrated_pressure": true,
+  "verification_scope": "Local build and report checks; online publication not verified",
+  "online_publication": "Pending: GitHub Pages delivery verification",
+  "archive_reconciliation": {
+    "prior_hdf_minutes": 7198,
+    "complete_hdf_minutes_added": 173,
+    "prior_hdf_classifications_preserved": true,
+    "prior_ehz_minutes_preserved": 7369,
+    "retry_downloads_match_prior_hashes": true
+  }
+}

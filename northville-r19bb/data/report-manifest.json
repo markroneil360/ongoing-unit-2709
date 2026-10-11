@@ -1,0 +1,40 @@
+{
+  "station": "AM.R19BB.00",
+  "generated_at": "2026-10-11T00:51:35.320407+00:00",
+  "reports": {
+    "24-hour": {
+      "filename": "R19BB-24-hour-report.pdf",
+      "start_utc": "2026-04-23T02:53:00+00:00",
+      "end_exclusive_utc": "2026-04-24T02:53:00+00:00",
+      "hdf": {
+        "complete_minutes": 1440,
+        "dominant_4_8_minutes": 109,
+        "counts": {
+          "10": 0,
+          "30": 0,
+          "60": 0
+        },
+        "longest_minutes": 6
+      },
+      "ehz_complete_minutes": 171,
+      "sha256": "67866995c0e4ff077a9bb5f685166bcfb9bf0262a1b420f3e5bde7b3f4a8304a"
+    },
+    "7-day-trailing": {
+      "filename": "R19BB-7-day-trailing-report.pdf",
+      "start_utc": "2026-04-17T02:53:00+00:00",
+      "end_exclusive_utc": "2026-04-24T02:53:00+00:00",
+      "hdf": {
+        "complete_minutes": 5759,
+        "dominant_4_8_minutes": 274,
+        "counts": {
+          "10": 0,
+          "30": 0,
+          "60": 0
+        },
+        "longest_minutes": 7
+      },
+      "ehz_complete_minutes": 5757,
+      "sha256": "335bd819d3a7a9213c198ffc3033ff145bd792ac5afb361dc6a780efb0f302f7"
+    }
+  }
+}

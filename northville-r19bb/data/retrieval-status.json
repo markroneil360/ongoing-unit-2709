@@ -1,0 +1,10 @@
+{
+  "station": "AM.R19BB.00",
+  "requested_at_eastern": "2026-10-10T20:48:03-04:00",
+  "checked_at_eastern": "2026-10-10T20:52:18.910252-04:00",
+  "waveform_retrieval": "HTTP 403 Forbidden from this execution environment",
+  "availability": "Unverified; this response does not establish station outage",
+  "measurement_archive_changed": true,
+  "latest_verified_hdf_sample_eastern": "2026-04-23T22:53:01.623-04:00",
+  "source_synchronization": "Sites source denied HTTP 403; publishing isolated GitHub Pages directory"
+}
