@@ -27,6 +27,38 @@ def duration(minutes):
     h, m = divmod(int(minutes), 60)
     return f'{h} Hours {m} Minutes' if m else f'{h} Hours'
 
+def longest_band_card(inputs, narrow):
+    audit = json.loads((ROOT / 'data/r6e8a-longest-band-run-audit.json').read_text())
+    historical = audit['historical_source']
+    if historical['sha256'] != inputs['candidate']['base_provenance']['sha256']:
+        raise ValueError('Longest-run historical source differs from accepted base')
+    best = dict(historical['longest_1_8'])
+    current = dict(historical['suffix_1_8'])
+    for t, band in sorted(inputs['minutes'].items()):
+        if band not in ('1-4', '4-8'):
+            current = None
+            continue
+        if current and t == current['end']:
+            current = dict(current, end=t + 60, n=current['n'] + 1)
+        else:
+            current = {'start': t, 'end': t + 60, 'n': 1}
+        if current['n'] > best['n']:
+            best = dict(current)
+    def label(t):
+        return datetime.fromtimestamp(t, timezone.utc).astimezone(TZ).strftime('%B %-d, %Y · %-I:%M %p %Z')
+    old = narrow['longest_runs'][0]
+    return (
+        '<article class="stat-card"><div class="stat-title">Longest Continuous Run</div>'
+        f'<div class="stat-number">{duration(best["n"])}<span>1–8 Hz Dominant</span></div>'
+        f'<div class="stat-date">Start: {label(best["start"])}<br>End: {label(best["end"])}</div>'
+        '<div class="why-title">Separate 4–8 Hz record</div>'
+        f'<p class="why-copy"><b>{duration(narrow["longest_minutes"])}</b><br>'
+        f'{stamp(old["start_utc"], False)} — {stamp(old["end_utc"], False)}.</p>'
+        '<p class="why-copy">Longest verified run since April 12, 2026 in available complete HDF minutes. '
+        '1–8 Hz includes minutes classified as either 1–4 or 4–8 Hz; missing minutes break the run. '
+        'End times mark the end of the last complete minute. Cumulative activity across separate events is reported separately.</p></article>'
+    )
+
 def render(inputs, html, now):
     candidate, status = inputs['candidate'], inputs['status']
     c = candidate['current']
@@ -73,6 +105,9 @@ def render(inputs, html, now):
     end = datetime.fromisoformat(longest['end_et']) - timedelta(seconds=1)
     dates = start.strftime('%B %-d, %Y') if start.date() == end.date() else start.strftime('%B %-d, %Y') + ' — ' + end.strftime('%B %-d, %Y')
     content = re.sub(r'<div class="stat-date">Occurred: .*?</div>', '<div class="stat-date">Occurred: ' + dates + '</div>', content)
+    content, card_count = re.subn(r'<article class="stat-card"><div class="stat-title">Longest Continuous Run</div>.*?</article>', lambda _: longest_band_card(inputs, c), content, flags=re.S)
+    if card_count != 1:
+        raise ValueError('Expected exactly one longest-run card')
     replace(r'<!-- EVIDENCE SUMMARY START -->.*?<!-- EVIDENCE SUMMARY END -->', '<!-- EVIDENCE SUMMARY START -->' + content + '<!-- EVIDENCE SUMMARY END -->', 'metrics')
     html = re.sub(r'The [\d,.]+-hour environmental record', f'The {c["dom48_hours"]:,.2f}-hour environmental record', html)
     html = re.sub(r'the <b>[\d,]+-Event ordinance subset</b>', f'the <b>{c["ordinance_events"]:,}-Event ordinance subset</b>', html)
