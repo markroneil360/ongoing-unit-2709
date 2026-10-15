@@ -1,0 +1,75 @@
+{
+  "station": "AM.R6E8A.00",
+  "channel": "HDF",
+  "scope_start_et": "2026-04-12T00:00:00-04:00",
+  "historical_source": {
+    "name": "R6E8A-HDF-minute-4-8Hz(1).csv",
+    "sha256": "4c2e8c43d436f08ea57ae02840fcd89bc94d5e852e420e1bd52981ca9665054b",
+    "complete_minutes": 148455,
+    "base_end_exclusive_utc": "2026-08-12T19:13:00+00:00",
+    "longest_1_8": {
+      "start": 1779727320,
+      "end": 1779810180,
+      "n": 1381
+    },
+    "suffix_1_8": {
+      "start": 1786561260,
+      "end": 1786561980,
+      "n": 12
+    }
+  },
+  "tail_payload_sha256": "4fee61dc54f79f859e33c070f67c65a8c8198fb6ab9048e28cf1636a2dbd28b6",
+  "longest_1_8": {
+    "start": 1789931940,
+    "end": 1790093280,
+    "n": 2689
+  },
+  "longest_4_8": {
+    "start": 1791681660,
+    "end": 1791742560,
+    "n": 1015
+  },
+  "method": "Maximal consecutive complete clock minutes classified in 1-4 or 4-8 Hz; missing minutes break a run. Narrow 4-8 record retained separately.",
+  "checks": [
+    {
+      "name": "historical_source_sha256",
+      "pass": true
+    },
+    {
+      "name": "historical_count_and_bands_match_accepted_base",
+      "pass": true
+    },
+    {
+      "name": "station_HDF_only",
+      "pass": true
+    },
+    {
+      "name": "tail_minute_count",
+      "pass": true
+    },
+    {
+      "name": "unique_ordered_clock_minutes",
+      "pass": true
+    },
+    {
+      "name": "no_cache_conflicts",
+      "pass": true
+    },
+    {
+      "name": "every_winning_minute_contiguous_and_1_8",
+      "pass": true
+    },
+    {
+      "name": "both_boundary_minutes_outside_1_8",
+      "pass": true
+    },
+    {
+      "name": "historical_and_35_minute_seam_shorter",
+      "pass": true
+    },
+    {
+      "name": "4_8_record_matches_candidate_1015_minutes",
+      "pass": true
+    }
+  ]
+}
