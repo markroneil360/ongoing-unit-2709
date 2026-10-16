@@ -1,41 +1,38 @@
 {
   "station": "AM.R6E8A.00",
-  "generated_utc": "2026-10-15T12:20:54.967089+00:00",
-  "generated_et": "2026-10-15 08:20:54 AM EDT",
-  "window_start_utc": "2026-10-15T11:30:54.967089+00:00",
-  "window_end_utc": "2026-10-15T11:50:54.967089+00:00",
+  "generated_utc": "2026-10-16T03:09:43+00:00",
+  "generated_et": "2026-10-15 11:09:43 PM EDT",
+  "source": "Direct RS Boom MiniSEED upload (HDF and EHZ)",
+  "direct_archive_edge_et": {
+    "HDF": "2026-10-15 10:51:01 PM EDT",
+    "EHZ": "2026-10-15 10:50:50 PM EDT"
+  },
+  "direct_archive_start_et": "2026-10-08 09:38:35 AM EDT",
   "channels": {
     "HDF": {
       "channel": "HDF",
       "ok": true,
-      "coverage_pct": 100.0,
-      "segments": 1,
-      "sample_rates_hz": [
-        100.0
+      "coverage_pct": 100,
+      "latest_sample_utc": "2026-10-16T02:51:01.580000+00:00",
+      "latest_sample_et": "2026-10-15 10:51:01 PM EDT",
+      "sample_rate_hz": [
+        100
       ],
-      "latest_sample_utc": "2026-10-15T11:50:54.960000+00:00",
-      "latest_sample_et": "2026-10-15 07:50:54 AM EDT",
-      "edge_gap_seconds": 0.007089,
-      "identity_verified": true,
-      "window_clipped_before_coverage": true,
-      "url": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=HDF&start=2026-10-15T11:30:54.967089&end=2026-10-15T11:50:54.967089&format=miniseed&nodata=404"
+      "identity_verified": true
     },
     "EHZ": {
       "channel": "EHZ",
       "ok": true,
-      "coverage_pct": 100.0,
-      "segments": 1,
-      "sample_rates_hz": [
-        100.0
+      "coverage_pct": 100,
+      "latest_sample_utc": "2026-10-16T02:50:50.630000+00:00",
+      "latest_sample_et": "2026-10-15 10:50:50 PM EDT",
+      "sample_rate_hz": [
+        100
       ],
-      "latest_sample_utc": "2026-10-15T11:50:54.960000+00:00",
-      "latest_sample_et": "2026-10-15 07:50:54 AM EDT",
-      "edge_gap_seconds": 0.007089,
-      "identity_verified": true,
-      "window_clipped_before_coverage": true,
-      "url": "https://data.raspberryshake.org/fdsnws/dataselect/1/query?net=AM&sta=R6E8A&loc=00&cha=EHZ&start=2026-10-15T11:30:54.967089&end=2026-10-15T11:50:54.967089&format=miniseed&nodata=404"
+      "identity_verified": true
     }
   },
-  "source": "Raspberry Shake public FDSN DataSelect",
+  "cumulative_analysis_edge_et": "2026-10-15 07:49 AM EDT",
+  "cumulative_recount_status": "pending; no cumulative totals were changed in this publication",
   "display_note": "*Account for up to 30 minutes of lag. Missing acquisition time is not scored as zero, quiet, normal, compliant, or below benchmark."
 }
