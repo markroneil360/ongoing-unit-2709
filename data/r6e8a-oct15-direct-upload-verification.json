@@ -1,0 +1,234 @@
+{
+  "schema_version": 1,
+  "station": "AM.R6E8A.00",
+  "publication_utc": "2026-10-16T03:09:43+00:00",
+  "source": "Direct RS Boom MiniSEED upload",
+  "channels": [
+    "HDF",
+    "EHZ"
+  ],
+  "record_length_bytes": 512,
+  "checks": {
+    "station_and_channel_identity": "PASS",
+    "source_hashes_and_file_headers": "PASS",
+    "acquisition_edge_and_channel_separation": "PASS",
+    "cumulative_recount": "PENDING; dashboard cumulative totals retained unchanged",
+    "publication_text_consistency": "PASS"
+  },
+  "archive_start_utc": "2026-10-08T13:38:35.240000+00:00",
+  "archive_end_utc": {
+    "HDF": "2026-10-16T02:51:01.580000+00:00",
+    "EHZ": "2026-10-16T02:50:50.630000+00:00"
+  },
+  "notable_source_gaps_utc": [
+    [
+      "2026-10-10T03:37:48.180000Z",
+      "2026-10-10T03:37:54.177000Z"
+    ],
+    [
+      "2026-10-12T06:18:00.947000Z",
+      "2026-10-12T06:20:02.860000Z"
+    ]
+  ],
+  "files": [
+    {
+      "file": "AM.R6E8A.00.EHZ.D.2026.281",
+      "bytes": 9247232,
+      "sha256": "7b40a8884158aea807ad6dbe6e6a27f5f3e0da10a77ca0530c38fe1c7902b6c5",
+      "records": 564,
+      "start_utc": "2026-10-08T13:38:35.240000+00:00",
+      "end_exclusive_utc": "2026-10-08T23:58:30.980000+00:00",
+      "samples": 116430,
+      "sample_rate_hz": 100,
+      "integrity_failures": 0
+    },
+    {
+      "file": "AM.R6E8A.00.EHZ.D.2026.282",
+      "bytes": 21403136,
+      "sha256": "0f2f1f189383a3cbca35ffddaefacdc94507b0fcc1a7347930ebe1d874742413",
+      "records": 1306,
+      "start_utc": "2026-10-09T00:00:01.980000+00:00",
+      "end_exclusive_utc": "2026-10-09T23:58:33.920000+00:00",
+      "samples": 269971,
+      "sample_rate_hz": 100,
+      "integrity_failures": 0
+    },
+    {
+      "file": "AM.R6E8A.00.EHZ.D.2026.283",
+      "bytes": 21410304,
+      "sha256": "dbd13a405034fc0f8710f7052084606cc030b528154eea319b559bc0b0675c35",
+      "records": 1306,
+      "start_utc": "2026-10-10T00:00:00.550000+00:00",
+      "end_exclusive_utc": "2026-10-10T23:58:04.517000+00:00",
+      "samples": 269835,
+      "sample_rate_hz": 100,
+      "integrity_failures": 0
+    },
+    {
+      "file": "AM.R6E8A.00.EHZ.D.2026.284",
+      "bytes": 21409792,
+      "sha256": "7b24292c004c08a2f3af9a783b1ba6f17f80e4b798eae420306af1ae35212b97",
+      "records": 1306,
+      "start_utc": "2026-10-11T00:00:00.397000+00:00",
+      "end_exclusive_utc": "2026-10-11T23:58:07.777000+00:00",
+      "samples": 269861,
+      "sample_rate_hz": 100,
+      "integrity_failures": 0
+    },
+    {
+      "file": "AM.R6E8A.00.EHZ.D.2026.285",
+      "bytes": 21366784,
+      "sha256": "e8cb47a5da9c89674a78adc729e9a2736ef0908b04493245cd57d801aace5779",
+      "records": 1304,
+      "start_utc": "2026-10-12T00:00:01.317000+00:00",
+      "end_exclusive_utc": "2026-10-12T23:58:48.810000+00:00",
+      "samples": 269612,
+      "sample_rate_hz": 100,
+      "integrity_failures": 0
+    },
+    {
+      "file": "AM.R6E8A.00.EHZ.D.2026.286",
+      "bytes": 21391872,
+      "sha256": "6bb7d79b145eb098dfb8fb2f4fae8d5ef9c4e3270966043cd92fcc5cb2daa347",
+      "records": 1305,
+      "start_utc": "2026-10-13T00:00:01.180000+00:00",
+      "end_exclusive_utc": "2026-10-13T23:58:14.120000+00:00",
+      "samples": 269866,
+      "sample_rate_hz": 100,
+      "integrity_failures": 0
+    },
+    {
+      "file": "AM.R6E8A.00.EHZ.D.2026.287",
+      "bytes": 21409280,
+      "sha256": "11f53ef12764ea1cc1a1f2361be5cbc9bb69717f47a7248a9f548f9d6a712d7f",
+      "records": 1306,
+      "start_utc": "2026-10-14T00:00:01.670000+00:00",
+      "end_exclusive_utc": "2026-10-14T23:58:09.640000+00:00",
+      "samples": 269859,
+      "sample_rate_hz": 100,
+      "integrity_failures": 0
+    },
+    {
+      "file": "AM.R6E8A.00.EHZ.D.2026.288",
+      "bytes": 21400064,
+      "sha256": "6e6063366b3ddc7442ef14bb590c8333ad47e2b1bf2cb5c405d804f5487625e6",
+      "records": 1306,
+      "start_utc": "2026-10-15T00:00:01.240000+00:00",
+      "end_exclusive_utc": "2026-10-15T23:58:47.420000+00:00",
+      "samples": 269986,
+      "sample_rate_hz": 100,
+      "integrity_failures": 0
+    },
+    {
+      "file": "AM.R6E8A.00.EHZ.D.2026.289",
+      "bytes": 2537984,
+      "sha256": "4227c16f80701179ffa6a46bfc1025b4ab728cd2af1da0e63a147c3f17f968eb",
+      "records": 154,
+      "start_utc": "2026-10-16T00:00:01.810000+00:00",
+      "end_exclusive_utc": "2026-10-16T02:48:46.540000+00:00",
+      "samples": 31824,
+      "sample_rate_hz": 100,
+      "integrity_failures": 0
+    },
+    {
+      "file": "AM.R6E8A.00.HDF.D.2026.281",
+      "bytes": 9138176,
+      "sha256": "77eee4f740576f822d477f452e11b4621f69218ff4e8e71e2b8916ca726fc9d9",
+      "records": 557,
+      "start_utc": "2026-10-08T13:38:35.380000+00:00",
+      "end_exclusive_utc": "2026-10-08T23:58:06.250000+00:00",
+      "samples": 116405,
+      "sample_rate_hz": 100,
+      "integrity_failures": 0
+    },
+    {
+      "file": "AM.R6E8A.00.HDF.D.2026.282",
+      "bytes": 21169152,
+      "sha256": "73a8d4fbdbb505fcb3dbbdd3057523bf1d431109b72ee50f7e3cc28d74527925",
+      "records": 1292,
+      "start_utc": "2026-10-09T00:00:01.170000+00:00",
+      "end_exclusive_utc": "2026-10-09T23:58:52.540000+00:00",
+      "samples": 269899,
+      "sample_rate_hz": 100,
+      "integrity_failures": 0
+    },
+    {
+      "file": "AM.R6E8A.00.HDF.D.2026.283",
+      "bytes": 21174272,
+      "sha256": "d3a667253fcfd94f26c198a0d6c078366b7f4738b1aa564542557ed3012b5a0c",
+      "records": 1292,
+      "start_utc": "2026-10-10T00:00:01.250000+00:00",
+      "end_exclusive_utc": "2026-10-10T23:58:30.567000+00:00",
+      "samples": 269866,
+      "sample_rate_hz": 100,
+      "integrity_failures": 0
+    },
+    {
+      "file": "AM.R6E8A.00.HDF.D.2026.284",
+      "bytes": 21182464,
+      "sha256": "0183ead6f2157e2fca2fe3c618269a36c62dc550583a08f828458d35cf0d839c",
+      "records": 1292,
+      "start_utc": "2026-10-11T00:00:00.467000+00:00",
+      "end_exclusive_utc": "2026-10-11T23:57:58.317000+00:00",
+      "samples": 269918,
+      "sample_rate_hz": 100,
+      "integrity_failures": 0
+    },
+    {
+      "file": "AM.R6E8A.00.HDF.D.2026.285",
+      "bytes": 21149184,
+      "sha256": "750bc221cba8f0e9a1e739094fff5b1a861f808a05c5b73c7ca4791f0fe27aad",
+      "records": 1290,
+      "start_utc": "2026-10-12T00:00:01.357000+00:00",
+      "end_exclusive_utc": "2026-10-12T23:57:59.060000+00:00",
+      "samples": 269434,
+      "sample_rate_hz": 100,
+      "integrity_failures": 0
+    },
+    {
+      "file": "AM.R6E8A.00.HDF.D.2026.286",
+      "bytes": 21177856,
+      "sha256": "2e649adbae8219828dd87893e20db5dbfa7a4ead5725ce3add5c929af76c07e4",
+      "records": 1292,
+      "start_utc": "2026-10-13T00:00:00.330000+00:00",
+      "end_exclusive_utc": "2026-10-13T23:58:15.960000+00:00",
+      "samples": 269838,
+      "sample_rate_hz": 100,
+      "integrity_failures": 0
+    },
+    {
+      "file": "AM.R6E8A.00.HDF.D.2026.287",
+      "bytes": 21191680,
+      "sha256": "96d213f8edfde3f1be60f033d2cd9d6cc657b9467e00a098719a210a434cd8c7",
+      "records": 1293,
+      "start_utc": "2026-10-14T00:00:00.350000+00:00",
+      "end_exclusive_utc": "2026-10-14T23:58:26.030000+00:00",
+      "samples": 269929,
+      "sample_rate_hz": 100,
+      "integrity_failures": 0
+    },
+    {
+      "file": "AM.R6E8A.00.HDF.D.2026.288",
+      "bytes": 21180416,
+      "sha256": "fff79e91c291d223d16f4e822ed031eb3b62a9b4b6cb32ee70c2433d6441e666",
+      "records": 1292,
+      "start_utc": "2026-10-15T00:00:00.020000+00:00",
+      "end_exclusive_utc": "2026-10-15T23:58:05.680000+00:00",
+      "samples": 269946,
+      "sample_rate_hz": 100,
+      "integrity_failures": 0
+    },
+    {
+      "file": "AM.R6E8A.00.HDF.D.2026.289",
+      "bytes": 2514944,
+      "sha256": "259699239ea913d9e6d2d18bacf6e69bf44206f0baa293e4ba62596b199b9b5d",
+      "records": 153,
+      "start_utc": "2026-10-16T00:00:00.210000+00:00",
+      "end_exclusive_utc": "2026-10-16T02:49:23.440000+00:00",
+      "samples": 31942,
+      "sample_rate_hz": 100,
+      "integrity_failures": 0
+    }
+  ],
+  "note": "The direct archive edge is published as acquisition status. Existing cumulative event totals and downloadable reports remain bound to the prior analyzed cutoff until the full frequency recount is completed."
+}
