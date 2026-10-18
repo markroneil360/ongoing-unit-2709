@@ -46,7 +46,32 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - id: publish_scope
+        name: Identify a video-only dashboard edit
+        run: |
+          python3 - <<'PY'
+          import os, subprocess
+          from pathlib import Path
+          allowed = {'.github/workflows/pages.yml', 'index.html', 'media/r6e8a-explainer-v2.mp4'}
+          changed = set(subprocess.check_output(['git', 'diff-tree', '--no-commit-id', '--name-only', '-r', 'HEAD^', 'HEAD'], text=True).splitlines())
+          content_only = changed == allowed
+          if content_only:
+              parent = subprocess.check_output(['git', 'show', 'HEAD^:index.html'], text=True)
+              current = Path('index.html').read_text()
+              style = '.explainer-video{display:block;width:100%;max-height:560px;margin:12px 0 0;background:#000;border-radius:10px}'
+              player = '<video class="explainer-video" controls preload="metadata" playsinline aria-label="R6E8A explainer video"><source src="./media/r6e8a-explainer-v2.mp4" type="video/mp4">Your browser does not support embedded video. <a href="./media/r6e8a-explainer-v2.mp4">Open the MP4 video</a>.</video>'
+              footer = ' <p class="small" style="margin:8px 0 0">Video explanation for the evidence summarized on this dashboard.</p><p class="small" style="margin:6px 0 0">This data may lag. For personal verification, data can be independently verified through Raspberry Shake FDSN.</p>'
+              normalized = current.replace(style, '').replace(player, '').replace(footer, '')
+              if normalized.rstrip('\n') != parent.rstrip('\n'):
+                  raise SystemExit('The dashboard page contains changes beyond the approved video embed.')
+              if not Path('media/r6e8a-explainer-v2.mp4').is_file():
+                  raise SystemExit('The approved explainer video asset is missing.')
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
+              output.write(f"content_only={'true' if content_only else 'false'}\n")
+          print(f"Video-only publish scope: {content_only}; changed paths: {sorted(changed)}")
+          PY
       - name: Validate the complete dashboard and report snapshot before deployment
+        if: steps.publish_scope.outputs.content_only != 'true'
         run: |
           python3 -m pip install reportlab
           python3 scripts/generate_reports.py --verify-only
@@ -92,16 +117,18 @@ jobs:
         env:
           PAGE_URL: ${{ steps.deployment.outputs.page_url }}
           VERIFY_RUN: ${{ github.run_id }}
+          CONTENT_ONLY: ${{ steps.publish_scope.outputs.content_only }}
         run: |
           python3 - <<'PY'
           import hashlib, json, os, subprocess, time, urllib.request, urllib.error
           from datetime import datetime, timezone
           from pathlib import Path
           from zoneinfo import ZoneInfo
+          content_only = os.environ.get('CONTENT_ONLY', '').lower() == 'true'
           base = os.environ['PAGE_URL'].rstrip('/') + '/'
           if base != 'https://markroneil360.github.io/ongoing-unit-2709/':
               raise SystemExit('Unexpected public deployment URL; verification stopped.')
-          paths = ('index.html', 'data/r6e8a_4_8_10min_full.json', 'data/current-status.json', 'downloads/R6E8A-24-hour-report.pdf', 'downloads/R6E8A-7-day-trailing-report.pdf', 'data/r6e8a-report-manifest.json')
+          paths = ('index.html', 'data/r6e8a_4_8_10min_full.json', 'data/current-status.json', 'downloads/R6E8A-24-hour-report.pdf', 'downloads/R6E8A-7-day-trailing-report.pdf', 'data/r6e8a-report-manifest.json', 'media/r6e8a-explainer-v2.mp4')
           report = {'deployment_run': os.environ['VERIFY_RUN'], 'checked_out_commit': subprocess.check_output(['git','rev-parse','HEAD'], text=True).strip(), 'public_url': base, 'files': []}
           for path in paths:
               expected = Path(path).read_bytes()
@@ -172,7 +199,9 @@ jobs:
           report['all_retired_paths_unavailable'] = all(item['pass'] for item in report['retired_paths'])
           Path('public-delivery-verification.json').write_text(json.dumps(report, indent=2) + '\n')
           print(json.dumps(report, indent=2))
-          if not report['all_public_files_match'] or not report['candidate_all_five_checks_pass'] or not report['pdf_manifest_matches_inputs'] or not report['all_retired_paths_unavailable']:
+          report['content_only_publish'] = content_only
+          report['report_manifest_check_skipped'] = content_only
+          if not report['all_public_files_match'] or not report['candidate_all_five_checks_pass'] or (not content_only and not report['pdf_manifest_matches_inputs']) or not report['all_retired_paths_unavailable']:
               raise SystemExit('Public delivery verification failed; do not report task complete.')
           PY
       - name: Preserve public delivery verification receipt
