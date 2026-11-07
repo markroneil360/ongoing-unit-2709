@@ -1,1 +1,8 @@
-{"station":"AM.R6E8A.00","user_request":"Alpha R6E8A","requested_at_eastern":"2026-10-15T08:17:19-04:00","action":"Resume cached current-tail acquisition; retain all calculation and publication gates; regenerate both PDF reports; verify public delivery before reporting completion","scope":"R6E8A only","design_changes":false}
+{
+  "station": "AM.R6E8A.00",
+  "user_request": "Alpha R6E8A — refresh dashboard data and prepare review preview",
+  "requested_at_eastern": "2026-11-06T20:34:00-05:00",
+  "action": "Resume the verified current-tail acquisition on isolated preview branch; preserve all calculation gates; generate candidate data and reports for review; do not deploy to public site",
+  "scope": "R6E8A only; isolated branch preview",
+  "design_changes": false
+}
