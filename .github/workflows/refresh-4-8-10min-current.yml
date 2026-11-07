@@ -47,7 +47,7 @@ jobs:
             echo 'Candidate unchanged.'
           else
             git commit -m 'R6E8A current candidate and resumable minute evidence (five checks passed)'
-            git pull --rebase origin main
+            git pull --rebase origin "$GITHUB_REF_NAME"
             git push
           fi
       - name: Preserve completed minute work even if publication was blocked
@@ -66,7 +66,7 @@ jobs:
             fi
             if ! git diff --cached --quiet; then
               git commit -m 'Preserve R6E8A acquisition checkpoint; no candidate publication'
-              git pull --rebase origin main
+              git pull --rebase origin "$GITHUB_REF_NAME"
               git push
             fi
           fi
