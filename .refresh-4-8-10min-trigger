@@ -1,8 +1,8 @@
 {
   "station": "AM.R6E8A.00",
-  "user_request": "Update R6E8A dashboard, report PDFs, and 2,000-hour explainer band for approval",
-  "requested_at_eastern": "2026-11-06T23:14:07-05:00",
-  "action": "Refresh cumulative HDF minute evidence on isolated review branch; retain five checks and create current candidate. Do not deploy to public site.",
+  "user_request": "Final current-tail refresh for explainer, PDFs, and dashboard approval",
+  "requested_at_eastern": "2026-11-06T23:24:59-05:00",
+  "action": "Advance candidate to latest complete FDSN HDF minutes on isolated review branch, rerun unchanged five gates, then prepare coherent dashboard and PDF snapshot. Do not deploy.",
   "scope": "R6E8A only; review branch",
   "design_changes": false
 }
