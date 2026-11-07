@@ -1,8 +1,8 @@
 {
   "station": "AM.R6E8A.00",
-  "user_request": "Alpha R6E8A — rerun preview after branch-safe candidate commit fix",
-  "requested_at_eastern": "2026-11-06T20:57:17-05:00",
-  "action": "Resume verified current-tail acquisition on isolated preview branch; preserve all calculation gates; generate candidate data and reports for review; do not deploy to public site",
-  "scope": "R6E8A only; isolated branch preview",
+  "user_request": "Update R6E8A dashboard, report PDFs, and 2,000-hour explainer band for approval",
+  "requested_at_eastern": "2026-11-06T23:14:07-05:00",
+  "action": "Refresh cumulative HDF minute evidence on isolated review branch; retain five checks and create current candidate. Do not deploy to public site.",
+  "scope": "R6E8A only; review branch",
   "design_changes": false
 }
