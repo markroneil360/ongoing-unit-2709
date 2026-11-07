@@ -1,1 +1,1 @@
-2026-11-06 11:14 PM EST: Refresh current AM.R6E8A.00 HDF and EHZ status independently; update the review-branch dashboard and both reports from the newly verified candidate through 10:45 PM EST. Preserve five checks, channel separation, gap handling, and lag disclosure. Do not deploy.
+2026-11-06 11:26:15 PM EST: Refresh AM.R6E8A.00 HDF and EHZ separately and regenerate the review-branch dashboard snapshot and both PDFs from the final verified current-tail candidate. Keep five checks, gap disclosure, channel separation, 30-minute lag note; no deploy.
