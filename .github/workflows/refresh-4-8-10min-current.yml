@@ -2,13 +2,12 @@ name: R6E8A 10-minute current-tail refresh
 
 on:
   push:
-    branches: [main]
+    branches: [main, 'codex/**']
     paths:
       - tools/refresh_4_8_10min_current.py
       - tools/fdsn_tail_cache.py
       - tests/test_fdsn_tail_cache.py
       - data/r6e8a_4_8_base_10min_2026-08-12.json
-      - .github/workflows/refresh-4-8-10min-current.yml
       - .refresh-4-8-10min-trigger
   workflow_dispatch:
 
@@ -48,7 +47,7 @@ jobs:
             echo 'Candidate unchanged.'
           else
             git commit -m 'R6E8A current candidate and resumable minute evidence (five checks passed)'
-            git pull --rebase origin main
+            git pull --rebase origin "$GITHUB_REF_NAME"
             git push
           fi
       - name: Preserve completed minute work even if publication was blocked
@@ -67,7 +66,7 @@ jobs:
             fi
             if ! git diff --cached --quiet; then
               git commit -m 'Preserve R6E8A acquisition checkpoint; no candidate publication'
-              git pull --rebase origin main
+              git pull --rebase origin "$GITHUB_REF_NAME"
               git push
             fi
           fi

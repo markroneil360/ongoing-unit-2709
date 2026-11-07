@@ -1,1 +1,8 @@
-{"station":"AM.R6E8A.00","user_request":"Alpha R6E8A","requested_at_eastern":"2026-10-15T08:17:19-04:00","action":"Resume cached current-tail acquisition; retain all calculation and publication gates; regenerate both PDF reports; verify public delivery before reporting completion","scope":"R6E8A only","design_changes":false}
+{
+  "station": "AM.R6E8A.00",
+  "user_request": "Final current-tail refresh for explainer, PDFs, and dashboard approval",
+  "requested_at_eastern": "2026-11-06T23:24:59-05:00",
+  "action": "Advance candidate to latest complete FDSN HDF minutes on isolated review branch, rerun unchanged five gates, then prepare coherent dashboard and PDF snapshot. Do not deploy.",
+  "scope": "R6E8A only; review branch",
+  "design_changes": false
+}
