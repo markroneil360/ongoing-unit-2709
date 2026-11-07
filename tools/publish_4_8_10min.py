@@ -81,7 +81,7 @@ def render(inputs, html, now):
         'Missing acquisition time is excluded, never scored as zero, quiet, normal, compliant, or below benchmark. HDF pressure and EHZ seismic data remain separate. '
         '*Account for up to 30 minutes of lag.</div></div>'
     )
-    replace(r'<div class="status">.*?</div><div class="download-actions">', header + '<div class="download-actions">', 'status')
+    replace(r'<div class="status">.*?<div class="download-actions">', header + '<div class="download-actions">', 'status')
     summary = re.search(r'<!-- EVIDENCE SUMMARY START -->(.*?)<!-- EVIDENCE SUMMARY END -->', html, re.S)
     if not summary:
         raise ValueError('Evidence summary markers missing')
