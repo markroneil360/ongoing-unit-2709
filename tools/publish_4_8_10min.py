@@ -120,8 +120,10 @@ def render(inputs, html, now):
         '<div class="check"><span class="dot"></span><div><b>Offline intervals remain excluded.</b><div class="small">The future USB miniSEED patch will be reconciled by recording timestamps and hashes; duplicates count once.</div></div></div>'
         '<div class="check"><span class="dot"></span><div><b>Counting rule is unchanged.</b><div class="small">Complete clock minutes, separated channels, and the existing nighttime screen are retained.</div></div></div>'
         '<div class="check"><span class="dot"></span><div><b>Five checks before publication completed.</b><div class="small">Station and cache integrity, duplicate reconciliation, independent cumulative recount, dashboard/report agreement, and the publication snapshot were checked. Public file delivery is verified separately after deployment.</div></div></div></div></section>', 'integrity')
-    replace(r'<footer><div class="wrap">.*?</div></footer>',
-        f'<footer><div class="wrap">R6E8A public dashboard · LAST UPDATE: {checked} · Complete HDF minutes through {cutoff} · Offline intervals excluded pending the USB miniSEED patch.</div></footer>', 'footer')
+    footer_text = f'R6E8A public dashboard · LAST UPDATE: {checked} · Complete HDF minutes through {cutoff} · Offline intervals excluded pending the USB miniSEED patch.'
+    html, footer_count = re.subn(r'(<footer><div class="wrap">).*?(</div>)', lambda m: m[1] + footer_text + m[2], html, flags=re.S)
+    if footer_count != 1:
+        raise ValueError(f'footer: expected exactly one footer wrapper, got {footer_count}')
     return html
 
 def main():
