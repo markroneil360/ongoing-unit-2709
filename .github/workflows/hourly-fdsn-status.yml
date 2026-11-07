@@ -2,7 +2,7 @@ name: Hourly R6E8A FDSN status
 
 on:
   push:
-    branches: [main]
+    branches: [main, 'codex/**']
     paths:
       - .hourly-fdsn-status-trigger
   schedule:
@@ -41,7 +41,7 @@ jobs:
             echo "No status change."
           else
             git commit -m "Hourly R6E8A FDSN status ($(TZ=America/Detroit date '+%Y-%m-%d %H:%M ET'))"
-            git pull --rebase origin main
+            git pull --rebase origin "$GITHUB_REF_NAME"
             python3 scripts/generate_reports.py --verify-only
             git push
           fi
