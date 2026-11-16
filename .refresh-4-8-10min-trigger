@@ -1,8 +1,8 @@
 {
   "station": "AM.R6E8A.00",
-  "user_request": "Final current-tail refresh for explainer, PDFs, and dashboard approval",
-  "requested_at_eastern": "2026-11-06T23:24:59-05:00",
-  "action": "Advance candidate to latest complete FDSN HDF minutes on isolated review branch, rerun unchanged five gates, then prepare coherent dashboard and PDF snapshot. Do not deploy.",
-  "scope": "R6E8A only; review branch",
+  "user_request": "Alpha R6E8A — refresh and publish verified dashboard data and reports",
+  "requested_at_eastern": "2026-11-16T03:11:00-05:00",
+  "action": "Resume from R6E8A-2K-CANARY. Refresh cumulative candidate from latest complete FDSN data on isolated review branch; preserve gaps and channel separation; pass unchanged five gates; regenerate dashboard snapshot and both PDFs. Publish only after verification.",
+  "scope": "R6E8A only; isolated review branch",
   "design_changes": false
 }
