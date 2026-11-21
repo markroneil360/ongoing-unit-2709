@@ -1,10 +1,10 @@
 {
   "station": "AM.R6E8A.00",
-  "checked_utc": "2026-11-16T09:07:20.153032+00:00",
-  "checked_et": "2026-11-16T04:07:20.153032-05:00",
-  "candidate_sha256": "c3bc700dde65a2a23fdb627f387a15d22ba0a7b81c3ddf13ad160fbdae6f15c1",
-  "cache_payload_sha256": "5ed9cb4065b7c9384d3b3c0b94bf22d02fd37793225908a1a6c2cc939529a2d1",
-  "status_sha256": "c6d3d917bd8390c60b7b81d2fa45b60a6710bc4e4a883555e5c5e435983e61f5",
+  "checked_utc": "2026-11-21T21:19:01.961693+00:00",
+  "checked_et": "2026-11-21T16:19:01.961693-05:00",
+  "candidate_sha256": "e90874643f19e2851713f4f596752da4811e7fc49c48820de589751ab978399b",
+  "cache_payload_sha256": "537d71954c503d7bbe1f53407d762f59454b81d9ba0c1302b4e3ba39461af3c3",
+  "status_sha256": "de7bd95daa1a2c0b4c8a83dccf1c7d3b2cd7c2d995b2542ca6cff775978f435f",
   "checks": [
     {
       "name": "1_station_hashes_and_acquisition",
