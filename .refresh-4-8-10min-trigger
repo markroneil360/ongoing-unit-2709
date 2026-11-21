@@ -1,8 +1,8 @@
 {
   "station": "AM.R6E8A.00",
-  "user_request": "Alpha R6E8A — refresh and publish verified dashboard data and reports",
-  "requested_at_eastern": "2026-11-16T03:11:00-05:00",
-  "action": "Resume from R6E8A-2K-CANARY. Refresh cumulative candidate from latest complete FDSN data on isolated review branch; preserve gaps and channel separation; pass unchanged five gates; regenerate dashboard snapshot and both PDFs. Publish only after verification.",
+  "user_request": "Alpha R6E8A — refresh and prepare approval review",
+  "requested_at_eastern": "2026-11-21T15:38:00-05:00",
+  "action": "Resume from the R6E8A-2K-CANARY state. Refresh the cumulative candidate from the latest complete FDSN data on this isolated review branch; preserve missing intervals and keep HDF/EHZ separate; run the unchanged five gates; regenerate the dashboard snapshot and both PDFs. Do not publish until Mark approves.",
   "scope": "R6E8A only; isolated review branch",
   "design_changes": false
 }
