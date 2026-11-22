@@ -1,0 +1,64 @@
+{
+  "video_sha256": "e89bee5d98a30822f59386abd91c1d93d10485ba1dfd92caca1c7de549ca8cec",
+  "checks": [
+    {
+      "name": "1_sha256_exact",
+      "pass": true,
+      "observed": "e89bee5d98a30822f59386abd91c1d93d10485ba1dfd92caca1c7de549ca8cec"
+    },
+    {
+      "name": "2_expected_size",
+      "pass": true,
+      "observed": 6551551
+    },
+    {
+      "name": "3_runtime",
+      "pass": true,
+      "observed": 217.906
+    },
+    {
+      "name": "4_video_codec",
+      "pass": true,
+      "observed": "h264"
+    },
+    {
+      "name": "5_audio_codec",
+      "pass": true,
+      "observed": "aac"
+    },
+    {
+      "name": "6_resolution",
+      "pass": true,
+      "observed": [
+        1280,
+        720
+      ]
+    },
+    {
+      "name": "7_voice_from_start",
+      "pass": true,
+      "observed": -21.557099
+    },
+    {
+      "name": "8_no_dead_air_ge_0_55s",
+      "pass": true,
+      "observed": []
+    },
+    {
+      "name": "9_dashboard_source_target",
+      "pass": true,
+      "observed": true
+    },
+    {
+      "name": "10_r6e8a_data_and_channels_verified",
+      "pass": true,
+      "observed": {
+        "hours": 2619.25,
+        "cutoff": "2026-11-21T21:10:00+00:00",
+        "hdf": 100.0,
+        "ehz": 100.0
+      }
+    }
+  ],
+  "all_ten_checks_pass": true
+}
