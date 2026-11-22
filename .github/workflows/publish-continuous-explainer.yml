@@ -17,6 +17,8 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: main
+      - name: Install FFmpeg verification tools
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
       - name: Reassemble exact edited MP4
         run: |
           set -euo pipefail
