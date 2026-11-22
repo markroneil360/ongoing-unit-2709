@@ -1,3 +1,3 @@
-Manual verified deployment requested 2026-09-20 08:42:43 PM EDT after successful R6E8A current-edge synchronization commit ccdde4917bd4de6f7ddafdc49c23ecf6d55339d4. Deploy main only. Completion requires the existing direct HTTPS byte-match verification for index.html, data/r6e8a_4_8_10min_full.json, and data/current-status.json, with the five spectral checks passing and HDF/EHZ remaining separate.
+Manual verified deployment requested 2026-11-22 03:29 PM EST after successful R6E8A 10-minute current-tail refresh and five publication checks. Deploy main only. Completion requires direct HTTPS byte-match verification for index.html, data/r6e8a_4_8_10min_full.json, data/current-status.json, both PDFs, and the report manifest; keep HDF and EHZ separate.
 
 continuous explainer public deploy trigger: 2026-11-21 07:58 PM EST; video sha256 e89bee5d98a3
