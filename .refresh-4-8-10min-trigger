@@ -1,7 +1,9 @@
 # User-requested R6E8A update — 2026-11-22
-# Start from the last accepted dashboard update on Nov 21, 2026 at 4:16 PM EST.
-# Retrieve the latest available complete FDSN minutes; preserve source receipts,
-# missing intervals, and separate HDF/EHZ channels. Reconcile the new tail with
-# the accepted cumulative candidate. Run all calculation and publication checks.
-# Mark asked to sanity-check the 24-hour difference and publish this update.
-# Keep prior work and calculation checkpoints.
+# Baseline: last published update Nov 22, 2026 at 3:28 PM EST.
+# Previously accepted HDF last-complete minute: Nov 22, 2026 at 2:56 PM EST.
+# Pull the newest complete FDSN minutes, including the latest 24-hour window;
+# reconcile cumulative data from the last accepted baseline through the new edge.
+# Keep AM.R6E8A.00 HDF (primary) and EHZ (secondary) separate; preserve source
+# receipts, hashes, missing intervals, and conflicts. Run all five sanity checks.
+# This is an approval candidate only: do not publish/deploy to the public dashboard.
+# Mark asked for the publish-allow link after the data increases are verified 5x.
