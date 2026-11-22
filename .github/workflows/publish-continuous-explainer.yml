@@ -1,0 +1,84 @@
+name: Publish continuous R6E8A explainer
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.video-continuous/READY'
+permissions:
+  contents: write
+concurrency:
+  group: r6e8a-continuous-explainer
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Reassemble exact edited MP4
+        run: |
+          set -euo pipefail
+          cat .video-continuous/chunk-*.b64 | base64 -d > /tmp/r6e8a-continuous.mp4
+      - name: Ten publication checks
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib,json,subprocess,re
+          from pathlib import Path
+          p=Path('/tmp/r6e8a-continuous.mp4')
+          idx=Path('index.html').read_text()
+          cand=json.loads(Path('data/r6e8a_4_8_10min_full.json').read_text())
+          status=json.loads(Path('data/current-status.json').read_text())
+          probe=json.loads(subprocess.check_output(['ffprobe','-v','error','-show_entries','format=duration,size:stream=codec_name,codec_type,width,height,sample_rate,channels','-of','json',str(p)]))
+          streams=probe['streams']; fmt=probe['format']
+          v=next(s for s in streams if s.get('codec_type')=='video')
+          a=next(s for s in streams if s.get('codec_type')=='audio')
+          sha=hashlib.sha256(p.read_bytes()).hexdigest()
+          silence=subprocess.run(['ffmpeg','-hide_banner','-i',str(p),'-af','silencedetect=noise=-38dB:d=0.55','-f','null','-'],stderr=subprocess.PIPE,text=True).stderr
+          sil=[x for x in silence.splitlines() if 'silence_start:' in x or 'silence_end:' in x]
+          first=subprocess.run(['ffmpeg','-hide_banner','-i',str(p),'-t','1','-af','astats=metadata=1:reset=1','-f','null','-'],stderr=subprocess.PIPE,text=True).stderr
+          m=re.search(r'RMS level dB: (-?[0-9.]+)',first)
+          first_rms=float(m.group(1)) if m else -999
+          checks=[
+            ('1_sha256_exact',sha=='e89bee5d98a30822f59386abd91c1d93d10485ba1dfd92caca1c7de549ca8cec',sha),
+            ('2_expected_size',int(fmt['size'])==6551551,int(fmt['size'])),
+            ('3_runtime',abs(float(fmt['duration'])-217.906)<0.03,float(fmt['duration'])),
+            ('4_video_codec',v.get('codec_name')=='h264',v.get('codec_name')),
+            ('5_audio_codec',a.get('codec_name')=='aac',a.get('codec_name')),
+            ('6_resolution',v.get('width')==1280 and v.get('height')==720,[v.get('width'),v.get('height')]),
+            ('7_voice_from_start',first_rms>-38,first_rms),
+            ('8_no_dead_air_ge_0_55s',not sil,sil),
+            ('9_dashboard_source_target','./media/r6e8a-little-known-dangers-explainer-live.mp4' in idx,True),
+            ('10_r6e8a_data_and_channels_verified',cand.get('all_five_checks_pass') is True and status['channels']['HDF']['ok'] and status['channels']['EHZ']['ok'],{'hours':cand['current']['dom48_hours'],'cutoff':cand['latest_complete_analyzed_minute_utc'],'hdf':status['channels']['HDF']['coverage_pct'],'ehz':status['channels']['EHZ']['coverage_pct']})
+          ]
+          receipt={'video_sha256':sha,'checks':[{'name':n,'pass':ok,'observed':obs} for n,ok,obs in checks],'all_ten_checks_pass':all(ok for _,ok,_ in checks)}
+          Path('/tmp/video-receipt.json').write_text(json.dumps(receipt,indent=2)+'\n')
+          print(json.dumps(receipt,indent=2))
+          if not receipt['all_ten_checks_pass']: raise SystemExit('Ten-check video verification failed')
+          PY
+      - name: Replace dashboard video and cache key
+        run: |
+          set -euo pipefail
+          cp /tmp/r6e8a-continuous.mp4 media/r6e8a-little-known-dangers-explainer-live.mp4
+          cp /tmp/video-receipt.json data/video-publish-verification.json
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          import re
+          s,n=re.subn(r'(r6e8a-little-known-dangers-explainer-live\.mp4\?v=)[^"<>]+',r'\1e89bee5d98a3',s)
+          if n<2: raise SystemExit(f'Expected source + link cache key replacements; got {n}')
+          p.write_text(s)
+          PY
+          rm -rf .video-continuous
+      - name: Commit only verified result
+        run: |
+          set -euo pipefail
+          git config user.name 'r6e8a-video-publish-bot'
+          git config user.email 'r6e8a-video-publish-bot@users.noreply.github.com'
+          git add media/r6e8a-little-known-dangers-explainer-live.mp4 index.html data/video-publish-verification.json .video-continuous
+          git commit -m 'Remove narration gaps from R6E8A explainer (10 checks passed)'
+          git pull --rebase origin main
+          git push
