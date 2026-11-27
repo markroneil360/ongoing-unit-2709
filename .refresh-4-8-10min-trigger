@@ -1,6 +1,6 @@
-# User-requested R6E8A update — 2026-11-27
-# Resume the accepted Apr 12-scoped HDF 4-8 Hz candidate and fetch the newest complete FDSN tail.
-# Keep missing intervals excluded and HDF/EHZ channels separate.
-# Reconcile candidate and report cutoffs, run all calculation and publication integrity checks,
-# regenerate the 24-hour and 7-day reports, and keep this update on a review branch pending approval.
-# Continue from cached work; do not recalculate completed intervals unnecessarily.
+# Alpha R6E8A continuation — 2026-11-27 3:59 PM EST
+# User requested the current dashboard be updated without account or repository settings changes.
+# Resume the Apr 12-scoped cumulative candidate and cached minute evidence on main; fetch only the newest complete FDSN tail.
+# Keep HDF primary and EHZ separate; exclude missing intervals and preserve source receipts.
+# Run the existing calculation gates. On success, allow the existing verified publish workflow to refresh channel status, regenerate both PDFs, and verify the public files.
+# If any gate or public verification fails, stop and retain the workflow evidence; do not claim publication.
