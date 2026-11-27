@@ -1,7 +1,6 @@
-# User-requested R6E8A update — 2026-11-22
-# Start from the last accepted dashboard update on Nov 21, 2026 at 4:16 PM EST.
-# Retrieve the latest available complete FDSN minutes; preserve source receipts,
-# missing intervals, and separate HDF/EHZ channels. Reconcile the new tail with
-# the accepted cumulative candidate. Run all calculation and publication checks.
-# Mark asked to sanity-check the 24-hour difference and publish this update.
-# Keep prior work and calculation checkpoints.
+# User-requested R6E8A update — 2026-11-27
+# Resume the accepted Apr 12-scoped HDF 4-8 Hz candidate and fetch the newest complete FDSN tail.
+# Keep missing intervals excluded and HDF/EHZ channels separate.
+# Reconcile candidate and report cutoffs, run all calculation and publication integrity checks,
+# regenerate the 24-hour and 7-day reports, and keep this update on a review branch pending approval.
+# Continue from cached work; do not recalculate completed intervals unnecessarily.
